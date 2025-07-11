@@ -1,0 +1,33 @@
+{
+  "recommendations": [
+    // CSS와 Tailwind
+    "bradlc.vscode-tailwindcss",
+    "esbenp.prettier-vscode",
+    // TypeScript와 JavaScript
+    "ms-vscode.vscode-typescript-next",
+    // React 개발
+    "ms-vscode.vscode-react-refactor",
+    "formulahendry.auto-rename-tag",
+    "christian-kohler.path-intellisense",
+    // Git과 버전 관리
+    "eamodio.gitlens",
+    "donjayamanne.githistory",
+    // 코드 품질 및 린팅
+    "dbaeumer.vscode-eslint",
+    "bradlc.vscode-tailwindcss",
+    // AI 코딩 지원 (Cursor에 내장되어 있지만 VSCode 사용자를 위해)
+    "github.copilot",
+    "github.copilot-chat",
+    // 개발 편의성
+    "ms-vscode.vscode-json",
+    "redhat.vscode-yaml",
+    "ms-vscode.vscode-npm-scripts",
+    // Electron 개발
+    "ms-vscode.vscode-chrome-debug",
+    // 기타 유용한 도구
+    "gruntfuggly.todo-tree",
+    "usernamehw.errorlens",
+    "christian-kohler.npm-intellisense",
+    "ms-vscode.vscode-thunder-client"
+  ]
+}
