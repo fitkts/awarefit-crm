@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
 import { Zap } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
 
 interface TitleBarProps {
   title: string;
@@ -29,7 +29,7 @@ const TitleBar: React.FC<TitleBarProps> = ({ title, description }) => {
 
   return (
     <header
-      className="bg-white border-b border-gray-200 px-4 py-2 flex-shrink-0 ml-12"
+      className="bg-white border-b border-gray-200 px-4 py-2 flex-shrink-0"
       style={{ WebkitAppRegion: 'drag' } as React.CSSProperties}
     >
       <div className="flex items-center justify-between">

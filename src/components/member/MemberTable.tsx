@@ -1,28 +1,28 @@
-import React, { useState } from 'react';
 import {
-  ChevronUp,
-  ChevronDown,
-  Edit,
-  Trash2,
-  Eye,
-  Phone,
-  Mail,
+  ArrowUpDown,
   Calendar,
   CheckSquare,
-  Square,
-  ArrowUpDown,
-  Settings,
+  ChevronDown,
+  ChevronUp,
   Download,
-  Users,
+  Edit,
+  Eye,
+  Mail,
+  Phone,
+  Settings,
+  Square,
+  Trash2,
   UserCheck,
+  Users,
   UserX,
 } from 'lucide-react';
+import React, { useState } from 'react';
 import {
-  Member,
-  SortOption,
-  MemberTableColumn,
   BulkAction,
+  Member,
+  MemberTableColumn,
   PaginationInfo,
+  SortOption,
 } from '../../types/member';
 
 interface MemberTableProps {
@@ -60,25 +60,25 @@ const MemberTable: React.FC<MemberTableProps> = ({
   const [columns, setColumns] = useState<MemberTableColumn[]>([
     {
       key: 'name',
-      label: '회원 정보',
+      label: '이름',
       sortable: true,
       visible: true,
       sticky: true,
-      width: '250px',
+      width: '200px',
     },
-    { key: 'phone', label: '연락처', sortable: false, visible: true, width: '200px' },
-    { key: 'gender', label: '성별', sortable: true, visible: true, width: '80px' },
-    { key: 'age', label: '나이', sortable: true, visible: true, width: '80px' },
-    { key: 'join_date', label: '가입일', sortable: true, visible: true, width: '120px' },
+    { key: 'phone', label: '연락처', sortable: false, visible: true, width: '160px' },
+    { key: 'gender', label: '성별', sortable: true, visible: true, width: '70px' },
+    { key: 'age', label: '나이', sortable: true, visible: true, width: '70px' },
+    { key: 'join_date', label: '가입일', sortable: true, visible: true, width: '100px' },
     {
       key: 'membership_status',
-      label: '회원권 상태',
+      label: '회원권',
       sortable: false,
       visible: true,
-      width: '120px',
+      width: '100px',
     },
-    { key: 'active', label: '상태', sortable: true, visible: true, width: '100px' },
-    { key: 'actions', label: '작업', sortable: false, visible: true, sticky: true, width: '120px' },
+    { key: 'active', label: '상태', sortable: true, visible: true, width: '80px' },
+    { key: 'actions', label: '작업', sortable: false, visible: true, sticky: true, width: '100px' },
   ]);
 
   // 일괄 작업 옵션
@@ -182,13 +182,13 @@ const MemberTable: React.FC<MemberTableProps> = ({
     switch (column.key) {
       case 'name':
         return (
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-semibold shadow-md">
+          <div className="flex items-center space-x-2">
+            <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white text-sm font-semibold shadow-md">
               {member.name.charAt(0)}
             </div>
             <div>
               <div className="text-sm font-medium text-gray-900">{member.name}</div>
-              <div className="text-sm text-gray-500">{member.member_number}</div>
+              <div className="text-xs text-gray-500">{member.member_number}</div>
             </div>
           </div>
         );
@@ -199,16 +199,16 @@ const MemberTable: React.FC<MemberTableProps> = ({
             <div className="flex items-center text-sm text-gray-900">
               {member.phone ? (
                 <>
-                  <Phone className="w-4 h-4 mr-1 text-gray-400" />
-                  {member.phone}
+                  <Phone className="w-3 h-3 mr-1 text-gray-400" />
+                  <span className="text-xs">{member.phone}</span>
                 </>
               ) : (
-                <span className="text-gray-400">미등록</span>
+                <span className="text-xs text-gray-400">미등록</span>
               )}
             </div>
             {member.email && (
-              <div className="flex items-center text-sm text-gray-500 mt-1">
-                <Mail className="w-4 h-4 mr-1 text-gray-400" />
+              <div className="flex items-center text-xs text-gray-500 mt-1">
+                <Mail className="w-3 h-3 mr-1 text-gray-400" />
                 {member.email}
               </div>
             )}
@@ -237,8 +237,8 @@ const MemberTable: React.FC<MemberTableProps> = ({
 
       case 'join_date':
         return (
-          <div className="flex items-center text-sm text-gray-900">
-            <Calendar className="w-4 h-4 mr-1 text-gray-400" />
+          <div className="flex items-center text-xs text-gray-900">
+            <Calendar className="w-3 h-3 mr-1 text-gray-400" />
             {new Date(member.join_date).toLocaleDateString('ko-KR')}
           </div>
         );
@@ -264,27 +264,27 @@ const MemberTable: React.FC<MemberTableProps> = ({
 
       case 'actions':
         return (
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-1">
             <button
               onClick={() => onView(member)}
               className="text-blue-600 hover:text-blue-900 p-1 rounded transition-colors"
               title="상세보기"
             >
-              <Eye className="w-4 h-4" />
+              <Eye className="w-3 h-3" />
             </button>
             <button
               onClick={() => onEdit(member)}
               className="text-green-600 hover:text-green-900 p-1 rounded transition-colors"
               title="수정"
             >
-              <Edit className="w-4 h-4" />
+              <Edit className="w-3 h-3" />
             </button>
             <button
               onClick={() => onDelete(member)}
               className="text-red-600 hover:text-red-900 p-1 rounded transition-colors"
               title="삭제"
             >
-              <Trash2 className="w-4 h-4" />
+              <Trash2 className="w-3 h-3" />
             </button>
           </div>
         );
@@ -295,25 +295,25 @@ const MemberTable: React.FC<MemberTableProps> = ({
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+    <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
       {/* 테이블 헤더 - 일괄 작업 및 설정 */}
-      <div className="px-6 py-4 border-b border-gray-200 bg-gray-50">
+      <div className="px-4 py-3 border-b border-gray-200 bg-gray-50">
         <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <h3 className="text-lg font-semibold text-gray-900">회원 목록</h3>
+          <div className="flex items-center space-x-3">
+            <h3 className="text-sm font-semibold text-gray-900">회원 목록</h3>
 
             {/* 선택된 항목 정보 */}
             {selectedMembers.length > 0 && (
-              <div className="flex items-center space-x-3">
-                <span className="text-sm text-gray-600">{selectedMembers.length}명 선택됨</span>
+              <div className="flex items-center space-x-2">
+                <span className="text-xs text-gray-600">{selectedMembers.length}명 선택됨</span>
 
                 {/* 일괄 작업 버튼들 */}
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-1">
                   {bulkActions.map(action => (
                     <button
                       key={action.type}
                       onClick={() => onBulkAction(action, selectedMembers)}
-                      className={`flex items-center space-x-1 px-3 py-1 text-xs rounded-lg transition-colors ${
+                      className={`flex items-center space-x-1 px-2 py-1 text-xs rounded-lg transition-colors ${
                         action.type === 'delete'
                           ? 'bg-red-100 text-red-700 hover:bg-red-200'
                           : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -334,18 +334,18 @@ const MemberTable: React.FC<MemberTableProps> = ({
           {/* 테이블 설정 */}
           <button
             onClick={() => setColumnSettings(!columnSettings)}
-            className="flex items-center space-x-1 px-3 py-2 text-sm text-gray-600 hover:text-gray-800 transition-colors"
+            className="flex items-center space-x-1 px-2 py-1 text-xs text-gray-600 hover:text-gray-800 transition-colors"
           >
-            <Settings className="w-4 h-4" />
+            <Settings className="w-3 h-3" />
             <span>컬럼 설정</span>
           </button>
         </div>
 
         {/* 컬럼 설정 패널 */}
         {columnSettings && (
-          <div className="mt-4 p-4 bg-white rounded-lg border border-gray-200">
-            <h4 className="text-sm font-medium text-gray-900 mb-3">표시할 컬럼 선택</h4>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="mt-3 p-3 bg-white rounded-lg border border-gray-200">
+            <h4 className="text-xs font-medium text-gray-900 mb-2">표시할 컬럼 선택</h4>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
               {columns.map(column => (
                 <label key={column.key} className="flex items-center space-x-2 cursor-pointer">
                   <input
@@ -361,7 +361,7 @@ const MemberTable: React.FC<MemberTableProps> = ({
                     className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                     disabled={column.sticky}
                   />
-                  <span className="text-sm text-gray-700">{column.label}</span>
+                  <span className="text-xs text-gray-700">{column.label}</span>
                 </label>
               ))}
             </div>
@@ -375,12 +375,12 @@ const MemberTable: React.FC<MemberTableProps> = ({
           <thead className="bg-gray-50 border-b border-gray-200">
             <tr>
               {/* 전체 선택 체크박스 */}
-              <th className="w-12 px-6 py-3">
+              <th className="w-10 px-4 py-2">
                 <button onClick={handleSelectAll}>
                   {selectedMembers.length === members.length && members.length > 0 ? (
-                    <CheckSquare className="w-5 h-5 text-blue-600" />
+                    <CheckSquare className="w-4 h-4 text-blue-600" />
                   ) : (
-                    <Square className="w-5 h-5 text-gray-400" />
+                    <Square className="w-4 h-4 text-gray-400" />
                   )}
                 </button>
               </th>
@@ -389,7 +389,7 @@ const MemberTable: React.FC<MemberTableProps> = ({
               {visibleColumns.map(column => (
                 <th
                   key={column.key}
-                  className={`px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider ${
+                  className={`px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider ${
                     column.width ? `w-[${column.width}]` : ''
                   }`}
                 >
@@ -401,12 +401,12 @@ const MemberTable: React.FC<MemberTableProps> = ({
                       <span>{column.label}</span>
                       {sortOption.field === column.key ? (
                         sortOption.direction === 'asc' ? (
-                          <ChevronUp className="w-4 h-4" />
+                          <ChevronUp className="w-3 h-3" />
                         ) : (
-                          <ChevronDown className="w-4 h-4" />
+                          <ChevronDown className="w-3 h-3" />
                         )
                       ) : (
-                        <ArrowUpDown className="w-4 h-4 opacity-50" />
+                        <ArrowUpDown className="w-3 h-3 opacity-50" />
                       )}
                     </button>
                   ) : (
@@ -420,20 +420,20 @@ const MemberTable: React.FC<MemberTableProps> = ({
           <tbody className="bg-white divide-y divide-gray-200">
             {loading ? (
               <tr>
-                <td colSpan={visibleColumns.length + 1} className="px-6 py-12 text-center">
+                <td colSpan={visibleColumns.length + 1} className="px-4 py-8 text-center">
                   <div className="flex items-center justify-center space-x-2">
-                    <div className="animate-spin rounded-full h-8 w-8 border-2 border-blue-600 border-t-transparent"></div>
-                    <span className="text-gray-500">로딩 중...</span>
+                    <div className="animate-spin rounded-full h-6 w-6 border-2 border-blue-600 border-t-transparent"></div>
+                    <span className="text-sm text-gray-500">로딩 중...</span>
                   </div>
                 </td>
               </tr>
             ) : members.length === 0 ? (
               <tr>
-                <td colSpan={visibleColumns.length + 1} className="px-6 py-12 text-center">
-                  <div className="flex flex-col items-center space-y-3">
-                    <Users className="w-12 h-12 text-gray-300" />
-                    <p className="text-gray-500">검색 결과가 없습니다.</p>
-                    <p className="text-sm text-gray-400">다른 검색 조건을 시도해보세요.</p>
+                <td colSpan={visibleColumns.length + 1} className="px-4 py-8 text-center">
+                  <div className="flex flex-col items-center space-y-2">
+                    <Users className="w-10 h-10 text-gray-300" />
+                    <p className="text-sm text-gray-500">검색 결과가 없습니다.</p>
+                    <p className="text-xs text-gray-400">다른 검색 조건을 시도해보세요.</p>
                   </div>
                 </td>
               </tr>
@@ -446,19 +446,19 @@ const MemberTable: React.FC<MemberTableProps> = ({
                   }`}
                 >
                   {/* 선택 체크박스 */}
-                  <td className="px-6 py-4">
+                  <td className="px-4 py-3">
                     <button onClick={() => handleSelectMember(member.id)}>
                       {selectedMembers.includes(member.id) ? (
-                        <CheckSquare className="w-5 h-5 text-blue-600" />
+                        <CheckSquare className="w-4 h-4 text-blue-600" />
                       ) : (
-                        <Square className="w-5 h-5 text-gray-400" />
+                        <Square className="w-4 h-4 text-gray-400" />
                       )}
                     </button>
                   </td>
 
                   {/* 데이터 셀 */}
                   {visibleColumns.map(column => (
-                    <td key={column.key} className="px-6 py-4 whitespace-nowrap">
+                    <td key={column.key} className="px-4 py-3 whitespace-nowrap">
                       {renderCell(member, column)}
                     </td>
                   ))}
@@ -471,9 +471,9 @@ const MemberTable: React.FC<MemberTableProps> = ({
 
       {/* 페이지네이션 */}
       {!loading && members.length > 0 && (
-        <div className="px-6 py-4 border-t border-gray-200 bg-gray-50">
+        <div className="px-4 py-3 border-t border-gray-200 bg-gray-50">
           <div className="flex items-center justify-between">
-            <div className="text-sm text-gray-700">
+            <div className="text-xs text-gray-700">
               <span>
                 {(pagination.page - 1) * pagination.limit + 1}-
                 {Math.min(pagination.page * pagination.limit, pagination.total)} of{' '}
@@ -481,12 +481,12 @@ const MemberTable: React.FC<MemberTableProps> = ({
               </span>
             </div>
 
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-1">
               {/* 이전 버튼 */}
               <button
                 onClick={() => onPageChange(pagination.page - 1)}
                 disabled={!pagination.hasPrev}
-                className="px-3 py-2 border border-gray-300 rounded-lg text-sm hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="px-2 py-1 border border-gray-300 rounded-lg text-xs hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 이전
               </button>
@@ -496,7 +496,7 @@ const MemberTable: React.FC<MemberTableProps> = ({
                 <button
                   key={pageNum}
                   onClick={() => onPageChange(pageNum)}
-                  className={`px-3 py-2 rounded-lg text-sm transition-colors ${
+                  className={`px-2 py-1 rounded-lg text-xs transition-colors ${
                     pageNum === pagination.page
                       ? 'bg-blue-600 text-white'
                       : 'border border-gray-300 hover:bg-gray-50'
@@ -510,7 +510,7 @@ const MemberTable: React.FC<MemberTableProps> = ({
               <button
                 onClick={() => onPageChange(pagination.page + 1)}
                 disabled={!pagination.hasNext}
-                className="px-3 py-2 border border-gray-300 rounded-lg text-sm hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="px-2 py-1 border border-gray-300 rounded-lg text-xs hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 다음
               </button>

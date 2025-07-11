@@ -1,19 +1,19 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { Users, Plus, RefreshCw } from 'lucide-react';
+import { Plus } from 'lucide-react';
+import React, { useCallback, useEffect, useState } from 'react';
+import MemberDetailModal from '../components/member/MemberDetailModal';
 import MemberForm from '../components/member/MemberForm';
-import MemberTable from '../components/member/MemberTable';
 import MemberSearchFilter from '../components/member/MemberSearchFilter';
 import MemberStats from '../components/member/MemberStats';
-import MemberDetailModal from '../components/member/MemberDetailModal';
+import MemberTable from '../components/member/MemberTable';
 import {
-  Member,
-  CreateMemberInput,
-  UpdateMemberInput,
-  MemberSearchFilter as MemberSearchFilterType,
-  SortOption,
-  PaginationInfo,
-  MemberStats as MemberStatsType,
-  BulkAction,
+    BulkAction,
+    CreateMemberInput,
+    Member,
+    MemberSearchFilter as MemberSearchFilterType,
+    MemberStats as MemberStatsType,
+    PaginationInfo,
+    SortOption,
+    UpdateMemberInput,
 } from '../types/member';
 
 const Members: React.FC = () => {
@@ -303,61 +303,38 @@ const Members: React.FC = () => {
     loadInitialData();
   };
 
+  // 신규 등록 핸들러
+  const handleAddMember = () => {
+    setIsFormOpen(true);
+  };
+
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {/* 에러 알림 */}
       {error && (
-        <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+        <div className="bg-red-50 border border-red-200 rounded-lg p-3">
           <div className="flex items-center justify-between">
-            <p className="text-red-700">{error}</p>
+            <p className="text-sm text-red-700">{error}</p>
             <button onClick={() => setError(null)} className="text-red-500 hover:text-red-700">
-              <Plus className="w-4 h-4 rotate-45" />
+              <Plus className="w-3 h-3 rotate-45" />
             </button>
           </div>
         </div>
       )}
 
-      {/* 페이지 헤더 */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-3">
-          <Users className="w-8 h-8 text-blue-600" />
-          <div>
-            <h1 className="text-2xl font-bold text-gray-900">회원 관리</h1>
-            <p className="text-gray-600">회원 정보를 등록하고 관리할 수 있습니다</p>
-          </div>
-        </div>
-
-        <div className="flex items-center space-x-3">
-          <button
-            onClick={handleRefresh}
-            className="flex items-center space-x-2 bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors"
-            disabled={loading}
-          >
-            <RefreshCw className={`w-5 h-5 ${loading ? 'animate-spin' : ''}`} />
-            <span>새로고침</span>
-          </button>
-
-          <button
-            onClick={() => setIsFormOpen(true)}
-            className="flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
-          >
-            <Plus className="w-5 h-5" />
-            <span>새 회원 등록</span>
-          </button>
-        </div>
-      </div>
-
-      {/* 회원 통계 대시보드 */}
-      <MemberStats stats={memberStats} loading={statsLoading} />
-
-      {/* 검색 및 필터 */}
+      {/* 검색 및 필터 - 최상단 */}
       <MemberSearchFilter
         filter={searchFilter}
         onFilterChange={handleFilterChange}
         onReset={handleFilterReset}
         memberCount={pagination.total}
         loading={loading}
+        onRefresh={handleRefresh}
+        onAddMember={handleAddMember}
       />
+
+      {/* 회원 통계 대시보드 */}
+      <MemberStats stats={memberStats} loading={statsLoading} />
 
       {/* 회원 목록 테이블 */}
       <MemberTable

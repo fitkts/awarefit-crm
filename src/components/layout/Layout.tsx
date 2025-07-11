@@ -22,12 +22,12 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, onPageChange }) 
   const details = pageDetails[currentPage] || { title: 'Awarefit CRM', description: '' };
 
   return (
-    <div className="flex h-screen bg-gray-100 font-sans">
+    <div className="flex h-screen bg-gray-100 font-sans relative">
       <Sidebar currentPage={currentPage} onPageChange={onPageChange} />
-      <div className="flex-1 flex flex-col overflow-hidden">
+      <div className="flex-1 flex flex-col overflow-hidden ml-12">
         <TitleBar title={details.title} description={details.description} />
-        <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-4 md:p-6">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 h-full">{children}</div>
+        <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-3">
+          <div className="h-full">{children}</div>
         </main>
       </div>
     </div>
