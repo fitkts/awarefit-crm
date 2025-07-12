@@ -58,8 +58,8 @@ export const registerMemberHandlers = (): void => {
       const stmt = db.prepare(`
         INSERT INTO members (
           member_number, name, phone, email, gender, birth_date,
-          join_date, address, emergency_contact, emergency_phone, notes
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+          join_date, address, notes
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
       `);
 
       const result = stmt.run(
@@ -71,8 +71,6 @@ export const registerMemberHandlers = (): void => {
         data.birth_date || null,
         data.join_date || new Date().toISOString().split('T')[0],
         data.address || null,
-        data.emergency_contact || null,
-        data.emergency_phone || null,
         data.notes || null
       );
 
@@ -89,8 +87,7 @@ export const registerMemberHandlers = (): void => {
       const stmt = db.prepare(`
         UPDATE members SET
           name = ?, phone = ?, email = ?, gender = ?, birth_date = ?,
-          address = ?, emergency_contact = ?, emergency_phone = ?, notes = ?,
-          updated_at = CURRENT_TIMESTAMP
+          address = ?, notes = ?, updated_at = CURRENT_TIMESTAMP
         WHERE id = ?
       `);
 
@@ -101,8 +98,6 @@ export const registerMemberHandlers = (): void => {
         data.gender || null,
         data.birth_date || null,
         data.address || null,
-        data.emergency_contact || null,
-        data.emergency_phone || null,
         data.notes || null,
         id
       );

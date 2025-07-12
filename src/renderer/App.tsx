@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { ToastProvider } from '../components/common/Toast';
 import Layout from '../components/layout/Layout';
 import Dashboard from '../pages/Dashboard';
 import Members from '../pages/Members';
@@ -79,16 +80,18 @@ const App: React.FC = () => {
   };
 
   return (
-    <Layout currentPage={currentPage} onPageChange={handlePageChange}>
-      {renderCurrentPage()}
+    <ToastProvider>
+      <Layout currentPage={currentPage} onPageChange={handlePageChange}>
+        {renderCurrentPage()}
 
-      {/* 개발 정보 표시 (디버그용) */}
-      {process.env.NODE_ENV === 'development' && (
-        <div className="fixed bottom-4 right-4 bg-black bg-opacity-80 text-white text-xs p-2 rounded">
-          v{appInfo.version} | {appInfo.isElectron ? 'Electron' : 'Web'}
-        </div>
-      )}
-    </Layout>
+        {/* 개발 정보 표시 (디버그용) */}
+        {process.env.NODE_ENV === 'development' && (
+          <div className="fixed bottom-4 right-4 bg-black bg-opacity-80 text-white text-xs p-2 rounded">
+            v{appInfo.version} | {appInfo.isElectron ? 'Electron' : 'Web'}
+          </div>
+        )}
+      </Layout>
+    </ToastProvider>
   );
 };
 

@@ -3,7 +3,9 @@
   "css.validate": false,
   "scss.validate": false,
   "less.validate": false,
-  "css.customData": [".vscode/css_custom_data.json"],
+  "css.customData": [
+    ".vscode/css_custom_data.json"
+  ],
   "tailwindCSS.includeLanguages": {
     "typescript": "javascript",
     "typescriptreact": "javascript"
@@ -15,13 +17,11 @@
   "files.associations": {
     "*.css": "tailwindcss"
   },
-
   // TypeScript 및 자동완성 설정
   "typescript.preferences.includePackageJsonAutoImports": "auto",
   "typescript.suggest.autoImports": true,
   "typescript.updateImportsOnFileMove.enabled": "always",
   "typescript.preferences.importModuleSpecifier": "relative",
-
   // 에디터 개선
   "editor.formatOnSave": true,
   "editor.formatOnPaste": true,
@@ -32,7 +32,6 @@
   "editor.tabSize": 2,
   "editor.insertSpaces": true,
   "editor.detectIndentation": false,
-
   // 파일 탐색기 설정
   "files.exclude": {
     "**/node_modules": true,
@@ -42,7 +41,6 @@
     "**/coverage": true,
     "**/.nyc_output": true
   },
-
   // 검색 설정
   "search.exclude": {
     "**/node_modules": true,
@@ -52,43 +50,41 @@
     "**/.nyc_output": true,
     "**/package-lock.json": true
   },
-
   // AI 코딩 지원을 위한 설정
   "editor.suggestSelection": "first",
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
   "editor.acceptSuggestionOnCommitCharacter": true,
   "editor.acceptSuggestionOnEnter": "on",
-
   // React/JSX 설정
   "emmet.includeLanguages": {
     "typescript": "html",
     "typescriptreact": "html"
   },
   "emmet.triggerExpansionOnTab": true,
-
   // 자동 저장 및 포맷팅
   "files.autoSave": "onFocusChange",
-  "editor.rulers": [80, 120],
+  "editor.rulers": [
+    80,
+    120
+  ],
   "editor.wordWrap": "on",
-
   // Git 설정
   "git.enableSmartCommit": true,
   "git.autofetch": true,
-
   // 확장자별 기본 포맷터 설정
   "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "vscode.typescript-language-features"
   },
   "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "vscode.typescript-language-features"
   },
   "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "vscode.typescript-language-features"
   },
   "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "vscode.json-language-features"
   },
   "[css]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "vscode.css-language-features"
   }
-} 
+}

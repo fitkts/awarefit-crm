@@ -9,8 +9,6 @@ export interface Member {
   birth_date?: string | null; // YYYY-MM-DD 형식
   join_date: string; // YYYY-MM-DD 형식
   address?: string | null;
-  emergency_contact?: string | null;
-  emergency_phone?: string | null;
   notes?: string | null;
   active: boolean;
   created_at: string;
@@ -25,8 +23,6 @@ export interface CreateMemberInput {
   gender?: '남성' | '여성';
   birth_date?: string;
   address?: string;
-  emergency_contact?: string;
-  emergency_phone?: string;
   notes?: string;
 }
 

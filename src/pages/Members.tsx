@@ -1,5 +1,6 @@
 import { Plus } from 'lucide-react';
 import React, { useCallback, useEffect, useState } from 'react';
+import { useToastHelpers } from '../components/common/Toast';
 import MemberDetailModal from '../components/member/MemberDetailModal';
 import MemberForm from '../components/member/MemberForm';
 import MemberSearchFilter from '../components/member/MemberSearchFilter';
@@ -72,6 +73,9 @@ const Members: React.FC = () => {
   // 에러 상태
   const [error, setError] = useState<string | null>(null);
 
+  // 토스트 알림 훅
+  const { showSuccess, showError } = useToastHelpers();
+
   // 컴포넌트 마운트 시 데이터 로드
   useEffect(() => {
     loadInitialData();
@@ -93,21 +97,31 @@ const Members: React.FC = () => {
       setLoading(true);
       setError(null);
 
-      // TODO: 실제 API 호출 구현
-      const result = await window.electronAPI?.database?.member?.getAll({
+      console.log('회원 목록 로딩 시도:', { searchFilter, sortOption });
+      
+      if (!window.electronAPI?.database?.member?.getAll) {
+        throw new Error('electronAPI가 사용할 수 없습니다.');
+      }
+
+      const result = await window.electronAPI.database.member.getAll({
         ...searchFilter,
         sort: sortOption,
         page: pagination.page,
         limit: pagination.limit,
       });
 
+      console.log('회원 목록 결과:', result);
+
       if (result) {
-        setMembers(result.members || []);
-        setPagination(result.pagination || pagination);
+        setMembers(Array.isArray(result) ? result : result.members || []);
+        if (result.pagination) {
+          setPagination(result.pagination);
+        }
       }
     } catch (error) {
       console.error('회원 목록 로드 실패:', error);
-      setError('회원 목록을 불러오는데 실패했습니다.');
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      setError(`회원 목록을 불러오는데 실패했습니다: ${errorMessage}`);
     } finally {
       setLoading(false);
     }
@@ -157,12 +171,24 @@ const Members: React.FC = () => {
   const handleCreateMember = async (data: CreateMemberInput) => {
     try {
       setFormLoading(true);
-      await window.electronAPI?.database?.member?.create(data);
+      console.log('회원 생성 시도:', data);
+      
+      if (!window.electronAPI?.database?.member?.create) {
+        throw new Error('electronAPI가 사용할 수 없습니다.');
+      }
+      
+      const result = await window.electronAPI.database.member.create(data);
+      console.log('회원 생성 결과:', result);
+      
       await loadInitialData(); // 목록과 통계 새로고침
       setIsFormOpen(false);
       setSelectedMembers([]); // 선택 초기화
+      
+      showSuccess('회원이 성공적으로 등록되었습니다.');
     } catch (error) {
       console.error('회원 등록 실패:', error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      showError(`회원 등록에 실패했습니다: ${errorMessage}`);
       throw error;
     } finally {
       setFormLoading(false);
@@ -173,12 +199,24 @@ const Members: React.FC = () => {
   const handleUpdateMember = async (data: UpdateMemberInput) => {
     try {
       setFormLoading(true);
-      await window.electronAPI?.database?.member?.update(data.id, data);
+      console.log('회원 수정 시도:', data);
+      
+      if (!window.electronAPI?.database?.member?.update) {
+        throw new Error('electronAPI가 사용할 수 없습니다.');
+      }
+      
+      const result = await window.electronAPI.database.member.update(data.id, data);
+      console.log('회원 수정 결과:', result);
+      
       await loadInitialData(); // 목록과 통계 새로고침
       setIsFormOpen(false);
       setEditingMember(undefined);
+      
+      showSuccess('회원 정보가 성공적으로 수정되었습니다.');
     } catch (error) {
       console.error('회원 수정 실패:', error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      showError(`회원 수정에 실패했습니다: ${errorMessage}`);
       throw error;
     } finally {
       setFormLoading(false);
@@ -196,17 +234,26 @@ const Members: React.FC = () => {
 
   // 회원 삭제 핸들러
   const handleDeleteMember = async (member: Member) => {
-    if (!confirm(`정말로 "${member.name}" 회원을 삭제하시겠습니까?`)) {
+    if (!confirm(`정말로 "${member.name}" 회원을 삭제하시겠습니까?\n\n이 작업은 되돌릴 수 없습니다.`)) {
       return;
     }
 
     try {
-      await window.electronAPI?.database?.member?.delete(member.id);
+      console.log('회원 삭제 시도:', member);
+      
+      if (!window.electronAPI?.database?.member?.delete) {
+        throw new Error('electronAPI가 사용할 수 없습니다.');
+      }
+      
+      await window.electronAPI.database.member.delete(member.id);
       await loadInitialData(); // 목록과 통계 새로고침
       setSelectedMembers(prev => prev.filter(id => id !== member.id));
+      
+      showSuccess(`"${member.name}" 회원이 성공적으로 삭제되었습니다.`);
     } catch (error) {
       console.error('회원 삭제 실패:', error);
-      setError('회원 삭제에 실패했습니다.');
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      showError(`회원 삭제에 실패했습니다: ${errorMessage}`);
     }
   };
 
@@ -294,7 +341,7 @@ const Members: React.FC = () => {
       }
     } catch (error) {
       console.error('일괄 작업 실패:', error);
-      setError(`${action.label} 작업에 실패했습니다.`);
+      showError(`${action.label} 작업에 실패했습니다.`);
     }
   };
 

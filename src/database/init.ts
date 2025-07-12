@@ -1,6 +1,7 @@
 import Database from 'better-sqlite3';
-import * as path from 'path';
 import { app } from 'electron';
+import * as path from 'path';
+import { MigrationRunner } from './migrations/migrationRunner';
 
 let db: Database.Database | null = null;
 
@@ -32,6 +33,16 @@ export const initializeDatabase = (): Database.Database => {
 
     // 기본 데이터 삽입
     insertDefaultData(db);
+
+    // 마이그레이션 실행
+    try {
+      const migrationRunner = new MigrationRunner(db);
+      migrationRunner.runMigrations();
+    } catch (migrationError) {
+      console.error('마이그레이션 실행 중 오류 발생:', migrationError);
+      // 마이그레이션 실패해도 앱은 계속 실행되도록 함
+      console.log('마이그레이션 실패했지만 앱은 계속 실행됩니다.');
+    }
 
     console.log('데이터베이스 초기화 완료');
     return db;
@@ -65,8 +76,6 @@ const createTables = (database: Database.Database): void => {
         birth_date DATE,
         join_date DATE NOT NULL DEFAULT CURRENT_DATE,
         address TEXT,
-        emergency_contact TEXT,
-        emergency_phone TEXT,
         notes TEXT,
         active BOOLEAN DEFAULT 1,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,

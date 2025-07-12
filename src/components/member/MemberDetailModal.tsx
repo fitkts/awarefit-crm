@@ -1,30 +1,30 @@
-import React, { useState, useEffect } from 'react';
 import {
-  X,
-  User,
-  Phone,
-  Mail,
-  Calendar,
-  MapPin,
-  CreditCard,
   Activity,
-  Clock,
+  AlertCircle,
   Award,
-  TrendingUp,
+  Calendar,
+  CheckCircle,
+  Clock,
+  CreditCard,
   Edit,
   FileText,
-  AlertCircle,
-  CheckCircle,
-  XCircle,
+  Mail,
+  MapPin,
+  Phone,
+  TrendingUp,
+  User,
   Users,
+  X,
+  XCircle,
 } from 'lucide-react';
-import { Member, MemberDetail, ExtendedMembershipHistory } from '../../types/member';
+import React, { useEffect, useState } from 'react';
+import { ExtendedMembershipHistory, Member, MemberDetail } from '../../types/member';
 import {
   calculateAge,
-  formatPhoneNumber,
-  formatEmail,
   formatAddress,
   formatDate,
+  formatEmail,
+  formatPhoneNumber,
 } from '../../utils/memberUtils';
 
 interface MemberDetailModalProps {
@@ -353,31 +353,7 @@ const MemberDetailModal: React.FC<MemberDetailModalProps> = ({
                     </div>
                   </div>
 
-                  {/* 비상연락처 */}
-                  {(member.emergency_contact || member.emergency_phone) && (
-                    <div className="bg-white rounded-lg border border-gray-200 p-6">
-                      <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                        <AlertCircle className="w-5 h-5 mr-2" />
-                        비상연락처
-                      </h3>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {member.emergency_contact && (
-                          <div>
-                            <span className="text-sm text-gray-600">이름</span>
-                            <p className="text-gray-900">{member.emergency_contact}</p>
-                          </div>
-                        )}
-                        {member.emergency_phone && (
-                          <div>
-                            <span className="text-sm text-gray-600">전화번호</span>
-                            <p className="text-gray-900">
-                              {formatPhoneNumber(member.emergency_phone)}
-                            </p>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  )}
+
 
                   {/* 메모 */}
                   {member.notes && (

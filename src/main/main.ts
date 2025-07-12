@@ -1,4 +1,4 @@
-import { app, BrowserWindow, Menu, dialog } from 'electron';
+import { app, BrowserWindow, dialog, Menu } from 'electron';
 import * as path from 'path';
 import { initializeDatabase } from '../database/init';
 import { registerMemberHandlers } from './ipc/memberHandlers';
@@ -27,15 +27,27 @@ if (process.platform === 'darwin') {
 let mainWindow: BrowserWindow | null = null;
 
 // 앱 준비 완료 시 윈도우 생성
-app.whenReady().then(() => {
+app.whenReady().then(async () => {
   createMainWindow();
   createMenu();
-  initializeDatabase();
-
-  // IPC 핸들러 등록
-  registerMemberHandlers();
-  registerPaymentHandlers();
-  registerSystemHandlers();
+  
+  try {
+    // 데이터베이스 초기화를 먼저 완료
+    await initializeDatabase();
+    console.log('데이터베이스 초기화 완료');
+    
+    // IPC 핸들러 등록
+    registerMemberHandlers();
+    registerPaymentHandlers();
+    registerSystemHandlers();
+    console.log('IPC 핸들러 등록 완료');
+  } catch (error) {
+    console.error('앱 초기화 실패:', error);
+    // 에러가 발생해도 IPC 핸들러는 등록하여 기본 기능은 사용할 수 있도록 함
+    registerMemberHandlers();
+    registerPaymentHandlers();
+    registerSystemHandlers();
+  }
 
   // macOS에서 dock 아이콘 클릭 시 윈도우 재생성
   app.on('activate', () => {
@@ -92,7 +104,7 @@ function createMainWindow(): void {
     mainWindow.loadURL('http://localhost:3002');
     mainWindow.webContents.openDevTools(); // 개발 도구 열기
   } else {
-    mainWindow.loadFile(path.join(__dirname, '../dist/index.html'));
+    mainWindow.loadFile(path.join(__dirname, '../index.html'));
   }
 
   // 윈도우 준비 완료 시 표시
