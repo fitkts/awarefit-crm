@@ -1,7 +1,7 @@
-import { ipcMain, app } from 'electron';
-import { getDatabase } from '../../database/init';
-import * as path from 'path';
+import { app, ipcMain } from 'electron';
 import * as fs from 'fs';
+import * as path from 'path';
+import { getDatabase } from '../../database/init';
 
 // 시스템 관련 IPC 핸들러 등록
 export const registerSystemHandlers = (): void => {
@@ -28,59 +28,6 @@ export const registerSystemHandlers = (): void => {
       }
     } catch (error) {
       console.error('데이터베이스 쿼리 실행 실패:', error);
-      throw error;
-    }
-  });
-
-  // 직원 관련 핸들러
-  ipcMain.handle('staff-get-all', async () => {
-    try {
-      const stmt = db.prepare('SELECT * FROM staff WHERE is_active = 1 ORDER BY name');
-      return stmt.all();
-    } catch (error) {
-      console.error('직원 목록 조회 실패:', error);
-      throw error;
-    }
-  });
-
-  ipcMain.handle('staff-get-by-id', async (_, id) => {
-    try {
-      const stmt = db.prepare('SELECT * FROM staff WHERE id = ?');
-      return stmt.get(id);
-    } catch (error) {
-      console.error('직원 조회 실패:', error);
-      throw error;
-    }
-  });
-
-  ipcMain.handle('staff-create', async (_, data) => {
-    try {
-      // 직원번호 생성 (STF-###)
-      const countStmt = db.prepare('SELECT COUNT(*) as count FROM staff');
-      const count = (countStmt.get() as { count: number }).count + 1;
-      const staffNumber = `STF-${count.toString().padStart(3, '0')}`;
-
-      const stmt = db.prepare(`
-        INSERT INTO staff (
-          staff_number, name, phone, email, position, hire_date,
-          can_manage_payments, can_manage_members
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-      `);
-
-      const result = stmt.run(
-        staffNumber,
-        data.name,
-        data.phone || null,
-        data.email || null,
-        data.position || '직원',
-        data.hire_date || new Date().toISOString().split('T')[0],
-        data.can_manage_payments || 0,
-        data.can_manage_members || 1
-      );
-
-      return { id: result.lastInsertRowid, staff_number: staffNumber };
-    } catch (error) {
-      console.error('직원 생성 실패:', error);
       throw error;
     }
   });

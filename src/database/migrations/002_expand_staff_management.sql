@@ -4,14 +4,39 @@
 
 BEGIN TRANSACTION;
 
--- 1. staff 테이블에 누락된 컬럼 추가 (SQLite는 IF NOT EXISTS를 ALTER TABLE에서 지원하지 않음)
--- 컬럼 중복 생성 방지를 위해 각각을 별도로 처리
+-- 1. 직원 역할 관리 테이블 생성 (컬럼 추가보다 먼저 생성)
+CREATE TABLE IF NOT EXISTS staff_roles (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT UNIQUE NOT NULL,
+  permissions TEXT NOT NULL, -- JSON 형태로 권한 저장
+  description TEXT,
+  is_active BOOLEAN DEFAULT 1,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
 
--- gender 컬럼 추가 (이미 존재할 수 있으므로 에러 무시)
--- SQLite는 컬럼 존재 체크가 어려우므로, 실행 후 에러는 무시하도록 처리
+-- 2. 직원 급여 조정 이력 테이블 생성
+CREATE TABLE IF NOT EXISTS staff_salary_history (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  staff_id INTEGER NOT NULL,
+  previous_salary DECIMAL(10,2),
+  new_salary DECIMAL(10,2) NOT NULL,
+  adjustment_amount DECIMAL(10,2) NOT NULL,
+  adjustment_reason TEXT,
+  effective_date DATE NOT NULL DEFAULT CURRENT_DATE,
+  created_by INTEGER, -- 조정한 관리자 ID
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  
+  FOREIGN KEY (staff_id) REFERENCES staff(id),
+  FOREIGN KEY (created_by) REFERENCES staff(id)
+);
+
+-- 3. staff 테이블에 누락된 컬럼 추가 (에러 발생시 무시됨)
+-- 이제 마이그레이션 러너가 컬럼 중복 에러를 안전하게 처리함
+
+-- gender 컬럼 추가
 ALTER TABLE staff ADD COLUMN gender TEXT CHECK(gender IN ('남성', '여성'));
 
--- birth_date 컬럼 추가
+-- birth_date 컬럼 추가 (이미 존재할 수 있음)
 ALTER TABLE staff ADD COLUMN birth_date DATE;
 
 -- address 컬럼 추가  
@@ -31,32 +56,6 @@ ALTER TABLE staff ADD COLUMN notes TEXT;
 
 -- updated_at 컬럼 추가
 ALTER TABLE staff ADD COLUMN updated_at DATETIME DEFAULT CURRENT_TIMESTAMP;
-
--- 2. 직원 역할 관리 테이블 생성
-CREATE TABLE IF NOT EXISTS staff_roles (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  name TEXT UNIQUE NOT NULL,
-  permissions TEXT NOT NULL, -- JSON 형태로 권한 저장
-  description TEXT,
-  is_active BOOLEAN DEFAULT 1,
-  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-);
-
--- 3. 직원 급여 조정 이력 테이블 생성
-CREATE TABLE IF NOT EXISTS staff_salary_history (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  staff_id INTEGER NOT NULL,
-  previous_salary DECIMAL(10,2),
-  new_salary DECIMAL(10,2) NOT NULL,
-  adjustment_amount DECIMAL(10,2) NOT NULL,
-  adjustment_reason TEXT,
-  effective_date DATE NOT NULL DEFAULT CURRENT_DATE,
-  created_by INTEGER, -- 조정한 관리자 ID
-  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-  
-  FOREIGN KEY (staff_id) REFERENCES staff(id),
-  FOREIGN KEY (created_by) REFERENCES staff(id)
-);
 
 -- 4. 회원-직원 연동을 위해 members 테이블에 담당직원 컬럼 추가
 ALTER TABLE members ADD COLUMN assigned_staff_id INTEGER;

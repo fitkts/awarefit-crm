@@ -28,28 +28,28 @@ if (process.platform === 'darwin') {
 let mainWindow: BrowserWindow | null = null;
 
 // 앱 준비 완료 시 윈도우 생성
-app.whenReady().then(async () => {
+app.whenReady().then(() => {
   createMainWindow();
   createMenu();
 
   try {
-    // 데이터베이스 초기화를 먼저 완료
-    await initializeDatabase();
+    // 데이터베이스 초기화 (동기적으로 처리)
+    initializeDatabase();
     console.log('데이터베이스 초기화 완료');
+  } catch (error) {
+    console.error('데이터베이스 초기화 실패:', error);
+    console.log('마이그레이션 실패했지만 앱은 계속 실행됩니다.');
+  }
 
-    // IPC 핸들러 등록
+  // IPC 핸들러 등록 (한 번만 실행)
+  try {
+    registerSystemHandlers();
     registerMemberHandlers();
     registerPaymentHandlers();
     registerStaffHandlers();
-    registerSystemHandlers();
     console.log('IPC 핸들러 등록 완료');
   } catch (error) {
-    console.error('앱 초기화 실패:', error);
-    // 에러가 발생해도 IPC 핸들러는 등록하여 기본 기능은 사용할 수 있도록 함
-    registerMemberHandlers();
-    registerPaymentHandlers();
-    registerStaffHandlers();
-    registerSystemHandlers();
+    console.error('IPC 핸들러 등록 실패:', error);
   }
 
   // macOS에서 dock 아이콘 클릭 시 윈도우 재생성
