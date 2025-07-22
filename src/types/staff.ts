@@ -12,8 +12,11 @@ export interface Staff {
   department?: string | null; // 부서
   salary?: number | null;
   address?: string | null;
+  role_id?: number | null; // 역할 ID (새로 추가)
   notes?: string | null;
-  active: boolean;
+  is_active: boolean; // 데이터베이스 컬럼명과 일치
+  can_manage_payments: boolean;
+  can_manage_members: boolean;
   created_at: string;
   updated_at: string;
 }
@@ -35,7 +38,10 @@ export interface CreateStaffInput {
 // 직원 수정을 위한 입력 데이터
 export interface UpdateStaffInput extends Partial<CreateStaffInput> {
   id: number;
-  active?: boolean;
+  is_active?: boolean;
+  role_id?: number;
+  can_manage_payments?: boolean;
+  can_manage_members?: boolean;
 }
 
 // 직원 검색 필터
@@ -44,13 +50,16 @@ export interface StaffSearchFilter {
   gender?: '남성' | '여성' | '';
   position?: string;
   department?: string;
-  active?: boolean | 'all';
+  role_id?: number | 'all';
+  is_active?: boolean | 'all';
   hire_date_from?: string;
   hire_date_to?: string;
   birth_date_from?: string;
   birth_date_to?: string;
   has_phone?: boolean;
   has_email?: boolean;
+  salary_min?: number;
+  salary_max?: number;
   age_min?: number;
   age_max?: number;
 }
@@ -63,8 +72,94 @@ export interface StaffStats {
   new_this_month: number;
   by_position: Record<string, number>;
   by_department: Record<string, number>;
+  by_role: Record<string, number>;
   average_tenure_months: number;
+  total_salary_cost: number;
+  average_salary: number;
 }
+
+// 직원 권한 관리
+export interface StaffPermissions {
+  member_management: boolean;
+  payment_management: boolean;
+  staff_management: boolean;
+  report_access: boolean;
+  system_settings: boolean;
+}
+
+// 직원 역할 정의
+export interface StaffRole {
+  id: number;
+  name: string;
+  permissions: StaffPermissions;
+  description?: string | null;
+  is_active: boolean;
+  created_at: string;
+}
+
+// 직원 역할 생성/수정 입력
+export interface StaffRoleInput {
+  name: string;
+  permissions: StaffPermissions;
+  description?: string;
+}
+
+// 급여 조정 이력
+export interface StaffSalaryHistory {
+  id: number;
+  staff_id: number;
+  previous_salary?: number | null;
+  new_salary: number;
+  adjustment_amount: number;
+  adjustment_reason?: string | null;
+  effective_date: string; // YYYY-MM-DD 형식
+  created_by?: number | null;
+  created_at: string;
+}
+
+// 급여 조정 입력
+export interface SalaryAdjustmentInput {
+  staff_id: number;
+  new_salary: number;
+  adjustment_reason?: string;
+  effective_date: string;
+}
+
+// 직원 상세 정보 (관련 데이터 포함)
+export interface StaffDetail extends Staff {
+  age?: number;
+  tenure_months?: number;
+  role?: StaffRole | null;
+  salary_history: StaffSalaryHistory[];
+  managed_members_count: number;
+  total_sales_amount: number;
+  last_salary_adjustment?: StaffSalaryHistory | null;
+}
+
+// 정렬 옵션
+export interface StaffSortOption {
+  field: 'name' | 'hire_date' | 'position' | 'department' | 'salary' | 'created_at';
+  direction: 'asc' | 'desc';
+}
+
+// 페이지네이션 정보
+export interface StaffPaginationInfo {
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
+  hasNext: boolean;
+  hasPrev: boolean;
+}
+
+// 일괄 작업 타입
+export type StaffBulkAction =
+  | 'activate'
+  | 'deactivate'
+  | 'delete'
+  | 'assign_role'
+  | 'update_department'
+  | 'salary_adjustment';
 
 // 공통 개인 정보 인터페이스 (회원과 직원이 공유)
 export interface PersonalInfo {

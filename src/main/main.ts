@@ -3,6 +3,7 @@ import * as path from 'path';
 import { initializeDatabase } from '../database/init';
 import { registerMemberHandlers } from './ipc/memberHandlers';
 import { registerPaymentHandlers } from './ipc/paymentHandlers';
+import { registerStaffHandlers } from './ipc/staffHandlers';
 import { registerSystemHandlers } from './ipc/systemHandlers';
 
 // 개발 환경 여부 확인
@@ -30,15 +31,16 @@ let mainWindow: BrowserWindow | null = null;
 app.whenReady().then(async () => {
   createMainWindow();
   createMenu();
-  
+
   try {
     // 데이터베이스 초기화를 먼저 완료
     await initializeDatabase();
     console.log('데이터베이스 초기화 완료');
-    
+
     // IPC 핸들러 등록
     registerMemberHandlers();
     registerPaymentHandlers();
+    registerStaffHandlers();
     registerSystemHandlers();
     console.log('IPC 핸들러 등록 완료');
   } catch (error) {
@@ -46,6 +48,7 @@ app.whenReady().then(async () => {
     // 에러가 발생해도 IPC 핸들러는 등록하여 기본 기능은 사용할 수 있도록 함
     registerMemberHandlers();
     registerPaymentHandlers();
+    registerStaffHandlers();
     registerSystemHandlers();
   }
 
@@ -93,9 +96,9 @@ function createMainWindow(): void {
     titleBarOverlay:
       process.platform !== 'darwin'
         ? {
-            color: '#ffffff',
-            symbolColor: '#000000',
-          }
+          color: '#ffffff',
+          symbolColor: '#000000',
+        }
         : undefined,
   });
 

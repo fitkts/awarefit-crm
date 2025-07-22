@@ -36,11 +36,22 @@ const electronAPI = {
 
     // 직원 관련 API
     staff: {
-      getAll: () => ipcRenderer.invoke('staff-get-all'),
+      getAll: (filter?: any) => ipcRenderer.invoke('staff-get-all', filter),
       getById: (id: number) => ipcRenderer.invoke('staff-get-by-id', id),
       create: (data: any) => ipcRenderer.invoke('staff-create', data),
       update: (id: number, data: any) => ipcRenderer.invoke('staff-update', id, data),
       delete: (id: number) => ipcRenderer.invoke('staff-delete', id),
+      search: (query: string) => ipcRenderer.invoke('staff-search', query),
+      getStats: () => ipcRenderer.invoke('staff-get-stats'),
+      salaryHistory: (staffId: number) => ipcRenderer.invoke('staff-salary-history', staffId),
+      salaryAdjust: (data: any) => ipcRenderer.invoke('staff-salary-adjust', data),
+    },
+
+    // 직원 역할 관련 API
+    staffRole: {
+      getAll: () => ipcRenderer.invoke('staff-roles-get-all'),
+      create: (data: any) => ipcRenderer.invoke('staff-role-create', data),
+      update: (id: number, data: any) => ipcRenderer.invoke('staff-role-update', id, data),
     },
 
     // 회원권 타입 관련 API

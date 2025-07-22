@@ -3,6 +3,7 @@ import { ToastProvider } from '../components/common/Toast';
 import Layout from '../components/layout/Layout';
 import Dashboard from '../pages/Dashboard';
 import Members from '../pages/Members';
+import Staff from '../pages/Staff';
 
 interface AppInfo {
   version: string;
@@ -47,12 +48,7 @@ const App: React.FC = () => {
           </div>
         );
       case 'staff':
-        return (
-          <div className="bg-white rounded-xl p-8 text-center">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">직원 관리</h2>
-            <p className="text-gray-600">직원 관리 기능이 곧 추가될 예정입니다.</p>
-          </div>
-        );
+        return <Staff />;
       case 'statistics':
         return (
           <div className="bg-white rounded-xl p-8 text-center">
