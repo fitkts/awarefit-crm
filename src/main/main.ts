@@ -43,10 +43,10 @@ app.whenReady().then(() => {
 
   // IPC 핸들러 등록 (한 번만 실행)
   try {
-    registerSystemHandlers();
     registerMemberHandlers();
-    registerPaymentHandlers();
     registerStaffHandlers();
+    registerPaymentHandlers(); // 결제 핸들러 추가
+    registerSystemHandlers();
     console.log('IPC 핸들러 등록 완료');
   } catch (error) {
     console.error('IPC 핸들러 등록 실패:', error);

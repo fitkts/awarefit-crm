@@ -19,7 +19,7 @@
     "health-check": "npm run type-check && npm run lint && echo '✅ 프로젝트 상태가 정상입니다!'",
     "db:init": "node scripts/init-database.js",
     "db:reset": "echo '데이터베이스 초기화 예정'",
-    "test": "echo \"테스트 설정 예정\" && exit 0",
+    "test": "jest",
     "test:watch": "echo \"테스트 워치 모드 예정\" && exit 0",
     "type-check": "tsc --noEmit",
     "type-check:watch": "tsc --noEmit --watch",

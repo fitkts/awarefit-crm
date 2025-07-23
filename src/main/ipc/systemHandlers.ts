@@ -66,41 +66,6 @@ export const registerSystemHandlers = (): void => {
     }
   });
 
-  // PT 패키지 관련 핸들러
-  ipcMain.handle('pt-package-get-all', async () => {
-    try {
-      const stmt = db.prepare(
-        'SELECT * FROM pt_packages WHERE is_active = 1 ORDER BY session_count'
-      );
-      return stmt.all();
-    } catch (error) {
-      console.error('PT 패키지 조회 실패:', error);
-      throw error;
-    }
-  });
-
-  ipcMain.handle('pt-package-create', async (_, data) => {
-    try {
-      const stmt = db.prepare(`
-        INSERT INTO pt_packages (name, session_count, price, validity_days, description)
-        VALUES (?, ?, ?, ?, ?)
-      `);
-
-      const result = stmt.run(
-        data.name,
-        data.session_count,
-        data.price,
-        data.validity_days || 90,
-        data.description || null
-      );
-
-      return { id: result.lastInsertRowid };
-    } catch (error) {
-      console.error('PT 패키지 생성 실패:', error);
-      throw error;
-    }
-  });
-
   // 통계 관련 핸들러
   ipcMain.handle('stats-get-dashboard', async () => {
     try {

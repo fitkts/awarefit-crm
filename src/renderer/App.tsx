@@ -3,6 +3,7 @@ import { ToastProvider } from '../components/common/Toast';
 import Layout from '../components/layout/Layout';
 import Dashboard from '../pages/Dashboard';
 import Members from '../pages/Members';
+import Payment from '../pages/Payment';
 import Staff from '../pages/Staff';
 
 interface AppInfo {
@@ -24,7 +25,7 @@ const App: React.FC = () => {
       setAppInfo(prev => ({ ...prev, isElectron: true }));
 
       // 앱 버전 가져오기
-      window.electronAPI.getAppVersion().then(version => {
+      window.electronAPI.app.getVersion().then((version: string) => {
         setAppInfo(prev => ({ ...prev, version }));
       });
     }
@@ -41,12 +42,7 @@ const App: React.FC = () => {
       case 'members':
         return <Members />;
       case 'payments':
-        return (
-          <div className="bg-white rounded-xl p-8 text-center">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">결제 관리</h2>
-            <p className="text-gray-600">결제 관리 기능이 곧 추가될 예정입니다.</p>
-          </div>
-        );
+        return <Payment />;
       case 'staff':
         return <Staff />;
       case 'statistics':

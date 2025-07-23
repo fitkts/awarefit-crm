@@ -7,14 +7,14 @@ import MemberSearchFilter from '../components/member/MemberSearchFilter';
 import MemberStats from '../components/member/MemberStats';
 import MemberTable from '../components/member/MemberTable';
 import {
-    BulkAction,
-    CreateMemberInput,
-    Member,
-    MemberSearchFilter as MemberSearchFilterType,
-    MemberStats as MemberStatsType,
-    PaginationInfo,
-    SortOption,
-    UpdateMemberInput,
+  BulkAction,
+  CreateMemberInput,
+  Member,
+  MemberSearchFilter as MemberSearchFilterType,
+  MemberStats as MemberStatsType,
+  PaginationInfo,
+  SortOption,
+  UpdateMemberInput,
 } from '../types/member';
 
 const Members: React.FC = () => {
@@ -98,7 +98,7 @@ const Members: React.FC = () => {
       setError(null);
 
       console.log('회원 목록 로딩 시도:', { searchFilter, sortOption });
-      
+
       if (!window.electronAPI?.database?.member?.getAll) {
         throw new Error('electronAPI가 사용할 수 없습니다.');
       }
@@ -113,9 +113,16 @@ const Members: React.FC = () => {
       console.log('회원 목록 결과:', result);
 
       if (result) {
-        setMembers(Array.isArray(result) ? result : result.members || []);
-        if (result.pagination) {
-          setPagination(result.pagination);
+        // API가 배열을 반환하므로 직접 설정
+        if (Array.isArray(result)) {
+          setMembers(result);
+        } else {
+          // 타입 가드를 사용해서 안전하게 처리
+          const resultWithPagination = result as any;
+          setMembers(resultWithPagination.members || []);
+          if (resultWithPagination.pagination) {
+            setPagination(resultWithPagination.pagination);
+          }
         }
       }
     } catch (error) {
@@ -172,18 +179,18 @@ const Members: React.FC = () => {
     try {
       setFormLoading(true);
       console.log('회원 생성 시도:', data);
-      
+
       if (!window.electronAPI?.database?.member?.create) {
         throw new Error('electronAPI가 사용할 수 없습니다.');
       }
-      
+
       const result = await window.electronAPI.database.member.create(data);
       console.log('회원 생성 결과:', result);
-      
+
       await loadInitialData(); // 목록과 통계 새로고침
       setIsFormOpen(false);
       setSelectedMembers([]); // 선택 초기화
-      
+
       showSuccess('회원이 성공적으로 등록되었습니다.');
     } catch (error) {
       console.error('회원 등록 실패:', error);
@@ -200,18 +207,18 @@ const Members: React.FC = () => {
     try {
       setFormLoading(true);
       console.log('회원 수정 시도:', data);
-      
+
       if (!window.electronAPI?.database?.member?.update) {
         throw new Error('electronAPI가 사용할 수 없습니다.');
       }
-      
+
       const result = await window.electronAPI.database.member.update(data.id, data);
       console.log('회원 수정 결과:', result);
-      
+
       await loadInitialData(); // 목록과 통계 새로고침
       setIsFormOpen(false);
       setEditingMember(undefined);
-      
+
       showSuccess('회원 정보가 성공적으로 수정되었습니다.');
     } catch (error) {
       console.error('회원 수정 실패:', error);
@@ -240,15 +247,15 @@ const Members: React.FC = () => {
 
     try {
       console.log('회원 삭제 시도:', member);
-      
+
       if (!window.electronAPI?.database?.member?.delete) {
         throw new Error('electronAPI가 사용할 수 없습니다.');
       }
-      
+
       await window.electronAPI.database.member.delete(member.id);
       await loadInitialData(); // 목록과 통계 새로고침
       setSelectedMembers(prev => prev.filter(id => id !== member.id));
-      
+
       showSuccess(`"${member.name}" 회원이 성공적으로 삭제되었습니다.`);
     } catch (error) {
       console.error('회원 삭제 실패:', error);

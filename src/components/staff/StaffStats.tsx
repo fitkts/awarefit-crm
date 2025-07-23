@@ -34,6 +34,10 @@ const StaffStatsComponent: React.FC<StaffStatsProps> = ({ stats, loading = false
     );
   }
 
+  // 안전한 값 접근을 위한 헬퍼 함수들
+  const safeValue = (value: number | undefined | null): number => value ?? 0;
+  const safeObject = (obj: Record<string, number> | undefined | null): Record<string, number> => obj ?? {};
+
   // 백분율 계산 헬퍼
   const getPercentage = (value: number, total: number) => {
     return total > 0 ? Math.round((value / total) * 100) : 0;
@@ -49,6 +53,17 @@ const StaffStatsComponent: React.FC<StaffStatsProps> = ({ stats, loading = false
     return amount.toLocaleString();
   };
 
+  // 안전한 stats 값들
+  const totalStaff = safeValue(stats.total);
+  const activeStaff = safeValue(stats.active);
+  const newThisMonth = safeValue(stats.new_this_month);
+  const averageTenure = safeValue(stats.average_tenure_months);
+  const totalSalaryCost = safeValue(stats.total_salary_cost);
+  const averageSalary = safeValue(stats.average_salary);
+  const byPosition = safeObject(stats.by_position);
+  const byDepartment = safeObject(stats.by_department);
+  const byRole = safeObject(stats.by_role);
+
   return (
     <div className="space-y-4 mb-4">
       {/* 상단 주요 지표 */}
@@ -58,9 +73,9 @@ const StaffStatsComponent: React.FC<StaffStatsProps> = ({ stats, loading = false
           <div className="flex items-center justify-between">
             <div>
               <p className="text-xs font-medium text-gray-600">전체 직원</p>
-              <p className="text-xl font-bold text-gray-900">{stats.total.toLocaleString()}</p>
+              <p className="text-xl font-bold text-gray-900">{totalStaff.toLocaleString()}</p>
               <p className="text-xs text-gray-500 mt-1">
-                신규 직원 {stats.new_this_month}명 (이번 달)
+                신규 직원 {newThisMonth}명 (이번 달)
               </p>
             </div>
             <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
@@ -74,9 +89,9 @@ const StaffStatsComponent: React.FC<StaffStatsProps> = ({ stats, loading = false
           <div className="flex items-center justify-between">
             <div>
               <p className="text-xs font-medium text-gray-600">활성 직원</p>
-              <p className="text-xl font-bold text-green-600">{stats.active.toLocaleString()}</p>
+              <p className="text-xl font-bold text-green-600">{activeStaff.toLocaleString()}</p>
               <p className="text-xs text-gray-500 mt-1">
-                {getPercentage(stats.active, stats.total)}% 활성률
+                {getPercentage(activeStaff, totalStaff)}% 활성률
               </p>
             </div>
             <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
@@ -91,10 +106,10 @@ const StaffStatsComponent: React.FC<StaffStatsProps> = ({ stats, loading = false
             <div>
               <p className="text-xs font-medium text-gray-600">평균 근속</p>
               <p className="text-xl font-bold text-blue-600">
-                {stats.average_tenure_months}개월
+                {averageTenure}개월
               </p>
               <p className="text-xs text-gray-500 mt-1">
-                약 {Math.round(stats.average_tenure_months / 12 * 10) / 10}년
+                약 {Math.round(averageTenure / 12 * 10) / 10}년
               </p>
             </div>
             <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
@@ -109,10 +124,10 @@ const StaffStatsComponent: React.FC<StaffStatsProps> = ({ stats, loading = false
             <div>
               <p className="text-xs font-medium text-gray-600">총 급여 비용</p>
               <p className="text-xl font-bold text-purple-600">
-                {formatSalary(stats.total_salary_cost)}원
+                {formatSalary(totalSalaryCost)}원
               </p>
               <p className="text-xs text-gray-500 mt-1">
-                평균 {formatSalary(stats.average_salary)}원
+                평균 {formatSalary(averageSalary)}원
               </p>
             </div>
             <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
@@ -131,25 +146,25 @@ const StaffStatsComponent: React.FC<StaffStatsProps> = ({ stats, loading = false
             <h3 className="text-sm font-medium text-gray-900">직책별 분포</h3>
           </div>
           <div className="space-y-2">
-            {Object.entries(stats.by_position).map(([position, count]) => (
+            {Object.entries(byPosition).map(([position, count]) => (
               <div key={position} className="flex items-center justify-between">
                 <div className="flex items-center">
                   <div className={`w-2 h-2 rounded-full mr-2 ${position === '매니저' ? 'bg-purple-500' :
-                      position === '트레이너' ? 'bg-blue-500' :
-                        position === '데스크' ? 'bg-green-500' :
-                          'bg-gray-500'
+                    position === '트레이너' ? 'bg-blue-500' :
+                      position === '데스크' ? 'bg-green-500' :
+                        'bg-gray-500'
                     }`}></div>
                   <span className="text-xs text-gray-600">{position}</span>
                 </div>
                 <div className="flex items-center">
                   <span className="text-sm font-medium text-gray-900 mr-2">{count}명</span>
                   <span className="text-xs text-gray-500">
-                    ({getPercentage(count, stats.total)}%)
+                    ({getPercentage(count, totalStaff)}%)
                   </span>
                 </div>
               </div>
             ))}
-            {Object.keys(stats.by_position).length === 0 && (
+            {Object.keys(byPosition).length === 0 && (
               <p className="text-xs text-gray-500 text-center py-2">데이터가 없습니다</p>
             )}
           </div>
@@ -162,26 +177,26 @@ const StaffStatsComponent: React.FC<StaffStatsProps> = ({ stats, loading = false
             <h3 className="text-sm font-medium text-gray-900">부서별 분포</h3>
           </div>
           <div className="space-y-2">
-            {Object.entries(stats.by_department).map(([department, count]) => (
+            {Object.entries(byDepartment).map(([department, count]) => (
               <div key={department} className="flex items-center justify-between">
                 <div className="flex items-center">
                   <div className={`w-2 h-2 rounded-full mr-2 ${department === '운영팀' ? 'bg-red-500' :
-                      department === '트레이닝팀' ? 'bg-blue-500' :
-                        department === '고객서비스팀' ? 'bg-green-500' :
-                          department === '시설관리팀' ? 'bg-yellow-500' :
-                            'bg-gray-500'
+                    department === '트레이닝팀' ? 'bg-blue-500' :
+                      department === '고객서비스팀' ? 'bg-green-500' :
+                        department === '시설관리팀' ? 'bg-yellow-500' :
+                          'bg-gray-500'
                     }`}></div>
                   <span className="text-xs text-gray-600">{department}</span>
                 </div>
                 <div className="flex items-center">
                   <span className="text-sm font-medium text-gray-900 mr-2">{count}명</span>
                   <span className="text-xs text-gray-500">
-                    ({getPercentage(count, stats.total)}%)
+                    ({getPercentage(count, totalStaff)}%)
                   </span>
                 </div>
               </div>
             ))}
-            {Object.keys(stats.by_department).length === 0 && (
+            {Object.keys(byDepartment).length === 0 && (
               <p className="text-xs text-gray-500 text-center py-2">데이터가 없습니다</p>
             )}
           </div>
@@ -194,25 +209,25 @@ const StaffStatsComponent: React.FC<StaffStatsProps> = ({ stats, loading = false
             <h3 className="text-sm font-medium text-gray-900">역할별 분포</h3>
           </div>
           <div className="space-y-2">
-            {Object.entries(stats.by_role).map(([role, count]) => (
+            {Object.entries(byRole).map(([role, count]) => (
               <div key={role} className="flex items-center justify-between">
                 <div className="flex items-center">
                   <div className={`w-2 h-2 rounded-full mr-2 ${role === '관리자' ? 'bg-red-500' :
-                      role === '트레이너' ? 'bg-blue-500' :
-                        role === '데스크' ? 'bg-green-500' :
-                          'bg-gray-500'
+                    role === '트레이너' ? 'bg-blue-500' :
+                      role === '데스크' ? 'bg-green-500' :
+                        'bg-gray-500'
                     }`}></div>
                   <span className="text-xs text-gray-600">{role}</span>
                 </div>
                 <div className="flex items-center">
                   <span className="text-sm font-medium text-gray-900 mr-2">{count}명</span>
                   <span className="text-xs text-gray-500">
-                    ({getPercentage(count, stats.total)}%)
+                    ({getPercentage(count, totalStaff)}%)
                   </span>
                 </div>
               </div>
             ))}
-            {Object.keys(stats.by_role).length === 0 && (
+            {Object.keys(byRole).length === 0 && (
               <p className="text-xs text-gray-500 text-center py-2">데이터가 없습니다</p>
             )}
           </div>
@@ -229,16 +244,16 @@ const StaffStatsComponent: React.FC<StaffStatsProps> = ({ stats, loading = false
             <h4 className="text-sm font-medium text-gray-900 mb-1">인사관리 인사이트</h4>
             <div className="text-xs text-gray-600 space-y-1">
               <p>
-                • 이번 달 신규 입사자가 {stats.new_this_month}명으로
-                {stats.new_this_month > 3 ? ' 많은' : ' 적은'} 편입니다.
+                • 이번 달 신규 입사자가 {newThisMonth}명으로
+                {newThisMonth > 3 ? ' 많은' : ' 적은'} 편입니다.
               </p>
               <p>
-                • 평균 근속 기간이 {stats.average_tenure_months}개월로
-                {stats.average_tenure_months > 24 ? '안정적' : '개선이 필요'}합니다.
+                • 평균 근속 기간이 {averageTenure}개월로
+                {averageTenure > 24 ? '안정적' : '개선이 필요'}합니다.
               </p>
               <p>
-                • 활성 직원 비율이 {getPercentage(stats.active, stats.total)}%로
-                {getPercentage(stats.active, stats.total) > 90 ? '우수' : '점검이 필요'}합니다.
+                • 활성 직원 비율이 {getPercentage(activeStaff, totalStaff)}%로
+                {getPercentage(activeStaff, totalStaff) > 90 ? '우수' : '점검이 필요'}합니다.
               </p>
             </div>
           </div>
