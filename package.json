@@ -7,7 +7,7 @@
   "scripts": {
     "start": "electron .",
     "dev": "concurrently \"npm run dev:webpack\" \"npm run dev:electron\"",
-    "dev:webpack": "webpack serve --config webpack.config.js --mode development",
+    "dev:webpack": "webpack serve --config webpack.config.js --mode development & echo 'Webpack dev server is ready!'",
     "dev:electron": "tsc && electron electron-entry.js",
     "build": "npm run clean && npm run type-check && npm run lint && npm run compile && webpack --mode production",
     "build:electron": "npm run build && electron-builder",
@@ -113,6 +113,7 @@
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
+    "@playwright/test": "^1.54.1",
     "@storybook/addon-docs": "^9.0.18",
     "@storybook/addon-onboarding": "^9.0.18",
     "@storybook/addon-webpack5-compiler-swc": "^3.0.0",

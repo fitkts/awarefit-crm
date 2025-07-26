@@ -6,7 +6,7 @@ import {
   StaffRole,
   UpdateStaffInput,
 } from '../../types/staff';
-import PersonForm from '../common/PersonForm';
+import { PersonForm } from '../common/PersonForm';
 
 interface StaffFormProps {
   isOpen: boolean;

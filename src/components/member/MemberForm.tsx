@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { CreateMemberInput, Member, UpdateMemberInput } from '../../types/member';
 import { FormConfig } from '../../types/staff';
-import PersonForm from '../common/PersonForm';
+import { PersonForm } from '../common/PersonForm';
 
 interface MemberFormProps {
   isOpen: boolean;
