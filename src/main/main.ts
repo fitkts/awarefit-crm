@@ -96,9 +96,9 @@ function createMainWindow(): void {
     titleBarOverlay:
       process.platform !== 'darwin'
         ? {
-          color: '#ffffff',
-          symbolColor: '#000000',
-        }
+            color: '#ffffff',
+            symbolColor: '#000000',
+          }
         : undefined,
   });
 

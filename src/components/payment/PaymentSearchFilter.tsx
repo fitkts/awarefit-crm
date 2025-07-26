@@ -1,13 +1,4 @@
-import {
-  Calendar,
-  CreditCard,
-  Filter,
-  Package,
-  RefreshCw,
-  Search,
-  User,
-  X,
-} from 'lucide-react';
+import { Calendar, CreditCard, Filter, Package, RefreshCw, Search, User, X } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import { PaymentSearchFilter as PaymentSearchFilterType } from '../../types/payment';
 
@@ -39,7 +30,7 @@ const PaymentSearchFilter: React.FC<PaymentSearchFilterProps> = ({
       try {
         const result = await window.electronAPI.database.staff.getAll({
           is_active: true,
-          can_manage_payments: true
+          can_manage_payments: true,
         });
         const staffOptions = result.map((staff: any) => ({
           id: staff.id,
@@ -123,7 +114,7 @@ const PaymentSearchFilter: React.FC<PaymentSearchFilterProps> = ({
             type="text"
             placeholder="회원명, 전화번호, 결제번호로 검색..."
             value={filter.search || ''}
-            onChange={(e) => handleFilterChange('search', e.target.value)}
+            onChange={e => handleFilterChange('search', e.target.value)}
             className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
@@ -188,7 +179,7 @@ const PaymentSearchFilter: React.FC<PaymentSearchFilterProps> = ({
             <input
               type="date"
               value={filter.payment_date_from || ''}
-              onChange={(e) => handleFilterChange('payment_date_from', e.target.value)}
+              onChange={e => handleFilterChange('payment_date_from', e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
@@ -201,7 +192,7 @@ const PaymentSearchFilter: React.FC<PaymentSearchFilterProps> = ({
             <input
               type="date"
               value={filter.payment_date_to || ''}
-              onChange={(e) => handleFilterChange('payment_date_to', e.target.value)}
+              onChange={e => handleFilterChange('payment_date_to', e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
@@ -214,7 +205,12 @@ const PaymentSearchFilter: React.FC<PaymentSearchFilterProps> = ({
             </label>
             <select
               value={filter.payment_type || 'all'}
-              onChange={(e) => handleFilterChange('payment_type', e.target.value === 'all' ? undefined : e.target.value)}
+              onChange={e =>
+                handleFilterChange(
+                  'payment_type',
+                  e.target.value === 'all' ? undefined : e.target.value
+                )
+              }
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="all">전체</option>
@@ -232,7 +228,12 @@ const PaymentSearchFilter: React.FC<PaymentSearchFilterProps> = ({
             </label>
             <select
               value={filter.payment_method || 'all'}
-              onChange={(e) => handleFilterChange('payment_method', e.target.value === 'all' ? undefined : e.target.value)}
+              onChange={e =>
+                handleFilterChange(
+                  'payment_method',
+                  e.target.value === 'all' ? undefined : e.target.value
+                )
+              }
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="all">전체</option>
@@ -251,7 +252,12 @@ const PaymentSearchFilter: React.FC<PaymentSearchFilterProps> = ({
             </label>
             <select
               value={filter.staff_id || ''}
-              onChange={(e) => handleFilterChange('staff_id', e.target.value ? parseInt(e.target.value) : undefined)}
+              onChange={e =>
+                handleFilterChange(
+                  'staff_id',
+                  e.target.value ? parseInt(e.target.value) : undefined
+                )
+              }
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="">전체 직원</option>
@@ -268,7 +274,9 @@ const PaymentSearchFilter: React.FC<PaymentSearchFilterProps> = ({
             <label className="block text-sm font-medium text-gray-700">상태</label>
             <select
               value={filter.status || 'all'}
-              onChange={(e) => handleFilterChange('status', e.target.value === 'all' ? undefined : e.target.value)}
+              onChange={e =>
+                handleFilterChange('status', e.target.value === 'all' ? undefined : e.target.value)
+              }
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="all">전체</option>
@@ -286,7 +294,12 @@ const PaymentSearchFilter: React.FC<PaymentSearchFilterProps> = ({
               type="number"
               placeholder="0"
               value={filter.amount_min || ''}
-              onChange={(e) => handleFilterChange('amount_min', e.target.value ? parseInt(e.target.value) : undefined)}
+              onChange={e =>
+                handleFilterChange(
+                  'amount_min',
+                  e.target.value ? parseInt(e.target.value) : undefined
+                )
+              }
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
@@ -297,7 +310,12 @@ const PaymentSearchFilter: React.FC<PaymentSearchFilterProps> = ({
               type="number"
               placeholder="∞"
               value={filter.amount_max || ''}
-              onChange={(e) => handleFilterChange('amount_max', e.target.value ? parseInt(e.target.value) : undefined)}
+              onChange={e =>
+                handleFilterChange(
+                  'amount_max',
+                  e.target.value ? parseInt(e.target.value) : undefined
+                )
+              }
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
@@ -329,7 +347,12 @@ const PaymentSearchFilter: React.FC<PaymentSearchFilterProps> = ({
           )}
           {filter.payment_type && filter.payment_type !== 'all' && (
             <span className="inline-flex items-center px-2 py-1 text-xs bg-green-100 text-green-800 rounded-full">
-              유형: {filter.payment_type === 'membership' ? '회원권' : filter.payment_type === 'pt' ? 'PT' : '기타'}
+              유형:{' '}
+              {filter.payment_type === 'membership'
+                ? '회원권'
+                : filter.payment_type === 'pt'
+                  ? 'PT'
+                  : '기타'}
               <button
                 onClick={() => handleFilterChange('payment_type', undefined)}
                 className="ml-1 text-green-600 hover:text-green-800"
@@ -340,9 +363,14 @@ const PaymentSearchFilter: React.FC<PaymentSearchFilterProps> = ({
           )}
           {filter.status && filter.status !== 'all' && (
             <span className="inline-flex items-center px-2 py-1 text-xs bg-purple-100 text-purple-800 rounded-full">
-              상태: {filter.status === 'completed' ? '완료' :
-                filter.status === 'refunded' ? '환불' :
-                  filter.status === 'cancelled' ? '취소' : '대기'}
+              상태:{' '}
+              {filter.status === 'completed'
+                ? '완료'
+                : filter.status === 'refunded'
+                  ? '환불'
+                  : filter.status === 'cancelled'
+                    ? '취소'
+                    : '대기'}
               <button
                 onClick={() => handleFilterChange('status', undefined)}
                 className="ml-1 text-purple-600 hover:text-purple-800"
@@ -357,4 +385,4 @@ const PaymentSearchFilter: React.FC<PaymentSearchFilterProps> = ({
   );
 };
 
-export default PaymentSearchFilter; 
+export default PaymentSearchFilter;

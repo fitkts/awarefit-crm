@@ -1,4 +1,3 @@
-
 import { calculateAge } from '../memberUtils';
 
 describe('calculateAge', () => {

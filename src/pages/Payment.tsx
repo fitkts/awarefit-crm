@@ -1,10 +1,4 @@
-import {
-  AlertCircle,
-  CreditCard,
-  Plus,
-  RefreshCw,
-  X,
-} from 'lucide-react';
+import { AlertCircle, CreditCard, Plus, RefreshCw, X } from 'lucide-react';
 import React, { useCallback, useEffect, useState } from 'react';
 import PaymentDetailModal from '../components/payment/PaymentDetailModal';
 import PaymentForm from '../components/payment/PaymentForm';
@@ -18,7 +12,7 @@ import {
   PaymentDetail,
   PaymentSearchFilter as PaymentSearchFilterType,
   PaymentSortOption,
-  UpdatePaymentInput
+  UpdatePaymentInput,
 } from '../types/payment';
 
 // 간단한 Toast 컴포넌트
@@ -42,11 +36,13 @@ const Toast: React.FC<{
     success: 'bg-green-500',
     error: 'bg-red-500',
     warning: 'bg-yellow-500',
-    info: 'bg-blue-500'
+    info: 'bg-blue-500',
   }[type];
 
   return (
-    <div className={`fixed top-4 right-4 z-50 ${bgColor} text-white px-4 py-2 rounded-lg shadow-lg`}>
+    <div
+      className={`fixed top-4 right-4 z-50 ${bgColor} text-white px-4 py-2 rounded-lg shadow-lg`}
+    >
       <div className="flex items-center">
         <span>{message}</span>
         <button onClick={onClose} className="ml-2 text-white hover:text-gray-200">
@@ -86,13 +82,13 @@ const PaymentPage: React.FC = () => {
   // 검색 및 필터
   const [searchFilter, setSearchFilter] = useState<PaymentSearchFilterType>({
     payment_date_from: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0], // 최근 30일
-    payment_date_to: new Date().toISOString().split('T')[0]
+    payment_date_to: new Date().toISOString().split('T')[0],
   });
 
   // 정렬
   const [sortOption, setSortOption] = useState<PaymentSortOption>({
     field: 'payment_date',
-    direction: 'desc'
+    direction: 'desc',
   });
 
   // 통계
@@ -102,7 +98,7 @@ const PaymentPage: React.FC = () => {
   const [toast, setToast] = useState<ToastState>({
     show: false,
     message: '',
-    type: 'info'
+    type: 'info',
   });
 
   // 현재 직원 ID (실제로는 로그인 시스템에서 가져와야 함)
@@ -261,12 +257,12 @@ const PaymentPage: React.FC = () => {
   // 필터 초기화
   const handleResetFilter = () => {
     setSearchFilter({
-      payment_date_from: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-      payment_date_to: new Date().toISOString().split('T')[0]
+      payment_date_from: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)
+        .toISOString()
+        .split('T')[0],
+      payment_date_to: new Date().toISOString().split('T')[0],
     });
   };
-
-
 
   return (
     <div className="flex flex-col h-full bg-gray-50">
@@ -277,9 +273,7 @@ const PaymentPage: React.FC = () => {
             <CreditCard className="w-8 h-8 text-blue-600 mr-3" />
             <div>
               <h1 className="text-2xl font-bold text-gray-900">결제 관리</h1>
-              <p className="text-sm text-gray-600">
-                회원권, PT, 기타 서비스 결제 관리
-              </p>
+              <p className="text-sm text-gray-600">회원권, PT, 기타 서비스 결제 관리</p>
             </div>
           </div>
           <div className="flex items-center gap-3">
@@ -295,8 +289,7 @@ const PaymentPage: React.FC = () => {
               onClick={handleCreatePayment}
               className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
             >
-              <Plus className="w-4 h-4 mr-2" />
-              새 결제
+              <Plus className="w-4 h-4 mr-2" />새 결제
             </button>
           </div>
         </div>
@@ -305,11 +298,7 @@ const PaymentPage: React.FC = () => {
       {/* 통계 대시보드 */}
       {stats && (
         <div className="px-6 py-4">
-          <PaymentStats
-            data={stats}
-            loading={loading}
-            onRefresh={loadStats}
-          />
+          <PaymentStats data={stats} loading={loading} onRefresh={loadStats} />
         </div>
       )}
 
@@ -374,14 +363,9 @@ const PaymentPage: React.FC = () => {
       />
 
       {/* 토스트 알림 */}
-      <Toast
-        show={toast.show}
-        message={toast.message}
-        type={toast.type}
-        onClose={closeToast}
-      />
+      <Toast show={toast.show} message={toast.message} type={toast.type} onClose={closeToast} />
     </div>
   );
 };
 
-export default PaymentPage; 
+export default PaymentPage;

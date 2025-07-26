@@ -212,7 +212,7 @@ const PaymentTable: React.FC<PaymentTableProps> = ({
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {payments.map((payment) => (
+            {payments.map(payment => (
               <React.Fragment key={payment.id}>
                 <tr className="hover:bg-gray-50">
                   {/* 결제일시 */}
@@ -223,12 +223,8 @@ const PaymentTable: React.FC<PaymentTableProps> = ({
                   {/* 회원명 */}
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex flex-col">
-                      <div className="text-sm font-medium text-gray-900">
-                        {payment.member_name}
-                      </div>
-                      <div className="text-sm text-gray-500">
-                        {payment.member_number}
-                      </div>
+                      <div className="text-sm font-medium text-gray-900">{payment.member_name}</div>
+                      <div className="text-sm text-gray-500">{payment.member_number}</div>
                     </div>
                   </td>
 
@@ -259,7 +255,9 @@ const PaymentTable: React.FC<PaymentTableProps> = ({
 
                   {/* 상태 */}
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`inline-flex items-center px-2 py-1 text-xs font-medium rounded-full ${getStatusStyle(payment.status)}`}>
+                    <span
+                      className={`inline-flex items-center px-2 py-1 text-xs font-medium rounded-full ${getStatusStyle(payment.status)}`}
+                    >
                       {getStatusIcon(payment.status)}
                       <span className="ml-1">{getStatusText(payment.status)}</span>
                     </span>
@@ -294,8 +292,6 @@ const PaymentTable: React.FC<PaymentTableProps> = ({
                     </div>
                   </td>
                 </tr>
-
-
               </React.Fragment>
             ))}
           </tbody>
@@ -305,4 +301,4 @@ const PaymentTable: React.FC<PaymentTableProps> = ({
   );
 };
 
-export default PaymentTable; 
+export default PaymentTable;

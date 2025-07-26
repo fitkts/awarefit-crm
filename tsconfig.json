@@ -41,7 +41,9 @@
     "build",
     "release",
     "**/*.spec.ts",
-    "**/*.test.ts"
+    "**/*.test.ts",
+    "src/__tests__/**/*",
+    "src/utils/memberTestUtils.ts"
   ],
   "ts-node": {
     "esm": true

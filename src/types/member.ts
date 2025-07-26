@@ -11,6 +11,7 @@ export interface Member {
   address?: string | null;
   notes?: string | null;
   active: boolean;
+  assigned_staff_id?: number | null; // 담당직원 ID
   created_at: string;
   updated_at: string;
 }
@@ -24,6 +25,7 @@ export interface CreateMemberInput {
   birth_date?: string;
   address?: string;
   notes?: string;
+  assigned_staff_id?: number | null; // 담당직원 ID
 }
 
 // 회원 수정을 위한 입력 데이터
@@ -35,7 +37,7 @@ export interface UpdateMemberInput extends Partial<CreateMemberInput> {
 // 고급 회원 검색 필터
 export interface MemberSearchFilter {
   search?: string; // 이름 또는 전화번호 검색
-  gender?: '남성' | '여성' | '';
+  gender?: '남성' | '여성' | '' | null;
   active?: boolean | 'all';
   join_date_from?: string;
   join_date_to?: string;
@@ -46,11 +48,12 @@ export interface MemberSearchFilter {
   has_membership?: boolean;
   age_min?: number;
   age_max?: number;
+  assigned_staff_id?: string | number | null; // 담당직원 필터
 }
 
 // 정렬 옵션
 export interface SortOption {
-  field: keyof Member | 'age' | 'membership_status';
+  field: keyof Member | 'birth_date' | 'assigned_staff' | 'membership_status';
   direction: 'asc' | 'desc';
 }
 
@@ -141,6 +144,7 @@ export interface MemberDetail extends Member {
   age?: number; // null 대신 undefined 사용
   currentMembership?: ExtendedMembershipHistory;
   membershipHistory: MembershipHistory[];
+  paymentHistory?: any[]; // 결제 내역 추가
   totalPayments: number;
   lastVisit?: string | null;
   visitCount: number;
@@ -160,16 +164,17 @@ export interface MemberRegistrationStep {
 
 // 일괄 작업 타입
 export interface BulkAction {
-  type: 'delete' | 'activate' | 'deactivate' | 'export';
+  type: 'delete' | 'activate' | 'deactivate' | 'export' | 'assign_staff';
   label: string;
   icon: string;
   confirmMessage?: string;
   requiresConfirmation: boolean;
+  staffId?: number | null; // 담당직원 변경용
 }
 
 // 테이블 컬럼 설정
 export interface MemberTableColumn {
-  key: keyof Member | 'age' | 'membership_status' | 'actions';
+  key: keyof Member | 'birth_date' | 'assigned_staff' | 'membership_status' | 'actions';
   label: string;
   sortable?: boolean;
   filterable?: boolean;

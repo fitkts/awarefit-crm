@@ -168,6 +168,7 @@ export interface PersonalInfo {
   email?: string;
   gender?: '남성' | '여성';
   birth_date?: string;
+  join_date?: string; // 회원 가입일 (회원 전용)
   address?: string;
   notes?: string;
 }
@@ -182,8 +183,9 @@ export interface FormConfig {
   additionalFields?: Array<{
     key: string;
     label: string;
-    type: 'text' | 'select' | 'number' | 'date';
+    type: 'text' | 'select' | 'number' | 'date' | 'textarea';
     required?: boolean;
+    placeholder?: string;
     options?: Array<{ value: string; label: string }>;
   }>;
-} 
+}

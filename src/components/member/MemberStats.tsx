@@ -1,9 +1,4 @@
-import {
-  Award,
-  UserCheck,
-  UserPlus,
-  Users,
-} from 'lucide-react';
+import { Award, UserCheck, UserPlus, Users } from 'lucide-react';
 import React from 'react';
 import { MemberStats } from '../../types/member';
 
@@ -77,9 +72,7 @@ const MemberStatsComponent: React.FC<MemberStatsProps> = ({ stats, loading = fal
             <p className="text-xl font-bold text-blue-600">
               {stats.new_this_month.toLocaleString()}
             </p>
-            <p className="text-xs text-gray-500 mt-1">
-              -, 전월 대비
-            </p>
+            <p className="text-xs text-gray-500 mt-1">-, 전월 대비</p>
           </div>
           <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
             <UserPlus className="w-5 h-5 text-blue-600" />

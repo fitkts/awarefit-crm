@@ -87,19 +87,21 @@ const Sidebar: React.FC<SidebarProps> = ({ currentPage, onPageChange }) => {
               disabled={isDisabled}
               className={`
                 w-full flex items-center space-x-2 px-2 py-2 rounded-md text-left transition-all duration-200
-                ${isActive
-                  ? 'bg-blue-50 text-blue-700 border border-blue-200'
-                  : isDisabled
-                    ? 'text-gray-400 cursor-not-allowed'
-                    : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
+                ${
+                  isActive
+                    ? 'bg-blue-50 text-blue-700 border border-blue-200'
+                    : isDisabled
+                      ? 'text-gray-400 cursor-not-allowed'
+                      : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
                 }
                 justify-start
               `}
               title={item.label}
             >
               <IconComponent
-                className={`w-4 h-4 flex-shrink-0 ${isActive ? 'text-blue-600' : isDisabled ? 'text-gray-400' : 'text-gray-500'
-                  }`}
+                className={`w-4 h-4 flex-shrink-0 ${
+                  isActive ? 'text-blue-600' : isDisabled ? 'text-gray-400' : 'text-gray-500'
+                }`}
               />
 
               <div className="flex-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 overflow-hidden">

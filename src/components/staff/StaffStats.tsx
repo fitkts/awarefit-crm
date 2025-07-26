@@ -36,7 +36,8 @@ const StaffStatsComponent: React.FC<StaffStatsProps> = ({ stats, loading = false
 
   // 안전한 값 접근을 위한 헬퍼 함수들
   const safeValue = (value: number | undefined | null): number => value ?? 0;
-  const safeObject = (obj: Record<string, number> | undefined | null): Record<string, number> => obj ?? {};
+  const safeObject = (obj: Record<string, number> | undefined | null): Record<string, number> =>
+    obj ?? {};
 
   // 백분율 계산 헬퍼
   const getPercentage = (value: number, total: number) => {
@@ -74,9 +75,7 @@ const StaffStatsComponent: React.FC<StaffStatsProps> = ({ stats, loading = false
             <div>
               <p className="text-xs font-medium text-gray-600">전체 직원</p>
               <p className="text-xl font-bold text-gray-900">{totalStaff.toLocaleString()}</p>
-              <p className="text-xs text-gray-500 mt-1">
-                신규 직원 {newThisMonth}명 (이번 달)
-              </p>
+              <p className="text-xs text-gray-500 mt-1">신규 직원 {newThisMonth}명 (이번 달)</p>
             </div>
             <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
               <Users className="w-5 h-5 text-blue-600" />
@@ -105,11 +104,9 @@ const StaffStatsComponent: React.FC<StaffStatsProps> = ({ stats, loading = false
           <div className="flex items-center justify-between">
             <div>
               <p className="text-xs font-medium text-gray-600">평균 근속</p>
-              <p className="text-xl font-bold text-blue-600">
-                {averageTenure}개월
-              </p>
+              <p className="text-xl font-bold text-blue-600">{averageTenure}개월</p>
               <p className="text-xs text-gray-500 mt-1">
-                약 {Math.round(averageTenure / 12 * 10) / 10}년
+                약 {Math.round((averageTenure / 12) * 10) / 10}년
               </p>
             </div>
             <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
@@ -123,12 +120,8 @@ const StaffStatsComponent: React.FC<StaffStatsProps> = ({ stats, loading = false
           <div className="flex items-center justify-between">
             <div>
               <p className="text-xs font-medium text-gray-600">총 급여 비용</p>
-              <p className="text-xl font-bold text-purple-600">
-                {formatSalary(totalSalaryCost)}원
-              </p>
-              <p className="text-xs text-gray-500 mt-1">
-                평균 {formatSalary(averageSalary)}원
-              </p>
+              <p className="text-xl font-bold text-purple-600">{formatSalary(totalSalaryCost)}원</p>
+              <p className="text-xs text-gray-500 mt-1">평균 {formatSalary(averageSalary)}원</p>
             </div>
             <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
               <CreditCard className="w-5 h-5 text-purple-600" />
@@ -149,11 +142,17 @@ const StaffStatsComponent: React.FC<StaffStatsProps> = ({ stats, loading = false
             {Object.entries(byPosition).map(([position, count]) => (
               <div key={position} className="flex items-center justify-between">
                 <div className="flex items-center">
-                  <div className={`w-2 h-2 rounded-full mr-2 ${position === '매니저' ? 'bg-purple-500' :
-                    position === '트레이너' ? 'bg-blue-500' :
-                      position === '데스크' ? 'bg-green-500' :
-                        'bg-gray-500'
-                    }`}></div>
+                  <div
+                    className={`w-2 h-2 rounded-full mr-2 ${
+                      position === '매니저'
+                        ? 'bg-purple-500'
+                        : position === '트레이너'
+                          ? 'bg-blue-500'
+                          : position === '데스크'
+                            ? 'bg-green-500'
+                            : 'bg-gray-500'
+                    }`}
+                  ></div>
                   <span className="text-xs text-gray-600">{position}</span>
                 </div>
                 <div className="flex items-center">
@@ -180,12 +179,19 @@ const StaffStatsComponent: React.FC<StaffStatsProps> = ({ stats, loading = false
             {Object.entries(byDepartment).map(([department, count]) => (
               <div key={department} className="flex items-center justify-between">
                 <div className="flex items-center">
-                  <div className={`w-2 h-2 rounded-full mr-2 ${department === '운영팀' ? 'bg-red-500' :
-                    department === '트레이닝팀' ? 'bg-blue-500' :
-                      department === '고객서비스팀' ? 'bg-green-500' :
-                        department === '시설관리팀' ? 'bg-yellow-500' :
-                          'bg-gray-500'
-                    }`}></div>
+                  <div
+                    className={`w-2 h-2 rounded-full mr-2 ${
+                      department === '운영팀'
+                        ? 'bg-red-500'
+                        : department === '트레이닝팀'
+                          ? 'bg-blue-500'
+                          : department === '고객서비스팀'
+                            ? 'bg-green-500'
+                            : department === '시설관리팀'
+                              ? 'bg-yellow-500'
+                              : 'bg-gray-500'
+                    }`}
+                  ></div>
                   <span className="text-xs text-gray-600">{department}</span>
                 </div>
                 <div className="flex items-center">
@@ -212,11 +218,17 @@ const StaffStatsComponent: React.FC<StaffStatsProps> = ({ stats, loading = false
             {Object.entries(byRole).map(([role, count]) => (
               <div key={role} className="flex items-center justify-between">
                 <div className="flex items-center">
-                  <div className={`w-2 h-2 rounded-full mr-2 ${role === '관리자' ? 'bg-red-500' :
-                    role === '트레이너' ? 'bg-blue-500' :
-                      role === '데스크' ? 'bg-green-500' :
-                        'bg-gray-500'
-                    }`}></div>
+                  <div
+                    className={`w-2 h-2 rounded-full mr-2 ${
+                      role === '관리자'
+                        ? 'bg-red-500'
+                        : role === '트레이너'
+                          ? 'bg-blue-500'
+                          : role === '데스크'
+                            ? 'bg-green-500'
+                            : 'bg-gray-500'
+                    }`}
+                  ></div>
                   <span className="text-xs text-gray-600">{role}</span>
                 </div>
                 <div className="flex items-center">
@@ -263,4 +275,4 @@ const StaffStatsComponent: React.FC<StaffStatsProps> = ({ stats, loading = false
   );
 };
 
-export default StaffStatsComponent; 
+export default StaffStatsComponent;

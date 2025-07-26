@@ -92,3 +92,5 @@ $RECYCLE.BIN/
 
 # Linux specific
 *~ 
+*storybook.log
+storybook-static

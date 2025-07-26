@@ -1,0 +1,46 @@
+# EditorConfig는 서로 다른 에디터와 IDE에서 일관된 코딩 스타일을 유지하는 데 도움이 됩니다.
+# https://editorconfig.org
+
+root = true
+
+# 모든 파일에 적용되는 기본 설정
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
+
+# TypeScript, JavaScript, JSON 파일
+[*.{ts,tsx,js,jsx,json}]
+indent_size = 2
+max_line_length = 120
+
+# Markdown 파일은 후행 공백을 유지 (마크다운 문법에서 의미가 있음)
+[*.md]
+trim_trailing_whitespace = false
+
+# YAML 파일
+[*.{yml,yaml}]
+indent_size = 2
+
+# Python 파일 (혹시 사용할 경우)
+[*.py]
+indent_size = 4
+
+# 설정 파일들
+[*.{config,conf}]
+indent_size = 2
+
+# 패키지 파일들
+[package.json]
+indent_size = 2
+
+# Shell 스크립트
+[*.{sh,bash}]
+indent_size = 2
+
+# SQL 파일
+[*.sql]
+indent_size = 2 

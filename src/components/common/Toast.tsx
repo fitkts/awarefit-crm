@@ -81,12 +81,10 @@ const ToastItem: React.FC<{
       `}
     >
       <Icon className={`w-5 h-5 mt-0.5 ${iconColors[toast.type]}`} />
-      
+
       <div className="flex-1 min-w-0">
         <p className="text-sm font-medium">{toast.title}</p>
-        {toast.message && (
-          <p className="mt-1 text-sm opacity-90">{toast.message}</p>
-        )}
+        {toast.message && <p className="mt-1 text-sm opacity-90">{toast.message}</p>}
       </div>
 
       <button
@@ -159,13 +157,9 @@ export const useToastHelpers = () => {
   const { addToast } = useToast();
 
   return {
-    showSuccess: (title: string, message?: string) =>
-      addToast({ type: 'success', title, message }),
-    showError: (title: string, message?: string) =>
-      addToast({ type: 'error', title, message }),
-    showWarning: (title: string, message?: string) =>
-      addToast({ type: 'warning', title, message }),
-    showInfo: (title: string, message?: string) =>
-      addToast({ type: 'info', title, message }),
+    showSuccess: (title: string, message?: string) => addToast({ type: 'success', title, message }),
+    showError: (title: string, message?: string) => addToast({ type: 'error', title, message }),
+    showWarning: (title: string, message?: string) => addToast({ type: 'warning', title, message }),
+    showInfo: (title: string, message?: string) => addToast({ type: 'info', title, message }),
   };
-}; 
+};

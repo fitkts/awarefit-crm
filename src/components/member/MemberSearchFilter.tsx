@@ -23,6 +23,9 @@ const MemberSearchFilterComponent: React.FC<MemberSearchFilterProps> = ({
 }) => {
   const [isAdvancedOpen, setIsAdvancedOpen] = useState(false);
   const [searchDebounce, setSearchDebounce] = useState<NodeJS.Timeout | null>(null);
+  const [staffList, setStaffList] = useState<Array<{ id: number; name: string; position: string }>>(
+    []
+  );
 
   // 필터 프리셋
   const filterPresets: FilterPreset[] = [
@@ -93,11 +96,35 @@ const MemberSearchFilterComponent: React.FC<MemberSearchFilterProps> = ({
     if (filter.birth_date_from || filter.birth_date_to) count++;
     if (filter.has_phone !== undefined) count++;
     if (filter.has_email !== undefined) count++;
+    if (filter.has_membership !== undefined) count++;
     if (filter.age_min || filter.age_max) count++;
+    if (filter.assigned_staff_id && filter.assigned_staff_id !== 'all') count++;
     return count;
   };
 
   const activeFilterCount = getActiveFilterCount();
+
+  // 직원 목록 로드
+  useEffect(() => {
+    const loadStaff = async () => {
+      try {
+        if (window.electronAPI?.database?.staff?.getAll) {
+          const result = await window.electronAPI.database.staff.getAll({ is_active: true });
+          setStaffList(
+            result.map((staff: any) => ({
+              id: staff.id,
+              name: staff.name,
+              position: staff.position,
+            }))
+          );
+        }
+      } catch (error) {
+        console.error('직원 목록 로드 실패:', error);
+      }
+    };
+
+    loadStaff();
+  }, []);
 
   useEffect(() => {
     return () => {
@@ -345,6 +372,29 @@ const MemberSearchFilterComponent: React.FC<MemberSearchFilterProps> = ({
                 max="100"
                 disabled={loading}
               />
+            </div>
+
+            {/* 담당직원 필터 */}
+            <div>
+              <label className="block text-xs font-medium text-gray-700 mb-1">담당직원</label>
+              <select
+                value={filter.assigned_staff_id || 'all'}
+                onChange={e =>
+                  updateFilter({
+                    assigned_staff_id: e.target.value === 'all' ? undefined : e.target.value,
+                  })
+                }
+                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                disabled={loading}
+              >
+                <option value="all">전체</option>
+                <option value="unassigned">미배정</option>
+                {staffList.map(staff => (
+                  <option key={staff.id} value={staff.id.toString()}>
+                    {staff.name} ({staff.position})
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
 

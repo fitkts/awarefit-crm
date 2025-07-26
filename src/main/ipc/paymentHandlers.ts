@@ -115,7 +115,9 @@ export const registerPaymentHandlers = (): void => {
       }
 
       // 결제 항목들
-      const itemsStmt = db.prepare('SELECT * FROM payment_items WHERE payment_id = ? ORDER BY created_at');
+      const itemsStmt = db.prepare(
+        'SELECT * FROM payment_items WHERE payment_id = ? ORDER BY created_at'
+      );
       const items = itemsStmt.all(id);
 
       // 락커 배정 정보
@@ -150,7 +152,7 @@ export const registerPaymentHandlers = (): void => {
         items,
         locker_assignments: lockers,
         refunds,
-        history
+        history,
       };
     } catch (error) {
       console.error('결제 조회 실패:', error);
@@ -316,7 +318,7 @@ export const registerPaymentHandlers = (): void => {
           JSON.stringify({
             amount: data.amount,
             payment_method: data.payment_method,
-            payment_type: data.payment_type
+            payment_type: data.payment_type,
           }),
           data.staff_id
         );
@@ -452,7 +454,7 @@ export const registerPaymentHandlers = (): void => {
           'refund_requested',
           JSON.stringify({
             refund_amount: data.refund_amount,
-            refund_method: data.refund_method
+            refund_method: data.refund_method,
           }),
           data.requested_by,
           data.reason
@@ -499,9 +501,14 @@ export const registerPaymentHandlers = (): void => {
 
         // 승인된 경우 결제 상태도 업데이트
         if (data.status === 'processed') {
-          const refund = db.prepare('SELECT payment_id FROM refunds WHERE id = ?').get(refundId) as { payment_id: number } | undefined;
+          const refund = db.prepare('SELECT payment_id FROM refunds WHERE id = ?').get(refundId) as
+            | { payment_id: number }
+            | undefined;
           if (refund) {
-            db.prepare('UPDATE payments SET status = ? WHERE id = ?').run('refunded', refund.payment_id);
+            db.prepare('UPDATE payments SET status = ? WHERE id = ?').run(
+              'refunded',
+              refund.payment_id
+            );
           }
         }
 
@@ -549,7 +556,10 @@ export const registerPaymentHandlers = (): void => {
         FROM payments 
         WHERE status = 'completed' AND strftime('%Y-%m', payment_date) = ?
       `);
-      const monthStats = monthStmt.get(thisMonth) as { month_payments: number; month_amount: number };
+      const monthStats = monthStmt.get(thisMonth) as {
+        month_payments: number;
+        month_amount: number;
+      };
 
       // 유형별 통계
       const byTypeStmt = db.prepare(`
@@ -561,7 +571,11 @@ export const registerPaymentHandlers = (): void => {
         WHERE status = 'completed'
         GROUP BY payment_type
       `);
-      const typeResults = byTypeStmt.all() as Array<{ payment_type: string; count: number; amount: number }>;
+      const typeResults = byTypeStmt.all() as Array<{
+        payment_type: string;
+        count: number;
+        amount: number;
+      }>;
 
       // 결제 방식별 통계
       const byMethodStmt = db.prepare(`
@@ -573,7 +587,11 @@ export const registerPaymentHandlers = (): void => {
         WHERE status = 'completed'
         GROUP BY payment_method
       `);
-      const methodResults = byMethodStmt.all() as Array<{ payment_method: string; count: number; amount: number }>;
+      const methodResults = byMethodStmt.all() as Array<{
+        payment_method: string;
+        count: number;
+        amount: number;
+      }>;
 
       // 상태별 통계
       const byStatusStmt = db.prepare(`
@@ -584,7 +602,11 @@ export const registerPaymentHandlers = (): void => {
         FROM payments 
         GROUP BY status
       `);
-      const statusResults = byStatusStmt.all() as Array<{ status: string; count: number; amount: number }>;
+      const statusResults = byStatusStmt.all() as Array<{
+        status: string;
+        count: number;
+        amount: number;
+      }>;
 
       // 직원별 매출 통계
       const topStaffStmt = db.prepare(`
@@ -600,10 +622,17 @@ export const registerPaymentHandlers = (): void => {
         ORDER BY amount DESC
         LIMIT 10
       `);
-      const topStaff = topStaffStmt.all() as Array<{ staff_id: number; staff_name: string; count: number; amount: number }>;
+      const topStaff = topStaffStmt.all() as Array<{
+        staff_id: number;
+        staff_name: string;
+        count: number;
+        amount: number;
+      }>;
 
       // 대기 중인 환불 건수
-      const pendingRefundsStmt = db.prepare('SELECT COUNT(*) as count FROM refunds WHERE status = ?');
+      const pendingRefundsStmt = db.prepare(
+        'SELECT COUNT(*) as count FROM refunds WHERE status = ?'
+      );
       const pendingRefunds = (pendingRefundsStmt.get('pending') as { count: number }).count;
 
       // 30일 이내 만료 예정
@@ -616,27 +645,40 @@ export const registerPaymentHandlers = (): void => {
       `);
       const thirtyDaysFromNow = new Date();
       thirtyDaysFromNow.setDate(thirtyDaysFromNow.getDate() + 30);
-      const expiringSoon = (expiringSoonStmt.get(today, thirtyDaysFromNow.toISOString().split('T')[0]) as { count: number }).count;
+      const expiringSoon = (
+        expiringSoonStmt.get(today, thirtyDaysFromNow.toISOString().split('T')[0]) as {
+          count: number;
+        }
+      ).count;
 
       return {
         ...total,
         ...todayStats,
         ...monthStats,
-        by_type: typeResults.reduce((acc, item) => {
-          acc[item.payment_type] = { count: item.count, amount: item.amount };
-          return acc;
-        }, {} as Record<string, { count: number; amount: number }>),
-        by_method: methodResults.reduce((acc, item) => {
-          acc[item.payment_method] = { count: item.count, amount: item.amount };
-          return acc;
-        }, {} as Record<string, { count: number; amount: number }>),
-        by_status: statusResults.reduce((acc, item) => {
-          acc[item.status] = { count: item.count, amount: item.amount };
-          return acc;
-        }, {} as Record<string, { count: number; amount: number }>),
+        by_type: typeResults.reduce(
+          (acc, item) => {
+            acc[item.payment_type] = { count: item.count, amount: item.amount };
+            return acc;
+          },
+          {} as Record<string, { count: number; amount: number }>
+        ),
+        by_method: methodResults.reduce(
+          (acc, item) => {
+            acc[item.payment_method] = { count: item.count, amount: item.amount };
+            return acc;
+          },
+          {} as Record<string, { count: number; amount: number }>
+        ),
+        by_status: statusResults.reduce(
+          (acc, item) => {
+            acc[item.status] = { count: item.count, amount: item.amount };
+            return acc;
+          },
+          {} as Record<string, { count: number; amount: number }>
+        ),
         top_staff: topStaff,
         pending_refunds: pendingRefunds,
-        expiring_soon: expiringSoon
+        expiring_soon: expiringSoon,
       };
     } catch (error) {
       console.error('결제 통계 조회 실패:', error);
@@ -725,7 +767,7 @@ export const registerPaymentHandlers = (): void => {
       return {
         eligible: true,
         max_refund_amount: maxRefundAmount,
-        suggested_method: suggestedMethod
+        suggested_method: suggestedMethod,
       };
     } catch (error) {
       console.error('환불 가능 여부 확인 실패:', error);

@@ -171,10 +171,11 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
             {/* 고급 필터 토글 */}
             <button
               onClick={() => setIsAdvancedOpen(!isAdvancedOpen)}
-              className={`flex items-center gap-2 px-3 py-2 text-sm border rounded-lg transition-colors ${isAdvancedOpen || activeFilterCount > 0
+              className={`flex items-center gap-2 px-3 py-2 text-sm border rounded-lg transition-colors ${
+                isAdvancedOpen || activeFilterCount > 0
                   ? 'bg-blue-50 text-blue-700 border-blue-300'
                   : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
-                }`}
+              }`}
               disabled={loading}
             >
               <Filter className="w-4 h-4" />
@@ -236,9 +237,7 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
             ) : (
               <span>
                 총{' '}
-                <span className="font-semibold text-gray-900">
-                  {staffCount.toLocaleString()}명
-                </span>
+                <span className="font-semibold text-gray-900">{staffCount.toLocaleString()}명</span>
                 의 직원
               </span>
             )}
@@ -250,10 +249,11 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
               <button
                 key={preset.id}
                 onClick={() => applyPreset(preset)}
-                className={`flex items-center gap-1 px-2 py-1 text-xs rounded-full transition-colors ${JSON.stringify(filter) === JSON.stringify(preset.filter)
+                className={`flex items-center gap-1 px-2 py-1 text-xs rounded-full transition-colors ${
+                  JSON.stringify(filter) === JSON.stringify(preset.filter)
                     ? 'bg-blue-100 text-blue-700 border border-blue-300'
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                  }`}
+                }`}
                 disabled={loading}
               >
                 <Bookmark className="w-3 h-3" />
@@ -345,7 +345,9 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
             <div>
               <label className="block text-xs font-medium text-gray-700 mb-1">직원 상태</label>
               <select
-                value={filter.is_active === true ? 'true' : filter.is_active === false ? 'false' : 'all'}
+                value={
+                  filter.is_active === true ? 'true' : filter.is_active === false ? 'false' : 'all'
+                }
                 onChange={e => {
                   const value = e.target.value;
                   updateFilter({
@@ -393,7 +395,11 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
                 type="number"
                 placeholder="예: 200"
                 value={filter.salary_min || ''}
-                onChange={e => updateFilter({ salary_min: e.target.value ? parseInt(e.target.value) * 10000 : undefined })}
+                onChange={e =>
+                  updateFilter({
+                    salary_min: e.target.value ? parseInt(e.target.value) * 10000 : undefined,
+                  })
+                }
                 className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 disabled={loading}
               />
@@ -407,7 +413,11 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
                 type="number"
                 placeholder="예: 500"
                 value={filter.salary_max || ''}
-                onChange={e => updateFilter({ salary_max: e.target.value ? parseInt(e.target.value) * 10000 : undefined })}
+                onChange={e =>
+                  updateFilter({
+                    salary_max: e.target.value ? parseInt(e.target.value) * 10000 : undefined,
+                  })
+                }
                 className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 disabled={loading}
               />
@@ -447,7 +457,9 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
                 type="number"
                 placeholder="예: 20"
                 value={filter.age_min || ''}
-                onChange={e => updateFilter({ age_min: e.target.value ? parseInt(e.target.value) : undefined })}
+                onChange={e =>
+                  updateFilter({ age_min: e.target.value ? parseInt(e.target.value) : undefined })
+                }
                 className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 disabled={loading}
               />
@@ -459,7 +471,9 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
                 type="number"
                 placeholder="예: 65"
                 value={filter.age_max || ''}
-                onChange={e => updateFilter({ age_max: e.target.value ? parseInt(e.target.value) : undefined })}
+                onChange={e =>
+                  updateFilter({ age_max: e.target.value ? parseInt(e.target.value) : undefined })
+                }
                 className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 disabled={loading}
               />
@@ -515,4 +529,4 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
   );
 };
 
-export default StaffSearchFilterComponent; 
+export default StaffSearchFilterComponent;

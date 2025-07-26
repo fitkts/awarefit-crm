@@ -97,10 +97,23 @@ const Members: React.FC = () => {
       setLoading(true);
       setError(null);
 
-      console.log('회원 목록 로딩 시도:', { searchFilter, sortOption });
+      console.log('🔍 [Members] 회원 목록 로딩 시도:', { searchFilter, sortOption });
 
-      if (!window.electronAPI?.database?.member?.getAll) {
-        throw new Error('electronAPI가 사용할 수 없습니다.');
+      // API 단계별 존재 여부 확인
+      if (!window.electronAPI) {
+        throw new Error('electronAPI가 로드되지 않았습니다.');
+      }
+
+      if (!window.electronAPI.database) {
+        throw new Error('database API가 로드되지 않았습니다.');
+      }
+
+      if (!window.electronAPI.database.member) {
+        throw new Error('member API가 로드되지 않았습니다.');
+      }
+
+      if (typeof window.electronAPI.database.member.getAll !== 'function') {
+        throw new Error('getAll 함수가 존재하지 않습니다.');
       }
 
       const result = await window.electronAPI.database.member.getAll({
@@ -110,25 +123,37 @@ const Members: React.FC = () => {
         limit: pagination.limit,
       });
 
-      console.log('회원 목록 결과:', result);
+      console.log('✅ [Members] 회원 목록 결과:', result);
 
       if (result) {
         // API가 배열을 반환하므로 직접 설정
         if (Array.isArray(result)) {
           setMembers(result);
+          console.log('✅ [Members] 배열 형태로 회원 목록 설정:', result.length, '명');
         } else {
           // 타입 가드를 사용해서 안전하게 처리
           const resultWithPagination = result as any;
-          setMembers(resultWithPagination.members || []);
+          const members = resultWithPagination.members || [];
+          setMembers(members);
+          console.log('✅ [Members] 페이지네이션 형태로 회원 목록 설정:', members.length, '명');
+
           if (resultWithPagination.pagination) {
             setPagination(resultWithPagination.pagination);
+            console.log(
+              '✅ [Members] 페이지네이션 정보 업데이트:',
+              resultWithPagination.pagination
+            );
           }
         }
+      } else {
+        console.warn('⚠️ [Members] 빈 결과 반환됨');
+        setMembers([]);
       }
     } catch (error) {
-      console.error('회원 목록 로드 실패:', error);
+      console.error('🚨 [Members] 회원 목록 로드 실패:', error);
       const errorMessage = error instanceof Error ? error.message : String(error);
       setError(`회원 목록을 불러오는데 실패했습니다: ${errorMessage}`);
+      setMembers([]); // 실패 시 빈 배열로 설정
     } finally {
       setLoading(false);
     }
@@ -139,36 +164,58 @@ const Members: React.FC = () => {
     try {
       setStatsLoading(true);
 
-      // TODO: 실제 API 호출 구현
-      // const stats = await window.electronAPI?.database?.member?.getStats();
+      // API 존재 여부를 더 정확하게 확인
+      console.log('🔍 [Debug] electronAPI 객체:', window.electronAPI);
+      console.log('🔍 [Debug] database 객체:', window.electronAPI?.database);
+      console.log('🔍 [Debug] member 객체:', window.electronAPI?.database?.member);
+      console.log('🔍 [Debug] getStats 함수:', window.electronAPI?.database?.member?.getStats);
 
-      // 임시 목업 데이터
-      const mockStats: MemberStatsType = {
-        total: members.length,
-        active: Math.floor(members.length * 0.85),
-        inactive: Math.floor(members.length * 0.15),
-        new_this_month: Math.floor(members.length * 0.1),
-        new_this_week: Math.floor(members.length * 0.03),
-        male: Math.floor(members.length * 0.6),
-        female: Math.floor(members.length * 0.4),
-        with_membership: Math.floor(members.length * 0.7),
-        without_membership: Math.floor(members.length * 0.3),
-        average_age: 32.5,
-        age_distribution: {
-          '10-19': Math.floor(members.length * 0.05),
-          '20-29': Math.floor(members.length * 0.35),
-          '30-39': Math.floor(members.length * 0.3),
-          '40-49': Math.floor(members.length * 0.2),
-          '50-59': Math.floor(members.length * 0.08),
-          '60+': Math.floor(members.length * 0.02),
-        },
-        recent_registrations: members.slice(0, 5),
-        upcoming_membership_expiry: Math.floor(members.length * 0.05),
-      };
+      if (!window.electronAPI) {
+        throw new Error('electronAPI가 로드되지 않았습니다.');
+      }
 
-      setMemberStats(mockStats);
+      if (!window.electronAPI.database) {
+        throw new Error('database API가 로드되지 않았습니다.');
+      }
+
+      if (!window.electronAPI.database.member) {
+        throw new Error('member API가 로드되지 않았습니다.');
+      }
+
+      if (typeof window.electronAPI.database.member.getStats !== 'function') {
+        throw new Error('getStats 함수가 존재하지 않습니다.');
+      }
+
+      const stats = await window.electronAPI.database.member.getStats();
+      console.log('회원 통계 결과:', stats);
+
+      setMemberStats(stats);
     } catch (error) {
       console.error('회원 통계 로드 실패:', error);
+
+      // 에러 발생시 기본값 설정
+      setMemberStats({
+        total: 0,
+        active: 0,
+        inactive: 0,
+        new_this_month: 0,
+        new_this_week: 0,
+        male: 0,
+        female: 0,
+        with_membership: 0,
+        without_membership: 0,
+        average_age: 0,
+        age_distribution: {
+          '10-19': 0,
+          '20-29': 0,
+          '30-39': 0,
+          '40-49': 0,
+          '50-59': 0,
+          '60+': 0,
+        },
+        recent_registrations: [],
+        upcoming_membership_expiry: 0,
+      });
     } finally {
       setStatsLoading(false);
     }
@@ -241,7 +288,9 @@ const Members: React.FC = () => {
 
   // 회원 삭제 핸들러
   const handleDeleteMember = async (member: Member) => {
-    if (!confirm(`정말로 "${member.name}" 회원을 삭제하시겠습니까?\n\n이 작업은 되돌릴 수 없습니다.`)) {
+    if (
+      !confirm(`정말로 "${member.name}" 회원을 삭제하시겠습니까?\n\n이 작업은 되돌릴 수 없습니다.`)
+    ) {
       return;
     }
 
@@ -323,32 +372,61 @@ const Members: React.FC = () => {
     }
 
     try {
-      switch (action.type) {
-        case 'activate':
-          // TODO: 일괄 활성화 API 호출
-          console.log('일괄 활성화:', memberIds);
-          break;
-        case 'deactivate':
-          // TODO: 일괄 비활성화 API 호출
-          console.log('일괄 비활성화:', memberIds);
-          break;
-        case 'delete':
-          // TODO: 일괄 삭제 API 호출
-          console.log('일괄 삭제:', memberIds);
-          break;
-        case 'export':
-          // TODO: 선택된 회원 데이터 내보내기
-          console.log('선택된 회원 내보내기:', memberIds);
-          break;
+      if (!window.electronAPI?.database?.member?.bulkAction) {
+        throw new Error('일괄 작업 API가 사용할 수 없습니다.');
       }
 
-      if (action.type !== 'export') {
-        await loadInitialData(); // 목록과 통계 새로고침
-        setSelectedMembers([]);
+      console.log(`일괄 작업 시작: ${action.type}, 대상: ${memberIds.length}명`);
+
+      let result;
+
+      // 담당직원 변경은 별도 API 사용
+      if (action.type === 'assign_staff') {
+        if (!window.electronAPI?.database?.member?.bulkAssignStaff) {
+          throw new Error('담당직원 일괄 변경 API가 사용할 수 없습니다.');
+        }
+        result = await window.electronAPI.database.member.bulkAssignStaff(
+          memberIds,
+          action.staffId || null
+        );
+      } else {
+        result = await window.electronAPI.database.member.bulkAction(action.type, memberIds);
+      }
+
+      console.log('일괄 작업 결과:', result);
+
+      // 결과에 따른 메시지 표시
+      if (result.success) {
+        const { processed_count, total_count, errors } = result;
+
+        if (errors && errors.length > 0) {
+          // 일부 실패한 경우
+          showError(
+            `${action.label} 작업: ${processed_count}/${total_count}명 처리 완료. ${errors.length}건 실패`
+          );
+          console.warn('일괄 작업 오류:', errors);
+        } else {
+          // 모두 성공한 경우
+          showSuccess(
+            `${action.label} 작업이 완료되었습니다. (${processed_count}/${total_count}명 처리)`
+          );
+        }
+
+        // 내보내기가 아닌 경우에만 데이터 새로고침
+        if (action.type !== 'export') {
+          await loadInitialData(); // 목록과 통계 새로고침
+          setSelectedMembers([]);
+        } else {
+          // 내보내기의 경우 선택만 해제
+          setSelectedMembers([]);
+        }
+      } else {
+        throw new Error(result.message || '일괄 작업 처리에 실패했습니다.');
       }
     } catch (error) {
       console.error('일괄 작업 실패:', error);
-      showError(`${action.label} 작업에 실패했습니다.`);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      showError(`${action.label} 작업에 실패했습니다: ${errorMessage}`);
     }
   };
 
@@ -360,6 +438,47 @@ const Members: React.FC = () => {
   // 신규 등록 핸들러
   const handleAddMember = () => {
     setIsFormOpen(true);
+  };
+
+  // 디버그: 데이터베이스 스키마 확인
+  const handleDebugSchema = async () => {
+    try {
+      // API 존재 여부 확인
+      if (!window.electronAPI?.database?.member?.debugSchema) {
+        console.error('🚨 [Debug] debugSchema 함수가 존재하지 않습니다');
+        alert('debugSchema 함수가 존재하지 않습니다. API가 제대로 로드되지 않았을 수 있습니다.');
+        return;
+      }
+
+      const result = await window.electronAPI.database.member.debugSchema();
+      console.log('🔍 [Debug] 스키마 확인 결과:', result);
+      alert('스키마 확인 완료. 콘솔을 확인하세요.');
+    } catch (error) {
+      console.error('🚨 [Debug] 스키마 확인 실패:', error);
+      alert('스키마 확인 실패: ' + (error instanceof Error ? error.message : String(error)));
+    }
+  };
+
+  // 디버그: 스키마 수정
+  const handleFixSchema = async () => {
+    try {
+      // API 존재 여부 확인
+      if (!window.electronAPI?.database?.member?.fixSchema) {
+        console.error('🚨 [Debug] fixSchema 함수가 존재하지 않습니다');
+        alert('fixSchema 함수가 존재하지 않습니다. API가 제대로 로드되지 않았을 수 있습니다.');
+        return;
+      }
+
+      const result = await window.electronAPI.database.member.fixSchema();
+      console.log('🔧 [Debug] 스키마 수정 결과:', result);
+      alert('스키마 수정 완료: ' + result.message);
+
+      // 수정 완료 후 데이터를 다시 로드
+      await loadInitialData();
+    } catch (error) {
+      console.error('🚨 [Debug] 스키마 수정 실패:', error);
+      alert('스키마 수정 실패: ' + (error instanceof Error ? error.message : String(error)));
+    }
   };
 
   return (
@@ -386,6 +505,25 @@ const Members: React.FC = () => {
         onRefresh={handleRefresh}
         onAddMember={handleAddMember}
       />
+
+      {/* 개발 환경에서만 디버그 버튼 표시 */}
+      {process.env.NODE_ENV === 'development' && (
+        <div className="flex gap-2 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+          <div className="text-sm text-yellow-700 mr-4">개발 디버그 도구:</div>
+          <button
+            onClick={handleDebugSchema}
+            className="px-3 py-1 text-xs bg-red-500 text-white rounded hover:bg-red-600"
+          >
+            🔍 DB 스키마 확인
+          </button>
+          <button
+            onClick={handleFixSchema}
+            className="px-3 py-1 text-xs bg-orange-500 text-white rounded hover:bg-orange-600"
+          >
+            🔧 DB 스키마 수정
+          </button>
+        </div>
+      )}
 
       {/* 회원 통계 대시보드 */}
       <MemberStats stats={memberStats} loading={statsLoading} />

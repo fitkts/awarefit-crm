@@ -172,14 +172,9 @@ const RefundModal: React.FC<RefundModalProps> = ({
         <div className="flex items-center justify-between p-6 border-b border-gray-200">
           <div className="flex items-center">
             <RefreshCw className="w-6 h-6 text-yellow-600 mr-3" />
-            <h2 className="text-xl font-semibold text-gray-900">
-              환불 처리
-            </h2>
+            <h2 className="text-xl font-semibold text-gray-900">환불 처리</h2>
           </div>
-          <button
-            onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 transition-colors"
-          >
+          <button onClick={onClose} className="text-gray-400 hover:text-gray-600 transition-colors">
             <X className="w-6 h-6" />
           </button>
         </div>
@@ -218,27 +213,34 @@ const RefundModal: React.FC<RefundModalProps> = ({
                   <span className="text-gray-600">환불 가능 여부 확인 중...</span>
                 </div>
               ) : eligibility ? (
-                <div className={`p-4 rounded-lg ${eligibility.eligible ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200'
-                  }`}>
+                <div
+                  className={`p-4 rounded-lg ${
+                    eligibility.eligible
+                      ? 'bg-green-50 border border-green-200'
+                      : 'bg-red-50 border border-red-200'
+                  }`}
+                >
                   <div className="flex items-center">
                     {eligibility.eligible ? (
                       <DollarSign className="w-5 h-5 text-green-600 mr-2" />
                     ) : (
                       <AlertTriangle className="w-5 h-5 text-red-600 mr-2" />
                     )}
-                    <h3 className={`font-medium ${eligibility.eligible ? 'text-green-900' : 'text-red-900'
-                      }`}>
+                    <h3
+                      className={`font-medium ${
+                        eligibility.eligible ? 'text-green-900' : 'text-red-900'
+                      }`}
+                    >
                       {eligibility.eligible ? '환불 가능' : '환불 불가'}
                     </h3>
                   </div>
                   {eligibility.eligible ? (
                     <p className="mt-2 text-sm text-green-800">
-                      최대 환불 가능 금액: <strong>{formatCurrency(eligibility.max_refund_amount)}</strong>
+                      최대 환불 가능 금액:{' '}
+                      <strong>{formatCurrency(eligibility.max_refund_amount)}</strong>
                     </p>
                   ) : (
-                    <p className="mt-2 text-sm text-red-800">
-                      {eligibility.reason}
-                    </p>
+                    <p className="mt-2 text-sm text-red-800">{eligibility.reason}</p>
                   )}
                 </div>
               ) : null}
@@ -256,10 +258,13 @@ const RefundModal: React.FC<RefundModalProps> = ({
                       <input
                         type="number"
                         value={formData.refund_amount}
-                        onChange={(e) => handleInputChange('refund_amount', parseInt(e.target.value) || 0)}
+                        onChange={e =>
+                          handleInputChange('refund_amount', parseInt(e.target.value) || 0)
+                        }
                         max={eligibility.max_refund_amount}
-                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.refund_amount ? 'border-red-300' : 'border-gray-300'
-                          }`}
+                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                          errors.refund_amount ? 'border-red-300' : 'border-gray-300'
+                        }`}
                         placeholder="환불할 금액을 입력하세요"
                       />
                       <div className="absolute right-3 top-2 text-gray-500">원</div>
@@ -286,7 +291,7 @@ const RefundModal: React.FC<RefundModalProps> = ({
                             name="refund_method"
                             value={method}
                             checked={formData.refund_method === method}
-                            onChange={(e) => handleInputChange('refund_method', e.target.value)}
+                            onChange={e => handleInputChange('refund_method', e.target.value)}
                             className="mr-2"
                           />
                           <span className="text-sm">{getRefundMethodText(method)}</span>
@@ -304,10 +309,11 @@ const RefundModal: React.FC<RefundModalProps> = ({
                       </label>
                       <textarea
                         value={formData.account_info}
-                        onChange={(e) => handleInputChange('account_info', e.target.value)}
+                        onChange={e => handleInputChange('account_info', e.target.value)}
                         rows={3}
-                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.account_info ? 'border-red-300' : 'border-gray-300'
-                          }`}
+                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                          errors.account_info ? 'border-red-300' : 'border-gray-300'
+                        }`}
                         placeholder="은행명, 계좌번호, 예금주명을 입력하세요"
                       />
                       {errors.account_info && (
@@ -324,15 +330,14 @@ const RefundModal: React.FC<RefundModalProps> = ({
                     </label>
                     <textarea
                       value={formData.reason}
-                      onChange={(e) => handleInputChange('reason', e.target.value)}
+                      onChange={e => handleInputChange('reason', e.target.value)}
                       rows={3}
-                      className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.reason ? 'border-red-300' : 'border-gray-300'
-                        }`}
+                      className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                        errors.reason ? 'border-red-300' : 'border-gray-300'
+                      }`}
                       placeholder="환불 사유를 상세히 입력하세요"
                     />
-                    {errors.reason && (
-                      <p className="mt-1 text-sm text-red-600">{errors.reason}</p>
-                    )}
+                    {errors.reason && <p className="mt-1 text-sm text-red-600">{errors.reason}</p>}
                   </div>
 
                   {/* 추가 메모 */}
@@ -342,7 +347,7 @@ const RefundModal: React.FC<RefundModalProps> = ({
                     </label>
                     <textarea
                       value={formData.notes}
-                      onChange={(e) => handleInputChange('notes', e.target.value)}
+                      onChange={e => handleInputChange('notes', e.target.value)}
                       rows={2}
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                       placeholder="추가 메모가 있으면 입력하세요"
@@ -394,4 +399,4 @@ const RefundModal: React.FC<RefundModalProps> = ({
   );
 };
 
-export default RefundModal; 
+export default RefundModal;

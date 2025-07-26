@@ -253,9 +253,7 @@ const SalaryManagementModal: React.FC<SalaryManagementModalProps> = ({
             <form onSubmit={handleSubmit} className="space-y-4">
               {/* 현재 급여 표시 */}
               <div className="bg-gray-50 rounded-lg p-4">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  현재 급여
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">현재 급여</label>
                 <div className="text-2xl font-bold text-gray-900">
                   {staff.salary ? formatSalary(staff.salary) : '미설정'}
                 </div>
@@ -263,9 +261,7 @@ const SalaryManagementModal: React.FC<SalaryManagementModalProps> = ({
 
               {/* 신규 급여 입력 */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  신규 급여 *
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">신규 급여 *</label>
                 <input
                   type="number"
                   value={formData.new_salary}
@@ -278,9 +274,7 @@ const SalaryManagementModal: React.FC<SalaryManagementModalProps> = ({
 
               {/* 조정 사유 */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  조정 사유
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">조정 사유</label>
                 <textarea
                   value={formData.adjustment_reason}
                   onChange={e => handleInputChange('adjustment_reason', e.target.value)}
@@ -292,9 +286,7 @@ const SalaryManagementModal: React.FC<SalaryManagementModalProps> = ({
 
               {/* 적용일 */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  적용일 *
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">적용일 *</label>
                 <input
                   type="date"
                   value={formData.effective_date}
@@ -318,12 +310,13 @@ const SalaryManagementModal: React.FC<SalaryManagementModalProps> = ({
                           <TrendingDown className="w-4 h-4 text-red-500 mr-1" />
                         ) : null}
                         <span
-                          className={`font-medium ${calculations.adjustment_amount > 0
+                          className={`font-medium ${
+                            calculations.adjustment_amount > 0
                               ? 'text-green-600'
                               : calculations.adjustment_amount < 0
                                 ? 'text-red-600'
                                 : 'text-gray-600'
-                            }`}
+                          }`}
                         >
                           {calculations.adjustment_amount > 0 ? '+' : ''}
                           {formatSalary(calculations.adjustment_amount)}
@@ -333,12 +326,13 @@ const SalaryManagementModal: React.FC<SalaryManagementModalProps> = ({
                     <div className="flex justify-between items-center">
                       <span className="text-sm text-gray-600">변화율</span>
                       <span
-                        className={`font-medium ${calculations.adjustment_percentage > 0
+                        className={`font-medium ${
+                          calculations.adjustment_percentage > 0
                             ? 'text-green-600'
                             : calculations.adjustment_percentage < 0
                               ? 'text-red-600'
                               : 'text-gray-600'
-                          }`}
+                        }`}
                       >
                         {calculations.adjustment_percentage > 0 ? '+' : ''}
                         {calculations.adjustment_percentage.toFixed(2)}%
@@ -377,7 +371,7 @@ const SalaryManagementModal: React.FC<SalaryManagementModalProps> = ({
                   <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600"></div>
                 </div>
               ) : salaryHistory.length > 0 ? (
-                salaryHistory.map((history) => (
+                salaryHistory.map(history => (
                   <div
                     key={history.id}
                     className="bg-gray-50 rounded-lg p-4 border border-gray-200"
@@ -392,19 +386,19 @@ const SalaryManagementModal: React.FC<SalaryManagementModalProps> = ({
                           <User className="w-4 h-4 text-blue-500 mr-2" />
                         )}
                         <span className="text-sm font-medium text-gray-900">
-                          {history.previous_salary ?
-                            `${formatSalary(history.previous_salary)} → ${formatSalary(history.new_salary)}` :
-                            `${formatSalary(history.new_salary)} (신규 책정)`
-                          }
+                          {history.previous_salary
+                            ? `${formatSalary(history.previous_salary)} → ${formatSalary(history.new_salary)}`
+                            : `${formatSalary(history.new_salary)} (신규 책정)`}
                         </span>
                       </div>
                       <span
-                        className={`text-sm font-medium ${history.adjustment_amount > 0
+                        className={`text-sm font-medium ${
+                          history.adjustment_amount > 0
                             ? 'text-green-600'
                             : history.adjustment_amount < 0
                               ? 'text-red-600'
                               : 'text-blue-600'
-                          }`}
+                        }`}
                       >
                         {history.adjustment_amount > 0 ? '+' : ''}
                         {formatSalary(history.adjustment_amount)}
@@ -432,4 +426,4 @@ const SalaryManagementModal: React.FC<SalaryManagementModalProps> = ({
   );
 };
 
-export default SalaryManagementModal; 
+export default SalaryManagementModal;

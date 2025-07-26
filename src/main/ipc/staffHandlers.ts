@@ -95,9 +95,7 @@ export const registerStaffHandlers = (): void => {
     try {
       // 직원번호 생성 (STF-YYYYMMDD-###)
       const today = new Date().toISOString().split('T')[0].replace(/-/g, '');
-      const countStmt = db.prepare(
-        'SELECT COUNT(*) as count FROM staff WHERE staff_number LIKE ?'
-      );
+      const countStmt = db.prepare('SELECT COUNT(*) as count FROM staff WHERE staff_number LIKE ?');
       const count = (countStmt.get(`STF-${today}-%`) as { count: number }).count + 1;
       const staffNumber = `STF-${today}-${count.toString().padStart(3, '0')}`;
 
@@ -125,7 +123,7 @@ export const registerStaffHandlers = (): void => {
         data.notes || null,
         data.can_manage_payments ? 1 : 0,
         data.can_manage_members ? 1 : 0,
-        1  // is_active를 명시적으로 1로 설정
+        1 // is_active를 명시적으로 1로 설정
       );
 
       // 급여가 설정된 경우 급여 이력에 기록
@@ -255,7 +253,7 @@ export const registerStaffHandlers = (): void => {
       return {
         total_staff: total,
         recent_hires: recent,
-        active_staff: total
+        active_staff: total,
       };
     } catch (error) {
       console.error('직원 통계 조회 실패:', error);
@@ -285,7 +283,9 @@ export const registerStaffHandlers = (): void => {
     try {
       const transaction = db.transaction(() => {
         // 기존 급여 조회
-        const currentStaff = db.prepare('SELECT salary FROM staff WHERE id = ?').get(data.staff_id) as { salary: number };
+        const currentStaff = db
+          .prepare('SELECT salary FROM staff WHERE id = ?')
+          .get(data.staff_id) as { salary: number };
 
         // 급여 업데이트
         const updateStmt = db.prepare('UPDATE staff SET salary = ? WHERE id = ?');
@@ -377,11 +377,13 @@ export const registerStaffHandlers = (): void => {
   // PT 패키지 목록 조회 (PaymentForm에서 필요)
   ipcMain.handle('pt-package-get-all', async () => {
     try {
-      const stmt = db.prepare('SELECT * FROM pt_packages WHERE is_active = 1 ORDER BY session_count');
+      const stmt = db.prepare(
+        'SELECT * FROM pt_packages WHERE is_active = 1 ORDER BY session_count'
+      );
       return stmt.all();
     } catch (error) {
       console.error('PT 패키지 조회 실패:', error);
       throw error;
     }
   });
-}; 
+};

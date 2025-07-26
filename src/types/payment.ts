@@ -206,7 +206,14 @@ export interface PaymentDetail extends Payment {
 
 // 정렬 옵션
 export interface PaymentSortOption {
-  field: 'payment_date' | 'amount' | 'member_name' | 'staff_name' | 'payment_type' | 'status' | 'created_at';
+  field:
+    | 'payment_date'
+    | 'amount'
+    | 'member_name'
+    | 'staff_name'
+    | 'payment_type'
+    | 'status'
+    | 'created_at';
   direction: 'asc' | 'desc';
 }
 
@@ -314,4 +321,4 @@ export interface PaymentUtils {
   generatePaymentNumber: (date?: string) => string;
   calculateRefundAmount: (payment: Payment, refundDate: string) => number;
   isRefundEligible: (payment: Payment) => RefundEligibility;
-} 
+}

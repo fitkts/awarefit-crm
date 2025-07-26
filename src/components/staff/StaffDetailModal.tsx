@@ -12,7 +12,7 @@ import {
   TrendingUp,
   User,
   Users,
-  X
+  X,
 } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import { Staff, StaffDetail } from '../../types/staff';
@@ -25,12 +25,7 @@ interface StaffDetailModalProps {
   onEdit: (staff: Staff) => void;
 }
 
-const StaffDetailModal: React.FC<StaffDetailModalProps> = ({
-  isOpen,
-  onClose,
-  staff,
-  onEdit,
-}) => {
+const StaffDetailModal: React.FC<StaffDetailModalProps> = ({ isOpen, onClose, staff, onEdit }) => {
   const [loading, setLoading] = useState(false);
   const [staffDetail, setStaffDetail] = useState<StaffDetail | null>(null);
   const [activeTab, setActiveTab] = useState<
@@ -200,10 +195,9 @@ const StaffDetailModal: React.FC<StaffDetailModalProps> = ({
                     </span>
                   )}
                   <span
-                    className={`px-3 py-1 rounded-full text-sm ${staff.is_active
-                        ? 'bg-green-500 bg-opacity-80'
-                        : 'bg-red-500 bg-opacity-80'
-                      }`}
+                    className={`px-3 py-1 rounded-full text-sm ${
+                      staff.is_active ? 'bg-green-500 bg-opacity-80' : 'bg-red-500 bg-opacity-80'
+                    }`}
                   >
                     {staff.is_active ? '활성' : '비활성'}
                   </span>
@@ -244,10 +238,11 @@ const StaffDetailModal: React.FC<StaffDetailModalProps> = ({
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as any)}
-                  className={`flex items-center space-x-2 py-4 border-b-2 transition-colors ${activeTab === tab.id
+                  className={`flex items-center space-x-2 py-4 border-b-2 transition-colors ${
+                    activeTab === tab.id
                       ? 'border-blue-600 text-blue-600'
                       : 'border-transparent text-gray-500 hover:text-gray-700'
-                    }`}
+                  }`}
                 >
                   <Icon className="w-4 h-4" />
                   <span className="font-medium">{tab.label}</span>
@@ -380,7 +375,12 @@ const StaffDetailModal: React.FC<StaffDetailModalProps> = ({
                           <div className="flex justify-between items-center mb-1">
                             <span className="text-sm text-gray-600">월 평균 매출</span>
                             <span className="text-sm text-gray-900">
-                              {Math.round(staffDetail.total_sales_amount / (staffDetail.tenure_months || 1) / 10000).toLocaleString()}만원
+                              {Math.round(
+                                staffDetail.total_sales_amount /
+                                  (staffDetail.tenure_months || 1) /
+                                  10000
+                              ).toLocaleString()}
+                              만원
                             </span>
                           </div>
                         </div>
@@ -407,15 +407,17 @@ const StaffDetailModal: React.FC<StaffDetailModalProps> = ({
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                       <div className="flex items-center space-x-2">
                         <div
-                          className={`w-3 h-3 rounded-full ${staff.can_manage_members ? 'bg-green-500' : 'bg-red-500'
-                            }`}
+                          className={`w-3 h-3 rounded-full ${
+                            staff.can_manage_members ? 'bg-green-500' : 'bg-red-500'
+                          }`}
                         ></div>
                         <span className="text-sm text-gray-700">회원 관리</span>
                       </div>
                       <div className="flex items-center space-x-2">
                         <div
-                          className={`w-3 h-3 rounded-full ${staff.can_manage_payments ? 'bg-green-500' : 'bg-red-500'
-                            }`}
+                          className={`w-3 h-3 rounded-full ${
+                            staff.can_manage_payments ? 'bg-green-500' : 'bg-red-500'
+                          }`}
                         ></div>
                         <span className="text-sm text-gray-700">결제 관리</span>
                       </div>
@@ -436,25 +438,32 @@ const StaffDetailModal: React.FC<StaffDetailModalProps> = ({
                     </div>
                     <div className="divide-y divide-gray-200">
                       {staffDetail.salary_history.length > 0 ? (
-                        staffDetail.salary_history.map((history) => (
+                        staffDetail.salary_history.map(history => (
                           <div key={history.id} className="p-6">
                             <div className="flex items-center justify-between">
                               <div>
                                 <p className="text-sm font-medium text-gray-900">
-                                  {history.previous_salary ?
-                                    `${history.previous_salary.toLocaleString()}원 → ${history.new_salary.toLocaleString()}원` :
-                                    `${history.new_salary.toLocaleString()}원 (신규 책정)`
-                                  }
+                                  {history.previous_salary
+                                    ? `${history.previous_salary.toLocaleString()}원 → ${history.new_salary.toLocaleString()}원`
+                                    : `${history.new_salary.toLocaleString()}원 (신규 책정)`}
                                 </p>
                                 <p className="text-xs text-gray-500 mt-1">
-                                  {formatDate(history.effective_date)} • {history.adjustment_reason || '사유 없음'}
+                                  {formatDate(history.effective_date)} •{' '}
+                                  {history.adjustment_reason || '사유 없음'}
                                 </p>
                               </div>
                               <div className="text-right">
-                                <span className={`text-lg font-bold ${history.adjustment_amount > 0 ? 'text-green-600' :
-                                    history.adjustment_amount < 0 ? 'text-red-600' : 'text-gray-600'
-                                  }`}>
-                                  {history.adjustment_amount > 0 ? '+' : ''}{history.adjustment_amount.toLocaleString()}원
+                                <span
+                                  className={`text-lg font-bold ${
+                                    history.adjustment_amount > 0
+                                      ? 'text-green-600'
+                                      : history.adjustment_amount < 0
+                                        ? 'text-red-600'
+                                        : 'text-gray-600'
+                                  }`}
+                                >
+                                  {history.adjustment_amount > 0 ? '+' : ''}
+                                  {history.adjustment_amount.toLocaleString()}원
                                 </span>
                               </div>
                             </div>
@@ -472,12 +481,20 @@ const StaffDetailModal: React.FC<StaffDetailModalProps> = ({
               )}
 
               {/* 기타 탭들 */}
-              {(activeTab === 'role' || activeTab === 'performance' || activeTab === 'activity') && (
+              {(activeTab === 'role' ||
+                activeTab === 'performance' ||
+                activeTab === 'activity') && (
                 <div className="p-6">
                   <div className="text-center py-12">
-                    {activeTab === 'role' && <Shield className="w-12 h-12 text-gray-400 mx-auto mb-4" />}
-                    {activeTab === 'performance' && <TrendingUp className="w-12 h-12 text-gray-400 mx-auto mb-4" />}
-                    {activeTab === 'activity' && <Clock className="w-12 h-12 text-gray-400 mx-auto mb-4" />}
+                    {activeTab === 'role' && (
+                      <Shield className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                    )}
+                    {activeTab === 'performance' && (
+                      <TrendingUp className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                    )}
+                    {activeTab === 'activity' && (
+                      <Clock className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                    )}
                     <h3 className="text-lg font-semibold text-gray-900 mb-2">
                       {activeTab === 'role' && '역할 관리'}
                       {activeTab === 'performance' && '성과 분석'}
@@ -503,4 +520,4 @@ const StaffDetailModal: React.FC<StaffDetailModalProps> = ({
   );
 };
 
-export default StaffDetailModal; 
+export default StaffDetailModal;

@@ -68,8 +68,9 @@ const MemberTable: React.FC<MemberTableProps> = ({
     },
     { key: 'phone', label: '연락처', sortable: false, visible: true, width: '160px' },
     { key: 'gender', label: '성별', sortable: true, visible: true, width: '70px' },
-    { key: 'age', label: '나이', sortable: true, visible: true, width: '70px' },
+    { key: 'birth_date', label: '생년월일', sortable: true, visible: true, width: '100px' },
     { key: 'join_date', label: '가입일', sortable: true, visible: true, width: '100px' },
+    { key: 'assigned_staff', label: '담당직원', sortable: false, visible: true, width: '120px' },
     {
       key: 'membership_status',
       label: '회원권',
@@ -113,12 +114,14 @@ const MemberTable: React.FC<MemberTableProps> = ({
   ];
 
   // 정렬 핸들러
-  const handleSort = (field: keyof Member | 'age' | 'membership_status' | 'actions') => {
+  const handleSort = (
+    field: keyof Member | 'birth_date' | 'assigned_staff' | 'membership_status' | 'actions'
+  ) => {
     if (field === 'actions') return; // actions 컬럼은 정렬 불가
     const newDirection =
       sortOption.field === field && sortOption.direction === 'asc' ? 'desc' : 'asc';
     onSortChange({
-      field: field as keyof Member | 'age' | 'membership_status',
+      field: field as keyof Member | 'birth_date' | 'assigned_staff' | 'membership_status',
       direction: newDirection,
     });
   };
@@ -139,19 +142,6 @@ const MemberTable: React.FC<MemberTableProps> = ({
     } else {
       onSelectionChange([...selectedMembers, memberId]);
     }
-  };
-
-  // 나이 계산
-  const calculateAge = (birthDate?: string | null): number | undefined => {
-    if (!birthDate) return undefined;
-    const today = new Date();
-    const birth = new Date(birthDate);
-    let age = today.getFullYear() - birth.getFullYear();
-    const monthDiff = today.getMonth() - birth.getMonth();
-    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
-      age--;
-    }
-    return age;
   };
 
   // 페이지네이션 버튼 생성
@@ -230,9 +220,11 @@ const MemberTable: React.FC<MemberTableProps> = ({
           </span>
         );
 
-      case 'age': {
-        const age = calculateAge(member.birth_date);
-        return <div className="text-sm text-gray-900">{age ? `${age}세` : '-'}</div>;
+      case 'birth_date': {
+        const birthDate = member.birth_date
+          ? new Date(member.birth_date).toLocaleDateString('ko-KR')
+          : '-';
+        return <div className="text-sm text-gray-900">{birthDate}</div>;
       }
 
       case 'join_date':
@@ -240,6 +232,13 @@ const MemberTable: React.FC<MemberTableProps> = ({
           <div className="flex items-center text-xs text-gray-900">
             <Calendar className="w-3 h-3 mr-1 text-gray-400" />
             {new Date(member.join_date).toLocaleDateString('ko-KR')}
+          </div>
+        );
+
+      case 'assigned_staff':
+        return (
+          <div className="text-sm text-gray-900">
+            {(member as any).assigned_staff_name || '미배정'}
           </div>
         );
 

@@ -18,14 +18,8 @@ import {
   XCircle,
 } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
-import { ExtendedMembershipHistory, Member, MemberDetail } from '../../types/member';
-import {
-  calculateAge,
-  formatAddress,
-  formatDate,
-  formatEmail,
-  formatPhoneNumber,
-} from '../../utils/memberUtils';
+import { Member, MemberDetail } from '../../types/member';
+import { formatAddress, formatDate, formatEmail, formatPhoneNumber } from '../../utils/memberUtils';
 
 interface MemberDetailModalProps {
   isOpen: boolean;
@@ -56,45 +50,10 @@ const MemberDetailModal: React.FC<MemberDetailModalProps> = ({
   const loadMemberDetail = async () => {
     try {
       setLoading(true);
-      // TODO: 실제 API 호출로 회원 상세 정보 로드
-      // const detail = await window.electronAPI?.database?.member?.getDetail(_memberId);
 
-      // 임시 목업 데이터
-      const mockDetail: MemberDetail = {
-        ...member!,
-        age: calculateAge(member!.birth_date),
-        currentMembership: {
-          id: 1,
-          memberId: member!.id,
-          membershipTypeId: 1,
-          paymentId: 1,
-          startDate: '2024-01-01',
-          endDate: '2024-12-31',
-          isActive: true,
-          createdAt: '2024-01-01',
-          membershipType: {
-            id: 1,
-            name: '1년 회원권',
-            durationMonths: 12,
-            price: 1100000,
-            description: '1년 헬스 이용권',
-            isActive: true,
-            createdAt: '2024-01-01',
-          },
-          daysRemaining: 45,
-          isExpiringSoon: true,
-        } as ExtendedMembershipHistory,
-        membershipHistory: [],
-        totalPayments: 1100000,
-        lastVisit: '2024-01-15',
-        visitCount: 85,
-        totalSpent: 1100000,
-        averageVisitsPerMonth: 8.5,
-        membershipStatus: 'expiring_soon',
-        profileImage: null,
-      };
-
-      setMemberDetail(mockDetail);
+      // 새로운 통합 API 사용
+      const detail = await window.electronAPI.database.member.getDetail(member!.id);
+      setMemberDetail(detail);
     } catch (error) {
       console.error('회원 상세 정보 로드 실패:', error);
     } finally {
@@ -353,8 +312,6 @@ const MemberDetailModal: React.FC<MemberDetailModalProps> = ({
                     </div>
                   </div>
 
-
-
                   {/* 메모 */}
                   {member.notes && (
                     <div className="bg-white rounded-lg border border-gray-200 p-6">
@@ -369,21 +326,227 @@ const MemberDetailModal: React.FC<MemberDetailModalProps> = ({
               )}
 
               {/* 회원권 탭 */}
-              {activeTab === 'membership' && (
-                <div className="p-6">
-                  <div className="text-center py-12">
-                    <Award className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-                    <p className="text-gray-500">회원권 이력 정보를 준비 중입니다.</p>
+              {activeTab === 'membership' && memberDetail && (
+                <div className="p-6 space-y-6">
+                  {/* 현재 회원권 */}
+                  {memberDetail.currentMembership ? (
+                    <div className="bg-gradient-to-r from-green-50 to-green-100 rounded-lg p-6 border border-green-200">
+                      <h3 className="text-lg font-semibold text-green-800 mb-4 flex items-center">
+                        <Award className="w-5 h-5 mr-2" />
+                        현재 활성 회원권
+                      </h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                          <div className="text-sm text-green-600 mb-1">회원권 유형</div>
+                          <div className="font-medium text-green-900">
+                            {memberDetail.currentMembership.membershipType.name}
+                          </div>
+                          <div className="text-sm text-green-700 mt-1">
+                            {memberDetail.currentMembership.membershipType.description}
+                          </div>
+                        </div>
+                        <div>
+                          <div className="text-sm text-green-600 mb-1">이용 기간</div>
+                          <div className="font-medium text-green-900">
+                            {formatDate(memberDetail.currentMembership.startDate)} ~{' '}
+                            {formatDate(memberDetail.currentMembership.endDate)}
+                          </div>
+                          <div
+                            className={`text-sm mt-1 ${memberDetail.currentMembership.daysRemaining <= 7 ? 'text-red-600' : 'text-green-700'}`}
+                          >
+                            남은 기간: {memberDetail.currentMembership.daysRemaining}일
+                          </div>
+                        </div>
+                      </div>
+                      <div className="mt-4">
+                        <div className="w-full bg-green-200 rounded-full h-3">
+                          <div
+                            className={`h-3 rounded-full ${
+                              memberDetail.currentMembership.daysRemaining <= 7
+                                ? 'bg-red-500'
+                                : memberDetail.currentMembership.daysRemaining <= 30
+                                  ? 'bg-orange-500'
+                                  : 'bg-green-500'
+                            }`}
+                            style={{
+                              width: `${Math.max(5, (memberDetail.currentMembership.daysRemaining / 365) * 100)}%`,
+                            }}
+                          ></div>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="bg-gray-50 rounded-lg p-6 border border-gray-200 text-center">
+                      <Award className="w-12 h-12 text-gray-400 mx-auto mb-3" />
+                      <h3 className="text-lg font-medium text-gray-700 mb-2">
+                        현재 활성 회원권이 없습니다
+                      </h3>
+                      <p className="text-gray-500">새로운 회원권을 등록해보세요.</p>
+                    </div>
+                  )}
+
+                  {/* 회원권 이력 */}
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-4">회원권 이용 이력</h3>
+                    {memberDetail.membershipHistory && memberDetail.membershipHistory.length > 0 ? (
+                      <div className="space-y-4">
+                        {memberDetail.membershipHistory.map((membership: any, index: number) => (
+                          <div
+                            key={index}
+                            className="bg-white border border-gray-200 rounded-lg p-4"
+                          >
+                            <div className="flex items-center justify-between mb-3">
+                              <div className="flex items-center space-x-3">
+                                <div
+                                  className={`w-3 h-3 rounded-full ${
+                                    membership.isCurrent
+                                      ? 'bg-green-500'
+                                      : new Date(membership.endDate) > new Date()
+                                        ? 'bg-blue-500'
+                                        : 'bg-gray-400'
+                                  }`}
+                                ></div>
+                                <h4 className="font-medium text-gray-900">
+                                  {membership.membershipType.name}
+                                </h4>
+                                {membership.isCurrent && (
+                                  <span className="px-2 py-1 text-xs bg-green-100 text-green-800 rounded-full">
+                                    현재 이용중
+                                  </span>
+                                )}
+                              </div>
+                              <div className="text-sm text-gray-500">
+                                {formatDate(membership.startDate)} ~{' '}
+                                {formatDate(membership.endDate)}
+                              </div>
+                            </div>
+                            <div className="text-sm text-gray-600">
+                              {membership.membershipType.description}
+                            </div>
+                            {membership.paymentNumber && (
+                              <div className="text-xs text-gray-500 mt-2">
+                                결제번호: {membership.paymentNumber}
+                              </div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="text-center py-8">
+                        <FileText className="w-8 h-8 text-gray-300 mx-auto mb-2" />
+                        <p className="text-gray-500">회원권 이용 이력이 없습니다.</p>
+                      </div>
+                    )}
                   </div>
                 </div>
               )}
 
               {/* 결제내역 탭 */}
-              {activeTab === 'payments' && (
-                <div className="p-6">
-                  <div className="text-center py-12">
-                    <CreditCard className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-                    <p className="text-gray-500">결제 내역을 준비 중입니다.</p>
+              {activeTab === 'payments' && memberDetail && (
+                <div className="p-6 space-y-6">
+                  {/* 결제 요약 */}
+                  <div className="bg-blue-50 rounded-lg p-6 border border-blue-200">
+                    <h3 className="text-lg font-semibold text-blue-800 mb-4 flex items-center">
+                      <CreditCard className="w-5 h-5 mr-2" />
+                      결제 요약
+                    </h3>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-blue-600">
+                          {memberDetail.paymentHistory?.length || 0}
+                        </div>
+                        <div className="text-sm text-blue-600">총 결제 건수</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-blue-600">
+                          {memberDetail.totalSpent?.toLocaleString() || 0}원
+                        </div>
+                        <div className="text-sm text-blue-600">총 결제 금액</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-blue-600">
+                          {memberDetail.paymentHistory && memberDetail.paymentHistory.length > 0
+                            ? Math.round(
+                                memberDetail.totalSpent / memberDetail.paymentHistory.length
+                              ).toLocaleString()
+                            : 0}
+                          원
+                        </div>
+                        <div className="text-sm text-blue-600">평균 결제 금액</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 결제 내역 목록 */}
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-4">결제 내역</h3>
+                    {memberDetail.paymentHistory && memberDetail.paymentHistory.length > 0 ? (
+                      <div className="space-y-3">
+                        {memberDetail.paymentHistory.map((payment: any, index: number) => (
+                          <div
+                            key={index}
+                            className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
+                          >
+                            <div className="flex items-center justify-between mb-2">
+                              <div className="flex items-center space-x-3">
+                                <div
+                                  className={`w-3 h-3 rounded-full ${
+                                    payment.status === 'completed'
+                                      ? 'bg-green-500'
+                                      : payment.status === 'pending'
+                                        ? 'bg-yellow-500'
+                                        : 'bg-red-500'
+                                  }`}
+                                ></div>
+                                <div>
+                                  <div className="font-medium text-gray-900">
+                                    {payment.payment_number}
+                                  </div>
+                                  <div className="text-sm text-gray-500">
+                                    {payment.payment_type === 'membership' &&
+                                      payment.membership_type_name}
+                                    {payment.payment_type === 'pt' && payment.pt_package_name}
+                                    {payment.payment_type === 'locker' && '락커'}
+                                    {payment.payment_type === 'other' && '기타'}
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="text-right">
+                                <div className="font-semibold text-gray-900">
+                                  {payment.amount?.toLocaleString()}원
+                                </div>
+                                <div className="text-sm text-gray-500">
+                                  {formatDate(payment.payment_date)}
+                                </div>
+                              </div>
+                            </div>
+                            <div className="flex items-center justify-between text-sm text-gray-600">
+                              <div>
+                                결제방법:{' '}
+                                {payment.payment_method === 'card'
+                                  ? '카드'
+                                  : payment.payment_method === 'cash'
+                                    ? '현금'
+                                    : payment.payment_method === 'transfer'
+                                      ? '계좌이체'
+                                      : payment.payment_method}
+                              </div>
+                              <div>담당자: {payment.staff_name}</div>
+                            </div>
+                            {payment.notes && (
+                              <div className="mt-2 text-sm text-gray-600 bg-gray-50 p-2 rounded">
+                                {payment.notes}
+                              </div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="text-center py-8">
+                        <CreditCard className="w-8 h-8 text-gray-300 mx-auto mb-2" />
+                        <p className="text-gray-500">결제 내역이 없습니다.</p>
+                      </div>
+                    )}
                   </div>
                 </div>
               )}

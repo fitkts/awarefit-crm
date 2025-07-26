@@ -74,9 +74,11 @@ export class MigrationRunner {
         this.db.exec(sql);
       } catch (error: any) {
         // 컬럼 중복 생성 에러는 무시하고 계속 진행
-        if (error.code === 'SQLITE_ERROR' &&
+        if (
+          error.code === 'SQLITE_ERROR' &&
           (error.message.includes('duplicate column name') ||
-            error.message.includes('already exists'))) {
+            error.message.includes('already exists'))
+        ) {
           console.log(`컬럼이 이미 존재합니다 (무시): ${error.message}`);
 
           // 트랜잭션 롤백 후 성공적인 부분만 실행
@@ -94,8 +96,7 @@ export class MigrationRunner {
         console.warn(`마이그레이션 ${migrationName} 중 경고:`, error.message);
 
         // 치명적 에러만 중단
-        if (error.code === 'SQLITE_ERROR' &&
-          error.message.includes('syntax error')) {
+        if (error.code === 'SQLITE_ERROR' && error.message.includes('syntax error')) {
           throw error;
         }
       }
@@ -111,9 +112,11 @@ export class MigrationRunner {
           this.db.exec(trimmedStatement + ';');
         } catch (error: any) {
           // 컬럼 중복 생성 에러는 무시하고 계속 진행
-          if (error.code === 'SQLITE_ERROR' &&
+          if (
+            error.code === 'SQLITE_ERROR' &&
             (error.message.includes('duplicate column name') ||
-              error.message.includes('already exists'))) {
+              error.message.includes('already exists'))
+          ) {
             console.log(`컬럼이 이미 존재합니다 (무시): ${error.message}`);
             continue;
           }
@@ -122,9 +125,11 @@ export class MigrationRunner {
           console.warn(`마이그레이션 ${migrationName} 중 경고:`, trimmedStatement, error.message);
 
           // 치명적 에러만 중단 (테이블 생성 실패 등)
-          if (error.code === 'SQLITE_ERROR' &&
+          if (
+            error.code === 'SQLITE_ERROR' &&
             (error.message.includes('syntax error') ||
-              error.message.includes('no such table') && trimmedStatement.includes('INSERT'))) {
+              (error.message.includes('no such table') && trimmedStatement.includes('INSERT')))
+          ) {
             throw error;
           }
         }
@@ -142,8 +147,11 @@ export class MigrationRunner {
       const trimmedLine = line.trim();
 
       // 트랜잭션 관련 명령은 스킵
-      if (trimmedLine.startsWith('BEGIN') || trimmedLine.startsWith('COMMIT') ||
-        trimmedLine.startsWith('ROLLBACK')) {
+      if (
+        trimmedLine.startsWith('BEGIN') ||
+        trimmedLine.startsWith('COMMIT') ||
+        trimmedLine.startsWith('ROLLBACK')
+      ) {
         continue;
       }
 
@@ -220,4 +228,4 @@ export class MigrationRunner {
     console.warn(`마이그레이션 ${version} 롤백은 수동으로 처리해야 합니다.`);
     // 실제 롤백 로직은 각 마이그레이션에 따라 수동으로 작성해야 함
   }
-} 
+}

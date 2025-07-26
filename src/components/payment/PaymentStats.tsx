@@ -66,10 +66,11 @@ const ChangeIndicator: React.FC<{ change?: number }> = ({ change }) => {
   const isNegative = change < 0;
 
   return (
-    <span className={`text-xs ${isPositive ? 'text-green-600' : isNegative ? 'text-red-600' : 'text-gray-500'}`}>
+    <span
+      className={`text-xs ${isPositive ? 'text-green-600' : isNegative ? 'text-red-600' : 'text-gray-500'}`}
+    >
       {isPositive && '+'}
-      {change.toFixed(1)}%
-      {isPositive ? ' ↗' : isNegative ? ' ↘' : ' →'}
+      {change.toFixed(1)}%{isPositive ? ' ↗' : isNegative ? ' ↘' : ' →'}
     </span>
   );
 };
@@ -85,9 +86,7 @@ const StatCard: React.FC<{
 }> = ({ title, value, subtitle, icon, iconBgColor, change }) => (
   <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
     <div className="flex items-center">
-      <div className={`p-3 rounded-lg ${iconBgColor}`}>
-        {icon}
-      </div>
+      <div className={`p-3 rounded-lg ${iconBgColor}`}>{icon}</div>
       <div className="ml-4 flex-1">
         <p className="text-sm font-medium text-gray-600">{title}</p>
         <p className="text-2xl font-bold text-gray-900">{value}</p>
@@ -102,16 +101,15 @@ const StatCard: React.FC<{
   </div>
 );
 
-const PaymentStats: React.FC<PaymentStatsProps> = ({
-  data,
-  loading = false,
-  onRefresh,
-}) => {
+const PaymentStats: React.FC<PaymentStatsProps> = ({ data, loading = false, onRefresh }) => {
   if (loading) {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {[...Array(4)].map((_, index) => (
-          <div key={index} className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 animate-pulse">
+          <div
+            key={index}
+            className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 animate-pulse"
+          >
             <div className="flex items-center">
               <div className="p-3 rounded-lg bg-gray-200 w-12 h-12"></div>
               <div className="ml-4 flex-1">
@@ -267,7 +265,8 @@ const PaymentStats: React.FC<PaymentStatsProps> = ({
           )}
           {data.expiringMemberships.count > 0 && (
             <p className="text-red-700">
-              • {data.expiringMemberships.daysLeft}일 이내 만료 예정 회원권이 <strong>{data.expiringMemberships.count}건</strong> 있습니다.
+              • {data.expiringMemberships.daysLeft}일 이내 만료 예정 회원권이{' '}
+              <strong>{data.expiringMemberships.count}건</strong> 있습니다.
             </p>
           )}
         </div>
@@ -276,4 +275,4 @@ const PaymentStats: React.FC<PaymentStatsProps> = ({
   );
 };
 
-export default PaymentStats; 
+export default PaymentStats;

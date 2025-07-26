@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { CreateStaffInput, FormConfig, Staff, StaffRole, UpdateStaffInput } from '../../types/staff';
+import {
+  CreateStaffInput,
+  FormConfig,
+  Staff,
+  StaffRole,
+  UpdateStaffInput,
+} from '../../types/staff';
 import PersonForm from '../common/PersonForm';
 
 interface StaffFormProps {
@@ -78,12 +84,12 @@ const StaffForm: React.FC<StaffFormProps> = ({
         options: rolesLoading
           ? [{ value: '', label: '로딩 중...' }]
           : [
-            { value: '', label: '역할 선택' },
-            ...roles.map(role => ({
-              value: role.id.toString(),
-              label: role.name,
-            })),
-          ],
+              { value: '', label: '역할 선택' },
+              ...roles.map(role => ({
+                value: role.id.toString(),
+                label: role.name,
+              })),
+            ],
       },
       {
         key: 'salary',
@@ -150,4 +156,4 @@ const StaffForm: React.FC<StaffFormProps> = ({
   );
 };
 
-export default StaffForm; 
+export default StaffForm;

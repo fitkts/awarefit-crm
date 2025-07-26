@@ -226,7 +226,11 @@ const StaffPage: React.FC = () => {
 
   // 직원 삭제 핸들러
   const handleDeleteStaff = async (staffMember: Staff) => {
-    if (!confirm(`정말로 "${staffMember.name}" 직원을 삭제하시겠습니까?\n\n이 작업은 되돌릴 수 없습니다.`)) {
+    if (
+      !confirm(
+        `정말로 "${staffMember.name}" 직원을 삭제하시겠습니까?\n\n이 작업은 되돌릴 수 없습니다.`
+      )
+    ) {
       return;
     }
 
@@ -408,4 +412,4 @@ const StaffPage: React.FC = () => {
   );
 };
 
-export default StaffPage; 
+export default StaffPage;

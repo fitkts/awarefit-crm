@@ -2,6 +2,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     // 테스트 환경을 위한 별도 옵션이 필요하다면 여기에 추가합니다.
+    "types": ["jest", "node", "@testing-library/jest-dom"]
   },
   // 기존 tsconfig.json의 exclude 설정을 덮어씁니다.
   // 테스트 파일을 더 이상 제외하지 않습니다.

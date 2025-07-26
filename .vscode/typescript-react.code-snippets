@@ -1,0 +1,145 @@
+{
+  "React Functional Component": {
+    "prefix": "rfc",
+    "body": [
+      "interface ${1:ComponentName}Props {",
+      "  $2",
+      "}",
+      "",
+      "const ${1:ComponentName}: React.FC<${1:ComponentName}Props> = ({ $3 }) => {",
+      "  return (",
+      "    <div className=\"$4\">",
+      "      $5",
+      "    </div>",
+      "  );",
+      "};",
+      "",
+      "export default ${1:ComponentName};"
+    ],
+    "description": "React Functional Component with TypeScript"
+  },
+  
+  "React Hook": {
+    "prefix": "rhook",
+    "body": [
+      "import { useState, useEffect } from 'react';",
+      "",
+      "interface Use${1:HookName}Return {",
+      "  $2",
+      "}",
+      "",
+      "const use${1:HookName} = (): Use${1:HookName}Return => {",
+      "  const [${3:state}, set${3/(.*)/${3:/capitalize}/}] = useState$4();",
+      "",
+      "  useEffect(() => {",
+      "    $5",
+      "  }, []);",
+      "",
+      "  return {",
+      "    ${3:state},",
+      "    set${3/(.*)/${3:/capitalize}/},",
+      "    $6",
+      "  };",
+      "};",
+      "",
+      "export default use${1:HookName};"
+    ],
+    "description": "Custom React Hook with TypeScript"
+  },
+  
+  "Electron IPC Handler": {
+    "prefix": "eipc",
+    "body": [
+      "// ${1:handlerName}",
+      "ipcMain.handle('${2:channel-name}', async (event, ${3:params}) => {",
+      "  try {",
+      "    $4",
+      "    return { success: true, data: ${5:result} };",
+      "  } catch (error) {",
+      "    console.error('${1:handlerName} error:', error);",
+      "    return { success: false, error: error.message };",
+      "  }",
+      "});"
+    ],
+    "description": "Electron IPC Handler"
+  },
+  
+  "Database Repository Method": {
+    "prefix": "dbmethod",
+    "body": [
+      "async ${1:methodName}(${2:params}): Promise<${3:ReturnType}> {",
+      "  const stmt = this.db.prepare(`",
+      "    ${4:SQL_QUERY}",
+      "  `);",
+      "",
+      "  try {",
+      "    const result = stmt.${5|get,all,run|}(${6:params});",
+      "    return result;",
+      "  } catch (error) {",
+      "    console.error('${1:methodName} error:', error);",
+      "    throw error;",
+      "  }",
+      "}"
+    ],
+    "description": "Database Repository Method"
+  },
+  
+  "Test Case": {
+    "prefix": "test",
+    "body": [
+      "describe('${1:Component/Function}', () => {",
+      "  test('${2:should behave correctly}', ${3|async |}() => {",
+      "    // Arrange",
+      "    $4",
+      "",
+      "    // Act",
+      "    $5",
+      "",
+      "    // Assert",
+      "    expect($6).${7|toBe,toEqual,toHaveBeenCalled|}($8);",
+      "  });",
+      "});"
+    ],
+    "description": "Jest Test Case"
+  },
+  
+  "Zustand Store": {
+    "prefix": "zstore",
+    "body": [
+      "interface ${1:StoreName}State {",
+      "  ${2:data}: ${3:Type}[];",
+      "  loading: boolean;",
+      "  error: string | null;",
+      "  ${4:actions}: {",
+      "    load${1:StoreName}: () => Promise<void>;",
+      "    add${5:Item}: (item: ${6:ItemType}) => Promise<void>;",
+      "    update${5:Item}: (id: string, item: Partial<${6:ItemType}>) => Promise<void>;",
+      "    delete${5:Item}: (id: string) => Promise<void>;",
+      "  };",
+      "}",
+      "",
+      "const use${1:StoreName}Store = create<${1:StoreName}State>((set, get) => ({",
+      "  ${2:data}: [],",
+      "  loading: false,",
+      "  error: null,",
+      "  ",
+      "  ${4:actions}: {",
+      "    load${1:StoreName}: async () => {",
+      "      set({ loading: true, error: null });",
+      "      try {",
+      "        const result = await window.electronAPI.database.${7:api}.getAll();",
+      "        set({ ${2:data}: result, loading: false });",
+      "      } catch (error) {",
+      "        set({ error: error.message, loading: false });",
+      "      }",
+      "    },",
+      "    $8",
+      "  },",
+      "}));",
+      "",
+      "export default use${1:StoreName}Store;"
+    ],
+    "description": "Zustand Store with CRUD operations"
+  }
+}
+

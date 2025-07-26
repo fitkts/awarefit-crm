@@ -99,7 +99,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
     try {
       const result = await window.electronAPI.database.staff.getAll({
         is_active: true,
-        can_manage_payments: true
+        can_manage_payments: true,
       });
       const staffOptions = result.map((staff: any) => ({
         id: staff.id,
@@ -197,7 +197,13 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
     if (calculatedAmount > 0) {
       setFormData(prev => ({ ...prev, amount: calculatedAmount }));
     }
-  }, [formData.payment_type, formData.membership_type_id, formData.pt_package_id, membershipTypes, ptPackages]);
+  }, [
+    formData.payment_type,
+    formData.membership_type_id,
+    formData.pt_package_id,
+    membershipTypes,
+    ptPackages,
+  ]);
 
   // 폼 데이터 변경 핸들러
   const handleInputChange = (field: keyof CreatePaymentInput, value: any) => {
@@ -268,10 +274,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
               {payment ? '결제 정보 수정' : '새 결제 등록'}
             </h2>
           </div>
-          <button
-            onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 transition-colors"
-          >
+          <button onClick={onClose} className="text-gray-400 hover:text-gray-600 transition-colors">
             <X className="w-6 h-6" />
           </button>
         </div>
@@ -287,7 +290,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
               </label>
               <select
                 value={formData.member_id || ''}
-                onChange={(e) => handleMemberSelect(parseInt(e.target.value))}
+                onChange={e => handleMemberSelect(parseInt(e.target.value))}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 disabled={loading.members}
                 required
@@ -310,12 +313,10 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
 
             {/* 담당 직원 선택 */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                담당 직원 *
-              </label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">담당 직원 *</label>
               <select
                 value={formData.staff_id || ''}
-                onChange={(e) => handleStaffSelect(parseInt(e.target.value))}
+                onChange={e => handleStaffSelect(parseInt(e.target.value))}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 disabled={loading.staff}
                 required
@@ -345,12 +346,13 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
                       name="payment_type"
                       value={type}
                       checked={formData.payment_type === type}
-                      onChange={(e) => handleInputChange('payment_type', e.target.value as PaymentType)}
+                      onChange={e =>
+                        handleInputChange('payment_type', e.target.value as PaymentType)
+                      }
                       className="mr-2"
                     />
                     <span className="text-sm">
-                      {type === 'membership' ? '회원권' :
-                        type === 'pt' ? 'PT' : '기타'}
+                      {type === 'membership' ? '회원권' : type === 'pt' ? 'PT' : '기타'}
                     </span>
                   </label>
                 ))}
@@ -365,7 +367,9 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
                 </label>
                 <select
                   value={formData.membership_type_id || ''}
-                  onChange={(e) => handleInputChange('membership_type_id', parseInt(e.target.value) || null)}
+                  onChange={e =>
+                    handleInputChange('membership_type_id', parseInt(e.target.value) || null)
+                  }
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   disabled={loading.membershipTypes}
                   required
@@ -384,12 +388,12 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
 
             {formData.payment_type === 'pt' && (
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  PT 패키지 *
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">PT 패키지 *</label>
                 <select
                   value={formData.pt_package_id || ''}
-                  onChange={(e) => handleInputChange('pt_package_id', parseInt(e.target.value) || null)}
+                  onChange={e =>
+                    handleInputChange('pt_package_id', parseInt(e.target.value) || null)
+                  }
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   disabled={loading.ptPackages}
                   required
@@ -416,7 +420,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
                 <input
                   type="number"
                   value={formData.amount}
-                  onChange={(e) => handleInputChange('amount', parseInt(e.target.value) || 0)}
+                  onChange={e => handleInputChange('amount', parseInt(e.target.value) || 0)}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="금액을 입력하세요"
                   min="0"
@@ -425,20 +429,16 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
                 <div className="absolute right-3 top-2 text-gray-500">원</div>
               </div>
               {formData.amount > 0 && (
-                <p className="mt-1 text-sm text-blue-600">
-                  {formatCurrency(formData.amount)}
-                </p>
+                <p className="mt-1 text-sm text-blue-600">{formatCurrency(formData.amount)}</p>
               )}
             </div>
 
             {/* 결제 방법 */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                결제 방법 *
-              </label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">결제 방법 *</label>
               <select
                 value={formData.payment_method}
-                onChange={(e) => handleInputChange('payment_method', e.target.value as PaymentMethod)}
+                onChange={e => handleInputChange('payment_method', e.target.value as PaymentMethod)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               >
@@ -451,13 +451,11 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
 
             {/* 결제 날짜 */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                결제 날짜 *
-              </label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">결제 날짜 *</label>
               <input
                 type="date"
                 value={formData.payment_date}
-                onChange={(e) => handleInputChange('payment_date', e.target.value)}
+                onChange={e => handleInputChange('payment_date', e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
@@ -465,12 +463,10 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
 
             {/* 메모 */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                메모
-              </label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">메모</label>
               <textarea
                 value={formData.notes}
-                onChange={(e) => handleInputChange('notes', e.target.value)}
+                onChange={e => handleInputChange('notes', e.target.value)}
                 rows={3}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="추가 메모가 있으면 입력하세요"
@@ -493,7 +489,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
               className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors disabled:opacity-50"
               disabled={isLoading}
             >
-              {isLoading ? '저장 중...' : (payment ? '수정' : '등록')}
+              {isLoading ? '저장 중...' : payment ? '수정' : '등록'}
             </button>
           </div>
         </form>
@@ -502,4 +498,4 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
   );
 };
 
-export default PaymentForm; 
+export default PaymentForm;
