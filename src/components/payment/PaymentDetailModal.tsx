@@ -208,7 +208,9 @@ const PaymentDetailModal: React.FC<PaymentDetailModalProps> = ({
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700">회원번호</label>
-                    <p className="mt-1 text-sm text-gray-900">{payment.member_number}</p>
+                    <p className="mt-1 text-sm text-gray-900">
+                      {payment.member_phone || payment.member_email || '연락처 없음'}
+                    </p>
                   </div>
                   {payment.member_phone && (
                     <div>

@@ -100,7 +100,7 @@ const MemberDetailModal: React.FC<MemberDetailModalProps> = ({
             </div>
             <div>
               <h2 className="text-2xl font-bold">{member.name}</h2>
-              <p className="text-blue-100">{member.member_number}</p>
+              <p className="text-blue-100">{member.phone || member.email || '연락처 없음'}</p>
               {memberDetail && (
                 <div className="flex items-center space-x-2 mt-1">
                   {getMembershipStatusIcon(memberDetail.membershipStatus)}

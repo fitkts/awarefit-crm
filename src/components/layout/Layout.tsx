@@ -15,6 +15,10 @@ const pageDetails: Record<string, { title: string; description: string }> = {
   staff: { title: '직원 관리', description: '직원 정보와 권한을 관리합니다' },
   statistics: { title: '통계 분석', description: '매출 및 회원 현황 통계를 확인합니다' },
   schedule: { title: 'PT 스케줄', description: 'PT 세션 예약 및 스케줄을 관리합니다' },
+  'component-demo': {
+    title: '컴포넌트 데모',
+    description: '재사용 가능한 UI 컴포넌트들을 테스트하고 확인합니다',
+  },
   settings: { title: '시스템 설정', description: '시스템 설정과 데이터 백업을 관리합니다' },
 };
 

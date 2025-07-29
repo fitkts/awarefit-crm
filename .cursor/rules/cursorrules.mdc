@@ -1,0 +1,445 @@
+---
+alwaysApply: true
+---
+
+# 🎯 Awarefit CRM 개발 가이드라인
+
+## 📋 프로젝트 개요
+
+- **프로젝트명**: Awarefit CRM (피트니스 회원 관리 시스템)
+- **기술 스택**: Electron + React + TypeScript + Tailwind CSS
+- **데이터베이스**: SQLite (better-sqlite3)
+- **테스트**: Jest (단위) + Playwright (E2E)
+
+## 🔧 개발 환경 및 실행 명령어
+
+```bash
+# 개발 서버 실행 (Electron + Webpack)
+npm run dev
+
+# 웹만 실행 (브라우저 테스트용)
+npm run dev:webpack
+
+# Electron만 실행
+npm run dev:electron
+
+# E2E 테스트 실행
+npx playwright test
+
+# 단위 테스트 실행
+npm test
+```
+
+## 🧪 **테스트 개발 필수 규칙** (중요!)
+
+### ✅ **새 기능 개발 시**
+
+- **새 페이지/컴포넌트 개발** → `e2e/{기능명}.spec.ts` 파일 생성
+- **새 API 기능** → 해당 E2E 테스트에 API 테스트 케이스 추가
+- **새 UI 요소** → `e2e/ui-elements.spec.ts`에 상호작용 테스트 추가
+
+### ✅ **기존 기능 수정 시**
+
+- **UI 텍스트 변경** → 해당 E2E 테스트의 선택자 업데이트
+- **폼 필드 추가/수정** → `e2e/ui-elements.spec.ts` 폼 테스트 업데이트
+- **네비게이션 변경** → `e2e/navigation.spec.ts` 업데이트
+
+### ✅ **버그 수정 시**
+
+- **버그 재현 테스트** 먼저 작성 (실패하는 테스트)
+- **버그 수정 후** 해당 테스트가 통과하는지 확인
+- **회귀 방지** 테스트 케이스 추가
+
+### 📁 **테스트 파일 구조**
+
+```
+e2e/
+├── navigation.spec.ts        # 페이지 이동, 메뉴 테스트
+├── ui-elements.spec.ts       # 폼, 모달, 버튼 등 UI 테스트
+├── api-error-handling.spec.ts # API 오류 및 환경 감지 테스트
+├── performance.spec.ts       # 성능, 접근성 테스트
+├── {새기능}.spec.ts         # 새 기능별 전용 테스트
+└── app.spec.ts              # 기본 애플리케이션 테스트
+```
+
+## 💻 **코딩 스타일 가이드**
+
+### **React 컴포넌트**
+
+- **함수형 컴포넌트** 사용 (React.FC 타입)
+- **Hook 기반** 상태 관리 (useState, useEffect)
+- **TypeScript** 엄격한 타입 정의
+- **Tailwind CSS** 스타일링
+
+### **파일 명명 규칙**
+
+- **컴포넌트**: PascalCase (MemberForm.tsx)
+- **페이지**: PascalCase (Members.tsx)
+- **훅**: camelCase, use prefix (useMemberData.ts)
+- **유틸**: camelCase (memberUtils.ts)
+- **타입**: camelCase interface (member.ts)
+
+### **코드 구조**
+
+```typescript
+// 컴포넌트 기본 구조
+import React from 'react';
+import { MemberType } from '../types/member';
+
+interface MemberFormProps {
+  member?: MemberType;
+  onSubmit: (data: MemberType) => void;
+}
+
+const MemberForm: React.FC<MemberFormProps> = ({ member, onSubmit }) => {
+  // Hook 선언
+  // 이벤트 핸들러
+  // 렌더링
+  return (
+    <div className="space-y-4">
+      {/* JSX */}
+    </div>
+  );
+};
+
+export default MemberForm;
+```
+
+## 📊 **데이터베이스 및 API 규칙**
+
+### **Electron IPC 통신**
+
+- **Main Process**: `src/main/ipc/{도메인}Handlers.ts`
+- **Preload**: `src/main/preload.ts`에서 API 노출
+- **Renderer**: `window.electronAPI.{도메인}.{메서드}()` 사용
+
+### **오류 처리**
+
+```typescript
+try {
+  const result = await window.electronAPI.member.create(memberData);
+  toast.success('회원 등록이 완료되었습니다.');
+} catch (error) {
+  console.error('회원 등록 실패:', error);
+  toast.error('회원 등록에 실패했습니다: ' + error.message);
+}
+```
+
+## 🎨 **UI/UX 가이드라인**
+
+### **디자인 시스템**
+
+- **색상**: Tailwind 기본 팔레트 사용
+- **간격**: space-y-4, p-4, m-4 등 일관된 간격
+- **버튼**: 일관된 스타일 (primary, secondary, danger)
+- **모달**: 배경 blur, 중앙 정렬, 반응형
+
+### **접근성**
+
+- **ARIA 레이블** 필수 (버튼, 폼 요소)
+- **키보드 네비게이션** 지원
+- **색상 대비** 4.5:1 이상
+- **포커스 표시** 명확히
+
+## 🚨 **주의사항 및 제약**
+
+### **환경 호환성**
+
+- **Electron 환경**에서 `electronAPI` 사용
+- **웹 브라우저**에서는 오류 처리 필요
+- **개발 시** 환경 감지 로직 포함
+
+### **성능 최적화**
+
+- **대용량 데이터** 페이지네이션 적용
+- **이미지 최적화** 필요 시
+- **메모리 누수** 방지 (useEffect cleanup)
+
+## 📝 **커밋 메시지 규칙**
+
+```bash
+# 기능 추가
+✨ feat: 새로운 PT 스케줄 기능 추가
+
+# 버그 수정
+🐛 fix: 회원 삭제 시 확인 모달 오류 수정
+
+# 테스트 추가
+🧪 test: PT 스케줄 E2E 테스트 케이스 추가
+
+# 스타일 변경
+💄 style: 대시보드 카드 레이아웃 개선
+
+# 리팩토링
+♻️ refactor: 회원 관리 컴포넌트 구조 개선
+```
+
+## 🎯 **개발 워크플로우**
+
+### **새 기능 개발 순서**
+
+1. **기능 설계** 및 타입 정의
+2. **컴포넌트 개발** (UI 우선)
+3. **API 연동** (IPC 핸들러)
+4. **E2E 테스트 작성** ← **필수!**
+5. **수동 테스트** 및 디버깅
+6. **커밋 및 푸시**
+
+### **버그 수정 순서**
+
+1. **버그 재현** 단계 확인
+2. **실패하는 테스트** 먼저 작성
+3. **버그 수정** 구현
+4. **테스트 통과** 확인
+5. **회귀 테스트** 추가
+6. **커밋 및 푸시**
+
+## 🔍 **코드 리뷰 체크리스트**
+
+### **기능 개발 시**
+
+- [ ] TypeScript 타입 정의 완료
+- [ ] 오류 처리 구현 완료
+- [ ] **E2E 테스트 케이스 추가** ← **필수!**
+- [ ] 접근성 가이드라인 준수
+- [ ] 반응형 디자인 적용
+
+### **버그 수정 시**
+
+- [ ] 버그 재현 테스트 추가
+- [ ] 근본 원인 해결 확인
+- [ ] 관련 테스트 케이스 업데이트
+- [ ] 회귀 방지 테스트 추가
+
+## 🚀 **CI/CD 통과 조건**
+
+- ✅ **TypeScript 컴파일** 성공
+- ✅ **ESLint 검사** 통과
+- ✅ **Jest 단위 테스트** 통과
+- ✅ **Playwright E2E 테스트** 통과 (6개 브라우저)
+- ✅ **Electron 빌드** 성공 (3개 OS)
+
+---
+
+**🎯 핵심 원칙: "기능 개발 = 테스트 개발"**  
+**새 코드를 작성할 때마다 테스트도 함께 작성하여 안정적인 시스템을 유지합니다!** # 🎯 Awarefit CRM 개발 가이드라인
+
+## 📋 프로젝트 개요
+
+- **프로젝트명**: Awarefit CRM (피트니스 회원 관리 시스템)
+- **기술 스택**: Electron + React + TypeScript + Tailwind CSS
+- **데이터베이스**: SQLite (better-sqlite3)
+- **테스트**: Jest (단위) + Playwright (E2E)
+
+## 🔧 개발 환경 및 실행 명령어
+
+```bash
+# 개발 서버 실행 (Electron + Webpack)
+npm run dev
+
+# 웹만 실행 (브라우저 테스트용)
+npm run dev:webpack
+
+# Electron만 실행
+npm run dev:electron
+
+# E2E 테스트 실행
+npx playwright test
+
+# 단위 테스트 실행
+npm test
+```
+
+## 🧪 **테스트 개발 필수 규칙** (중요!)
+
+### ✅ **새 기능 개발 시**
+
+- **새 페이지/컴포넌트 개발** → `e2e/{기능명}.spec.ts` 파일 생성
+- **새 API 기능** → 해당 E2E 테스트에 API 테스트 케이스 추가
+- **새 UI 요소** → `e2e/ui-elements.spec.ts`에 상호작용 테스트 추가
+
+### ✅ **기존 기능 수정 시**
+
+- **UI 텍스트 변경** → 해당 E2E 테스트의 선택자 업데이트
+- **폼 필드 추가/수정** → `e2e/ui-elements.spec.ts` 폼 테스트 업데이트
+- **네비게이션 변경** → `e2e/navigation.spec.ts` 업데이트
+
+### ✅ **버그 수정 시**
+
+- **버그 재현 테스트** 먼저 작성 (실패하는 테스트)
+- **버그 수정 후** 해당 테스트가 통과하는지 확인
+- **회귀 방지** 테스트 케이스 추가
+
+### 📁 **테스트 파일 구조**
+
+```
+e2e/
+├── navigation.spec.ts        # 페이지 이동, 메뉴 테스트
+├── ui-elements.spec.ts       # 폼, 모달, 버튼 등 UI 테스트
+├── api-error-handling.spec.ts # API 오류 및 환경 감지 테스트
+├── performance.spec.ts       # 성능, 접근성 테스트
+├── {새기능}.spec.ts         # 새 기능별 전용 테스트
+└── app.spec.ts              # 기본 애플리케이션 테스트
+```
+
+## 💻 **코딩 스타일 가이드**
+
+### **React 컴포넌트**
+
+- **함수형 컴포넌트** 사용 (React.FC 타입)
+- **Hook 기반** 상태 관리 (useState, useEffect)
+- **TypeScript** 엄격한 타입 정의
+- **Tailwind CSS** 스타일링
+
+### **파일 명명 규칙**
+
+- **컴포넌트**: PascalCase (MemberForm.tsx)
+- **페이지**: PascalCase (Members.tsx)
+- **훅**: camelCase, use prefix (useMemberData.ts)
+- **유틸**: camelCase (memberUtils.ts)
+- **타입**: camelCase interface (member.ts)
+
+### **코드 구조**
+
+```typescript
+// 컴포넌트 기본 구조
+import React from 'react';
+import { MemberType } from '../types/member';
+
+interface MemberFormProps {
+  member?: MemberType;
+  onSubmit: (data: MemberType) => void;
+}
+
+const MemberForm: React.FC<MemberFormProps> = ({ member, onSubmit }) => {
+  // Hook 선언
+  // 이벤트 핸들러
+  // 렌더링
+  return (
+    <div className="space-y-4">
+      {/* JSX */}
+    </div>
+  );
+};
+
+export default MemberForm;
+```
+
+## 📊 **데이터베이스 및 API 규칙**
+
+### **Electron IPC 통신**
+
+- **Main Process**: `src/main/ipc/{도메인}Handlers.ts`
+- **Preload**: `src/main/preload.ts`에서 API 노출
+- **Renderer**: `window.electronAPI.{도메인}.{메서드}()` 사용
+
+### **오류 처리**
+
+```typescript
+try {
+  const result = await window.electronAPI.member.create(memberData);
+  toast.success('회원 등록이 완료되었습니다.');
+} catch (error) {
+  console.error('회원 등록 실패:', error);
+  toast.error('회원 등록에 실패했습니다: ' + error.message);
+}
+```
+
+## 🎨 **UI/UX 가이드라인**
+
+### **디자인 시스템**
+
+- **색상**: Tailwind 기본 팔레트 사용
+- **간격**: space-y-4, p-4, m-4 등 일관된 간격
+- **버튼**: 일관된 스타일 (primary, secondary, danger)
+- **모달**: 배경 blur, 중앙 정렬, 반응형
+
+### **접근성**
+
+- **ARIA 레이블** 필수 (버튼, 폼 요소)
+- **키보드 네비게이션** 지원
+- **색상 대비** 4.5:1 이상
+- **포커스 표시** 명확히
+
+## 🚨 **주의사항 및 제약**
+
+### **환경 호환성**
+
+- **Electron 환경**에서 `electronAPI` 사용
+- **웹 브라우저**에서는 오류 처리 필요
+- **개발 시** 환경 감지 로직 포함
+
+### **성능 최적화**
+
+- **대용량 데이터** 페이지네이션 적용
+- **이미지 최적화** 필요 시
+- **메모리 누수** 방지 (useEffect cleanup)
+
+## 📝 **커밋 메시지 규칙**
+
+```bash
+# 기능 추가
+✨ feat: 새로운 PT 스케줄 기능 추가
+
+# 버그 수정
+🐛 fix: 회원 삭제 시 확인 모달 오류 수정
+
+# 테스트 추가
+🧪 test: PT 스케줄 E2E 테스트 케이스 추가
+
+# 스타일 변경
+💄 style: 대시보드 카드 레이아웃 개선
+
+# 리팩토링
+♻️ refactor: 회원 관리 컴포넌트 구조 개선
+```
+
+## 🎯 **개발 워크플로우**
+
+### **새 기능 개발 순서**
+
+1. **기능 설계** 및 타입 정의
+2. **컴포넌트 개발** (UI 우선)
+3. **API 연동** (IPC 핸들러)
+4. **E2E 테스트 작성** ← **필수!**
+5. **수동 테스트** 및 디버깅
+6. **커밋 및 푸시**
+
+### **버그 수정 순서**
+
+1. **버그 재현** 단계 확인
+2. **실패하는 테스트** 먼저 작성
+3. **버그 수정** 구현
+4. **테스트 통과** 확인
+5. **회귀 테스트** 추가
+6. **커밋 및 푸시**
+
+## 🔍 **코드 리뷰 체크리스트**
+
+### **기능 개발 시**
+
+- [ ] TypeScript 타입 정의 완료
+- [ ] 오류 처리 구현 완료
+- [ ] **E2E 테스트 케이스 추가** ← **필수!**
+- [ ] 접근성 가이드라인 준수
+- [ ] 반응형 디자인 적용
+
+### **버그 수정 시**
+
+- [ ] 버그 재현 테스트 추가
+- [ ] 근본 원인 해결 확인
+- [ ] 관련 테스트 케이스 업데이트
+- [ ] 회귀 방지 테스트 추가
+
+## 🚀 **CI/CD 통과 조건**
+
+- ✅ **TypeScript 컴파일** 성공
+- ✅ **ESLint 검사** 통과
+- ✅ **Jest 단위 테스트** 통과
+- ✅ **Playwright E2E 테스트** 통과 (6개 브라우저)
+- ✅ **Electron 빌드** 성공 (3개 OS)
+
+---
+
+**🎯 핵심 원칙: "기능 개발 = 테스트 개발"**  
+**새 코드를 작성할 때마다 테스트도 함께 작성하여 안정적인 시스템을 유지합니다!**

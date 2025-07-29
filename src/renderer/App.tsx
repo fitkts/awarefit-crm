@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ToastProvider } from '../components/common/Toast';
 import Layout from '../components/layout/Layout';
+import ComponentDemo from '../pages/ComponentDemo';
 import Dashboard from '../pages/Dashboard';
 import Members from '../pages/Members';
 import Payment from '../pages/Payment';
@@ -66,6 +67,8 @@ const App: React.FC = () => {
             <p className="text-gray-600">시스템 설정 기능은 개발 중입니다.</p>
           </div>
         );
+      case 'component-demo':
+        return <ComponentDemo />;
       default:
         return <Dashboard />;
     }

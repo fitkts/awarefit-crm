@@ -199,7 +199,9 @@ const StaffTable: React.FC<StaffTableProps> = ({
             </div>
             <div className="ml-3">
               <div className="text-sm font-medium text-gray-900">{staffMember.name}</div>
-              <div className="text-xs text-gray-500">#{staffMember.staff_number}</div>
+              <div className="text-xs text-gray-500">
+                {staffMember.phone || staffMember.email || '연락처 없음'}
+              </div>
             </div>
           </div>
         );

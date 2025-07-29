@@ -178,7 +178,9 @@ const MemberTable: React.FC<MemberTableProps> = ({
             </div>
             <div>
               <div className="text-sm font-medium text-gray-900">{member.name}</div>
-              <div className="text-xs text-gray-500">{member.member_number}</div>
+              <div className="text-xs text-gray-500">
+                {member.phone || member.email || '연락처 없음'}
+              </div>
             </div>
           </div>
         );

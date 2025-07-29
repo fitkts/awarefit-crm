@@ -300,8 +300,9 @@ const PersonForm: React.FC<PersonFormProps> = ({
                   type="text"
                   value={formData.name}
                   onChange={e => handleInputChange('name', e.target.value)}
-                  className={`w-full px-2 py-1.5 text-sm border rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-colors ${errors.name ? 'border-red-500' : 'border-gray-300'
-                    }`}
+                  className={`w-full px-2 py-1.5 text-sm border rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                    errors.name ? 'border-red-500' : 'border-gray-300'
+                  }`}
                   placeholder="이름을 입력하세요"
                   disabled={isLoading}
                 />
@@ -330,8 +331,9 @@ const PersonForm: React.FC<PersonFormProps> = ({
                     type="date"
                     value={formData.birth_date}
                     onChange={e => handleInputChange('birth_date', e.target.value)}
-                    className={`w-full px-2 py-1.5 text-sm border rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-colors ${errors.birth_date ? 'border-red-500' : 'border-gray-300'
-                      }`}
+                    className={`w-full px-2 py-1.5 text-sm border rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                      errors.birth_date ? 'border-red-500' : 'border-gray-300'
+                    }`}
                     disabled={isLoading}
                   />
                 </div>
@@ -362,8 +364,9 @@ const PersonForm: React.FC<PersonFormProps> = ({
                       type="text"
                       value={formData.position || ''}
                       onChange={e => handleInputChange('position', e.target.value)}
-                      className={`w-full px-2 py-1.5 text-sm border rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-colors ${errors.position ? 'border-red-500' : 'border-gray-300'
-                        }`}
+                      className={`w-full px-2 py-1.5 text-sm border rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                        errors.position ? 'border-red-500' : 'border-gray-300'
+                      }`}
                       placeholder="트레이너, 관리자"
                       disabled={isLoading}
                     />
@@ -394,8 +397,9 @@ const PersonForm: React.FC<PersonFormProps> = ({
                     type="number"
                     value={formData.salary || ''}
                     onChange={e => handleInputChange('salary', e.target.value)}
-                    className={`w-full px-2 py-1.5 text-sm border rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-colors ${errors.salary ? 'border-red-500' : 'border-gray-300'
-                      }`}
+                    className={`w-full px-2 py-1.5 text-sm border rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                      errors.salary ? 'border-red-500' : 'border-gray-300'
+                    }`}
                     placeholder="0"
                     min="0"
                     disabled={isLoading}
@@ -416,8 +420,9 @@ const PersonForm: React.FC<PersonFormProps> = ({
                     type="tel"
                     value={formData.phone}
                     onChange={e => handleInputChange('phone', e.target.value)}
-                    className={`w-full px-2 py-1.5 text-sm border rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-colors ${errors.phone ? 'border-red-500' : 'border-gray-300'
-                      }`}
+                    className={`w-full px-2 py-1.5 text-sm border rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                      errors.phone ? 'border-red-500' : 'border-gray-300'
+                    }`}
                     placeholder="010-0000-0000"
                     maxLength={13}
                     disabled={isLoading}
@@ -431,8 +436,9 @@ const PersonForm: React.FC<PersonFormProps> = ({
                     type="email"
                     value={formData.email}
                     onChange={e => handleInputChange('email', e.target.value)}
-                    className={`w-full px-2 py-1.5 text-sm border rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-colors ${errors.email ? 'border-red-500' : 'border-gray-300'
-                      }`}
+                    className={`w-full px-2 py-1.5 text-sm border rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                      errors.email ? 'border-red-500' : 'border-gray-300'
+                    }`}
                     placeholder="example@email.com"
                     disabled={isLoading}
                   />
@@ -483,8 +489,9 @@ const PersonForm: React.FC<PersonFormProps> = ({
                       <select
                         value={formData[field.key] || ''}
                         onChange={e => handleInputChange(field.key, e.target.value)}
-                        className={`w-full px-2 py-1.5 text-sm border rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-colors ${errors[field.key] ? 'border-red-500' : 'border-gray-300'
-                          }`}
+                        className={`w-full px-2 py-1.5 text-sm border rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                          errors[field.key] ? 'border-red-500' : 'border-gray-300'
+                        }`}
                         disabled={isLoading}
                       >
                         {field.options?.map(option => (
@@ -498,8 +505,9 @@ const PersonForm: React.FC<PersonFormProps> = ({
                         value={formData[field.key] || ''}
                         onChange={e => handleInputChange(field.key, e.target.value)}
                         rows={2}
-                        className={`w-full px-2 py-1.5 text-sm border rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500 resize-none transition-colors ${errors[field.key] ? 'border-red-500' : 'border-gray-300'
-                          }`}
+                        className={`w-full px-2 py-1.5 text-sm border rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500 resize-none transition-colors ${
+                          errors[field.key] ? 'border-red-500' : 'border-gray-300'
+                        }`}
                         placeholder={field.placeholder}
                         disabled={isLoading}
                       />
@@ -508,8 +516,9 @@ const PersonForm: React.FC<PersonFormProps> = ({
                         type={field.type || 'text'}
                         value={formData[field.key] || ''}
                         onChange={e => handleInputChange(field.key, e.target.value)}
-                        className={`w-full px-2 py-1.5 text-sm border rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-colors ${errors[field.key] ? 'border-red-500' : 'border-gray-300'
-                          }`}
+                        className={`w-full px-2 py-1.5 text-sm border rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                          errors[field.key] ? 'border-red-500' : 'border-gray-300'
+                        }`}
                         placeholder={field.placeholder}
                         disabled={isLoading}
                       />

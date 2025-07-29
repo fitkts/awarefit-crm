@@ -184,7 +184,7 @@ const StaffDetailModal: React.FC<StaffDetailModalProps> = ({ isOpen, onClose, st
               </div>
               <div>
                 <h2 className="text-2xl font-bold">{staff.name}</h2>
-                <p className="text-blue-100">#{staff.staff_number}</p>
+                <p className="text-blue-100">{staff.phone || staff.email || '연락처 없음'}</p>
                 <div className="flex items-center space-x-4 mt-2">
                   <span className="bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm">
                     {staff.position}

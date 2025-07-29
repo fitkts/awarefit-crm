@@ -1,4 +1,13 @@
-import { BarChart3, Calendar, CreditCard, Home, Settings, UserCog, Users } from 'lucide-react';
+import {
+  BarChart3,
+  Calendar,
+  Code,
+  CreditCard,
+  Home,
+  Settings,
+  UserCog,
+  Users,
+} from 'lucide-react';
 import React from 'react';
 
 interface SidebarProps {
@@ -51,6 +60,13 @@ const menuItems: MenuItem[] = [
     label: 'PT 스케줄',
     icon: Calendar,
     status: 'coming-soon',
+  },
+  {
+    id: 'component-demo',
+    label: '컴포넌트 데모',
+    icon: Code,
+    status: 'active',
+    badge: 'New',
   },
   {
     id: 'settings',

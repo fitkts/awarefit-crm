@@ -228,7 +228,12 @@ const SalaryManagementModal: React.FC<SalaryManagementModalProps> = ({
               <div>
                 <h2 className="text-xl font-bold">급여 관리</h2>
                 <p className="text-green-100">
-                  {staff.name} ({staff.staff_number}) - {staff.position}
+                  {staff.name} - {staff.position}
+                  {(staff.phone || staff.email) && (
+                    <span className="text-gray-500 text-sm ml-2">
+                      ({staff.phone || staff.email})
+                    </span>
+                  )}
                 </p>
               </div>
             </div>

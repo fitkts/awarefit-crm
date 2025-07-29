@@ -300,13 +300,14 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
                 </option>
                 {members.map(member => (
                   <option key={member.id} value={member.id}>
-                    {member.name} ({member.member_number}) {member.phone && `- ${member.phone}`}
+                    {member.name} {member.phone && `- ${member.phone}`}
                   </option>
                 ))}
               </select>
               {selectedMember && (
                 <p className="mt-1 text-sm text-gray-600">
-                  선택된 회원: {selectedMember.name} ({selectedMember.member_number})
+                  선택된 회원: {selectedMember.name}{' '}
+                  {selectedMember.phone && `- ${selectedMember.phone}`}
                 </p>
               )}
             </div>

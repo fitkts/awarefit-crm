@@ -68,4 +68,4 @@ export const NewStaff: Story = {
     isLoading: false,
     person: undefined,
   },
-}; 
+};
