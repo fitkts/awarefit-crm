@@ -43,6 +43,301 @@ export const registerMemberHandlers = (): void => {
     }
   });
 
+  // 디버그: 회원 데이터 일치성 검증
+  ipcMain.handle('member-verify-data-consistency', async () => {
+    try {
+      console.log('🔍 [Debug] 회원 데이터 일치성 검증 시작');
+
+      const verification = {
+        timestamp: new Date().toISOString(),
+        table_counts: {} as any,
+        stats_counts: {} as any,
+        discrepancies: [] as string[],
+        deleted_members: {} as any,
+        detailed_breakdown: {} as any,
+      };
+
+      // 1. 테이블 직접 카운트 (모든 조건별)
+      console.log('📊 [Debug] 테이블 직접 카운트 실행');
+
+      // 전체 회원 수 (삭제된 회원 포함)
+      const totalAllStmt = db.prepare('SELECT COUNT(*) as count FROM members');
+      verification.table_counts.total_including_deleted = (
+        totalAllStmt.get() as { count: number }
+      ).count;
+
+      // 삭제되지 않은 전체 회원 수
+      const totalNotDeletedStmt = db.prepare(
+        'SELECT COUNT(*) as count FROM members WHERE deleted_at IS NULL'
+      );
+      verification.table_counts.total_not_deleted = (
+        totalNotDeletedStmt.get() as { count: number }
+      ).count;
+
+      // 삭제되지 않은 활성 회원 수
+      const activeNotDeletedStmt = db.prepare(
+        'SELECT COUNT(*) as count FROM members WHERE deleted_at IS NULL AND active = 1'
+      );
+      verification.table_counts.active_not_deleted = (
+        activeNotDeletedStmt.get() as { count: number }
+      ).count;
+
+      // 삭제되지 않은 비활성 회원 수
+      const inactiveNotDeletedStmt = db.prepare(
+        'SELECT COUNT(*) as count FROM members WHERE deleted_at IS NULL AND active = 0'
+      );
+      verification.table_counts.inactive_not_deleted = (
+        inactiveNotDeletedStmt.get() as { count: number }
+      ).count;
+
+      // 삭제된 회원 수
+      const deletedStmt = db.prepare(
+        'SELECT COUNT(*) as count FROM members WHERE deleted_at IS NOT NULL'
+      );
+      verification.table_counts.deleted = (deletedStmt.get() as { count: number }).count;
+
+      // 2. 통계 API로 계산된 수치 가져오기
+      console.log('📊 [Debug] 통계 API 수치 가져오기');
+
+      const base_condition = 'deleted_at IS NULL';
+      const statsStmt = db.prepare(`
+        SELECT 
+          COUNT(*) as total,
+          COUNT(CASE WHEN active = 1 THEN 1 END) as active,
+          COUNT(CASE WHEN active = 0 THEN 1 END) as inactive
+        FROM members
+        WHERE ${base_condition}
+      `);
+      const statsResult = statsStmt.get() as { total: number; active: number; inactive: number };
+
+      verification.stats_counts = {
+        total: statsResult.total,
+        active: statsResult.active,
+        inactive: statsResult.inactive,
+      };
+
+      // 3. 삭제된 회원들 상세 정보
+      console.log('🗑️ [Debug] 삭제된 회원들 분석');
+
+      const deletedMembersStmt = db.prepare(`
+        SELECT id, name, member_number, active, deleted_at, created_at 
+        FROM members 
+        WHERE deleted_at IS NOT NULL 
+        ORDER BY deleted_at DESC
+      `);
+      const deletedMembersData = deletedMembersStmt.all();
+
+      verification.deleted_members = {
+        count: deletedMembersData.length,
+        list: deletedMembersData,
+        active_when_deleted: deletedMembersData.filter((m: any) => m.active === 1).length,
+        inactive_when_deleted: deletedMembersData.filter((m: any) => m.active === 0).length,
+      };
+
+      // 4. 일치성 검증
+      console.log('✅ [Debug] 일치성 검증 수행');
+
+      if (verification.table_counts.total_not_deleted !== verification.stats_counts.total) {
+        verification.discrepancies.push(
+          `전체 회원 수 불일치: 테이블=${verification.table_counts.total_not_deleted}, 통계=${verification.stats_counts.total}`
+        );
+      }
+
+      if (verification.table_counts.active_not_deleted !== verification.stats_counts.active) {
+        verification.discrepancies.push(
+          `활성 회원 수 불일치: 테이블=${verification.table_counts.active_not_deleted}, 통계=${verification.stats_counts.active}`
+        );
+      }
+
+      if (verification.table_counts.inactive_not_deleted !== verification.stats_counts.inactive) {
+        verification.discrepancies.push(
+          `비활성 회원 수 불일치: 테이블=${verification.table_counts.inactive_not_deleted}, 통계=${verification.stats_counts.inactive}`
+        );
+      }
+
+      // 5. 상세 분석
+      verification.detailed_breakdown = {
+        should_match: {
+          total_not_deleted: verification.table_counts.total_not_deleted,
+          stats_total: verification.stats_counts.total,
+          matches: verification.table_counts.total_not_deleted === verification.stats_counts.total,
+        },
+        excluded_from_stats: {
+          deleted_members: verification.table_counts.deleted,
+          total_including_deleted: verification.table_counts.total_including_deleted,
+        },
+        summary: {
+          table_shows_in_ui: verification.table_counts.active_not_deleted, // member-get-all 기본 결과
+          stats_shows_total: verification.stats_counts.total, // 통계의 전체 수
+          should_be_same:
+            verification.table_counts.total_not_deleted === verification.stats_counts.total,
+        },
+      };
+
+      // 6. 로그 출력
+      console.log('📋 [Debug] 검증 결과 요약:');
+      console.log(
+        `  - 전체 회원 (삭제 포함): ${verification.table_counts.total_including_deleted}명`
+      );
+      console.log(`  - 삭제되지 않은 회원: ${verification.table_counts.total_not_deleted}명`);
+      console.log(`  - 통계 API 전체 수: ${verification.stats_counts.total}명`);
+      console.log(`  - 삭제된 회원: ${verification.table_counts.deleted}명`);
+      console.log(`  - 불일치 항목: ${verification.discrepancies.length}개`);
+
+      if (verification.discrepancies.length > 0) {
+        console.log('⚠️ [Debug] 발견된 불일치:');
+        verification.discrepancies.forEach(d => console.log(`    - ${d}`));
+      } else {
+        console.log('✅ [Debug] 모든 수치가 일치합니다');
+      }
+
+      return verification;
+    } catch (error) {
+      console.error('🚨 [Debug] 데이터 일치성 검증 실패:', error);
+      throw error;
+    }
+  });
+
+  // 디버그: UI 필터 분석 (어떤 필터가 적용되어 어떤 결과가 나오는지 확인)
+  ipcMain.handle('member-debug-ui-filter', async (_, filter) => {
+    try {
+      console.log('🔍 [Debug] UI 필터 분석 시작');
+      console.log('🔍 [Debug] 받은 필터:', filter);
+
+      const analysis = {
+        timestamp: new Date().toISOString(),
+        input_filter: filter,
+        expected_behavior: {} as any,
+        actual_query: {} as any,
+        result_counts: {} as any,
+        filter_analysis: {} as any,
+      };
+
+      // 1. 필터 분석
+      analysis.filter_analysis = {
+        has_filter_object: !!filter,
+        active_filter_value: filter?.active,
+        active_filter_type: typeof filter?.active,
+        will_show_only_active: !filter || (filter.active !== 'all' && filter.active !== false),
+        effective_filter:
+          filter?.active === 'all'
+            ? 'all_members'
+            : filter?.active === false
+              ? 'inactive_only'
+              : filter?.active === true
+                ? 'active_only'
+                : 'default_active_only',
+      };
+
+      // 2. 예상 동작
+      if (!filter || (filter.active !== 'all' && filter.active !== false)) {
+        analysis.expected_behavior = {
+          description: '활성 회원만 표시 (기본 동작)',
+          expected_count: 'active_members_only',
+          sql_condition: 'WHERE deleted_at IS NULL AND active = 1',
+        };
+      } else if (filter.active === 'all') {
+        analysis.expected_behavior = {
+          description: '전체 회원 표시 (활성 + 비활성)',
+          expected_count: 'all_non_deleted_members',
+          sql_condition: 'WHERE deleted_at IS NULL',
+        };
+      } else if (filter.active === false) {
+        analysis.expected_behavior = {
+          description: '비활성 회원만 표시',
+          expected_count: 'inactive_members_only',
+          sql_condition: 'WHERE deleted_at IS NULL AND active = 0',
+        };
+      }
+
+      // 3. 실제 쿼리 시뮬레이션
+      let query = `
+        SELECT m.*, s.name as assigned_staff_name, s.position as assigned_staff_position
+        FROM members m
+        LEFT JOIN staff s ON m.assigned_staff_id = s.id
+        WHERE m.deleted_at IS NULL
+      `;
+      const params: any[] = [];
+
+      if (filter) {
+        if (filter.active === true) {
+          query += ' AND m.active = 1';
+        } else if (filter.active === false) {
+          query += ' AND m.active = 0';
+        } else if (filter.active !== 'all') {
+          query += ' AND m.active = 1';
+        }
+      } else {
+        query += ' AND m.active = 1';
+      }
+
+      analysis.actual_query = {
+        sql: query,
+        params: params,
+        simplified: query.replace(/\s+/g, ' ').trim(),
+      };
+
+      // 4. 실제 결과 카운트
+      const countQuery = query
+        .replace(
+          'SELECT m.*, s.name as assigned_staff_name, s.position as assigned_staff_position',
+          'SELECT COUNT(*) as count'
+        )
+        .replace(/ORDER BY.*$/, '');
+
+      const countStmt = db.prepare(countQuery);
+      const result = countStmt.get(params) as { count: number };
+      analysis.result_counts.ui_would_show = result.count;
+
+      // 5. 비교용 직접 카운트
+      const directCounts = {
+        all_including_deleted: db.prepare('SELECT COUNT(*) as count FROM members').get() as {
+          count: number;
+        },
+        all_not_deleted: db
+          .prepare('SELECT COUNT(*) as count FROM members WHERE deleted_at IS NULL')
+          .get() as { count: number },
+        active_only: db
+          .prepare('SELECT COUNT(*) as count FROM members WHERE deleted_at IS NULL AND active = 1')
+          .get() as { count: number },
+        inactive_only: db
+          .prepare('SELECT COUNT(*) as count FROM members WHERE deleted_at IS NULL AND active = 0')
+          .get() as { count: number },
+        deleted: db
+          .prepare('SELECT COUNT(*) as count FROM members WHERE deleted_at IS NOT NULL')
+          .get() as { count: number },
+      };
+
+      analysis.result_counts = {
+        ...analysis.result_counts,
+        direct_counts: {
+          all_including_deleted: directCounts.all_including_deleted.count,
+          all_not_deleted: directCounts.all_not_deleted.count,
+          active_only: directCounts.active_only.count,
+          inactive_only: directCounts.inactive_only.count,
+          deleted: directCounts.deleted.count,
+        },
+      };
+
+      // 6. 로그 출력
+      console.log('📋 [Debug] UI 필터 분석 결과:');
+      console.log(`  - 입력된 필터:`, filter);
+      console.log(`  - 효과적인 필터: ${analysis.filter_analysis.effective_filter}`);
+      console.log(`  - UI가 표시할 회원 수: ${analysis.result_counts.ui_would_show}명`);
+      console.log(
+        `  - 전체 회원 (삭제 제외): ${analysis.result_counts.direct_counts.all_not_deleted}명`
+      );
+      console.log(`  - 활성 회원: ${analysis.result_counts.direct_counts.active_only}명`);
+      console.log(`  - 비활성 회원: ${analysis.result_counts.direct_counts.inactive_only}명`);
+      console.log(`  - 예상 동작: ${analysis.expected_behavior.description}`);
+
+      return analysis;
+    } catch (error) {
+      console.error('🚨 [Debug] UI 필터 분석 실패:', error);
+      throw error;
+    }
+  });
+
   // 디버그: assigned_staff_id 컬럼 수동 추가
   ipcMain.handle('member-fix-schema', async () => {
     try {
@@ -85,7 +380,7 @@ export const registerMemberHandlers = (): void => {
         SELECT m.*, s.name as assigned_staff_name, s.position as assigned_staff_position
         FROM members m
         LEFT JOIN staff s ON m.assigned_staff_id = s.id
-        WHERE 1=1
+        WHERE m.deleted_at IS NULL
       `;
       const params: any[] = [];
 
@@ -614,7 +909,9 @@ export const registerMemberHandlers = (): void => {
   // 회원 삭제 (비활성화)
   ipcMain.handle('member-delete', async (_, id) => {
     try {
-      const stmt = db.prepare('UPDATE members SET active = 0 WHERE id = ?');
+      const stmt = db.prepare(
+        'UPDATE members SET active = 0, deleted_at = CURRENT_TIMESTAMP WHERE id = ?'
+      );
       const result = stmt.run(id);
       return { changes: result.changes };
     } catch (error) {
@@ -629,7 +926,7 @@ export const registerMemberHandlers = (): void => {
       const searchTerm = `%${query}%`;
       const stmt = db.prepare(`
         SELECT * FROM members 
-        WHERE active = 1 
+        WHERE active = 1 AND deleted_at IS NULL
         AND (name LIKE ? OR phone LIKE ? OR member_number LIKE ?)
         ORDER BY name
         LIMIT 50
@@ -644,6 +941,8 @@ export const registerMemberHandlers = (): void => {
   // 회원 통계 조회
   ipcMain.handle('member-get-stats', async () => {
     try {
+      const base_condition = 'deleted_at IS NULL';
+
       // 기본 회원 통계
       const totalStmt = db.prepare(`
         SELECT 
@@ -651,15 +950,17 @@ export const registerMemberHandlers = (): void => {
           COUNT(CASE WHEN active = 1 THEN 1 END) as active,
           COUNT(CASE WHEN active = 0 THEN 1 END) as inactive
         FROM members
+        WHERE ${base_condition}
       `);
       const basicStats = totalStmt.get() as { total: number; active: number; inactive: number };
 
       // 성별 분포
       const genderStmt = db.prepare(`
         SELECT 
-          COUNT(CASE WHEN gender = '남성' AND active = 1 THEN 1 END) as male,
-          COUNT(CASE WHEN gender = '여성' AND active = 1 THEN 1 END) as female
+          COUNT(CASE WHEN gender = '남성' THEN 1 END) as male,
+          COUNT(CASE WHEN gender = '여성' THEN 1 END) as female
         FROM members
+        WHERE ${base_condition} AND active = 1
       `);
       const genderStats = genderStmt.get() as { male: number; female: number };
 
@@ -669,7 +970,7 @@ export const registerMemberHandlers = (): void => {
           COUNT(CASE WHEN join_date >= date('now', '-30 days') THEN 1 END) as new_this_month,
           COUNT(CASE WHEN join_date >= date('now', '-7 days') THEN 1 END) as new_this_week
         FROM members
-        WHERE active = 1
+        WHERE ${base_condition} AND active = 1
       `);
       const newStats = newMembersStmt.get() as { new_this_month: number; new_this_week: number };
 
@@ -681,7 +982,7 @@ export const registerMemberHandlers = (): void => {
             THEN (julianday('now') - julianday(birth_date)) / 365.25 
           END), 1) as average_age
         FROM members
-        WHERE active = 1 AND birth_date IS NOT NULL
+        WHERE ${base_condition} AND active = 1 AND birth_date IS NOT NULL
       `);
       const ageStats = avgAgeStmt.get() as { average_age: number };
 
@@ -705,7 +1006,7 @@ export const registerMemberHandlers = (): void => {
               ELSE NULL 
             END as age
           FROM members
-          WHERE active = 1 AND birth_date IS NOT NULL
+          WHERE ${base_condition} AND active = 1 AND birth_date IS NOT NULL
         ) 
         GROUP BY age_group
         ORDER BY age_group
@@ -718,22 +1019,20 @@ export const registerMemberHandlers = (): void => {
       // 회원권 보유 현황 (임시 - 실제 membership_history 테이블 연동 필요)
       const membershipStmt = db.prepare(`
         SELECT 
-          COUNT(CASE WHEN mh.id IS NOT NULL AND mh.end_date >= date('now') THEN 1 END) as with_membership,
-          COUNT(CASE WHEN mh.id IS NULL OR mh.end_date < date('now') THEN 1 END) as without_membership
+          COUNT(DISTINCT CASE WHEN mh.id IS NOT NULL AND mh.end_date >= date('now') THEN m.id END) as with_membership
         FROM members m
         LEFT JOIN membership_history mh ON m.id = mh.member_id AND mh.is_active = 1
-        WHERE m.active = 1
+        WHERE m.${base_condition} AND m.active = 1
       `);
       const membershipStats = membershipStmt.get() as {
         with_membership: number;
-        without_membership: number;
       };
 
       // 최근 등록 회원
       const recentMembersStmt = db.prepare(`
         SELECT id, name, member_number, join_date, phone
         FROM members
-        WHERE active = 1
+        WHERE ${base_condition} AND active = 1
         ORDER BY join_date DESC, created_at DESC
         LIMIT 5
       `);
@@ -741,10 +1040,10 @@ export const registerMemberHandlers = (): void => {
 
       // 곧 만료될 회원권 수 (30일 이내)
       const expiringStmt = db.prepare(`
-        SELECT COUNT(*) as upcoming_expiry
+        SELECT COUNT(DISTINCT m.id) as upcoming_expiry
         FROM membership_history mh
         JOIN members m ON mh.member_id = m.id
-        WHERE m.active = 1 
+        WHERE m.${base_condition} AND m.active = 1 
         AND mh.is_active = 1
         AND mh.end_date BETWEEN date('now') AND date('now', '+30 days')
       `);
@@ -764,6 +1063,8 @@ export const registerMemberHandlers = (): void => {
         ageDistributionMap[item.age_group as keyof typeof ageDistributionMap] = item.count;
       });
 
+      const without_membership = basicStats.active - membershipStats.with_membership;
+
       return {
         total: basicStats.total,
         active: basicStats.active,
@@ -773,7 +1074,7 @@ export const registerMemberHandlers = (): void => {
         male: genderStats.male,
         female: genderStats.female,
         with_membership: membershipStats.with_membership,
-        without_membership: membershipStats.without_membership,
+        without_membership: without_membership > 0 ? without_membership : 0,
         average_age: ageStats.average_age || 0,
         age_distribution: ageDistributionMap,
         recent_registrations: recentRegistrations,
@@ -825,41 +1126,13 @@ export const registerMemberHandlers = (): void => {
                 break;
 
               case 'delete':
-                // 회원 완전 삭제 (주의: 관련 데이터도 함께 처리 필요)
-                // 1. 먼저 관련 데이터 확인
-                const relatedDataStmt = db.prepare(`
-                  SELECT 
-                    (SELECT COUNT(*) FROM payments WHERE member_id = ?) as payment_count,
-                    (SELECT COUNT(*) FROM membership_history WHERE member_id = ?) as membership_count,
-                    (SELECT COUNT(*) FROM pt_sessions WHERE member_id = ?) as pt_count
-                `);
-                const relatedData = relatedDataStmt.get(memberId, memberId, memberId) as {
-                  payment_count: number;
-                  membership_count: number;
-                  pt_count: number;
-                };
-
-                // 관련 데이터가 있으면 비활성화만 수행 (안전장치)
-                if (
-                  relatedData.payment_count > 0 ||
-                  relatedData.membership_count > 0 ||
-                  relatedData.pt_count > 0
-                ) {
-                  console.warn(`회원 ID ${memberId}: 관련 데이터가 있어 비활성화 처리됨`);
-                  const safeDeleteStmt = db.prepare(
-                    'UPDATE members SET active = 0, updated_at = CURRENT_TIMESTAMP WHERE id = ?'
-                  );
-                  const safeDeleteResult = safeDeleteStmt.run(memberId);
-                  if (safeDeleteResult.changes > 0) {
-                    processedCount++;
-                  }
-                } else {
-                  // 관련 데이터가 없으면 완전 삭제
-                  const deleteStmt = db.prepare('DELETE FROM members WHERE id = ?');
-                  const deleteResult = deleteStmt.run(memberId);
-                  if (deleteResult.changes > 0) {
-                    processedCount++;
-                  }
+                // soft delete 방식으로 변경
+                const deleteStmt = db.prepare(
+                  'UPDATE members SET active = 0, deleted_at = CURRENT_TIMESTAMP WHERE id = ?'
+                );
+                const deleteResult = deleteStmt.run(memberId);
+                if (deleteResult.changes > 0) {
+                  processedCount++;
                 }
                 break;
 

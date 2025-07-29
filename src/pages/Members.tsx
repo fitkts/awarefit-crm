@@ -22,7 +22,7 @@ const Members: React.FC = () => {
   const [members, setMembers] = useState<Member[]>([]);
   const [loading, setLoading] = useState(true);
   const [statsLoading, setStatsLoading] = useState(true);
-  const [searchFilter, setSearchFilter] = useState<MemberSearchFilterType>({});
+  const [searchFilter, setSearchFilter] = useState<MemberSearchFilterType>({ active: 'all' });
   const [sortOption, setSortOption] = useState<SortOption>({
     field: 'join_date',
     direction: 'desc',

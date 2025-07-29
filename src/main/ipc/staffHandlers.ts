@@ -93,18 +93,17 @@ export const registerStaffHandlers = (): void => {
   // 직원 생성
   ipcMain.handle('staff-create', async (_, data) => {
     try {
-      // 직원번호 생성 (STF-YYYYMMDD-###)
-      const today = new Date().toISOString().split('T')[0].replace(/-/g, '');
-      const countStmt = db.prepare('SELECT COUNT(*) as count FROM staff WHERE staff_number LIKE ?');
-      const count = (countStmt.get(`STF-${today}-%`) as { count: number }).count + 1;
-      const staffNumber = `STF-${today}-${count.toString().padStart(3, '0')}`;
+      // 자동으로 직원 번호 생성
+      const countStmt = db.prepare('SELECT COUNT(*) as count FROM staff');
+      const { count } = countStmt.get() as { count: number };
+      const staffNumber = `STF-${String(count + 1).padStart(3, '0')}`;
 
       const stmt = db.prepare(`
         INSERT INTO staff (
-          staff_number, name, phone, email, gender, birth_date,
-          hire_date, position, department, salary, address, role_id, notes,
-          can_manage_payments, can_manage_members, is_active
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+          staff_number, name, phone, email, gender, birth_date, 
+          position, department, salary, address, notes, hire_date,
+          can_manage_payments, can_manage_members
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       `);
 
       const result = stmt.run(
@@ -114,36 +113,15 @@ export const registerStaffHandlers = (): void => {
         data.email || null,
         data.gender || null,
         data.birth_date || null,
-        data.hire_date || new Date().toISOString().split('T')[0],
         data.position,
         data.department || null,
         data.salary || null,
         data.address || null,
-        data.role_id || null,
         data.notes || null,
+        data.hire_date,
         data.can_manage_payments ? 1 : 0,
-        data.can_manage_members ? 1 : 0,
-        1 // is_active를 명시적으로 1로 설정
+        data.can_manage_members !== false ? 1 : 0 // 기본값 true
       );
-
-      // 급여가 설정된 경우 급여 이력에 기록
-      if (data.salary) {
-        const salaryHistoryStmt = db.prepare(`
-          INSERT INTO staff_salary_history (
-            staff_id, previous_salary, new_salary, adjustment_amount, 
-            adjustment_reason, effective_date
-          ) VALUES (?, ?, ?, ?, ?, ?)
-        `);
-
-        salaryHistoryStmt.run(
-          result.lastInsertRowid,
-          null,
-          data.salary,
-          data.salary,
-          '신규 채용',
-          data.hire_date || new Date().toISOString().split('T')[0]
-        );
-      }
 
       return { id: result.lastInsertRowid, staff_number: staffNumber };
     } catch (error) {
@@ -157,10 +135,8 @@ export const registerStaffHandlers = (): void => {
     try {
       const stmt = db.prepare(`
         UPDATE staff SET
-          name = ?, phone = ?, email = ?, gender = ?, birth_date = ?,
-          position = ?, department = ?, salary = ?, address = ?, role_id = ?,
-          notes = ?, can_manage_payments = ?, can_manage_members = ?,
-          updated_at = CURRENT_TIMESTAMP
+          name = ?, phone = ?, email = ?, position = ?,
+          can_manage_payments = ?, can_manage_members = ?
         WHERE id = ?
       `);
 
@@ -168,14 +144,7 @@ export const registerStaffHandlers = (): void => {
         data.name,
         data.phone || null,
         data.email || null,
-        data.gender || null,
-        data.birth_date || null,
         data.position,
-        data.department || null,
-        data.salary || null,
-        data.address || null,
-        data.role_id || null,
-        data.notes || null,
         data.can_manage_payments ? 1 : 0,
         data.can_manage_members ? 1 : 0,
         id
@@ -261,7 +230,8 @@ export const registerStaffHandlers = (): void => {
     }
   });
 
-  // 직원 급여 이력 조회
+  // 직원 급여 이력 조회 (TODO: 마이그레이션 완료 후 활성화)
+  /*
   ipcMain.handle('staff-salary-history', async (_, staffId) => {
     try {
       const stmt = db.prepare(`
@@ -278,7 +248,7 @@ export const registerStaffHandlers = (): void => {
     }
   });
 
-  // 급여 조정
+  // 급여 조정 (TODO: 마이그레이션 완료 후 활성화)
   ipcMain.handle('staff-salary-adjust', async (_, data) => {
     try {
       const transaction = db.transaction(() => {
@@ -304,20 +274,20 @@ export const registerStaffHandlers = (): void => {
           currentStaff?.salary || 0,
           data.new_salary,
           data.new_salary - (currentStaff?.salary || 0),
-          data.reason || '급여 조정',
+          data.reason,
           data.effective_date || new Date().toISOString().split('T')[0],
           data.created_by
         );
-
-        return { success: true };
       });
 
-      return transaction();
+      transaction();
+      return { success: true };
     } catch (error) {
       console.error('급여 조정 실패:', error);
       throw error;
     }
   });
+  */
 
   // 직원 역할 목록 조회
   ipcMain.handle('staff-roles-get-all', async () => {
@@ -370,6 +340,18 @@ export const registerStaffHandlers = (): void => {
       return { changes: result.changes };
     } catch (error) {
       console.error('직원 역할 수정 실패:', error);
+      throw error;
+    }
+  });
+
+  // 직원 역할 삭제
+  ipcMain.handle('staff-role-delete', async (_, id) => {
+    try {
+      const stmt = db.prepare('UPDATE staff_roles SET is_active = 0 WHERE id = ?');
+      const result = stmt.run(id);
+      return { changes: result.changes };
+    } catch (error) {
+      console.error('직원 역할 삭제 실패:', error);
       throw error;
     }
   });

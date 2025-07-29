@@ -191,6 +191,7 @@ export interface PaymentStats {
 export interface PaymentDetail extends Payment {
   member_name: string;
   member_phone?: string | null;
+  member_email?: string | null;
   member_number: string;
   staff_name: string;
   membership_type_name?: string | null;

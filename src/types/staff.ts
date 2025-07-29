@@ -33,6 +33,7 @@ export interface CreateStaffInput {
   salary?: number;
   address?: string;
   notes?: string;
+  hire_date: string; // 입사일은 필수
 }
 
 // 직원 수정을 위한 입력 데이터

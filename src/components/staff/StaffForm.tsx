@@ -1,11 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import {
-  CreateStaffInput,
-  FormConfig,
-  Staff,
-  StaffRole,
-  UpdateStaffInput,
-} from '../../types/staff';
+import React from 'react';
+import { CreateStaffInput, FormConfig, Staff, UpdateStaffInput } from '../../types/staff';
 import { PersonForm } from '../common/PersonForm';
 
 interface StaffFormProps {
@@ -23,29 +17,6 @@ const StaffForm: React.FC<StaffFormProps> = ({
   staff,
   isLoading = false,
 }) => {
-  const [roles, setRoles] = useState<StaffRole[]>([]);
-  const [rolesLoading, setRolesLoading] = useState(false);
-
-  // 역할 목록 조회
-  useEffect(() => {
-    const fetchRoles = async () => {
-      if (!isOpen) return;
-
-      setRolesLoading(true);
-      try {
-        const result = await window.electronAPI.database.staffRole.getAll();
-        setRoles(result);
-      } catch (error) {
-        console.error('역할 목록 조회 실패:', error);
-        setRoles([]);
-      } finally {
-        setRolesLoading(false);
-      }
-    };
-
-    fetchRoles();
-  }, [isOpen]);
-
   const staffFormConfig: FormConfig = {
     entityType: 'staff',
     title: staff ? '직원 정보 수정' : '새 직원 등록',
@@ -70,32 +41,12 @@ const StaffForm: React.FC<StaffFormProps> = ({
         type: 'select',
         required: false,
         options: [
+          { value: '', label: '부서 선택 (선택사항)' },
           { value: '운영팀', label: '운영팀' },
           { value: '트레이닝팀', label: '트레이닝팀' },
           { value: '고객서비스팀', label: '고객서비스팀' },
           { value: '시설관리팀', label: '시설관리팀' },
         ],
-      },
-      {
-        key: 'role_id',
-        label: '역할',
-        type: 'select',
-        required: false,
-        options: rolesLoading
-          ? [{ value: '', label: '로딩 중...' }]
-          : [
-              { value: '', label: '역할 선택' },
-              ...roles.map(role => ({
-                value: role.id.toString(),
-                label: role.name,
-              })),
-            ],
-      },
-      {
-        key: 'salary',
-        label: '급여',
-        type: 'number',
-        required: false,
       },
       {
         key: 'hire_date',
@@ -104,25 +55,37 @@ const StaffForm: React.FC<StaffFormProps> = ({
         required: true,
       },
       {
-        key: 'can_manage_payments',
-        label: '결제 관리 권한',
-        type: 'select',
+        key: 'salary',
+        label: '월급여 (선택사항)',
+        type: 'number',
         required: false,
-        options: [
-          { value: 'false', label: '없음' },
-          { value: 'true', label: '있음' },
-        ],
+        placeholder: '예: 3000000 (원 단위)',
       },
-      {
-        key: 'can_manage_members',
-        label: '회원 관리 권한',
-        type: 'select',
-        required: false,
-        options: [
-          { value: 'false', label: '없음' },
-          { value: 'true', label: '있음' },
-        ],
-      },
+      // 수정 모드에서만 권한 설정 표시
+      ...(staff
+        ? [
+            {
+              key: 'can_manage_members',
+              label: '회원 관리 권한',
+              type: 'select' as const,
+              required: false,
+              options: [
+                { value: 'false', label: '없음' },
+                { value: 'true', label: '있음' },
+              ],
+            },
+            {
+              key: 'can_manage_payments',
+              label: '결제 관리 권한',
+              type: 'select' as const,
+              required: false,
+              options: [
+                { value: 'false', label: '없음' },
+                { value: 'true', label: '있음' },
+              ],
+            },
+          ]
+        : []),
     ],
   };
 

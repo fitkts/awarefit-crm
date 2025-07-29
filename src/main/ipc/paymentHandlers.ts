@@ -10,7 +10,7 @@ export const registerPaymentHandlers = (): void => {
     try {
       let query = `
         SELECT p.*, 
-               m.name as member_name, m.phone as member_phone, m.member_number,
+               m.name as member_name, m.phone as member_phone, m.email as member_email, m.member_number,
                mt.name as membership_type_name, 
                pt.name as pt_package_name,
                s.name as staff_name
@@ -97,7 +97,7 @@ export const registerPaymentHandlers = (): void => {
       // 기본 결제 정보
       const paymentStmt = db.prepare(`
         SELECT p.*, 
-               m.name as member_name, m.phone as member_phone, m.member_number,
+               m.name as member_name, m.phone as member_phone, m.email as member_email, m.member_number,
                mt.name as membership_type_name, 
                pt.name as pt_package_name,
                s.name as staff_name

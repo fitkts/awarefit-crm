@@ -16,6 +16,8 @@ interface ElectronAPI {
       bulkAssignStaff: (memberIds: number[], staffId: number | null) => Promise<any>;
       debugSchema: () => Promise<any>;
       fixSchema: () => Promise<any>;
+      verifyDataConsistency: () => Promise<any>;
+      debugUIFilter: (filter: any) => Promise<any>;
     };
     staff: {
       getAll: (filter?: any) => Promise<any[]>;
@@ -82,6 +84,8 @@ const electronAPI: ElectronAPI = {
         ipcRenderer.invoke('member-bulk-assign-staff', memberIds, staffId),
       debugSchema: () => ipcRenderer.invoke('member-debug-schema'),
       fixSchema: () => ipcRenderer.invoke('member-fix-schema'),
+      verifyDataConsistency: () => ipcRenderer.invoke('member-verify-data-consistency'),
+      debugUIFilter: (filter: any) => ipcRenderer.invoke('member-debug-ui-filter', filter),
     },
     staff: {
       getAll: (filter?: any) => ipcRenderer.invoke('staff-get-all', filter),

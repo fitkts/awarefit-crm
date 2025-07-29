@@ -1,7 +1,7 @@
 import { Save, User, UserCheck } from 'lucide-react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Member } from '../../types/member';
-import { FormConfig, PersonalInfo, Staff } from '../../types/staff';
+import { FormConfig, Staff } from '../../types/staff';
 import { isValidBirthDate, isValidEmail, isValidPhone } from '../../utils/memberUtils';
 
 interface PersonFormProps {
@@ -22,7 +22,7 @@ const PersonForm: React.FC<PersonFormProps> = ({
   isLoading = false,
 }) => {
   // 상태 관리
-  const [formData, setFormData] = useState<PersonalInfo & Record<string, any>>({
+  const [formData, setFormData] = useState<Record<string, any>>({
     name: '',
     phone: '',
     email: '',
@@ -39,7 +39,7 @@ const PersonForm: React.FC<PersonFormProps> = ({
   // 폼 초기화
   useEffect(() => {
     if (person) {
-      const commonFields = {
+      const commonFields: Record<string, any> = {
         name: person.name,
         phone: person.phone || '',
         email: person.email || '',
@@ -52,18 +52,59 @@ const PersonForm: React.FC<PersonFormProps> = ({
 
       // 직원일 경우 추가 필드
       if (config.entityType === 'staff' && 'position' in person) {
-        setFormData({
+        const staffPerson = person as Staff;
+        const staffFields: Record<string, any> = {
           ...commonFields,
-          position: person.position || '',
-          department: (person as Staff).department || '',
-          salary: (person as Staff).salary || '',
-        });
+          position: staffPerson.position || '',
+          department: staffPerson.department || '',
+          salary: staffPerson.salary || '',
+          hire_date: staffPerson.hire_date || '',
+          role_id: staffPerson.role_id || '',
+          can_manage_payments: staffPerson.can_manage_payments || false,
+          can_manage_members: staffPerson.can_manage_members || false,
+        };
+
+        // config.additionalFields에서 정의된 필드들도 추가로 처리
+        if (config.additionalFields) {
+          config.additionalFields.forEach(field => {
+            if (field.key in staffPerson) {
+              let value = (staffPerson as any)[field.key];
+
+              // boolean 값을 select용 문자열로 변환
+              if (field.type === 'select' && typeof value === 'boolean') {
+                value = value.toString();
+              }
+
+              staffFields[field.key] = value || '';
+            }
+          });
+        }
+
+        setFormData(staffFields as Record<string, any>);
       } else {
-        setFormData(commonFields);
+        // 회원일 경우 추가 필드 처리
+        const memberFields: Record<string, any> = { ...commonFields };
+
+        if (config.additionalFields) {
+          config.additionalFields.forEach(field => {
+            if (field.key in person) {
+              let value = (person as any)[field.key];
+
+              // boolean 값을 select용 문자열로 변환
+              if (field.type === 'select' && typeof value === 'boolean') {
+                value = value.toString();
+              }
+
+              memberFields[field.key] = value || '';
+            }
+          });
+        }
+
+        setFormData(memberFields as Record<string, any>);
       }
     } else {
       // 새 등록 모드일 때 폼 초기화
-      const initialData: PersonalInfo & Record<string, any> = {
+      const initialData: Record<string, any> = {
         name: '',
         phone: '',
         email: '',
@@ -78,12 +119,24 @@ const PersonForm: React.FC<PersonFormProps> = ({
         initialData.position = '';
         initialData.department = '';
         initialData.salary = '';
+        initialData.hire_date = new Date().toISOString().split('T')[0]; // 입사일 기본값
+      }
+
+      // config.additionalFields에서 정의된 필드들의 기본값 설정
+      if (config.additionalFields) {
+        config.additionalFields.forEach(field => {
+          if (field.type === 'select' && field.options && field.options.length > 0) {
+            initialData[field.key] = field.options[0].value;
+          } else {
+            initialData[field.key] = '';
+          }
+        });
       }
 
       setFormData(initialData);
     }
     setErrors({});
-  }, [person, isOpen, config.entityType]);
+  }, [person, isOpen, config.entityType, config.additionalFields]);
 
   // 모달 외부 클릭 핸들러
   const handleOverlayClick = useCallback(

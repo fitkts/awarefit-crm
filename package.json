@@ -17,6 +17,7 @@
     "fresh-start": "npm run clean && npm install && npm run compile && npm run dev",
     "safe-build": "npm run clean && npm run type-check && npm run lint:fix && npm run compile && webpack --mode production",
     "health-check": "npm run type-check && npm run lint && echo '✅ 프로젝트 상태가 정상입니다!'",
+    "verify-member-data": "node scripts/verify-member-data.js",
     "db:init": "node scripts/init-database.js",
     "db:reset": "echo '데이터베이스 초기화 예정'",
     "test": "jest",
