@@ -29,24 +29,20 @@ let mainWindow: BrowserWindow | null = null;
 
 // 앱 준비 완료 시 윈도우 생성
 app.whenReady().then(() => {
-  // IPC 핸들러를 먼저 등록 (윈도우 생성 전에)
   try {
+    // 데이터베이스를 먼저 초기화 (IPC 핸들러 등록 전에)
+    initializeDatabase();
+    console.log('데이터베이스 초기화 완료');
+    
+    // 데이터베이스 초기화 후 IPC 핸들러 등록
     registerMemberHandlers();
     registerStaffHandlers();
     registerPaymentHandlers(); // 결제 핸들러 추가
     registerSystemHandlers();
     console.log('IPC 핸들러 등록 완료');
   } catch (error) {
-    console.error('IPC 핸들러 등록 실패:', error);
-  }
-
-  try {
-    // 데이터베이스 초기화 (동기적으로 처리)
-    initializeDatabase();
-    console.log('데이터베이스 초기화 완료');
-  } catch (error) {
-    console.error('데이터베이스 초기화 실패:', error);
-    console.log('마이그레이션 실패했지만 앱은 계속 실행됩니다.');
+    console.error('데이터베이스 초기화 또는 IPC 핸들러 등록 실패:', error);
+    console.log('오류가 발생했지만 앱은 계속 실행됩니다.');
   }
 
   createMainWindow();
