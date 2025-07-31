@@ -1,0 +1,15 @@
+{
+  "version": "1.0.0",
+  "database_path": "database.sqlite",
+  "migrations_dir": "src/database/migrations",
+  "backup_before_migration": true,
+  "verify_data_integrity": true,
+  "max_rollback_versions": 5,
+  "migration_timeout": 300000,
+  "safety_checks": {
+    "require_backup": true,
+    "verify_schema": true,
+    "test_queries": true,
+    "check_constraints": true
+  }
+}

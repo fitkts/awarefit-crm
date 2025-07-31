@@ -1,0 +1,73 @@
+{
+  "timestamp": "2025-07-30T06:32:52.519Z",
+  "overall": {
+    "status": "warning",
+    "score": 79.21875,
+    "critical_issues": [
+      "TypeScript 컴파일 오류가 있습니다.",
+      "environment 영역에 심각한 문제가 있습니다 (점수: 0.0)"
+    ],
+    "warnings": [
+      "코드 포맷팅이 일관되지 않습니다."
+    ],
+    "recommendations": [
+      "🌍 개발 환경 설정을 점검하고 필요한 도구들을 업데이트하세요.",
+      "✨ TypeScript 오류와 ESLint 경고를 해결하세요.",
+      "📊 정기적으로 헬스체크를 실행하여 시스템 상태를 모니터링하세요.",
+      "🔄 자동화 스크립트를 활용하여 개발 효율성을 높이세요."
+    ]
+  },
+  "categories": {
+    "environment": {
+      "score": 0,
+      "passed": 0,
+      "total": 5,
+      "status": "critical"
+    },
+    "structure": {
+      "score": 93.75,
+      "passed": 15,
+      "total": 16,
+      "status": "healthy"
+    },
+    "dependencies": {
+      "score": 100,
+      "passed": 5,
+      "total": 5,
+      "status": "healthy"
+    },
+    "code_quality": {
+      "score": 60,
+      "passed": 3,
+      "total": 5,
+      "status": "warning"
+    },
+    "database": {
+      "score": 100,
+      "passed": 5,
+      "total": 5,
+      "status": "healthy"
+    },
+    "testing": {
+      "score": 80,
+      "passed": 4,
+      "total": 5,
+      "status": "healthy"
+    },
+    "automation": {
+      "score": 100,
+      "passed": 5,
+      "total": 5,
+      "status": "healthy"
+    },
+    "security": {
+      "score": 100,
+      "passed": 5,
+      "total": 5,
+      "status": "healthy"
+    }
+  },
+  "execution_time": 93801,
+  "version": "1.0.0",
+  "project": "Awarefit CRM"
+}

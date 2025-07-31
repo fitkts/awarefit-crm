@@ -1,0 +1,259 @@
+/* Tailwind CSS 기본 스타일 */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 글로벌 스타일 */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    'Roboto',
+    'Oxygen',
+    'Ubuntu',
+    'Cantarell',
+    'Fira Sans',
+    'Droid Sans',
+    'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f8fafc;
+  color: #1e293b;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+#root {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* macOS 제목 표시줄 스타일 */
+@supports (-webkit-appearance: none) {
+  .macos-titlebar-area {
+    -webkit-app-region: drag;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 28px;
+    z-index: 9999;
+    pointer-events: none;
+  }
+
+  .macos-titlebar-area button,
+  .macos-titlebar-area a,
+  .macos-titlebar-area input,
+  .macos-titlebar-area select,
+  .macos-titlebar-area textarea {
+    -webkit-app-region: no-drag;
+    pointer-events: auto;
+  }
+}
+
+/* 반응형 레이아웃 지원 */
+.responsive-container {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.responsive-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+@media (max-width: 768px) {
+  .responsive-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 스크롤바 스타일 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* 커스텀 컴포넌트 스타일 */
+@layer components {
+  .btn-primary {
+    @apply bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary-100 hover:bg-secondary-200 text-secondary-700 font-medium py-2 px-4 rounded-lg transition-colors duration-200;
+  }
+
+  .btn-success {
+    @apply bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200;
+  }
+
+  .btn-danger {
+    @apply bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200;
+  }
+
+  .input-field {
+    @apply w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all duration-200;
+  }
+
+  .card {
+    @apply bg-white rounded-lg shadow-sm border border-gray-200 p-6;
+    min-width: 0; /* flexbox 자식에서 텍스트 오버플로우 방지 */
+  }
+
+  .card-header {
+    @apply flex justify-between items-center mb-4 pb-2 border-b border-gray-200;
+    min-width: 0;
+  }
+
+  .table-container {
+    @apply overflow-x-auto bg-white rounded-lg shadow-sm border border-gray-200;
+    min-width: 0;
+  }
+
+  .table-header {
+    @apply bg-gray-50 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider;
+  }
+
+  .table-cell {
+    @apply px-6 py-4 whitespace-nowrap text-sm text-gray-900;
+  }
+
+  .sidebar-nav {
+    @apply flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-colors duration-200;
+  }
+
+  .sidebar-nav-active {
+    @apply bg-primary-100 text-primary-700 border-r-2 border-primary-500;
+  }
+
+  .sidebar-nav-inactive {
+    @apply text-gray-600 hover:bg-gray-100 hover:text-gray-900;
+  }
+}
+
+/* 애니메이션 클래스 */
+@layer utilities {
+  .fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+
+  .slide-up {
+    animation: slideUp 0.3s ease-out;
+  }
+
+  .scale-in {
+    animation: scaleIn 0.2s ease-out;
+  }
+
+  .text-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* 프린트 스타일 */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+}
+
+.title-bar {
+  -webkit-app-region: drag;
+  user-select: none;
+  position: relative;
+  z-index: 10;
+}
+
+.title-bar button,
+.title-bar a,
+.title-bar input,
+.title-bar select,
+.title-bar textarea {
+  -webkit-app-region: no-drag;
+}
+
+/* 윈도우 크기 조절을 위한 반응형 유틸리티 */
+.min-width-0 {
+  min-width: 0;
+}
+
+.overflow-hidden-x {
+  overflow-x: hidden;
+}
+
+.overflow-auto-x {
+  overflow-x: auto;
+}

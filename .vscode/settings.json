@@ -1,90 +1,78 @@
 {
-  // CSS and Tailwind 설정
-  "css.validate": false,
-  "scss.validate": false,
-  "less.validate": false,
-  "css.customData": [
-    ".vscode/css_custom_data.json"
-  ],
-  "tailwindCSS.includeLanguages": {
-    "typescript": "javascript",
-    "typescriptreact": "javascript"
-  },
-  "tailwindCSS.emmetCompletions": true,
-  "editor.quickSuggestions": {
-    "strings": true
-  },
-  "files.associations": {
-    "*.css": "tailwindcss"
-  },
-  // TypeScript 및 자동완성 설정
   "typescript.preferences.includePackageJsonAutoImports": "auto",
-  "typescript.suggest.autoImports": true,
-  "typescript.updateImportsOnFileMove.enabled": "always",
-  "typescript.preferences.importModuleSpecifier": "relative",
-  // 에디터 개선
-  "editor.formatOnSave": true,
-  "editor.formatOnPaste": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
     "source.organizeImports": "explicit"
   },
-  "editor.tabSize": 2,
-  "editor.insertSpaces": true,
-  "editor.detectIndentation": false,
-  // 파일 탐색기 설정
-  "files.exclude": {
-    "**/node_modules": true,
-    "**/dist": true,
-    "**/build": true,
-    "**/.git": true,
-    "**/coverage": true,
-    "**/.nyc_output": true
+  "editor.formatOnSave": true,
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 1000,
+  "editor.rulers": [100],
+  "editor.wordWrap": "wordWrapColumn",
+  "editor.wordWrapColumn": 100,
+  
+  // TypeScript 관련 설정
+  "typescript.suggest.autoImports": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "typescript.preferences.quoteStyle": "single",
+  
+  // ESLint 설정
+  "eslint.enable": true,
+  "eslint.run": "onSave",
+  "eslint.format.enable": true,
+  
+  // 파일 연관성
+  "files.associations": {
+    "*.ts": "typescript",
+    "*.tsx": "typescriptreact",
+    ".cursorrules": "markdown"
   },
-  // 검색 설정
+  
+  // 자동 완성 및 IntelliSense
+  "editor.quickSuggestions": {
+    "other": "on",
+    "comments": "off",
+    "strings": "on"
+  },
+  "editor.suggestOnTriggerCharacters": true,
+  "editor.acceptSuggestionOnCommitCharacter": true,
+  "editor.acceptSuggestionOnEnter": "on",
+  
+  // SQL 쿼리 하이라이팅
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "scope": "string.quoted.single.js",
+        "settings": {
+          "foreground": "#CE9178"
+        }
+      }
+    ]
+  },
+  
+  // 프로젝트별 설정
   "search.exclude": {
     "**/node_modules": true,
     "**/dist": true,
-    "**/build": true,
-    "**/coverage": true,
-    "**/.nyc_output": true,
-    "**/package-lock.json": true
+    "**/.git": true,
+    "**/playwright-report": true,
+    "**/test-results": true
   },
-  // AI 코딩 지원을 위한 설정
-  "editor.suggestSelection": "first",
-  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-  "editor.acceptSuggestionOnCommitCharacter": true,
-  "editor.acceptSuggestionOnEnter": "on",
-  // React/JSX 설정
-  "emmet.includeLanguages": {
-    "typescript": "html",
-    "typescriptreact": "html"
-  },
-  "emmet.triggerExpansionOnTab": true,
-  // 자동 저장 및 포맷팅
-  "files.autoSave": "onFocusChange",
-  "editor.rulers": [
-    80,
-    120
-  ],
-  "editor.wordWrap": "on",
+  
+  // 디버깅 설정
+  "debug.allowBreakpointsEverywhere": true,
+  "debug.showInlineBreakpointCandidates": true,
+  
   // Git 설정
-  "git.enableSmartCommit": true,
   "git.autofetch": true,
-  // 확장자별 기본 포맷터 설정
-  "[typescript]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
-  },
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
-  },
-  "[javascript]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
-  },
-  "[json]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
-  },
-  "[css]": {
-    "editor.defaultFormatter": "vscode.css-language-features"
-  }
+  "git.confirmSync": false,
+  "git.enableSmartCommit": true,
+  
+  // 코드 스니펫 및 자동 완성
+  "editor.snippetSuggestions": "top",
+  "editor.tabCompletion": "on",
+  
+  // 경고 및 에러 표시
+  "problems.showCurrentInStatus": true,
+  "typescript.reportStyleChecksAsWarnings": true
 }

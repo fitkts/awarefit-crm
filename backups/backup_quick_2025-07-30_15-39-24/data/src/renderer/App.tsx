@@ -1,0 +1,93 @@
+import React, { useEffect, useState } from 'react';
+import { ToastProvider } from '../components/common/Toast';
+import Layout from '../components/layout/Layout';
+import ComponentDemo from '../pages/ComponentDemo';
+import Dashboard from '../pages/Dashboard';
+import Members from '../pages/Members';
+import Payment from '../pages/Payment';
+import Staff from '../pages/Staff';
+
+interface AppInfo {
+  version: string;
+  isElectron: boolean;
+}
+
+const App: React.FC = () => {
+  const [appInfo, setAppInfo] = useState<AppInfo>({
+    version: '1.0.0',
+    isElectron: false,
+  });
+
+  const [currentPage, setCurrentPage] = useState<string>('dashboard');
+
+  useEffect(() => {
+    // Electron API 사용 가능한지 확인
+    if (window.electronAPI) {
+      setAppInfo(prev => ({ ...prev, isElectron: true }));
+
+      // 앱 버전 가져오기
+      window.electronAPI.app.getVersion().then((version: string) => {
+        setAppInfo(prev => ({ ...prev, version }));
+      });
+    }
+  }, []);
+
+  const handlePageChange = (page: string) => {
+    setCurrentPage(page);
+  };
+
+  const renderCurrentPage = () => {
+    switch (currentPage) {
+      case 'dashboard':
+        return <Dashboard />;
+      case 'members':
+        return <Members />;
+      case 'payments':
+        return <Payment />;
+      case 'staff':
+        return <Staff />;
+      case 'statistics':
+        return (
+          <div className="bg-white rounded-xl p-8 text-center">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">통계 분석</h2>
+            <p className="text-gray-600">통계 분석 기능이 곧 추가될 예정입니다.</p>
+          </div>
+        );
+      case 'schedule':
+        return (
+          <div className="bg-white rounded-xl p-8 text-center">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">PT 스케줄</h2>
+            <p className="text-gray-600">PT 스케줄 기능은 개발 중입니다.</p>
+          </div>
+        );
+      case 'settings':
+        return (
+          <div className="bg-white rounded-xl p-8 text-center">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">시스템 설정</h2>
+            <p className="text-gray-600">시스템 설정 기능은 개발 중입니다.</p>
+          </div>
+        );
+      case 'component-demo':
+        return <ComponentDemo />;
+      default:
+        return <Dashboard />;
+    }
+  };
+
+  return (
+    <ToastProvider>
+      <Layout currentPage={currentPage} onPageChange={handlePageChange}>
+        {renderCurrentPage()}
+
+        {/* 개발 정보 표시 (디버그용) */}
+        {process.env.NODE_ENV === 'development' && (
+          <div className="fixed bottom-4 right-4 bg-black bg-opacity-80 text-white text-xs p-2 rounded">
+            v{appInfo.version} | {appInfo.isElectron ? 'Electron' : 'Web'}
+          </div>
+        )}
+      </Layout>
+    </ToastProvider>
+  );
+};
+
+export default App;

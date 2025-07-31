@@ -1,0 +1,90 @@
+{
+  "bundle_analysis": {
+    "total_size": 0,
+    "files": [],
+    "analysis": {
+      "detailed": false
+    },
+    "recommendations": []
+  },
+  "startup_analysis": {
+    "measurements": [],
+    "average_time": 0,
+    "recommendations": []
+  },
+  "memory_analysis": {
+    "current": {
+      "rss": 32337920,
+      "heapTotal": 5824512,
+      "heapUsed": 4867312,
+      "external": 1644949,
+      "arrayBuffers": 10515
+    },
+    "history": [],
+    "trends": {},
+    "recommendations": []
+  },
+  "database_analysis": {
+    "query_performance": [
+      {
+        "query": "SELECT * FROM members",
+        "time": 45,
+        "type": "SELECT"
+      },
+      {
+        "query": "SELECT * FROM payments WHERE date > ?",
+        "time": 120,
+        "type": "SELECT"
+      },
+      {
+        "query": "INSERT INTO members (...)",
+        "time": 25,
+        "type": "INSERT"
+      },
+      {
+        "query": "UPDATE members SET ... WHERE id = ?",
+        "time": 35,
+        "type": "UPDATE"
+      }
+    ],
+    "slow_queries": [
+      {
+        "query": "SELECT * FROM payments WHERE date > ?",
+        "time": 120,
+        "type": "SELECT"
+      }
+    ],
+    "recommendations": [
+      {
+        "type": "database_optimization",
+        "message": "1개의 느린 쿼리가 발견되었습니다.",
+        "suggestions": [
+          "인덱스 추가 고려",
+          "쿼리 최적화",
+          "페이지네이션 적용",
+          "N+1 쿼리 문제 해결"
+        ],
+        "slow_queries": [
+          {
+            "query": "SELECT * FROM payments WHERE date > ?",
+            "time": 120,
+            "type": "SELECT"
+          }
+        ]
+      }
+    ]
+  },
+  "recommendations": [
+    {
+      "type": "database_optimization",
+      "priority": "medium",
+      "message": "데이터베이스 쿼리 최적화가 필요합니다.",
+      "actions": [
+        "느린 쿼리에 인덱스 추가",
+        "쿼리 실행 계획 분석",
+        "N+1 쿼리 문제 해결",
+        "페이지네이션 적용"
+      ]
+    }
+  ]
+}

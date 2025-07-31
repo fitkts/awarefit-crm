@@ -1,0 +1,82 @@
+{
+  "backup_name": "quick",
+  "backup_type": "quick",
+  "created_at": "2025-07-30T06:39:25.427Z",
+  "created_by": "Backup System v1.0",
+  "project_info": {
+    "name": "awarefit-crm",
+    "version": "1.0.0",
+    "description": "피트니스 회원 관리 시스템 - Awarefit CRM"
+  },
+  "git_info": {
+    "branch": "main",
+    "commit": "ed694dd1c085153739033d4c61fc268b082a29ef",
+    "status": "M .cursorrules\n M .husky/pre-commit\n M .vscode/extensions.json\n M .vscode/settings.json\n M e2e/ui-elements.spec.ts\n M package.json\n M scripts/test-common-features.js\n M scripts/test-member-features.js\n M scripts/test-payment-features.js\n M scripts/test-staff-features.js\n M src/components/member/MemberSearchFilter.tsx\n M src/main/ipc/memberHandlers.ts\n M src/pages/Members.tsx\n?? .cursorrules.backup\n?? DUPLICATE_ELIMINATION_REPORT.md\n?? HEALTH_CHECK_SUMMARY.md\n?? HEALTH_REPORT.json\n?? backup-config.json\n?? package.json.backup\n?? package.json.tmp\n?? scripts/auto-checklist.js\n?? scripts/backup-restore.js\n?? scripts/backup/\n?? scripts/health-check.js\n?? scripts/quality-dashboard.js\n?? scripts/test-framework-demo.js\n?? scripts/update-test-scripts.js\n?? scripts/utils/\n?? scripts/validate-sql-handlers.js\n?? src/utils/dbLogger.ts\n?? src/utils/errorDetector.ts\n?? src/utils/queryBuilder.ts"
+  },
+  "system_info": {
+    "platform": "darwin",
+    "node_version": "v22.15.0",
+    "cwd": "/Users/taeseokkim/Awarefit-CRM"
+  },
+  "config_used": {
+    "version": "1.0.0",
+    "auto_backup": {
+      "enabled": true,
+      "interval": "daily",
+      "keep_count": 7,
+      "include_node_modules": false
+    },
+    "backup_paths": {
+      "critical": [
+        "src/",
+        "scripts/",
+        "e2e/",
+        "docs/",
+        "package.json",
+        "package-lock.json",
+        "tsconfig.json",
+        "webpack.config.js",
+        "playwright.config.ts",
+        ".cursorrules",
+        ".gitignore",
+        ".husky/"
+      ],
+      "important": [
+        "public/",
+        "commitlint.config.js",
+        "jest.config.js",
+        "postcss.config.js",
+        "tailwind.config.js",
+        "env.example"
+      ],
+      "optional": [
+        "README.md",
+        "CHANGELOG.md",
+        "LICENSE",
+        ".vscode/",
+        ".github/"
+      ]
+    },
+    "exclude_patterns": [
+      "node_modules/",
+      "dist/",
+      "build/",
+      ".git/",
+      "backups/",
+      "temp-backup/",
+      "*.log",
+      ".DS_Store",
+      "Thumbs.db",
+      "*.tmp",
+      "*.cache"
+    ]
+  },
+  "completion_time": "2025-07-30T06:39:36.178Z",
+  "duration_ms": 11178,
+  "stats": {
+    "directories": 39,
+    "files": 166,
+    "totalSize": 2795861
+  },
+  "status": "completed"
+}

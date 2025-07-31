@@ -1,0 +1,18 @@
+{
+  "version": "1.0.0",
+  "monitoring_interval": 5000,
+  "alert_thresholds": {
+    "memory_usage": 80,
+    "cpu_usage": 70,
+    "disk_usage": 85,
+    "bundle_size": 5242880,
+    "query_time": 1000,
+    "startup_time": 10000
+  },
+  "performance_targets": {
+    "bundle_size": 2097152,
+    "startup_time": 3000,
+    "memory_usage": 536870912,
+    "query_time": 100
+  }
+}

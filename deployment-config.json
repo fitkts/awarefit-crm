@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0",
+  "minimum_health_score": 85,
+  "required_tests": {
+    "unit_tests": true,
+    "e2e_tests": true,
+    "lint_check": true,
+    "type_check": true
+  },
+  "deployment_stages": [
+    "preparation",
+    "backup",
+    "validation",
+    "build",
+    "test",
+    "package",
+    "deploy"
+  ],
+  "safety_checks": {
+    "require_backup": true,
+    "require_git_clean": true,
+    "require_health_check": true,
+    "confirm_deployment": true
+  }
+}

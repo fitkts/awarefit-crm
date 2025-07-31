@@ -1,0 +1,51 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "commonjs",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "jsx": "react-jsx",
+    "strict": true,
+    "noEmitOnError": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@/components/*": ["src/components/*"],
+      "@/utils/*": ["src/utils/*"],
+      "@/types/*": ["src/types/*"],
+      "@/config/*": ["src/config/*"],
+      "@/database/*": ["src/database/*"],
+      "@/services/*": ["src/services/*"],
+      "@/hooks/*": ["src/hooks/*"],
+      "@/store/*": ["src/store/*"]
+    },
+    "typeRoots": ["node_modules/@types"],
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build",
+    "release",
+    "**/*.spec.ts",
+    "**/*.test.ts",
+    "src/__tests__/**/*",
+    "src/utils/memberTestUtils.ts"
+  ],
+  "ts-node": {
+    "esm": true
+  }
+} 
