@@ -25,10 +25,15 @@ const App: React.FC = () => {
     if (window.electronAPI) {
       setAppInfo(prev => ({ ...prev, isElectron: true }));
 
-      // 앱 버전 가져오기
-      window.electronAPI.app.getVersion().then((version: string) => {
-        setAppInfo(prev => ({ ...prev, version }));
-      });
+      // 앱 버전 가져오기 (오류 처리 추가)
+      window.electronAPI.app.getVersion()
+        .then((version: string) => {
+          setAppInfo(prev => ({ ...prev, version }));
+        })
+        .catch((error: any) => {
+          console.error('앱 버전 조회 실패:', error);
+          setAppInfo(prev => ({ ...prev, version: 'Unknown' }));
+        });
     }
   }, []);
 
