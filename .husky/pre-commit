@@ -1,5 +1,4 @@
 #!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
 
 echo "🔍 [Pre-commit] 커밋 전 자동 검증 시작..."
 
