@@ -5,7 +5,7 @@ import { getDatabase } from '../../database/init';
 
 // 시스템 관련 IPC 핸들러 등록
 export const registerSystemHandlers = (): void => {
-  const db = getDatabase();
+  // 데이터베이스가 필요한 경우에만 동적으로 가져오기 (지연 로딩)
 
   // 앱 버전 조회
   ipcMain.handle('app-version', () => {
@@ -20,6 +20,7 @@ export const registerSystemHandlers = (): void => {
   // 데이터베이스 쿼리 실행
   ipcMain.handle('database-query', async (_, sql, params = []) => {
     try {
+      const db = getDatabase(); // 실행 시점에 데이터베이스 가져오기
       const stmt = db.prepare(sql);
       if (sql.trim().toLowerCase().startsWith('select')) {
         return stmt.all(params);
@@ -35,6 +36,7 @@ export const registerSystemHandlers = (): void => {
   // 회원권 타입 관련 핸들러
   ipcMain.handle('membership-type-get-all', async () => {
     try {
+      const db = getDatabase(); // 실행 시점에 데이터베이스 가져오기
       const stmt = db.prepare(
         'SELECT * FROM membership_types WHERE is_active = 1 ORDER BY duration_months'
       );
@@ -47,6 +49,7 @@ export const registerSystemHandlers = (): void => {
 
   ipcMain.handle('membership-type-create', async (_, data) => {
     try {
+      const db = getDatabase(); // 실행 시점에 데이터베이스 가져오기
       const stmt = db.prepare(`
         INSERT INTO membership_types (name, duration_months, price, description)
         VALUES (?, ?, ?, ?)
@@ -69,6 +72,7 @@ export const registerSystemHandlers = (): void => {
   // 통계 관련 핸들러
   ipcMain.handle('stats-get-dashboard', async () => {
     try {
+      const db = getDatabase(); // 실행 시점에 데이터베이스 가져오기
       // 기본 통계 수집
       const totalMembers = (
         db.prepare('SELECT COUNT(*) as count FROM members WHERE active = 1').get() as {

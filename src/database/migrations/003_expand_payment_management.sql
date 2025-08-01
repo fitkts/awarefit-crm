@@ -1,7 +1,6 @@
 -- Migration: Expand payment management system
 -- Created: 2024-01-16
 -- Description: Add comprehensive payment management tables for fitness CRM
-BEGIN TRANSACTION;
 -- 1. 기존 payments 테이블에 락커 결제 지원 컬럼 추가
 -- 기존 payment_method 제약조건은 그대로 유지하고 확장
 ALTER TABLE payments
@@ -199,4 +198,3 @@ WHERE EXISTS (
     WHERE id = 1
     LIMIT 1
   );
-COMMIT;

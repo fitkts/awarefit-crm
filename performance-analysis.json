@@ -1,22 +1,345 @@
 {
   "bundle_analysis": {
-    "total_size": 0,
-    "files": [],
+    "total_size": 611092,
+    "files": [
+      {
+        "name": "components/common/PersonForm.js",
+        "size": 22961,
+        "path": "dist/components/common/PersonForm.js"
+      },
+      {
+        "name": "components/common/PersonForm.stories.js",
+        "size": 1738,
+        "path": "dist/components/common/PersonForm.stories.js"
+      },
+      {
+        "name": "components/common/Toast.js",
+        "size": 4518,
+        "path": "dist/components/common/Toast.js"
+      },
+      {
+        "name": "components/layout/Layout.js",
+        "size": 2161,
+        "path": "dist/components/layout/Layout.js"
+      },
+      {
+        "name": "components/layout/Sidebar.js",
+        "size": 4186,
+        "path": "dist/components/layout/Sidebar.js"
+      },
+      {
+        "name": "components/layout/TitleBar.js",
+        "size": 2556,
+        "path": "dist/components/layout/TitleBar.js"
+      },
+      {
+        "name": "components/member/MemberDetailModal.js",
+        "size": 25741,
+        "path": "dist/components/member/MemberDetailModal.js"
+      },
+      {
+        "name": "components/member/MemberForm.js",
+        "size": 4208,
+        "path": "dist/components/member/MemberForm.js"
+      },
+      {
+        "name": "components/member/MemberSearchFilter.js",
+        "size": 18338,
+        "path": "dist/components/member/MemberSearchFilter.js"
+      },
+      {
+        "name": "components/member/MemberStats.js",
+        "size": 4774,
+        "path": "dist/components/member/MemberStats.js"
+      },
+      {
+        "name": "components/member/MemberTable.js",
+        "size": 16888,
+        "path": "dist/components/member/MemberTable.js"
+      },
+      {
+        "name": "components/payment/PaymentDetailModal.js",
+        "size": 16968,
+        "path": "dist/components/payment/PaymentDetailModal.js"
+      },
+      {
+        "name": "components/payment/PaymentForm.js",
+        "size": 17140,
+        "path": "dist/components/payment/PaymentForm.js"
+      },
+      {
+        "name": "components/payment/PaymentSearchFilter.js",
+        "size": 13944,
+        "path": "dist/components/payment/PaymentSearchFilter.js"
+      },
+      {
+        "name": "components/payment/PaymentStats.js",
+        "size": 9532,
+        "path": "dist/components/payment/PaymentStats.js"
+      },
+      {
+        "name": "components/payment/PaymentTable.js",
+        "size": 9691,
+        "path": "dist/components/payment/PaymentTable.js"
+      },
+      {
+        "name": "components/payment/RefundModal.js",
+        "size": 14373,
+        "path": "dist/components/payment/RefundModal.js"
+      },
+      {
+        "name": "components/staff/SalaryManagementModal.js",
+        "size": 15792,
+        "path": "dist/components/staff/SalaryManagementModal.js"
+      },
+      {
+        "name": "components/staff/StaffDetailModal.js",
+        "size": 20929,
+        "path": "dist/components/staff/StaffDetailModal.js"
+      },
+      {
+        "name": "components/staff/StaffForm.js",
+        "size": 3997,
+        "path": "dist/components/staff/StaffForm.js"
+      },
+      {
+        "name": "components/staff/StaffSearchFilter.js",
+        "size": 20023,
+        "path": "dist/components/staff/StaffSearchFilter.js"
+      },
+      {
+        "name": "components/staff/StaffStats.js",
+        "size": 13469,
+        "path": "dist/components/staff/StaffStats.js"
+      },
+      {
+        "name": "components/staff/StaffTable.js",
+        "size": 17335,
+        "path": "dist/components/staff/StaffTable.js"
+      },
+      {
+        "name": "components/ui/Button.js",
+        "size": 2909,
+        "path": "dist/components/ui/Button.js"
+      },
+      {
+        "name": "components/ui/Card.js",
+        "size": 2232,
+        "path": "dist/components/ui/Card.js"
+      },
+      {
+        "name": "components/ui/Input.js",
+        "size": 6811,
+        "path": "dist/components/ui/Input.js"
+      },
+      {
+        "name": "components/ui/Modal.js",
+        "size": 2778,
+        "path": "dist/components/ui/Modal.js"
+      },
+      {
+        "name": "components/ui/index.js",
+        "size": 1562,
+        "path": "dist/components/ui/index.js"
+      },
+      {
+        "name": "database/init.js",
+        "size": 12053,
+        "path": "dist/database/init.js"
+      },
+      {
+        "name": "database/migrations/migrationRunner.js",
+        "size": 9857,
+        "path": "dist/database/migrations/migrationRunner.js"
+      },
+      {
+        "name": "main/ipc/memberHandlers.js",
+        "size": 52239,
+        "path": "dist/main/ipc/memberHandlers.js"
+      },
+      {
+        "name": "main/ipc/paymentHandlers.js",
+        "size": 25935,
+        "path": "dist/main/ipc/paymentHandlers.js"
+      },
+      {
+        "name": "main/ipc/staffHandlers.js",
+        "size": 12558,
+        "path": "dist/main/ipc/staffHandlers.js"
+      },
+      {
+        "name": "main/ipc/systemHandlers.js",
+        "size": 6506,
+        "path": "dist/main/ipc/systemHandlers.js"
+      },
+      {
+        "name": "main/main.js",
+        "size": 13282,
+        "path": "dist/main/main.js"
+      },
+      {
+        "name": "main/preload.js",
+        "size": 4996,
+        "path": "dist/main/preload.js"
+      },
+      {
+        "name": "main/services/databaseService.js",
+        "size": 2537,
+        "path": "dist/main/services/databaseService.js"
+      },
+      {
+        "name": "main/services/fileService.js",
+        "size": 7632,
+        "path": "dist/main/services/fileService.js"
+      },
+      {
+        "name": "pages/ComponentDemo.js",
+        "size": 28340,
+        "path": "dist/pages/ComponentDemo.js"
+      },
+      {
+        "name": "pages/Dashboard.js",
+        "size": 9398,
+        "path": "dist/pages/Dashboard.js"
+      },
+      {
+        "name": "pages/DataVerification.js",
+        "size": 13606,
+        "path": "dist/pages/DataVerification.js"
+      },
+      {
+        "name": "pages/Members.js",
+        "size": 20424,
+        "path": "dist/pages/Members.js"
+      },
+      {
+        "name": "pages/Payment.js",
+        "size": 13241,
+        "path": "dist/pages/Payment.js"
+      },
+      {
+        "name": "pages/Staff.js",
+        "size": 14044,
+        "path": "dist/pages/Staff.js"
+      },
+      {
+        "name": "renderer/App.js",
+        "size": 4181,
+        "path": "dist/renderer/App.js"
+      },
+      {
+        "name": "renderer/index.js",
+        "size": 2336,
+        "path": "dist/renderer/index.js"
+      },
+      {
+        "name": "stories/Button.js",
+        "size": 637,
+        "path": "dist/stories/Button.js"
+      },
+      {
+        "name": "stories/Button.stories.js",
+        "size": 1533,
+        "path": "dist/stories/Button.stories.js"
+      },
+      {
+        "name": "stories/Header.js",
+        "size": 1773,
+        "path": "dist/stories/Header.js"
+      },
+      {
+        "name": "stories/Header.stories.js",
+        "size": 870,
+        "path": "dist/stories/Header.stories.js"
+      },
+      {
+        "name": "stories/Page.js",
+        "size": 3038,
+        "path": "dist/stories/Page.js"
+      },
+      {
+        "name": "stories/Page.stories.js",
+        "size": 1113,
+        "path": "dist/stories/Page.stories.js"
+      },
+      {
+        "name": "types/common.js",
+        "size": 77,
+        "path": "dist/types/common.js"
+      },
+      {
+        "name": "types/member.js",
+        "size": 77,
+        "path": "dist/types/member.js"
+      },
+      {
+        "name": "types/payment.js",
+        "size": 77,
+        "path": "dist/types/payment.js"
+      },
+      {
+        "name": "types/staff.js",
+        "size": 77,
+        "path": "dist/types/staff.js"
+      },
+      {
+        "name": "utils/dbLogger.js",
+        "size": 11614,
+        "path": "dist/utils/dbLogger.js"
+      },
+      {
+        "name": "utils/errorDetector.js",
+        "size": 14338,
+        "path": "dist/utils/errorDetector.js"
+      },
+      {
+        "name": "utils/logger.js",
+        "size": 7002,
+        "path": "dist/utils/logger.js"
+      },
+      {
+        "name": "utils/memberUtils.js",
+        "size": 8423,
+        "path": "dist/utils/memberUtils.js"
+      },
+      {
+        "name": "utils/queryBuilder.js",
+        "size": 9724,
+        "path": "dist/utils/queryBuilder.js"
+      }
+    ],
     "analysis": {
       "detailed": false
     },
     "recommendations": []
   },
   "startup_analysis": {
-    "measurements": [],
-    "average_time": 0,
-    "recommendations": []
+    "measurements": [
+      20182,
+      20959,
+      19229,
+      19326,
+      20173
+    ],
+    "average_time": 19973.8,
+    "recommendations": [
+      {
+        "type": "startup_optimization",
+        "message": "시작 시간이 19974ms로 목표 3000ms보다 느립니다.",
+        "suggestions": [
+          "웹팩 설정 최적화",
+          "불필요한 import 제거",
+          "코드 스플리팅 적용",
+          "tree shaking 활성화"
+        ]
+      }
+    ]
   },
   "memory_analysis": {
     "current": {
-      "rss": 32337920,
-      "heapTotal": 5824512,
-      "heapUsed": 4867312,
+      "rss": 33968128,
+      "heapTotal": 6873088,
+      "heapUsed": 5033648,
       "external": 1644949,
       "arrayBuffers": 10515
     },
@@ -75,6 +398,17 @@
     ]
   },
   "recommendations": [
+    {
+      "type": "startup_performance",
+      "priority": "medium",
+      "message": "시작 성능 개선이 필요합니다.",
+      "actions": [
+        "웹팩 설정 최적화",
+        "초기 로딩 모듈 최소화",
+        "지연 로딩 적용",
+        "HMR(Hot Module Replacement) 활용"
+      ]
+    },
     {
       "type": "database_optimization",
       "priority": "medium",

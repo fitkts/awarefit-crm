@@ -1,7 +1,6 @@
 -- Migration: Fix payment amount data types consistency
 -- Created: 2024-01-17
 -- Description: Convert all amount fields from DECIMAL to INTEGER for consistency
-BEGIN TRANSACTION;
 -- 1. payments 테이블의 amount 컬럼을 INTEGER로 변경
 -- SQLite에서는 직접 컬럼 타입 변경이 불가능하므로 새 테이블 생성 후 데이터 이전
 -- 백업 테이블 생성
@@ -193,4 +192,3 @@ UPDATE pt_packages
 SET price = price
 WHERE price = price;
 -- 이미 변환됨
-COMMIT;

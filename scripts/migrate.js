@@ -1105,6 +1105,88 @@ class DatabaseMigrationSystem {
     console.log('  - 데이터 무결성이 자동으로 검증됩니다');
     console.log('');
   }
+
+  /**
+   * 실패한 마이그레이션 롤백
+   */
+  async rollbackFailedMigration(migration) {
+    try {
+      console.log(`🔄 마이그레이션 롤백 중: ${migration.filename}`);
+      
+      // 롤백 SQL이 있는 경우 실행
+      if (migration.downSQL) {
+        const transaction = this.db.transaction(() => {
+          this.db.exec(migration.downSQL);
+          
+          // 마이그레이션 기록 삭제
+          this.db.prepare('DELETE FROM migrations WHERE filename = ?').run(migration.filename);
+        });
+        
+        transaction();
+        console.log('✅ 롤백 완료');
+      } else {
+        console.log('⚠️ 롤백 SQL이 없어 자동 롤백이 불가능합니다.');
+        
+        const emergencyChoice = await this.askQuestion('긴급 롤백을 수행하시겠습니까? (Y/n): ');
+        if (emergencyChoice.toLowerCase() !== 'n') {
+          await this.performEmergencyRollback();
+        }
+      }
+    } catch (error) {
+      console.error(`❌ 롤백 실패: ${error.message}`);
+      throw error;
+    }
+  }
+
+  /**
+   * 긴급 롤백 (백업에서 복원)
+   */
+  async performEmergencyRollback() {
+    try {
+      console.log('🚨 긴급 롤백 실행 중...');
+      
+      // 가장 최근 백업 찾기
+      const backupDir = 'migration-backups';
+      if (!fs.existsSync(backupDir)) {
+        throw new Error('백업 디렉토리가 존재하지 않습니다.');
+      }
+      
+      const backups = fs.readdirSync(backupDir)
+        .filter(dir => dir.startsWith('migration_backup_'))
+        .sort()
+        .reverse();
+        
+      if (backups.length === 0) {
+        throw new Error('사용 가능한 백업이 없습니다.');
+      }
+      
+      const latestBackup = backups[0];
+      const backupPath = path.join(backupDir, latestBackup, 'database.sqlite');
+      
+      if (!fs.existsSync(backupPath)) {
+        throw new Error(`백업 파일이 존재하지 않습니다: ${backupPath}`);
+      }
+      
+      console.log(`📦 백업에서 복원 중: ${latestBackup}`);
+      
+      // 현재 데이터베이스 닫기
+      if (this.db) {
+        this.db.close();
+      }
+      
+      // 백업에서 복원
+      fs.copyFileSync(backupPath, this.migrationConfig.database_path);
+      
+      // 데이터베이스 다시 연결
+      this.db = sqlite3(this.migrationConfig.database_path);
+      
+      console.log('✅ 긴급 롤백 완료');
+      
+    } catch (error) {
+      console.error(`❌ 긴급 롤백 실패: ${error.message}`);
+      throw error;
+    }
+  }
 }
 
 // 스크립트 실행

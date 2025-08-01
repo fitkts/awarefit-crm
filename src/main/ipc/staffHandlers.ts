@@ -3,11 +3,12 @@ import { getDatabase } from '../../database/init';
 
 // 직원 관련 IPC 핸들러 등록
 export const registerStaffHandlers = (): void => {
-  const db = getDatabase();
+  // 데이터베이스가 필요한 경우에만 동적으로 가져오기 (지연 로딩)
 
   // 모든 직원 조회 (필터링 포함)
   ipcMain.handle('staff-get-all', async (_, filter) => {
     try {
+      const db = getDatabase(); // 실행 시점에 데이터베이스 가져오기
       let query = `
         SELECT s.*, sr.name as role_name, sr.permissions as role_permissions
         FROM staff s
@@ -77,6 +78,7 @@ export const registerStaffHandlers = (): void => {
   // 특정 직원 조회
   ipcMain.handle('staff-get-by-id', async (_, id) => {
     try {
+      const db = getDatabase(); // 실행 시점에 데이터베이스 가져오기
       const stmt = db.prepare(`
         SELECT s.*, sr.name as role_name, sr.permissions as role_permissions
         FROM staff s
@@ -93,6 +95,7 @@ export const registerStaffHandlers = (): void => {
   // 직원 생성
   ipcMain.handle('staff-create', async (_, data) => {
     try {
+      const db = getDatabase(); // 실행 시점에 데이터베이스 가져오기
       // 자동으로 직원 번호 생성
       const countStmt = db.prepare('SELECT COUNT(*) as count FROM staff');
       const { count } = countStmt.get() as { count: number };
@@ -133,6 +136,7 @@ export const registerStaffHandlers = (): void => {
   // 직원 정보 수정
   ipcMain.handle('staff-update', async (_, id, data) => {
     try {
+      const db = getDatabase(); // 실행 시점에 데이터베이스 가져오기
       const stmt = db.prepare(`
         UPDATE staff SET
           name = ?, phone = ?, email = ?, position = ?,
@@ -160,6 +164,7 @@ export const registerStaffHandlers = (): void => {
   // 직원 삭제 (비활성화)
   ipcMain.handle('staff-delete', async (_, id) => {
     try {
+      const db = getDatabase(); // 실행 시점에 데이터베이스 가져오기
       const stmt = db.prepare('UPDATE staff SET is_active = 0 WHERE id = ?');
       const result = stmt.run(id);
       return { changes: result.changes };
@@ -172,6 +177,7 @@ export const registerStaffHandlers = (): void => {
   // 직원 검색
   ipcMain.handle('staff-search', async (_, query) => {
     try {
+      const db = getDatabase(); // 실행 시점에 데이터베이스 가져오기
       const searchTerm = `%${query}%`;
       const stmt = db.prepare(`
         SELECT s.*, sr.name as role_name 
@@ -192,6 +198,7 @@ export const registerStaffHandlers = (): void => {
   // 직원별 결제 내역 조회
   ipcMain.handle('staff-get-by-payment', async (_, staffId) => {
     try {
+      const db = getDatabase(); // 실행 시점에 데이터베이스 가져오기
       const stmt = db.prepare(`
         SELECT p.*, m.name as member_name, m.member_number
         FROM payments p
@@ -209,6 +216,7 @@ export const registerStaffHandlers = (): void => {
   // 직원 통계 조회
   ipcMain.handle('staff-get-stats', async () => {
     try {
+      const db = getDatabase(); // 실행 시점에 데이터베이스 가져오기
       const totalStmt = db.prepare('SELECT COUNT(*) as total FROM staff WHERE is_active = 1');
       const total = (totalStmt.get() as { total: number }).total;
 
@@ -234,6 +242,7 @@ export const registerStaffHandlers = (): void => {
   /*
   ipcMain.handle('staff-salary-history', async (_, staffId) => {
     try {
+      const db = getDatabase(); // 실행 시점에 데이터베이스 가져오기
       const stmt = db.prepare(`
         SELECT ssh.*, s.name as created_by_name
         FROM staff_salary_history ssh
@@ -251,6 +260,7 @@ export const registerStaffHandlers = (): void => {
   // 급여 조정 (TODO: 마이그레이션 완료 후 활성화)
   ipcMain.handle('staff-salary-adjust', async (_, data) => {
     try {
+      const db = getDatabase(); // 실행 시점에 데이터베이스 가져오기
       const transaction = db.transaction(() => {
         // 기존 급여 조회
         const currentStaff = db
@@ -292,6 +302,7 @@ export const registerStaffHandlers = (): void => {
   // 직원 역할 목록 조회
   ipcMain.handle('staff-roles-get-all', async () => {
     try {
+      const db = getDatabase(); // 실행 시점에 데이터베이스 가져오기
       const stmt = db.prepare('SELECT * FROM staff_roles WHERE is_active = 1 ORDER BY name');
       return stmt.all();
     } catch (error) {
@@ -303,6 +314,7 @@ export const registerStaffHandlers = (): void => {
   // 직원 역할 생성
   ipcMain.handle('staff-role-create', async (_, data) => {
     try {
+      const db = getDatabase(); // 실행 시점에 데이터베이스 가져오기
       const stmt = db.prepare(`
         INSERT INTO staff_roles (name, permissions, description)
         VALUES (?, ?, ?)
@@ -324,6 +336,7 @@ export const registerStaffHandlers = (): void => {
   // 직원 역할 수정
   ipcMain.handle('staff-role-update', async (_, id, data) => {
     try {
+      const db = getDatabase(); // 실행 시점에 데이터베이스 가져오기
       const stmt = db.prepare(`
         UPDATE staff_roles SET
           name = ?, permissions = ?, description = ?
@@ -347,6 +360,7 @@ export const registerStaffHandlers = (): void => {
   // 직원 역할 삭제
   ipcMain.handle('staff-role-delete', async (_, id) => {
     try {
+      const db = getDatabase(); // 실행 시점에 데이터베이스 가져오기
       const stmt = db.prepare('UPDATE staff_roles SET is_active = 0 WHERE id = ?');
       const result = stmt.run(id);
       return { changes: result.changes };
@@ -359,6 +373,7 @@ export const registerStaffHandlers = (): void => {
   // PT 패키지 목록 조회 (PaymentForm에서 필요)
   ipcMain.handle('pt-package-get-all', async () => {
     try {
+      const db = getDatabase(); // 실행 시점에 데이터베이스 가져오기
       const stmt = db.prepare(
         'SELECT * FROM pt_packages WHERE is_active = 1 ORDER BY session_count'
       );

@@ -3,11 +3,12 @@ import { getDatabase } from '../../database/init';
 
 // 결제 관련 IPC 핸들러 등록
 export const registerPaymentHandlers = (): void => {
-  const db = getDatabase();
+  // 데이터베이스가 필요한 경우에만 동적으로 가져오기 (지연 로딩)
 
   // 모든 결제 조회 (필터링 포함)
   ipcMain.handle('payment-get-all', async (_, filter) => {
     try {
+      const db = getDatabase(); // 실행 시점에 데이터베이스 가져오기
       let query = `
         SELECT p.*, 
                m.name as member_name, m.phone as member_phone, m.email as member_email, m.member_number,
@@ -94,6 +95,7 @@ export const registerPaymentHandlers = (): void => {
   // 특정 결제 조회 (상세 정보 포함)
   ipcMain.handle('payment-get-by-id', async (_, id) => {
     try {
+      const db = getDatabase(); // 실행 시점에 데이터베이스 가져오기
       // 기본 결제 정보
       const paymentStmt = db.prepare(`
         SELECT p.*, 
@@ -163,6 +165,7 @@ export const registerPaymentHandlers = (): void => {
   // 결제 생성
   ipcMain.handle('payment-create', async (_, data) => {
     try {
+      const db = getDatabase(); // 실행 시점에 데이터베이스 가져오기
       const transaction = db.transaction(() => {
         // 결제번호 생성 (PAY-YYYYMMDD-###)
         const today = new Date().toISOString().split('T')[0].replace(/-/g, '');
@@ -336,6 +339,7 @@ export const registerPaymentHandlers = (): void => {
   // 결제 정보 수정
   ipcMain.handle('payment-update', async (_, id, data) => {
     try {
+      const db = getDatabase(); // 실행 시점에 데이터베이스 가져오기
       // 기존 결제 정보 조회
       const oldPayment = db.prepare('SELECT * FROM payments WHERE id = ?').get(id);
       if (!oldPayment) {
@@ -390,6 +394,7 @@ export const registerPaymentHandlers = (): void => {
   // 결제 취소 (소프트 삭제)
   ipcMain.handle('payment-cancel', async (_, id, staffId, reason) => {
     try {
+      const db = getDatabase(); // 실행 시점에 데이터베이스 가져오기
       const transaction = db.transaction(() => {
         // 결제 상태를 취소로 변경
         const stmt = db.prepare('UPDATE payments SET status = ? WHERE id = ?');
@@ -424,6 +429,7 @@ export const registerPaymentHandlers = (): void => {
   // 환불 요청 생성
   ipcMain.handle('refund-create', async (_, data) => {
     try {
+      const db = getDatabase(); // 실행 시점에 데이터베이스 가져오기
       const transaction = db.transaction(() => {
         const stmt = db.prepare(`
           INSERT INTO refunds (
@@ -473,6 +479,7 @@ export const registerPaymentHandlers = (): void => {
   // 환불 승인/거부
   ipcMain.handle('refund-update', async (_, refundId, data) => {
     try {
+      const db = getDatabase(); // 실행 시점에 데이터베이스 가져오기
       const transaction = db.transaction(() => {
         const updateFields = ['status = ?'];
         const updateValues = [data.status];
@@ -525,6 +532,7 @@ export const registerPaymentHandlers = (): void => {
   // 결제 통계 조회
   ipcMain.handle('payment-get-stats', async () => {
     try {
+      const db = getDatabase(); // 실행 시점에 데이터베이스 가져오기
       const today = new Date().toISOString().split('T')[0];
       const thisMonth = new Date().toISOString().substring(0, 7);
 
@@ -689,6 +697,7 @@ export const registerPaymentHandlers = (): void => {
   // 회원별 결제 내역 조회
   ipcMain.handle('payment-get-by-member', async (_, memberId) => {
     try {
+      const db = getDatabase(); // 실행 시점에 데이터베이스 가져오기
       const stmt = db.prepare(`
         SELECT p.*, 
                mt.name as membership_type_name, 
@@ -711,6 +720,7 @@ export const registerPaymentHandlers = (): void => {
   // 직원별 결제 내역 조회
   ipcMain.handle('payment-get-by-staff', async (_, staffId) => {
     try {
+      const db = getDatabase(); // 실행 시점에 데이터베이스 가져오기
       const stmt = db.prepare(`
         SELECT p.*, 
                m.name as member_name, m.member_number,
@@ -733,6 +743,7 @@ export const registerPaymentHandlers = (): void => {
   // 환불 가능 여부 확인
   ipcMain.handle('payment-check-refund-eligibility', async (_, paymentId) => {
     try {
+      const db = getDatabase(); // 실행 시점에 데이터베이스 가져오기
       const payment = db.prepare('SELECT * FROM payments WHERE id = ?').get(paymentId) as any;
       if (!payment) {
         return { eligible: false, reason: '결제 정보를 찾을 수 없습니다.' };

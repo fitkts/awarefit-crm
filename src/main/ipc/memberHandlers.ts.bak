@@ -9,6 +9,7 @@ export const registerMemberHandlers = (): void => {
   ipcMain.handle('member-debug-schema', async () => {
     try {
       const db = getDatabase(); // 실행 시점에 데이터베이스 가져오기
+      const db = getDatabase(); // 실행 시점에 데이터베이스 가져오기
       console.log('🔍 [Debug] 데이터베이스 스키마 및 마이그레이션 상태 확인');
 
       // 1. 마이그레이션 상태 확인
@@ -47,6 +48,7 @@ export const registerMemberHandlers = (): void => {
   // 디버그: 회원 데이터 일치성 검증
   ipcMain.handle('member-verify-data-consistency', async () => {
     try {
+      const db = getDatabase(); // 실행 시점에 데이터베이스 가져오기
       const db = getDatabase(); // 실행 시점에 데이터베이스 가져오기
       console.log('🔍 [Debug] 회원 데이터 일치성 검증 시작');
 

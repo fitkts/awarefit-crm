@@ -10,7 +10,7 @@
     "dev:webpack": "webpack serve --config webpack.config.js --mode development & echo 'Webpack dev server is ready!'",
     "dev:electron": "tsc && electron electron-entry.js",
     "build": "npm run clean && npm run type-check && npm run lint && npm run compile && webpack --mode production",
-    "build:electron": "npm run build && electron-builder",
+    "build:electron": "electron-builder --publish=never",
     "compile": "tsc",
     "clean": "rimraf dist",
     "quick-start": "npm run clean && npm run compile && npm run dev",
@@ -50,6 +50,7 @@
     "dev:reset": "npm run clean && rm -rf node_modules && npm install && npm run dev",
     "dev:debug": "NODE_ENV=development DEBUG=* npm run dev",
     "build:analyze": "node scripts/analyze-bundle.js",
+    "analyze": "node scripts/analyze-bundle.js",
     "size:check": "npm run build && ls -la dist/",
     "env:check": "node -e \"console.log(process.env)\" | grep -E \"NODE_|npm_\"",
     "scripts:list": "npm run | grep -E \"^[a-z]\"",
@@ -75,7 +76,6 @@
     "deploy:prepare": "node scripts/deploy.js --prepare",
     "deploy:full": "node scripts/deploy.js --full",
     "deploy": "node scripts/deploy.js",
-    "build:electron": "electron-builder --publish=never",
     "perf:monitor": "node scripts/performance-monitor.js --monitor",
     "perf:analyze": "node scripts/performance-monitor.js --analyze",
     "perf:optimize": "node scripts/performance-monitor.js --optimize",
@@ -95,7 +95,11 @@
     "validate-sql": "node scripts/validate-sql-handlers.js",
     "verify": "npm run type-check && npm run lint && npm run quality",
     "setup-error-detection": "node -e \"const { setupErrorDetection } = require('./src/utils/errorDetector'); setupErrorDetection(); console.log('오류 감지 시스템 활성화됨');\"",
-    "error-stats": "node -e \"const { printErrorStats, generateErrorReportFile } = require('./src/utils/errorDetector'); printErrorStats(); generateErrorReportFile();\""
+    "error-stats": "node -e \"const { printErrorStats, generateErrorReportFile } = require('./src/utils/errorDetector'); printErrorStats(); generateErrorReportFile();\"",
+    "rebuild": "npm rebuild && npx electron-rebuild",
+    "rebuild:electron": "npx electron-rebuild",
+    "postinstall": "npm run rebuild:electron:force",
+    "rebuild:electron:force": "cd node_modules/better-sqlite3 && env npm_config_target=$(npx electron --version | sed 's/v//') npm_config_arch=x64 npm_config_target_arch=x64 npm_config_disturl=https://electronjs.org/headers npm_config_runtime=electron npm_config_build_from_source=true npm run install"
   },
   "config": {
     "commitizen": {
@@ -144,6 +148,7 @@
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
+    "@electron/rebuild": "^4.0.1",
     "@playwright/test": "^1.54.1",
     "@storybook/addon-docs": "^9.0.18",
     "@storybook/addon-onboarding": "^9.0.18",

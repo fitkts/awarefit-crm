@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { ToastProvider } from '../components/common/Toast';
 import Layout from '../components/layout/Layout';
 import ComponentDemo from '../pages/ComponentDemo';
@@ -7,35 +7,8 @@ import Members from '../pages/Members';
 import Payment from '../pages/Payment';
 import Staff from '../pages/Staff';
 
-interface AppInfo {
-  version: string;
-  isElectron: boolean;
-}
-
 const App: React.FC = () => {
-  const [appInfo, setAppInfo] = useState<AppInfo>({
-    version: '1.0.0',
-    isElectron: false,
-  });
-
   const [currentPage, setCurrentPage] = useState<string>('dashboard');
-
-  useEffect(() => {
-    // Electron API 사용 가능한지 확인
-    if (window.electronAPI) {
-      setAppInfo(prev => ({ ...prev, isElectron: true }));
-
-      // 앱 버전 가져오기 (오류 처리 추가)
-      window.electronAPI.app.getVersion()
-        .then((version: string) => {
-          setAppInfo(prev => ({ ...prev, version }));
-        })
-        .catch((error: any) => {
-          console.error('앱 버전 조회 실패:', error);
-          setAppInfo(prev => ({ ...prev, version: 'Unknown' }));
-        });
-    }
-  }, []);
 
   const handlePageChange = (page: string) => {
     setCurrentPage(page);
@@ -83,13 +56,6 @@ const App: React.FC = () => {
     <ToastProvider>
       <Layout currentPage={currentPage} onPageChange={handlePageChange}>
         {renderCurrentPage()}
-
-        {/* 개발 정보 표시 (디버그용) */}
-        {process.env.NODE_ENV === 'development' && (
-          <div className="fixed bottom-4 right-4 bg-black bg-opacity-80 text-white text-xs p-2 rounded">
-            v{appInfo.version} | {appInfo.isElectron ? 'Electron' : 'Web'}
-          </div>
-        )}
       </Layout>
     </ToastProvider>
   );

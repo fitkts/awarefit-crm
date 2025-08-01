@@ -1,11 +1,11 @@
 import { Calculator, CreditCard, Package, User, X } from 'lucide-react';
 import React, { useCallback, useEffect, useState } from 'react';
-import { CreatePaymentInput, Payment, PaymentMethod, PaymentType } from '../../types/payment';
+import { CreatePaymentInput, Payment, PaymentMethod, PaymentType, UpdatePaymentInput } from '../../types/payment';
 
 interface PaymentFormProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (data: CreatePaymentInput) => Promise<void>;
+  onSubmit: (data: CreatePaymentInput | UpdatePaymentInput) => Promise<void>;
   payment?: Payment; // 수정 모드일 때 전달되는 기존 결제 데이터
   isLoading?: boolean;
 }
@@ -46,7 +46,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
   isLoading = false,
 }) => {
   // 상태 관리
-  const [formData, setFormData] = useState<CreatePaymentInput>({
+  const [formData, setFormData] = useState<CreatePaymentInput | UpdatePaymentInput>({
     member_id: 0,
     staff_id: 0,
     payment_type: 'membership',
@@ -151,7 +151,9 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
   // 기존 결제 데이터 로드 (수정 모드)
   useEffect(() => {
     if (payment) {
+      // 수정 모드: ID를 포함하여 UpdatePaymentInput 타입으로 설정
       setFormData({
+        id: payment.id, // 🔥 수정 모드에서 ID 포함!
         member_id: payment.member_id,
         staff_id: payment.staff_id,
         payment_type: payment.payment_type,
@@ -161,7 +163,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
         payment_method: payment.payment_method,
         payment_date: payment.payment_date,
         notes: payment.notes || '',
-      });
+      } as UpdatePaymentInput);
     } else {
       // 새 결제 폼 초기화
       setFormData({
@@ -174,7 +176,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
         payment_method: '현금',
         payment_date: new Date().toISOString().split('T')[0],
         notes: '',
-      });
+      } as CreatePaymentInput);
     }
   }, [payment]);
 
@@ -206,7 +208,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
   ]);
 
   // 폼 데이터 변경 핸들러
-  const handleInputChange = (field: keyof CreatePaymentInput, value: any) => {
+  const handleInputChange = (field: keyof (CreatePaymentInput | UpdatePaymentInput), value: any) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
@@ -237,7 +239,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
       return;
     }
 
-    if (formData.amount <= 0) {
+    if (!formData.amount || formData.amount <= 0) {
       alert('결제 금액을 입력해주세요.');
       return;
     }
@@ -280,7 +282,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
         </div>
 
         {/* 폼 콘텐츠 */}
-        <form onSubmit={handleSubmit} className="p-6 overflow-y-auto max-h-[calc(90vh-140px)]">
+        <form onSubmit={handleSubmit} className="p-6 overflow-y-auto max-h-[calc(90vh-140px)]" data-testid="payment-form">
           <div className="space-y-6">
             {/* 회원 선택 */}
             <div>
@@ -429,7 +431,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
                 />
                 <div className="absolute right-3 top-2 text-gray-500">원</div>
               </div>
-              {formData.amount > 0 && (
+              {formData.amount && formData.amount > 0 && (
                 <p className="mt-1 text-sm text-blue-600">{formatCurrency(formData.amount)}</p>
               )}
             </div>

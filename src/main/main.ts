@@ -29,20 +29,29 @@ let mainWindow: BrowserWindow | null = null;
 
 // 앱 준비 완료 시 윈도우 생성
 app.whenReady().then(() => {
+  // 데이터베이스 초기화 (실패해도 앱 계속 실행)
   try {
-    // 데이터베이스를 먼저 초기화 (IPC 핸들러 등록 전에)
     initializeDatabase();
-    console.log('데이터베이스 초기화 완료');
+    console.log('✅ 데이터베이스 초기화 완료');
+  } catch (error) {
+    console.error('❌ 데이터베이스 초기화 실패:', error);
+    console.log('⚠️ 데이터베이스 없이 앱을 실행합니다. 일부 기능이 제한될 수 있습니다.');
+  }
+  
+  // IPC 핸들러는 항상 등록 (데이터베이스 실패와 무관하게)
+  try {
+    // 시스템 핸들러부터 등록 (데이터베이스 의존성이 적음)
+    registerSystemHandlers();
     
-    // 데이터베이스 초기화 후 IPC 핸들러 등록
+    // 데이터베이스 의존적 핸들러들은 안전하게 등록
     registerMemberHandlers();
     registerStaffHandlers();
-    registerPaymentHandlers(); // 결제 핸들러 추가
-    registerSystemHandlers();
-    console.log('IPC 핸들러 등록 완료');
+    registerPaymentHandlers();
+    
+    console.log('✅ IPC 핸들러 등록 완료');
   } catch (error) {
-    console.error('데이터베이스 초기화 또는 IPC 핸들러 등록 실패:', error);
-    console.log('오류가 발생했지만 앱은 계속 실행됩니다.');
+    console.error('❌ IPC 핸들러 등록 실패:', error);
+    console.log('⚠️ 백엔드 기능이 제한될 수 있습니다.');
   }
 
   createMainWindow();

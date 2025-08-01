@@ -1,0 +1,3910 @@
+{
+  "system": [
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8567779328,
+        "free": 22155264,
+        "percentage": 99.74207878112793
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462230955,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:28:26.481Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8567377920,
+        "free": 22556672,
+        "percentage": 99.73740577697754
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462231152,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:28:32.527Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8571121664,
+        "free": 18812928,
+        "percentage": 99.7809886932373
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462231349,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:28:36.541Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8570044416,
+        "free": 19890176,
+        "percentage": 99.76844787597656
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462231545,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:28:42.113Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8564207616,
+        "free": 25726976,
+        "percentage": 99.70049858093262
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462231742,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:28:49.076Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8569282560,
+        "free": 20652032,
+        "percentage": 99.75957870483398
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462231939,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:28:54.570Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8568250368,
+        "free": 21684224,
+        "percentage": 99.74756240844727
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462232136,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:28:57.029Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8476016640,
+        "free": 113917952,
+        "percentage": 98.67382049560547
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462232333,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:29:02.290Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8387575808,
+        "free": 202358784,
+        "percentage": 97.64423370361328
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462232530,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:29:07.175Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8370442240,
+        "free": 219492352,
+        "percentage": 97.44477272033691
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462232727,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:29:11.628Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8574103552,
+        "free": 15831040,
+        "percentage": 99.81570243835449
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462232924,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:29:17.149Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8570359808,
+        "free": 19574784,
+        "percentage": 99.77211952209473
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462233121,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:29:23.957Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8526020608,
+        "free": 63913984,
+        "percentage": 99.25594329833984
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462233318,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:29:27.720Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8556003328,
+        "free": 33931264,
+        "percentage": 99.60498809814453
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462233515,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:29:33.058Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8449232896,
+        "free": 140701696,
+        "percentage": 98.36201667785645
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462233712,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:29:38.846Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8571871232,
+        "free": 18063360,
+        "percentage": 99.78971481323242
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462233909,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:29:43.607Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8511311872,
+        "free": 78622720,
+        "percentage": 99.0847110748291
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462234106,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:29:47.937Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8462909440,
+        "free": 127025152,
+        "percentage": 98.52123260498047
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462234302,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:29:52.542Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8306028544,
+        "free": 283906048,
+        "percentage": 96.69489860534668
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1416763145,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:29:58.914Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8574492672,
+        "free": 15441920,
+        "percentage": 99.82023239135742
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1416763342,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:30:05.383Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8527192064,
+        "free": 62742528,
+        "percentage": 99.26958084106445
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1416763539,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:30:07.679Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8437489664,
+        "free": 152444928,
+        "percentage": 98.22530746459961
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1417484912,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:30:17.945Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8536838144,
+        "free": 53096448,
+        "percentage": 99.38187599182129
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1427253195,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:30:21.202Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8340127744,
+        "free": 249806848,
+        "percentage": 97.09186553955078
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1442790445,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:30:25.772Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8550645760,
+        "free": 39288832,
+        "percentage": 99.54261779785156
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1461624462,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:30:29.997Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8485990400,
+        "free": 103944192,
+        "percentage": 98.78993034362793
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1461624659,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:30:33.923Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8564957184,
+        "free": 24977408,
+        "percentage": 99.70922470092773
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1461624856,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:30:39.590Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8524017664,
+        "free": 65916928,
+        "percentage": 99.23262596130371
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1461625053,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:30:44.624Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8570736640,
+        "free": 19197952,
+        "percentage": 99.7765064239502
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1461625250,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:30:49.060Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8569311232,
+        "free": 20623360,
+        "percentage": 99.75991249084473
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1461625446,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:30:54.141Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8562139136,
+        "free": 27795456,
+        "percentage": 99.67641830444336
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1461625643,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:30:59.469Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8569073664,
+        "free": 20860928,
+        "percentage": 99.75714683532715
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1461625840,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:31:04.269Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8522366976,
+        "free": 67567616,
+        "percentage": 99.21340942382812
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1461626037,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:31:09.292Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8524935168,
+        "free": 64999424,
+        "percentage": 99.24330711364746
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1461626234,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:31:15.045Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8567271424,
+        "free": 22663168,
+        "percentage": 99.73616600036621
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1461626431,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:31:19.326Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8511770624,
+        "free": 78163968,
+        "percentage": 99.09005165100098
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1461626628,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:31:25.240Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8081612800,
+        "free": 508321792,
+        "percentage": 94.08235549926758
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1461626825,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:31:29.405Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8197148672,
+        "free": 392785920,
+        "percentage": 95.42737007141113
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1461627022,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:31:34.087Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8396218368,
+        "free": 193716224,
+        "percentage": 97.74484634399414
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1461627219,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:31:41.241Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8555298816,
+        "free": 34635776,
+        "percentage": 99.59678649902344
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1461627416,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:31:46.505Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8563535872,
+        "free": 26398720,
+        "percentage": 99.69267845153809
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1461627613,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:31:51.512Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8561786880,
+        "free": 28147712,
+        "percentage": 99.67231750488281
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1461627810,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:31:55.852Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8562384896,
+        "free": 27549696,
+        "percentage": 99.67927932739258
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1461628007,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:32:00.641Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8559816704,
+        "free": 30117888,
+        "percentage": 99.64938163757324
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1461628204,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:32:07.414Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8524967936,
+        "free": 64966656,
+        "percentage": 99.24368858337402
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1461628401,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:32:11.293Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8527540224,
+        "free": 62394368,
+        "percentage": 99.27363395690918
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1461628598,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:32:15.156Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8539054080,
+        "free": 50880512,
+        "percentage": 99.40767288208008
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1461628795,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:32:20.328Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8142909440,
+        "free": 447025152,
+        "percentage": 94.79594230651855
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462240084,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:32:24.399Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8459182080,
+        "free": 130752512,
+        "percentage": 98.47784042358398
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462240281,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:32:30.456Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8529539072,
+        "free": 60395520,
+        "percentage": 99.29690361022949
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462240478,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:32:34.639Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8557244416,
+        "free": 32690176,
+        "percentage": 99.61943626403809
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462240675,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:32:39.629Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8569569280,
+        "free": 20365312,
+        "percentage": 99.7629165649414
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462240872,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:32:48.665Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8569946112,
+        "free": 19988480,
+        "percentage": 99.76730346679688
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462241068,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:32:51.519Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8537645056,
+        "free": 52289536,
+        "percentage": 99.39126968383789
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462241265,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:32:54.629Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8481370112,
+        "free": 108564480,
+        "percentage": 98.73614311218262
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462241462,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:33:00.010Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8478957568,
+        "free": 110977024,
+        "percentage": 98.70805740356445
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462241659,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:33:05.125Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8522223616,
+        "free": 67710976,
+        "percentage": 99.21174049377441
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462241856,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:33:10.958Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8429146112,
+        "free": 160788480,
+        "percentage": 98.12817573547363
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462242053,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:33:14.880Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8584339456,
+        "free": 5595136,
+        "percentage": 99.93486404418945
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462242250,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:33:21.374Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8569483264,
+        "free": 20451328,
+        "percentage": 99.76191520690918
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462242447,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:33:24.730Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8541863936,
+        "free": 48070656,
+        "percentage": 99.44038391113281
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462242644,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:33:30.650Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8565092352,
+        "free": 24842240,
+        "percentage": 99.7107982635498
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462242841,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:33:35.615Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8551534592,
+        "free": 38400000,
+        "percentage": 99.55296516418457
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462243037,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:33:40.720Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8494493696,
+        "free": 95440896,
+        "percentage": 98.8889217376709
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462243234,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:33:45.474Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8405778432,
+        "free": 184156160,
+        "percentage": 97.85614013671875
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462243430,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:33:49.976Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8482050048,
+        "free": 107884544,
+        "percentage": 98.74405860900879
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462243627,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:33:54.657Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8567767040,
+        "free": 22167552,
+        "percentage": 99.74193572998047
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462243824,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:34:00.330Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8545251328,
+        "free": 44683264,
+        "percentage": 99.47981834411621
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462244021,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:34:04.743Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8483553280,
+        "free": 106381312,
+        "percentage": 98.76155853271484
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462244218,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:34:12.180Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8566128640,
+        "free": 23805952,
+        "percentage": 99.72286224365234
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462244415,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:34:15.588Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8526970880,
+        "free": 62963712,
+        "percentage": 99.26700592041016
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462244612,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:34:20.920Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8517767168,
+        "free": 72167424,
+        "percentage": 99.15986061096191
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462244809,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:34:24.924Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8565157888,
+        "free": 24776704,
+        "percentage": 99.71156120300293
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462245006,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:34:29.809Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8547405824,
+        "free": 42528768,
+        "percentage": 99.5048999786377
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462245203,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:34:34.793Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8558419968,
+        "free": 31514624,
+        "percentage": 99.63312149047852
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462245399,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:34:39.999Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8327012352,
+        "free": 262922240,
+        "percentage": 96.93918228149414
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462245596,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:34:45.497Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8325140480,
+        "free": 264794112,
+        "percentage": 96.91739082336426
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462245695,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:34:49.809Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 7905910784,
+        "free": 684023808,
+        "percentage": 92.03691482543945
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462245990,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:34:55.359Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 7991779328,
+        "free": 598155264,
+        "percentage": 93.03655624389648
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462246187,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:34:59.691Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8051912704,
+        "free": 538021888,
+        "percentage": 93.73660087585449
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462246384,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:35:04.780Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8088973312,
+        "free": 500961280,
+        "percentage": 94.16804313659668
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462246581,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:35:09.708Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8097722368,
+        "free": 492212224,
+        "percentage": 94.26989555358887
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462246778,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:35:14.706Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8138436608,
+        "free": 451497984,
+        "percentage": 94.74387168884277
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462246975,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:35:20.057Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8212185088,
+        "free": 377749504,
+        "percentage": 95.6024169921875
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462247172,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:35:24.799Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8321839104,
+        "free": 268095488,
+        "percentage": 96.87895774841309
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462247368,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:35:29.910Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8423129088,
+        "free": 166805504,
+        "percentage": 98.0581283569336
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462247565,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:35:34.762Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8530673664,
+        "free": 59260928,
+        "percentage": 99.31011199951172
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462247761,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:35:39.987Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8538341376,
+        "free": 51593216,
+        "percentage": 99.39937591552734
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462247958,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:35:45.753Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8563920896,
+        "free": 26013696,
+        "percentage": 99.6971607208252
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462248155,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:35:50.520Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8485351424,
+        "free": 104583168,
+        "percentage": 98.78249168395996
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462248351,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:35:55.909Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8561786880,
+        "free": 28147712,
+        "percentage": 99.67231750488281
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462248548,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:36:00.860Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8567922688,
+        "free": 22011904,
+        "percentage": 99.74374771118164
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462248745,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:36:05.942Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8570007552,
+        "free": 19927040,
+        "percentage": 99.76801872253418
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462248942,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:36:10.130Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8571375616,
+        "free": 18558976,
+        "percentage": 99.78394508361816
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462249139,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:36:15.223Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8208445440,
+        "free": 381489152,
+        "percentage": 95.55888175964355
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462249336,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:36:20.139Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8406388736,
+        "free": 183545856,
+        "percentage": 97.86324501037598
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462249533,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:36:26.234Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8258727936,
+        "free": 331206656,
+        "percentage": 96.14424705505371
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462249730,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:36:31.137Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 8396144640,
+        "free": 193789952,
+        "percentage": 97.74398803710938
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462249927,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:36:36.984Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 7829413888,
+        "free": 760520704,
+        "percentage": 91.1463737487793
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462250124,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:36:39.723Z"
+    },
+    {
+      "memory": {
+        "total": 8589934592,
+        "used": 7994740736,
+        "free": 595193856,
+        "percentage": 93.07103157043457
+      },
+      "cpu": {
+        "percentage": 32,
+        "cores": 4,
+        "model": "Intel(R) Core(TM) m3-6Y30 CPU @ 0.90GHz",
+        "speed": 1100
+      },
+      "disk": {
+        "used": 1462250320,
+        "total": 85899345920,
+        "percentage": 50
+      },
+      "network": {
+        "sent": 0,
+        "received": 0
+      },
+      "timestamp": "2025-07-31T14:36:44.750Z"
+    }
+  ],
+  "application": [
+    {
+      "memory": {
+        "rss": 68124672,
+        "heapTotal": 42262528,
+        "heapUsed": 18123832,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 813.53282574,
+      "eventLoopDelay": 0.067618,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:28:26.481Z"
+    },
+    {
+      "memory": {
+        "rss": 67854336,
+        "heapTotal": 42262528,
+        "heapUsed": 19456336,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 819.579115447,
+      "eventLoopDelay": 0.068364,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:28:32.527Z"
+    },
+    {
+      "memory": {
+        "rss": 67022848,
+        "heapTotal": 42262528,
+        "heapUsed": 20658992,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 823.593245305,
+      "eventLoopDelay": 0.062895,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:28:36.541Z"
+    },
+    {
+      "memory": {
+        "rss": 66940928,
+        "heapTotal": 42262528,
+        "heapUsed": 21838544,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 829.165515236,
+      "eventLoopDelay": 0.584917,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:28:42.114Z"
+    },
+    {
+      "memory": {
+        "rss": 66629632,
+        "heapTotal": 42262528,
+        "heapUsed": 9425808,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 836.128106869,
+      "eventLoopDelay": 0.063093,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:28:49.077Z"
+    },
+    {
+      "memory": {
+        "rss": 66691072,
+        "heapTotal": 42262528,
+        "heapUsed": 10796896,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 841.621729031,
+      "eventLoopDelay": 0.060328,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:28:54.570Z"
+    },
+    {
+      "memory": {
+        "rss": 66625536,
+        "heapTotal": 42262528,
+        "heapUsed": 12124608,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 844.080363668,
+      "eventLoopDelay": 0.061189,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:28:57.029Z"
+    },
+    {
+      "memory": {
+        "rss": 66772992,
+        "heapTotal": 42262528,
+        "heapUsed": 13456272,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 849.345301776,
+      "eventLoopDelay": 4.252703,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:29:02.294Z"
+    },
+    {
+      "memory": {
+        "rss": 72622080,
+        "heapTotal": 42262528,
+        "heapUsed": 6126744,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 854.226617002,
+      "eventLoopDelay": 0.065255,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:29:07.175Z"
+    },
+    {
+      "memory": {
+        "rss": 74678272,
+        "heapTotal": 42262528,
+        "heapUsed": 7523104,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 858.679470824,
+      "eventLoopDelay": 0.063587,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:29:11.628Z"
+    },
+    {
+      "memory": {
+        "rss": 74547200,
+        "heapTotal": 42262528,
+        "heapUsed": 8945208,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 864.200255872,
+      "eventLoopDelay": 0.063128,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:29:17.149Z"
+    },
+    {
+      "memory": {
+        "rss": 74014720,
+        "heapTotal": 42262528,
+        "heapUsed": 10286360,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 871.00812027,
+      "eventLoopDelay": 0.074332,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:29:23.957Z"
+    },
+    {
+      "memory": {
+        "rss": 73994240,
+        "heapTotal": 42262528,
+        "heapUsed": 11548728,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 874.771075921,
+      "eventLoopDelay": 0.063183,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:29:27.720Z"
+    },
+    {
+      "memory": {
+        "rss": 73977856,
+        "heapTotal": 42262528,
+        "heapUsed": 12816168,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 880.108477924,
+      "eventLoopDelay": 0.06194,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:29:33.058Z"
+    },
+    {
+      "memory": {
+        "rss": 73891840,
+        "heapTotal": 42262528,
+        "heapUsed": 14114688,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 885.896563344,
+      "eventLoopDelay": 0.069829,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:29:38.846Z"
+    },
+    {
+      "memory": {
+        "rss": 73854976,
+        "heapTotal": 42262528,
+        "heapUsed": 15412704,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 890.657314146,
+      "eventLoopDelay": 0.068641,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:29:43.607Z"
+    },
+    {
+      "memory": {
+        "rss": 73854976,
+        "heapTotal": 42262528,
+        "heapUsed": 16749976,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 894.988042672,
+      "eventLoopDelay": 0.065404,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:29:47.938Z"
+    },
+    {
+      "memory": {
+        "rss": 73957376,
+        "heapTotal": 42262528,
+        "heapUsed": 17965000,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 899.592152755,
+      "eventLoopDelay": 0.064889,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:29:52.542Z"
+    },
+    {
+      "memory": {
+        "rss": 74129408,
+        "heapTotal": 42524672,
+        "heapUsed": 19116344,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 905.967428225,
+      "eventLoopDelay": 3.469331,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:29:58.917Z"
+    },
+    {
+      "memory": {
+        "rss": 69509120,
+        "heapTotal": 42524672,
+        "heapUsed": 6454232,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 912.433498782,
+      "eventLoopDelay": 0.188817,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:30:05.383Z"
+    },
+    {
+      "memory": {
+        "rss": 69599232,
+        "heapTotal": 42524672,
+        "heapUsed": 7718064,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 914.729557161,
+      "eventLoopDelay": 0.06834,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:30:07.679Z"
+    },
+    {
+      "memory": {
+        "rss": 69001216,
+        "heapTotal": 42524672,
+        "heapUsed": 8973104,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 924.995618103,
+      "eventLoopDelay": 0.108149,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:30:17.946Z"
+    },
+    {
+      "memory": {
+        "rss": 69033984,
+        "heapTotal": 42524672,
+        "heapUsed": 10271440,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 928.251805246,
+      "eventLoopDelay": 0.18119,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:30:21.202Z"
+    },
+    {
+      "memory": {
+        "rss": 69087232,
+        "heapTotal": 42524672,
+        "heapUsed": 11559120,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 932.828729435,
+      "eventLoopDelay": 0.232198,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:30:25.779Z"
+    },
+    {
+      "memory": {
+        "rss": 69165056,
+        "heapTotal": 42524672,
+        "heapUsed": 12787296,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 937.047284042,
+      "eventLoopDelay": 0.072243,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:30:29.998Z"
+    },
+    {
+      "memory": {
+        "rss": 69246976,
+        "heapTotal": 42524672,
+        "heapUsed": 13942616,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 940.972321728,
+      "eventLoopDelay": 0.05888,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:30:33.923Z"
+    },
+    {
+      "memory": {
+        "rss": 69246976,
+        "heapTotal": 42524672,
+        "heapUsed": 15113216,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 946.639364935,
+      "eventLoopDelay": 0.083091,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:30:39.590Z"
+    },
+    {
+      "memory": {
+        "rss": 69292032,
+        "heapTotal": 42524672,
+        "heapUsed": 16348864,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 951.673466726,
+      "eventLoopDelay": 0.060892,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:30:44.624Z"
+    },
+    {
+      "memory": {
+        "rss": 69287936,
+        "heapTotal": 42524672,
+        "heapUsed": 17517640,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 956.109319635,
+      "eventLoopDelay": 0.060108,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:30:49.060Z"
+    },
+    {
+      "memory": {
+        "rss": 69328896,
+        "heapTotal": 42524672,
+        "heapUsed": 18647424,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 961.190506122,
+      "eventLoopDelay": 0.065148,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:30:54.141Z"
+    },
+    {
+      "memory": {
+        "rss": 69365760,
+        "heapTotal": 42524672,
+        "heapUsed": 19738008,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 966.518562547,
+      "eventLoopDelay": 0.435154,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:30:59.469Z"
+    },
+    {
+      "memory": {
+        "rss": 69226496,
+        "heapTotal": 42524672,
+        "heapUsed": 6949032,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 971.31798972,
+      "eventLoopDelay": 0.069692,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:31:04.269Z"
+    },
+    {
+      "memory": {
+        "rss": 69271552,
+        "heapTotal": 42524672,
+        "heapUsed": 8237368,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 976.341354252,
+      "eventLoopDelay": 0.066022,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:31:09.292Z"
+    },
+    {
+      "memory": {
+        "rss": 66666496,
+        "heapTotal": 42524672,
+        "heapUsed": 9487744,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 982.093855649,
+      "eventLoopDelay": 0.070263,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:31:15.045Z"
+    },
+    {
+      "memory": {
+        "rss": 66707456,
+        "heapTotal": 42524672,
+        "heapUsed": 10751704,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 986.375252973,
+      "eventLoopDelay": 0.0683,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:31:19.326Z"
+    },
+    {
+      "memory": {
+        "rss": 66682880,
+        "heapTotal": 42524672,
+        "heapUsed": 12040520,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 992.288926764,
+      "eventLoopDelay": 0.062509,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:31:25.240Z"
+    },
+    {
+      "memory": {
+        "rss": 66748416,
+        "heapTotal": 42524672,
+        "heapUsed": 13237456,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 996.453603071,
+      "eventLoopDelay": 0.068364,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:31:29.405Z"
+    },
+    {
+      "memory": {
+        "rss": 66801664,
+        "heapTotal": 42524672,
+        "heapUsed": 14393696,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1001.135395815,
+      "eventLoopDelay": 0.066736,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:31:34.087Z"
+    },
+    {
+      "memory": {
+        "rss": 66846720,
+        "heapTotal": 42524672,
+        "heapUsed": 15560176,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1008.289168376,
+      "eventLoopDelay": 0.065515,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:31:41.241Z"
+    },
+    {
+      "memory": {
+        "rss": 66859008,
+        "heapTotal": 42524672,
+        "heapUsed": 16781024,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1013.553981006,
+      "eventLoopDelay": 0.064009,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:31:46.506Z"
+    },
+    {
+      "memory": {
+        "rss": 68923392,
+        "heapTotal": 42524672,
+        "heapUsed": 19698072,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1018.560807309,
+      "eventLoopDelay": 0.060623,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:31:51.512Z"
+    },
+    {
+      "memory": {
+        "rss": 68935680,
+        "heapTotal": 42524672,
+        "heapUsed": 20816160,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1022.903256037,
+      "eventLoopDelay": 3.266058,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:31:55.855Z"
+    },
+    {
+      "memory": {
+        "rss": 68964352,
+        "heapTotal": 42524672,
+        "heapUsed": 7587856,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1027.689801728,
+      "eventLoopDelay": 0.061767,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:32:00.642Z"
+    },
+    {
+      "memory": {
+        "rss": 68960256,
+        "heapTotal": 42524672,
+        "heapUsed": 8914152,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1034.461817342,
+      "eventLoopDelay": 0.075918,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:32:07.414Z"
+    },
+    {
+      "memory": {
+        "rss": 69009408,
+        "heapTotal": 42524672,
+        "heapUsed": 10186872,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1038.340932502,
+      "eventLoopDelay": 0.063142,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:32:11.293Z"
+    },
+    {
+      "memory": {
+        "rss": 69058560,
+        "heapTotal": 42524672,
+        "heapUsed": 11461800,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1042.20424023,
+      "eventLoopDelay": 0.061372,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:32:15.156Z"
+    },
+    {
+      "memory": {
+        "rss": 69103616,
+        "heapTotal": 42524672,
+        "heapUsed": 12751584,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1047.375857832,
+      "eventLoopDelay": 0.06254,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:32:20.328Z"
+    },
+    {
+      "memory": {
+        "rss": 69152768,
+        "heapTotal": 42524672,
+        "heapUsed": 14006312,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1051.447018122,
+      "eventLoopDelay": 0.060967,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:32:24.399Z"
+    },
+    {
+      "memory": {
+        "rss": 69197824,
+        "heapTotal": 42524672,
+        "heapUsed": 15240912,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1057.503836987,
+      "eventLoopDelay": 0.062238,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:32:30.456Z"
+    },
+    {
+      "memory": {
+        "rss": 69132288,
+        "heapTotal": 42524672,
+        "heapUsed": 16524744,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1061.686694738,
+      "eventLoopDelay": 0.066488,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:32:34.639Z"
+    },
+    {
+      "memory": {
+        "rss": 69054464,
+        "heapTotal": 42524672,
+        "heapUsed": 17850472,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1066.676492127,
+      "eventLoopDelay": 0.060877,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:32:39.629Z"
+    },
+    {
+      "memory": {
+        "rss": 69017600,
+        "heapTotal": 42524672,
+        "heapUsed": 19020480,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1075.711976403,
+      "eventLoopDelay": 0.067746,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:32:48.665Z"
+    },
+    {
+      "memory": {
+        "rss": 68800512,
+        "heapTotal": 42524672,
+        "heapUsed": 20257608,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1078.56650946,
+      "eventLoopDelay": 0.064508,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:32:51.519Z"
+    },
+    {
+      "memory": {
+        "rss": 68894720,
+        "heapTotal": 42524672,
+        "heapUsed": 7995008,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1081.675986025,
+      "eventLoopDelay": 0.068555,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:32:54.629Z"
+    },
+    {
+      "memory": {
+        "rss": 68943872,
+        "heapTotal": 42524672,
+        "heapUsed": 9363840,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1087.057736771,
+      "eventLoopDelay": 0.063011,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:33:00.011Z"
+    },
+    {
+      "memory": {
+        "rss": 68980736,
+        "heapTotal": 42524672,
+        "heapUsed": 10687168,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1092.172334254,
+      "eventLoopDelay": 0.067357,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:33:05.125Z"
+    },
+    {
+      "memory": {
+        "rss": 68984832,
+        "heapTotal": 42524672,
+        "heapUsed": 12007736,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1098.004918965,
+      "eventLoopDelay": 0.062458,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:33:10.958Z"
+    },
+    {
+      "memory": {
+        "rss": 69021696,
+        "heapTotal": 42524672,
+        "heapUsed": 13381856,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1101.927459937,
+      "eventLoopDelay": 0.061902,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:33:14.881Z"
+    },
+    {
+      "memory": {
+        "rss": 68943872,
+        "heapTotal": 42524672,
+        "heapUsed": 14637536,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1108.421198025,
+      "eventLoopDelay": 0.068789,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:33:21.374Z"
+    },
+    {
+      "memory": {
+        "rss": 68988928,
+        "heapTotal": 42524672,
+        "heapUsed": 15888296,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1111.777196581,
+      "eventLoopDelay": 0.071924,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:33:24.731Z"
+    },
+    {
+      "memory": {
+        "rss": 67665920,
+        "heapTotal": 42524672,
+        "heapUsed": 17144792,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1117.697081593,
+      "eventLoopDelay": 0.061308,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:33:30.651Z"
+    },
+    {
+      "memory": {
+        "rss": 67706880,
+        "heapTotal": 42524672,
+        "heapUsed": 18442736,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1122.661831902,
+      "eventLoopDelay": 0.061535,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:33:35.615Z"
+    },
+    {
+      "memory": {
+        "rss": 67764224,
+        "heapTotal": 42524672,
+        "heapUsed": 19613816,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1127.766683003,
+      "eventLoopDelay": 0.062839,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:33:40.720Z"
+    },
+    {
+      "memory": {
+        "rss": 67813376,
+        "heapTotal": 42524672,
+        "heapUsed": 20787752,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1132.544447143,
+      "eventLoopDelay": 24.483572,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:33:45.498Z"
+    },
+    {
+      "memory": {
+        "rss": 67866624,
+        "heapTotal": 42524672,
+        "heapUsed": 8511448,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1137.022028365,
+      "eventLoopDelay": 0.064212,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:33:49.976Z"
+    },
+    {
+      "memory": {
+        "rss": 68263936,
+        "heapTotal": 42524672,
+        "heapUsed": 9887368,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1141.703459716,
+      "eventLoopDelay": 0.063181,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:33:54.657Z"
+    },
+    {
+      "memory": {
+        "rss": 68313088,
+        "heapTotal": 42524672,
+        "heapUsed": 11215528,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1147.376241264,
+      "eventLoopDelay": 0.063618,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:34:00.330Z"
+    },
+    {
+      "memory": {
+        "rss": 68313088,
+        "heapTotal": 42524672,
+        "heapUsed": 12537672,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1151.789350307,
+      "eventLoopDelay": 0.072344,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:34:04.743Z"
+    },
+    {
+      "memory": {
+        "rss": 68136960,
+        "heapTotal": 42524672,
+        "heapUsed": 13873344,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1159.226328337,
+      "eventLoopDelay": 0.06425,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:34:12.181Z"
+    },
+    {
+      "memory": {
+        "rss": 67993600,
+        "heapTotal": 42524672,
+        "heapUsed": 15160344,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1162.634280875,
+      "eventLoopDelay": 0.066806,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:34:15.589Z"
+    },
+    {
+      "memory": {
+        "rss": 68046848,
+        "heapTotal": 42524672,
+        "heapUsed": 16415880,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1167.965843774,
+      "eventLoopDelay": 0.060203,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:34:20.920Z"
+    },
+    {
+      "memory": {
+        "rss": 68108288,
+        "heapTotal": 42524672,
+        "heapUsed": 17720920,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1171.970018629,
+      "eventLoopDelay": 0.062974,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:34:24.924Z"
+    },
+    {
+      "memory": {
+        "rss": 68157440,
+        "heapTotal": 42524672,
+        "heapUsed": 19013912,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1176.854523133,
+      "eventLoopDelay": 0.070107,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:34:29.809Z"
+    },
+    {
+      "memory": {
+        "rss": 68210688,
+        "heapTotal": 42524672,
+        "heapUsed": 20212856,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1181.838314374,
+      "eventLoopDelay": 0.064264,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:34:34.793Z"
+    },
+    {
+      "memory": {
+        "rss": 68255744,
+        "heapTotal": 42524672,
+        "heapUsed": 21389624,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1187.045144786,
+      "eventLoopDelay": 0.57963,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:34:40.000Z"
+    },
+    {
+      "memory": {
+        "rss": 68300800,
+        "heapTotal": 42524672,
+        "heapUsed": 9062480,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1192.542633369,
+      "eventLoopDelay": 0.060134,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:34:45.497Z"
+    },
+    {
+      "memory": {
+        "rss": 68354048,
+        "heapTotal": 42524672,
+        "heapUsed": 10400480,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1196.854421071,
+      "eventLoopDelay": 0.06985,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:34:49.809Z"
+    },
+    {
+      "memory": {
+        "rss": 68399104,
+        "heapTotal": 42524672,
+        "heapUsed": 11731248,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1202.404431505,
+      "eventLoopDelay": 0.063302,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:34:55.359Z"
+    },
+    {
+      "memory": {
+        "rss": 68456448,
+        "heapTotal": 42524672,
+        "heapUsed": 13125344,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1206.73630024,
+      "eventLoopDelay": 0.067604,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:34:59.691Z"
+    },
+    {
+      "memory": {
+        "rss": 68505600,
+        "heapTotal": 42524672,
+        "heapUsed": 14360424,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1211.824918154,
+      "eventLoopDelay": 0.066166,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:35:04.780Z"
+    },
+    {
+      "memory": {
+        "rss": 68550656,
+        "heapTotal": 42524672,
+        "heapUsed": 15712312,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1216.752509929,
+      "eventLoopDelay": 0.064014,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:35:09.708Z"
+    },
+    {
+      "memory": {
+        "rss": 68595712,
+        "heapTotal": 42524672,
+        "heapUsed": 16986808,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1221.751247131,
+      "eventLoopDelay": 0.065012,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:35:14.707Z"
+    },
+    {
+      "memory": {
+        "rss": 68640768,
+        "heapTotal": 42524672,
+        "heapUsed": 18318280,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1227.10162127,
+      "eventLoopDelay": 0.064821,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:35:20.057Z"
+    },
+    {
+      "memory": {
+        "rss": 68685824,
+        "heapTotal": 42524672,
+        "heapUsed": 19617440,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1231.843303787,
+      "eventLoopDelay": 0.06325,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:35:24.799Z"
+    },
+    {
+      "memory": {
+        "rss": 68730880,
+        "heapTotal": 42524672,
+        "heapUsed": 20783944,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1236.954733478,
+      "eventLoopDelay": 0.06262,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:35:29.910Z"
+    },
+    {
+      "memory": {
+        "rss": 68775936,
+        "heapTotal": 42524672,
+        "heapUsed": 21960712,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1241.806842362,
+      "eventLoopDelay": 0.454995,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:35:34.762Z"
+    },
+    {
+      "memory": {
+        "rss": 68825088,
+        "heapTotal": 42524672,
+        "heapUsed": 9480208,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1247.031100535,
+      "eventLoopDelay": 0.065799,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:35:39.987Z"
+    },
+    {
+      "memory": {
+        "rss": 68866048,
+        "heapTotal": 42524672,
+        "heapUsed": 10819808,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1252.797580391,
+      "eventLoopDelay": 0.063636,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:35:45.753Z"
+    },
+    {
+      "memory": {
+        "rss": 68812800,
+        "heapTotal": 42524672,
+        "heapUsed": 12172456,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1257.564653086,
+      "eventLoopDelay": 0.065154,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:35:50.521Z"
+    },
+    {
+      "memory": {
+        "rss": 68857856,
+        "heapTotal": 42524672,
+        "heapUsed": 13561712,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1262.953571575,
+      "eventLoopDelay": 0.059785,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:35:55.910Z"
+    },
+    {
+      "memory": {
+        "rss": 68907008,
+        "heapTotal": 42786816,
+        "heapUsed": 14837800,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1267.903667068,
+      "eventLoopDelay": 0.133703,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:36:00.860Z"
+    },
+    {
+      "memory": {
+        "rss": 69021696,
+        "heapTotal": 43311104,
+        "heapUsed": 16131176,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1272.986334345,
+      "eventLoopDelay": 0.064406,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:36:05.943Z"
+    },
+    {
+      "memory": {
+        "rss": 69062656,
+        "heapTotal": 43311104,
+        "heapUsed": 17410696,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1277.173656812,
+      "eventLoopDelay": 0.062025,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:36:10.130Z"
+    },
+    {
+      "memory": {
+        "rss": 69107712,
+        "heapTotal": 43311104,
+        "heapUsed": 18747320,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1282.267132244,
+      "eventLoopDelay": 0.067323,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:36:15.223Z"
+    },
+    {
+      "memory": {
+        "rss": 69115904,
+        "heapTotal": 43311104,
+        "heapUsed": 20051704,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1287.182704035,
+      "eventLoopDelay": 0.061334,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:36:20.139Z"
+    },
+    {
+      "memory": {
+        "rss": 69165056,
+        "heapTotal": 43311104,
+        "heapUsed": 21252232,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1293.278059456,
+      "eventLoopDelay": 0.06695,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:36:26.235Z"
+    },
+    {
+      "memory": {
+        "rss": 69210112,
+        "heapTotal": 43311104,
+        "heapUsed": 22426608,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1298.182124254,
+      "eventLoopDelay": 2.164552,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:36:31.139Z"
+    },
+    {
+      "memory": {
+        "rss": 69251072,
+        "heapTotal": 43311104,
+        "heapUsed": 10028600,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1304.027524391,
+      "eventLoopDelay": 0.060644,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:36:36.984Z"
+    },
+    {
+      "memory": {
+        "rss": 69296128,
+        "heapTotal": 43311104,
+        "heapUsed": 11366648,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1306.766745971,
+      "eventLoopDelay": 0.064205,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:36:39.724Z"
+    },
+    {
+      "memory": {
+        "rss": 69341184,
+        "heapTotal": 43311104,
+        "heapUsed": 12756424,
+        "external": 1644949,
+        "arrayBuffers": 10475
+      },
+      "uptime": 1311.792899995,
+      "eventLoopDelay": 0.063037,
+      "version": "v22.15.0",
+      "platform": "darwin",
+      "timestamp": "2025-07-31T14:36:44.750Z"
+    }
+  ],
+  "database": [],
+  "bundle": [],
+  "timestamps": [
+    "2025-07-31T14:28:25.295Z",
+    "2025-07-31T14:28:30.297Z",
+    "2025-07-31T14:28:35.299Z",
+    "2025-07-31T14:28:40.300Z",
+    "2025-07-31T14:28:45.326Z",
+    "2025-07-31T14:28:50.332Z",
+    "2025-07-31T14:28:55.332Z",
+    "2025-07-31T14:29:00.333Z",
+    "2025-07-31T14:29:05.334Z",
+    "2025-07-31T14:29:10.336Z",
+    "2025-07-31T14:29:15.338Z",
+    "2025-07-31T14:29:20.340Z",
+    "2025-07-31T14:29:25.340Z",
+    "2025-07-31T14:29:30.348Z",
+    "2025-07-31T14:29:35.349Z",
+    "2025-07-31T14:29:40.349Z",
+    "2025-07-31T14:29:45.517Z",
+    "2025-07-31T14:29:50.517Z",
+    "2025-07-31T14:29:55.649Z",
+    "2025-07-31T14:30:00.649Z",
+    "2025-07-31T14:30:05.650Z",
+    "2025-07-31T14:30:10.689Z",
+    "2025-07-31T14:30:17.951Z",
+    "2025-07-31T14:30:22.952Z",
+    "2025-07-31T14:30:27.953Z",
+    "2025-07-31T14:30:32.953Z",
+    "2025-07-31T14:30:37.954Z",
+    "2025-07-31T14:30:42.954Z",
+    "2025-07-31T14:30:47.955Z",
+    "2025-07-31T14:30:52.956Z",
+    "2025-07-31T14:30:57.957Z",
+    "2025-07-31T14:31:02.959Z",
+    "2025-07-31T14:31:07.958Z",
+    "2025-07-31T14:31:12.959Z",
+    "2025-07-31T14:31:17.959Z",
+    "2025-07-31T14:31:22.959Z",
+    "2025-07-31T14:31:27.959Z",
+    "2025-07-31T14:31:32.961Z",
+    "2025-07-31T14:31:37.962Z",
+    "2025-07-31T14:31:42.963Z",
+    "2025-07-31T14:31:47.964Z",
+    "2025-07-31T14:31:52.964Z",
+    "2025-07-31T14:31:57.965Z",
+    "2025-07-31T14:32:02.973Z",
+    "2025-07-31T14:32:07.975Z",
+    "2025-07-31T14:32:12.975Z",
+    "2025-07-31T14:32:17.975Z",
+    "2025-07-31T14:32:22.976Z",
+    "2025-07-31T14:32:27.977Z",
+    "2025-07-31T14:32:32.978Z",
+    "2025-07-31T14:32:37.979Z",
+    "2025-07-31T14:32:42.980Z",
+    "2025-07-31T14:32:48.674Z",
+    "2025-07-31T14:32:53.675Z",
+    "2025-07-31T14:32:58.676Z",
+    "2025-07-31T14:33:03.678Z",
+    "2025-07-31T14:33:08.708Z",
+    "2025-07-31T14:33:13.709Z",
+    "2025-07-31T14:33:18.711Z",
+    "2025-07-31T14:33:23.711Z",
+    "2025-07-31T14:33:28.712Z",
+    "2025-07-31T14:33:33.713Z",
+    "2025-07-31T14:33:38.713Z",
+    "2025-07-31T14:33:43.714Z",
+    "2025-07-31T14:33:48.715Z",
+    "2025-07-31T14:33:53.717Z",
+    "2025-07-31T14:33:58.718Z",
+    "2025-07-31T14:34:03.720Z",
+    "2025-07-31T14:34:08.720Z",
+    "2025-07-31T14:34:13.720Z",
+    "2025-07-31T14:34:18.720Z",
+    "2025-07-31T14:34:23.721Z",
+    "2025-07-31T14:34:28.721Z",
+    "2025-07-31T14:34:33.721Z",
+    "2025-07-31T14:34:38.721Z",
+    "2025-07-31T14:34:43.722Z",
+    "2025-07-31T14:34:48.723Z",
+    "2025-07-31T14:34:53.724Z",
+    "2025-07-31T14:34:58.725Z",
+    "2025-07-31T14:35:03.725Z",
+    "2025-07-31T14:35:08.725Z",
+    "2025-07-31T14:35:13.727Z",
+    "2025-07-31T14:35:18.728Z",
+    "2025-07-31T14:35:23.728Z",
+    "2025-07-31T14:35:28.728Z",
+    "2025-07-31T14:35:33.731Z",
+    "2025-07-31T14:35:38.732Z",
+    "2025-07-31T14:35:43.733Z",
+    "2025-07-31T14:35:48.734Z",
+    "2025-07-31T14:35:53.735Z",
+    "2025-07-31T14:35:58.736Z",
+    "2025-07-31T14:36:03.738Z",
+    "2025-07-31T14:36:08.741Z",
+    "2025-07-31T14:36:13.743Z",
+    "2025-07-31T14:36:18.752Z",
+    "2025-07-31T14:36:23.754Z",
+    "2025-07-31T14:36:28.754Z",
+    "2025-07-31T14:36:33.754Z",
+    "2025-07-31T14:36:38.754Z",
+    "2025-07-31T14:36:43.755Z"
+  ]
+}
