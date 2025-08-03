@@ -35,7 +35,7 @@ const MemberSearchFilterComponent: React.FC<MemberSearchFilterProps> = ({
 
     return {
       from: firstDay.toISOString().split('T')[0],
-      to: lastDay.toISOString().split('T')[0]
+      to: lastDay.toISOString().split('T')[0],
     };
   };
 
@@ -46,7 +46,7 @@ const MemberSearchFilterComponent: React.FC<MemberSearchFilterProps> = ({
 
     return {
       from: oneYearAgo.toISOString().split('T')[0],
-      to: oneYearAgoLastDay.toISOString().split('T')[0]
+      to: oneYearAgoLastDay.toISOString().split('T')[0],
     };
   };
 
@@ -196,10 +196,11 @@ const MemberSearchFilterComponent: React.FC<MemberSearchFilterProps> = ({
             {/* 필터 토글 */}
             <button
               onClick={() => setIsAdvancedOpen(!isAdvancedOpen)}
-              className={`flex items-center gap-1.5 px-3 py-2 text-sm border rounded-lg transition-colors ${isAdvancedOpen || activeFilterCount > 0
-                ? 'bg-blue-50 border-blue-500 text-blue-700'
-                : 'border-gray-300 text-gray-700 hover:bg-gray-50'
-                }`}
+              className={`flex items-center gap-1.5 px-3 py-2 text-sm border rounded-lg transition-colors ${
+                isAdvancedOpen || activeFilterCount > 0
+                  ? 'bg-blue-50 border-blue-500 text-blue-700'
+                  : 'border-gray-300 text-gray-700 hover:bg-gray-50'
+              }`}
               disabled={loading}
             >
               <Filter className="w-4 h-4" />
@@ -272,10 +273,11 @@ const MemberSearchFilterComponent: React.FC<MemberSearchFilterProps> = ({
               <button
                 key={preset.id}
                 onClick={() => applyPreset(preset)}
-                className={`flex items-center gap-1 px-2 py-1 text-xs rounded-full transition-colors ${JSON.stringify(filter) === JSON.stringify(preset.filter)
-                  ? 'bg-blue-100 text-blue-700 border border-blue-300'
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                  }`}
+                className={`flex items-center gap-1 px-2 py-1 text-xs rounded-full transition-colors ${
+                  JSON.stringify(filter) === JSON.stringify(preset.filter)
+                    ? 'bg-blue-100 text-blue-700 border border-blue-300'
+                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                }`}
                 disabled={loading}
               >
                 <Bookmark className="w-3 h-3" />
@@ -478,10 +480,11 @@ const MemberSearchFilterComponent: React.FC<MemberSearchFilterProps> = ({
                 <button
                   key={preset.id}
                   onClick={() => applyPreset(preset)}
-                  className={`flex items-center gap-1 px-2 py-1 text-xs rounded-lg transition-colors ${JSON.stringify(filter) === JSON.stringify(preset.filter)
-                    ? 'bg-blue-100 text-blue-700 border border-blue-300'
-                    : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-300'
-                    }`}
+                  className={`flex items-center gap-1 px-2 py-1 text-xs rounded-lg transition-colors ${
+                    JSON.stringify(filter) === JSON.stringify(preset.filter)
+                      ? 'bg-blue-100 text-blue-700 border border-blue-300'
+                      : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-300'
+                  }`}
                   disabled={loading}
                 >
                   <Bookmark className="w-3 h-3" />

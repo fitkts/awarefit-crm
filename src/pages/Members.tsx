@@ -29,7 +29,7 @@ const Members: React.FC = () => {
   });
   const [pagination, setPagination] = useState<PaginationInfo>({
     page: 1,
-    limit: 10,
+    limit: 50,
     total: 0,
     totalPages: 0,
     hasNext: false,
@@ -81,10 +81,10 @@ const Members: React.FC = () => {
     loadInitialData();
   }, []);
 
-  // 검색 필터나 정렬 옵션 변경 시 회원 목록 다시 로드
+  // 검색 필터나 정렬 옵션, 페이지 또는 limit 변경 시 회원 목록 다시 로드
   useEffect(() => {
     loadMembers();
-  }, [searchFilter, sortOption, pagination.page]);
+  }, [searchFilter, sortOption, pagination.page, pagination.limit]);
 
   // 초기 데이터 로드
   const loadInitialData = async () => {
@@ -363,6 +363,12 @@ const Members: React.FC = () => {
     setSelectedMembers([]);
   };
 
+  // 페이지 당 항목 수 변경
+  const handleLimitChange = (limit: number) => {
+    setPagination(prev => ({ ...prev, limit, page: 1 })); // 페이지를 1로 리셋
+    setSelectedMembers([]);
+  };
+
   // 일괄 작업 처리
   const handleBulkAction = async (action: BulkAction, memberIds: number[]) => {
     if (action.requiresConfirmation && action.confirmMessage) {
@@ -536,6 +542,7 @@ const Members: React.FC = () => {
         onSortChange={handleSortChange}
         pagination={pagination}
         onPageChange={handlePageChange}
+        onLimitChange={handleLimitChange}
         onEdit={openEditMode}
         onDelete={handleDeleteMember}
         onView={handleViewMember}

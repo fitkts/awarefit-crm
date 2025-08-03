@@ -1,6 +1,6 @@
 /**
  * 실시간 오류 감지 및 자동 해결책 제시 시스템
- * 
+ *
  * 이 모듈은 런타임에서 발생하는 SQL 파라미터 오류, API 연결 오류 등을
  * 자동으로 감지하고 즉시 해결책을 제시합니다.
  */
@@ -51,13 +51,13 @@ class ErrorDetector {
           '🔧 QueryBuilder 클래스를 사용하세요: src/utils/queryBuilder.ts',
           '🔧 SQL 쿼리의 ? 개수와 파라미터 배열 길이를 확인하세요',
           '🔧 COUNT 쿼리 생성 시 LIMIT/OFFSET 파라미터를 제외하세요',
-          '🔧 dbLogger.executeQuery()를 사용하여 자동 검증하세요'
+          '🔧 dbLogger.executeQuery()를 사용하여 자동 검증하세요',
         ],
         preventionTips: [
           '💡 항상 QueryBuilder 패턴을 사용하세요',
           '💡 쿼리 실행 전 파라미터 개수를 검증하세요',
-          '💡 복잡한 동적 쿼리는 단계별로 빌드하세요'
-        ]
+          '💡 복잡한 동적 쿼리는 단계별로 빌드하세요',
+        ],
       },
       {
         pattern: /SQLITE_ERROR.*syntax error/i,
@@ -67,12 +67,12 @@ class ErrorDetector {
           '🔧 SQL 문법을 확인하세요',
           '🔧 테이블명과 컬럼명을 검증하세요',
           '🔧 쿼리를 단순화해서 테스트해보세요',
-          '🔧 SQLite 문법 가이드를 참조하세요'
+          '🔧 SQLite 문법 가이드를 참조하세요',
         ],
         preventionTips: [
           '💡 쿼리 작성 시 IDE의 SQL 하이라이팅을 활용하세요',
-          '💡 복잡한 쿼리는 단계별로 빌드하고 테스트하세요'
-        ]
+          '💡 복잡한 쿼리는 단계별로 빌드하고 테스트하세요',
+        ],
       },
 
       // API 관련 오류들
@@ -84,13 +84,13 @@ class ErrorDetector {
           '🔧 preload.ts가 올바르게 로드되었는지 확인하세요',
           '🔧 main.ts에서 preload 스크립트 경로를 확인하세요',
           '🔧 개발 서버를 재시작해보세요',
-          '🔧 Electron 환경에서 실행 중인지 확인하세요'
+          '🔧 Electron 환경에서 실행 중인지 확인하세요',
         ],
         preventionTips: [
           '💡 API 호출 전 window.electronAPI 존재 여부를 확인하세요',
           '💡 환경 감지 로직을 추가하세요',
-          '💡 웹 브라우저용 fallback을 구현하세요'
-        ]
+          '💡 웹 브라우저용 fallback을 구현하세요',
+        ],
       },
       {
         pattern: /fetch.*network.*error|Failed to fetch/i,
@@ -100,12 +100,12 @@ class ErrorDetector {
           '🔧 네트워크 연결을 확인하세요',
           '🔧 API 서버가 실행 중인지 확인하세요',
           '🔧 CORS 설정을 확인하세요',
-          '🔧 재시도 로직을 구현하세요'
+          '🔧 재시도 로직을 구현하세요',
         ],
         preventionTips: [
           '💡 네트워크 오류에 대한 적절한 fallback을 구현하세요',
-          '💡 사용자에게 명확한 오류 메시지를 표시하세요'
-        ]
+          '💡 사용자에게 명확한 오류 메시지를 표시하세요',
+        ],
       },
 
       // UI/React 관련 오류들
@@ -117,12 +117,12 @@ class ErrorDetector {
           '🔧 컴포넌트 prop의 기본값을 설정하세요',
           '🔧 optional chaining (?.)을 사용하세요',
           '🔧 TypeScript 타입 정의를 확인하세요',
-          '🔧 prop 전달 과정을 검토하세요'
+          '🔧 prop 전달 과정을 검토하세요',
         ],
         preventionTips: [
           '💡 모든 prop에 대해 타입과 기본값을 정의하세요',
-          '💡 prop-types 또는 TypeScript를 활용하세요'
-        ]
+          '💡 prop-types 또는 TypeScript를 활용하세요',
+        ],
       },
       {
         pattern: /React.*Hook.*called conditionally|Hooks.*order/i,
@@ -132,12 +132,12 @@ class ErrorDetector {
           '🔧 Hook을 조건문 밖으로 이동하세요',
           '🔧 Hook 호출 순서를 일정하게 유지하세요',
           '🔧 React Hook 규칙을 준수하세요',
-          '🔧 ESLint react-hooks 플러그인을 사용하세요'
+          '🔧 ESLint react-hooks 플러그인을 사용하세요',
         ],
         preventionTips: [
           '💡 Hook은 항상 컴포넌트 최상단에 작성하세요',
-          '💡 조건부 Hook 사용을 피하세요'
-        ]
+          '💡 조건부 Hook 사용을 피하세요',
+        ],
       },
 
       // TypeScript 관련 오류들
@@ -149,13 +149,10 @@ class ErrorDetector {
           '🔧 TypeScript 타입 정의를 확인하세요',
           '🔧 인터페이스와 실제 구현이 일치하는지 확인하세요',
           '🔧 타입 가드나 타입 단언을 사용하세요',
-          '🔧 npm run type-check를 실행하세요'
+          '🔧 npm run type-check를 실행하세요',
         ],
-        preventionTips: [
-          '💡 strict 모드를 활성화하세요',
-          '💡 any 타입 사용을 최소화하세요'
-        ]
-      }
+        preventionTips: ['💡 strict 모드를 활성화하세요', '💡 any 타입 사용을 최소화하세요'],
+      },
     ];
   }
 
@@ -179,11 +176,11 @@ class ErrorDetector {
 
     // 전역 에러 핸들러
     if (typeof window !== 'undefined') {
-      window.addEventListener('error', (event) => {
+      window.addEventListener('error', event => {
         this.analyzeError('error', [event.error?.message || event.message]);
       });
 
-      window.addEventListener('unhandledrejection', (event) => {
+      window.addEventListener('unhandledrejection', event => {
         this.analyzeError('error', [event.reason]);
       });
     }
@@ -208,7 +205,7 @@ class ErrorDetector {
         detectedPattern: matchedPattern.pattern.toString(),
         solutions: matchedPattern.solution,
         preventionTips: matchedPattern.preventionTips,
-        stackTrace: this.extractStackTrace(args)
+        stackTrace: this.extractStackTrace(args),
       };
 
       this.errorHistory.push(report);
@@ -259,16 +256,16 @@ class ErrorDetector {
    */
   private showErrorGuidance(report: ErrorReport): void {
     const style = this.getConsoleStyle(report.severity);
-    
+
     console.group(`🚨 [ErrorDetector] ${report.category} 오류 감지!`);
     console.log(`%c📊 분류: ${report.category} (${report.severity})`, style);
     console.log(`%c🔍 원인: ${report.originalMessage}`, 'color: #666;');
-    
+
     console.log(`%c💡 해결 방법:`, 'color: #2196F3; font-weight: bold;');
     report.solutions.forEach((solution, index) => {
       console.log(`%c  ${index + 1}. ${solution}`, 'color: #4CAF50;');
     });
-    
+
     console.log(`%c🛡️ 예방 팁:`, 'color: #FF9800; font-weight: bold;');
     report.preventionTips.forEach((tip, index) => {
       console.log(`%c  ${index + 1}. ${tip}`, 'color: #FF9800;');
@@ -276,7 +273,10 @@ class ErrorDetector {
 
     // 특별한 조치가 필요한 경우
     if (report.severity === 'critical') {
-      console.log(`%c⚠️ 이 오류는 즉시 수정이 필요합니다!`, 'color: #F44336; font-weight: bold; background: #FFEBEE; padding: 4px;');
+      console.log(
+        `%c⚠️ 이 오류는 즉시 수정이 필요합니다!`,
+        'color: #F44336; font-weight: bold; background: #FFEBEE; padding: 4px;'
+      );
     }
 
     console.groupEnd();
@@ -327,7 +327,7 @@ class ErrorDetector {
       total: this.errorHistory.length,
       byCategory,
       bySeverity,
-      recent: this.errorHistory.slice(-10) // 최근 10개
+      recent: this.errorHistory.slice(-10), // 최근 10개
     };
   }
 

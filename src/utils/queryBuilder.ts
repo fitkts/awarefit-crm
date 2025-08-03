@@ -1,6 +1,6 @@
 /**
  * SQL 쿼리 빌더 - 파라미터 안전성 보장
- * 
+ *
  * 이 클래스는 동적 SQL 쿼리를 안전하게 생성하고 파라미터 바인딩을 보장합니다.
  * 방금 겪은 "Too few parameter values" 오류 같은 문제를 사전에 방지합니다.
  */
@@ -95,15 +95,17 @@ export class QueryBuilder {
    * OR 조건 그룹 추가
    */
   addOrGroup(conditions: Array<{ field: string; value: any; operator?: string }>): this {
-    const validConditions = conditions.filter(c => c.value !== undefined && c.value !== null && c.value !== '');
-    
+    const validConditions = conditions.filter(
+      c => c.value !== undefined && c.value !== null && c.value !== ''
+    );
+
     if (validConditions.length > 0) {
       const orClauses = validConditions.map(c => {
         const operator = c.operator || '=';
         this.params.push(c.value);
         return `${c.field} ${operator} ?`;
       });
-      
+
       this.query += ` AND (${orClauses.join(' OR ')})`;
       this.log('🔍 [QueryBuilder] OR 그룹 추가:', orClauses);
     }
@@ -140,15 +142,10 @@ export class QueryBuilder {
    */
   toCountQuery(): QueryResult {
     // ORDER BY, LIMIT, OFFSET 제거
-    let countQuery = this.query
-      .replace(/\s+ORDER BY[^]*$/i, '')
-      .replace(/\s+LIMIT[^]*$/i, '');
+    let countQuery = this.query.replace(/\s+ORDER BY[^]*$/i, '').replace(/\s+LIMIT[^]*$/i, '');
 
     // SELECT 절을 COUNT(*)로 교체
-    countQuery = countQuery.replace(
-      /SELECT\s+.*?\s+FROM/i,
-      'SELECT COUNT(*) as total FROM'
-    );
+    countQuery = countQuery.replace(/SELECT\s+.*?\s+FROM/i, 'SELECT COUNT(*) as total FROM');
 
     // LIMIT과 OFFSET 파라미터 제거
     const limitCount = (this.query.match(/LIMIT|OFFSET/g) || []).length;
@@ -158,10 +155,10 @@ export class QueryBuilder {
     this.log('🔍 [QueryBuilder] COUNT 파라미터:', countParams);
 
     this.validateQuery(countQuery, countParams);
-    
+
     return {
       query: countQuery,
-      params: countParams
+      params: countParams,
     };
   }
 
@@ -170,13 +167,13 @@ export class QueryBuilder {
    */
   build(): QueryResult {
     this.validateQuery(this.query, this.params);
-    
+
     this.log('🔍 [QueryBuilder] 최종 쿼리:', this.query);
     this.log('🔍 [QueryBuilder] 최종 파라미터:', this.params);
-    
+
     return {
       query: this.query,
-      params: this.params
+      params: this.params,
     };
   }
 
@@ -185,7 +182,7 @@ export class QueryBuilder {
    */
   private validateQuery(query: string, params: any[]): void {
     const paramCount = (query.match(/\?/g) || []).length;
-    
+
     if (paramCount !== params.length) {
       const error = new Error(
         `🚨 QueryBuilder 파라미터 개수 불일치: 쿼리 ${paramCount}개, 파라미터 ${params.length}개`
@@ -195,7 +192,7 @@ export class QueryBuilder {
       this.log('🚨 [QueryBuilder] 파라미터:', params);
       throw error;
     }
-    
+
     this.log('✅ [QueryBuilder] 파라미터 검증 통과');
   }
 
@@ -251,7 +248,7 @@ export const buildMemberQuery = (filter: any) => {
     builder.addOrGroup([
       { field: 'm.name', value: filter.search, operator: 'LIKE' },
       { field: 'm.phone', value: filter.search, operator: 'LIKE' },
-      { field: 'm.member_number', value: filter.search, operator: 'LIKE' }
+      { field: 'm.member_number', value: filter.search, operator: 'LIKE' },
     ]);
   }
 
@@ -275,7 +272,7 @@ export const buildMemberQuery = (filter: any) => {
   } else if (filter.has_phone === false) {
     builder.addOrGroup([
       { field: 'm.phone', value: null },
-      { field: 'm.phone', value: '' }
+      { field: 'm.phone', value: '' },
     ]);
   }
 
@@ -284,7 +281,7 @@ export const buildMemberQuery = (filter: any) => {
   } else if (filter.has_email === false) {
     builder.addOrGroup([
       { field: 'm.email', value: null },
-      { field: 'm.email', value: '' }
+      { field: 'm.email', value: '' },
     ]);
   }
 

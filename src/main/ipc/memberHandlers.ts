@@ -558,7 +558,7 @@ export const registerMemberHandlers = (): void => {
         countQuery = countQuery.replace(/\s+ORDER BY[^]*$/i, '');
         console.log('🔍 [memberHandlers] ORDER BY 제거 후:', countQuery);
 
-        // LIMIT 절 제거 (더 정확한 정규식 사용)  
+        // LIMIT 절 제거 (더 정확한 정규식 사용)
         countQuery = countQuery.replace(/\s+LIMIT[^]*$/i, '');
         console.log('🔍 [memberHandlers] LIMIT 제거 후:', countQuery);
 
@@ -580,8 +580,15 @@ export const registerMemberHandlers = (): void => {
 
         if (countParams.length !== countQueryParamCount) {
           console.error('🚨 [memberHandlers] COUNT 쿼리 파라미터 개수 불일치!');
-          console.error('🚨 [memberHandlers] 필요:', countQueryParamCount, '제공:', countParams.length);
-          throw new Error(`COUNT 쿼리 파라미터 개수 불일치: 필요 ${countQueryParamCount}개, 제공 ${countParams.length}개`);
+          console.error(
+            '🚨 [memberHandlers] 필요:',
+            countQueryParamCount,
+            '제공:',
+            countParams.length
+          );
+          throw new Error(
+            `COUNT 쿼리 파라미터 개수 불일치: 필요 ${countQueryParamCount}개, 제공 ${countParams.length}개`
+          );
         }
 
         const countResult = countStmt.get(countParams) as { total: number };
@@ -736,19 +743,19 @@ export const registerMemberHandlers = (): void => {
         membershipStatus,
         currentMembership: currentMembership
           ? {
-            ...currentMembership,
-            membershipType: {
-              id: (currentMembership as any).membership_type_id,
-              name: (currentMembership as any).membership_type_name,
-              description: (currentMembership as any).membership_type_description,
-              price: (currentMembership as any).membership_type_price,
-              durationMonths: (currentMembership as any).duration_months,
-              isActive: true,
-              createdAt: (currentMembership as any).created_at,
-            },
-            daysRemaining: (currentMembership as any).days_remaining,
-            isExpiringSoon: (currentMembership as any).is_expiring_soon === 1,
-          }
+              ...currentMembership,
+              membershipType: {
+                id: (currentMembership as any).membership_type_id,
+                name: (currentMembership as any).membership_type_name,
+                description: (currentMembership as any).membership_type_description,
+                price: (currentMembership as any).membership_type_price,
+                durationMonths: (currentMembership as any).duration_months,
+                isActive: true,
+                createdAt: (currentMembership as any).created_at,
+              },
+              daysRemaining: (currentMembership as any).days_remaining,
+              isExpiringSoon: (currentMembership as any).is_expiring_soon === 1,
+            }
           : null,
         membershipHistory: membershipHistory.map((mh: any) => ({
           ...(mh as any),

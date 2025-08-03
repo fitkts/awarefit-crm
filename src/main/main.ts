@@ -37,17 +37,17 @@ app.whenReady().then(() => {
     console.error('❌ 데이터베이스 초기화 실패:', error);
     console.log('⚠️ 데이터베이스 없이 앱을 실행합니다. 일부 기능이 제한될 수 있습니다.');
   }
-  
+
   // IPC 핸들러는 항상 등록 (데이터베이스 실패와 무관하게)
   try {
     // 시스템 핸들러부터 등록 (데이터베이스 의존성이 적음)
     registerSystemHandlers();
-    
+
     // 데이터베이스 의존적 핸들러들은 안전하게 등록
     registerMemberHandlers();
     registerStaffHandlers();
     registerPaymentHandlers();
-    
+
     console.log('✅ IPC 핸들러 등록 완료');
   } catch (error) {
     console.error('❌ IPC 핸들러 등록 실패:', error);

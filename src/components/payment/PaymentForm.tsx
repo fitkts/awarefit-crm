@@ -1,6 +1,12 @@
 import { Calculator, CreditCard, Package, User, X } from 'lucide-react';
 import React, { useCallback, useEffect, useState } from 'react';
-import { CreatePaymentInput, Payment, PaymentMethod, PaymentType, UpdatePaymentInput } from '../../types/payment';
+import {
+  CreatePaymentInput,
+  Payment,
+  PaymentMethod,
+  PaymentType,
+  UpdatePaymentInput,
+} from '../../types/payment';
 
 interface PaymentFormProps {
   isOpen: boolean;
@@ -208,7 +214,10 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
   ]);
 
   // 폼 데이터 변경 핸들러
-  const handleInputChange = (field: keyof (CreatePaymentInput | UpdatePaymentInput), value: any) => {
+  const handleInputChange = (
+    field: keyof (CreatePaymentInput | UpdatePaymentInput),
+    value: any
+  ) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
@@ -282,7 +291,11 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
         </div>
 
         {/* 폼 콘텐츠 */}
-        <form onSubmit={handleSubmit} className="p-6 overflow-y-auto max-h-[calc(90vh-140px)]" data-testid="payment-form">
+        <form
+          onSubmit={handleSubmit}
+          className="p-6 overflow-y-auto max-h-[calc(90vh-140px)]"
+          data-testid="payment-form"
+        >
           <div className="space-y-6">
             {/* 회원 선택 */}
             <div>

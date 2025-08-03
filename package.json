@@ -36,6 +36,7 @@
     "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx,json,css,md}\"",
     "check-all": "npm run type-check && npm run lint && npm run format:check",
     "fix-all": "npm run lint:fix && npm run format && echo '🎉 코드 자동 수정 완료!'",
+    "auto-fix-all": "node scripts/auto-fix-all.js",
     "reinstall": "rm -rf node_modules package-lock.json && npm install",
     "doctor": "npm run health-check && npm audit && echo '🏥 프로젝트 진단 완료!'",
     "release": "npm run safe-build && npm run build:electron",

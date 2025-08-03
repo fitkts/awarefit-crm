@@ -1,15 +1,15 @@
 import {
-    ArrowUpDown,
-    Calendar,
-    CheckCircle,
-    Clock,
-    CreditCard,
-    DollarSign,
-    Edit,
-    Eye,
-    RefreshCw,
-    User,
-    X,
+  ArrowUpDown,
+  Calendar,
+  CheckCircle,
+  Clock,
+  CreditCard,
+  DollarSign,
+  Edit,
+  Eye,
+  RefreshCw,
+  User,
+  X,
 } from 'lucide-react';
 import React from 'react';
 import { PaymentDetail, PaymentSortOption } from '../../types/payment';
@@ -139,7 +139,10 @@ const PaymentTable: React.FC<PaymentTableProps> = ({
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden" data-testid="payment-table">
+    <div
+      className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden"
+      data-testid="payment-table"
+    >
       <div className="overflow-x-auto">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">

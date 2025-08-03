@@ -1,6 +1,6 @@
 /**
  * 데이터베이스 실행 래퍼 - 자동 로깅 및 검증
- * 
+ *
  * 이 유틸리티는 모든 SQL 실행을 래핑하여 자동으로 로깅하고 검증합니다.
  * SQL 파라미터 불일치 오류를 사전에 방지하고 디버깅을 용이하게 합니다.
  */
@@ -32,7 +32,7 @@ class DatabaseLogger {
     successfulQueries: 0,
     failedQueries: 0,
     averageExecutionTime: 0,
-    slowQueries: []
+    slowQueries: [],
   };
 
   private debugMode: boolean = process.env.NODE_ENV === 'development';
@@ -43,19 +43,19 @@ class DatabaseLogger {
    */
   executeQuery(db: any, query: string, params: any[] = []): QueryExecutionResult {
     const startTime = Date.now();
-    
+
     try {
       this.validateAndLog(query, params, 'SELECT');
-      
+
       const stmt = db.prepare(query);
       const data = stmt.all(params);
-      
+
       const executionTime = Date.now() - startTime;
       this.updateStats(true, executionTime, query);
-      
+
       this.log('✅ [DB] 쿼리 성공', {
         resultCount: data.length,
-        executionTime: `${executionTime}ms`
+        executionTime: `${executionTime}ms`,
       });
 
       return {
@@ -63,21 +63,20 @@ class DatabaseLogger {
         data,
         executionTime,
         query,
-        params
+        params,
       };
-      
     } catch (error) {
       const executionTime = Date.now() - startTime;
       this.updateStats(false, executionTime, query);
-      
+
       this.logError('🚨 [DB] 쿼리 실행 실패', error as Error, query, params);
-      
+
       return {
         success: false,
         error: error as Error,
         executionTime,
         query,
-        params
+        params,
       };
     }
   }
@@ -87,19 +86,19 @@ class DatabaseLogger {
    */
   executeQueryOne(db: any, query: string, params: any[] = []): QueryExecutionResult {
     const startTime = Date.now();
-    
+
     try {
       this.validateAndLog(query, params, 'SELECT ONE');
-      
+
       const stmt = db.prepare(query);
       const data = stmt.get(params);
-      
+
       const executionTime = Date.now() - startTime;
       this.updateStats(true, executionTime, query);
-      
+
       this.log('✅ [DB] 단일 쿼리 성공', {
         hasResult: !!data,
-        executionTime: `${executionTime}ms`
+        executionTime: `${executionTime}ms`,
       });
 
       return {
@@ -107,21 +106,20 @@ class DatabaseLogger {
         data,
         executionTime,
         query,
-        params
+        params,
       };
-      
     } catch (error) {
       const executionTime = Date.now() - startTime;
       this.updateStats(false, executionTime, query);
-      
+
       this.logError('🚨 [DB] 단일 쿼리 실행 실패', error as Error, query, params);
-      
+
       return {
         success: false,
         error: error as Error,
         executionTime,
         query,
-        params
+        params,
       };
     }
   }
@@ -131,20 +129,20 @@ class DatabaseLogger {
    */
   executeCommand(db: any, query: string, params: any[] = []): QueryExecutionResult {
     const startTime = Date.now();
-    
+
     try {
       this.validateAndLog(query, params, 'COMMAND');
-      
+
       const stmt = db.prepare(query);
       const result = stmt.run(params);
-      
+
       const executionTime = Date.now() - startTime;
       this.updateStats(true, executionTime, query);
-      
+
       this.log('✅ [DB] 명령 실행 성공', {
         changes: result.changes,
         lastInsertRowid: result.lastInsertRowid,
-        executionTime: `${executionTime}ms`
+        executionTime: `${executionTime}ms`,
       });
 
       return {
@@ -152,21 +150,20 @@ class DatabaseLogger {
         data: result,
         executionTime,
         query,
-        params
+        params,
       };
-      
     } catch (error) {
       const executionTime = Date.now() - startTime;
       this.updateStats(false, executionTime, query);
-      
+
       this.logError('🚨 [DB] 명령 실행 실패', error as Error, query, params);
-      
+
       return {
         success: false,
         error: error as Error,
         executionTime,
         query,
-        params
+        params,
       };
     }
   }
@@ -174,34 +171,37 @@ class DatabaseLogger {
   /**
    * 트랜잭션 실행
    */
-  executeTransaction(db: any, operations: Array<{ query: string; params: any[] }>): QueryExecutionResult {
+  executeTransaction(
+    db: any,
+    operations: Array<{ query: string; params: any[] }>
+  ): QueryExecutionResult {
     const startTime = Date.now();
     const allQueries = operations.map(op => op.query).join('; ');
     const allParams = operations.flatMap(op => op.params);
-    
+
     try {
       this.log('�� [DB] 트랜잭션 시작', { operationCount: operations.length });
-      
+
       const transaction = db.transaction(() => {
         const results = [];
-        
+
         for (const operation of operations) {
           this.validateAndLog(operation.query, operation.params, 'TRANSACTION');
           const stmt = db.prepare(operation.query);
           const result = stmt.run(operation.params);
           results.push(result);
         }
-        
+
         return results;
       });
-      
+
       const data = transaction();
       const executionTime = Date.now() - startTime;
       this.updateStats(true, executionTime, allQueries);
-      
+
       this.log('✅ [DB] 트랜잭션 성공', {
         operationCount: operations.length,
-        executionTime: `${executionTime}ms`
+        executionTime: `${executionTime}ms`,
       });
 
       return {
@@ -209,21 +209,20 @@ class DatabaseLogger {
         data,
         executionTime,
         query: allQueries,
-        params: allParams
+        params: allParams,
       };
-      
     } catch (error) {
       const executionTime = Date.now() - startTime;
       this.updateStats(false, executionTime, allQueries);
-      
+
       this.logError('🚨 [DB] 트랜잭션 실패', error as Error, allQueries, allParams);
-      
+
       return {
         success: false,
         error: error as Error,
         executionTime,
         query: allQueries,
-        params: allParams
+        params: allParams,
       };
     }
   }
@@ -233,14 +232,14 @@ class DatabaseLogger {
    */
   private validateAndLog(query: string, params: any[], type: string): void {
     const paramCount = (query.match(/\?/g) || []).length;
-    
+
     this.log(`🔍 [DB] ${type} 실행 시작:`, {
       query: this.sanitizeQueryForLog(query),
       params: params,
       parameterCount: params.length,
-      placeholderCount: paramCount
+      placeholderCount: paramCount,
     });
-    
+
     if (paramCount !== params.length) {
       const error = new Error(
         `🚨 DB Logger: 파라미터 개수 불일치 (쿼리: ${paramCount}개, 파라미터: ${params.length}개)`
@@ -248,7 +247,7 @@ class DatabaseLogger {
       this.logError('🚨 [DB] 파라미터 검증 실패', error, query, params);
       throw error;
     }
-    
+
     this.log('✅ [DB] 파라미터 검증 통과');
   }
 
@@ -257,33 +256,34 @@ class DatabaseLogger {
    */
   private updateStats(success: boolean, executionTime: number, query: string): void {
     this.stats.totalQueries++;
-    
+
     if (success) {
       this.stats.successfulQueries++;
     } else {
       this.stats.failedQueries++;
     }
-    
+
     // 평균 실행 시간 계산
-    const totalTime = (this.stats.averageExecutionTime * (this.stats.totalQueries - 1)) + executionTime;
+    const totalTime =
+      this.stats.averageExecutionTime * (this.stats.totalQueries - 1) + executionTime;
     this.stats.averageExecutionTime = totalTime / this.stats.totalQueries;
-    
+
     // 느린 쿼리 추적
     if (executionTime > this.slowQueryThreshold) {
       this.stats.slowQueries.push({
         query: this.sanitizeQueryForLog(query),
         executionTime,
-        timestamp: new Date()
+        timestamp: new Date(),
       });
-      
+
       // 최대 10개까지만 보관
       if (this.stats.slowQueries.length > 10) {
         this.stats.slowQueries.shift();
       }
-      
+
       this.log('🐌 [DB] 느린 쿼리 감지', {
         executionTime: `${executionTime}ms`,
-        threshold: `${this.slowQueryThreshold}ms`
+        threshold: `${this.slowQueryThreshold}ms`,
       });
     }
   }
@@ -317,7 +317,7 @@ class DatabaseLogger {
       error: error.message,
       query: this.sanitizeQueryForLog(query),
       params: params,
-      stack: this.debugMode ? error.stack : undefined
+      stack: this.debugMode ? error.stack : undefined,
     });
   }
 
@@ -337,7 +337,7 @@ class DatabaseLogger {
       successfulQueries: 0,
       failedQueries: 0,
       averageExecutionTime: 0,
-      slowQueries: []
+      slowQueries: [],
     };
     this.log('🔄 [DB] 통계 초기화됨');
   }
@@ -347,14 +347,17 @@ class DatabaseLogger {
    */
   printPerformanceReport(): void {
     const stats = this.getStats();
-    const successRate = stats.totalQueries > 0 ? (stats.successfulQueries / stats.totalQueries * 100).toFixed(2) : '0';
-    
+    const successRate =
+      stats.totalQueries > 0
+        ? ((stats.successfulQueries / stats.totalQueries) * 100).toFixed(2)
+        : '0';
+
     console.log('\n📊 [DB] 성능 리포트:');
     console.log(`- 총 쿼리: ${stats.totalQueries}개`);
     console.log(`- 성공률: ${successRate}%`);
     console.log(`- 평균 실행 시간: ${stats.averageExecutionTime.toFixed(2)}ms`);
     console.log(`- 느린 쿼리: ${stats.slowQueries.length}개`);
-    
+
     if (stats.slowQueries.length > 0) {
       console.log('\n🐌 느린 쿼리 목록:');
       stats.slowQueries.forEach((slowQuery, index) => {
@@ -408,7 +411,10 @@ export const executeCommand = (db: any, query: string, params: any[] = []) => {
 /**
  * 트랜잭션 실행
  */
-export const executeTransaction = (db: any, operations: Array<{ query: string; params: any[] }>) => {
+export const executeTransaction = (
+  db: any,
+  operations: Array<{ query: string; params: any[] }>
+) => {
   const result = dbLogger.executeTransaction(db, operations);
   if (!result.success) {
     throw result.error;

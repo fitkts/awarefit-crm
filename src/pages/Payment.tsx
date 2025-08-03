@@ -7,12 +7,12 @@ import PaymentStats from '../components/payment/PaymentStats';
 import PaymentTable from '../components/payment/PaymentTable';
 import RefundModal from '../components/payment/RefundModal';
 import {
-    CreatePaymentInput,
-    Payment,
-    PaymentDetail,
-    PaymentSearchFilter as PaymentSearchFilterType,
-    PaymentSortOption,
-    UpdatePaymentInput,
+  CreatePaymentInput,
+  Payment,
+  PaymentDetail,
+  PaymentSearchFilter as PaymentSearchFilterType,
+  PaymentSortOption,
+  UpdatePaymentInput,
 } from '../types/payment';
 
 // 간단한 Toast 컴포넌트
@@ -203,7 +203,7 @@ const PaymentPage: React.FC = () => {
       console.log('🔍 [Payment] selectedPayment:', selectedPayment);
       console.log('🔍 [Payment] 전달받은 data:', data);
       console.log('🔍 [Payment] data에 id가 있는가:', 'id' in data);
-      
+
       if (selectedPayment && 'id' in data) {
         console.log('✅ [Payment] 수정 모드 - payment.update 호출');
         await window.electronAPI.database.payment.update(data.id, data);

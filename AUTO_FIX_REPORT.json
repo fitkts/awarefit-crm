@@ -1,0 +1,41 @@
+{
+  "timestamp": "2025-08-03T00:12:14.663Z",
+  "duration": 121722,
+  "results": {
+    "formatting": {
+      "success": true,
+      "details": [
+        "✅ 코드 포맷팅 완료"
+      ]
+    },
+    "unitTests": {
+      "success": true,
+      "details": [
+        "✅ 5개 테스트 파일 생성 완료"
+      ]
+    },
+    "readme": {
+      "success": true,
+      "details": [
+        "✅ README.md 생성 완료"
+      ]
+    },
+    "linting": {
+      "success": true,
+      "details": [
+        "✅ 린트 오류 자동 수정 완료"
+      ]
+    },
+    "typeCheck": {
+      "success": true,
+      "details": [
+        "✅ 타입 체크 통과"
+      ]
+    }
+  },
+  "summary": {
+    "total": 5,
+    "success": 5,
+    "failed": 0
+  }
+}

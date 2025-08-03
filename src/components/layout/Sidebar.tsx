@@ -1,12 +1,12 @@
 import {
-  BarChart3,
-  Calendar,
-  Code,
-  CreditCard,
-  Home,
-  Settings,
-  UserCog,
-  Users,
+    BarChart3,
+    Calendar,
+    Code,
+    CreditCard,
+    Home,
+    Settings,
+    UserCog,
+    Users,
 } from 'lucide-react';
 import React from 'react';
 
@@ -82,7 +82,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentPage, onPageChange }) => {
       className="
       fixed left-0 top-0 h-full z-40 
       w-12 hover:w-40 
-      bg-white border-r border-gray-200 
+      bg-white dark:bg-dark-800 border-r border-gray-200 dark:border-dark-700
       transition-all duration-300 ease-in-out 
       flex flex-col
       group
@@ -105,10 +105,10 @@ const Sidebar: React.FC<SidebarProps> = ({ currentPage, onPageChange }) => {
                 w-full flex items-center space-x-2 px-2 py-2 rounded-md text-left transition-all duration-200
                 ${
                   isActive
-                    ? 'bg-blue-50 text-blue-700 border border-blue-200'
+                    ? 'bg-blue-50 dark:bg-blue-900 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-700'
                     : isDisabled
-                      ? 'text-gray-400 cursor-not-allowed'
-                      : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
+                      ? 'text-gray-400 dark:text-dark-500 cursor-not-allowed'
+                      : 'text-gray-700 dark:text-dark-300 hover:bg-gray-50 dark:hover:bg-dark-700 hover:text-gray-900 dark:hover:text-dark-100'
                 }
                 justify-start
               `}
@@ -116,7 +116,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentPage, onPageChange }) => {
             >
               <IconComponent
                 className={`w-4 h-4 flex-shrink-0 ${
-                  isActive ? 'text-blue-600' : isDisabled ? 'text-gray-400' : 'text-gray-500'
+                  isActive ? 'text-blue-600 dark:text-blue-400' : isDisabled ? 'text-gray-400 dark:text-dark-500' : 'text-gray-500 dark:text-dark-400'
                 }`}
               />
 
@@ -145,11 +145,11 @@ const Sidebar: React.FC<SidebarProps> = ({ currentPage, onPageChange }) => {
       </nav>
 
       {/* 하단 정보 */}
-      <div className="p-2 border-t border-gray-200 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <div className="bg-gray-50 rounded-md p-2">
-          <div className="text-xs text-gray-600 mb-1">현재 버전</div>
-          <div className="text-sm font-semibold text-gray-900">v1.0.0</div>
-          <div className="text-xs text-gray-500 mt-1">
+      <div className="p-2 border-t border-gray-200 dark:border-dark-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <div className="bg-gray-50 dark:bg-dark-700 rounded-md p-2">
+          <div className="text-xs text-gray-600 dark:text-dark-400 mb-1">현재 버전</div>
+          <div className="text-sm font-semibold text-gray-900 dark:text-dark-100">v1.0.0</div>
+          <div className="text-xs text-gray-500 dark:text-dark-400 mt-1">
             마지막 업데이트: {new Date().toLocaleDateString('ko-KR')}
           </div>
         </div>
