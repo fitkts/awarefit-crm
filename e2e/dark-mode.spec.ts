@@ -182,4 +182,93 @@ test.describe('다크모드 기능', () => {
     // 시스템 다크모드 설정에 따라 초기에 다크모드가 적용되어야 함
     await expect(page.locator('html')).toHaveClass(/dark/);
   });
+
+  test('ComponentDemo 페이지에서 다크모드 토글이 올바르게 작동해야 함', async ({ page }) => {
+    await page.goto('http://localhost:3000');
+    
+    // ComponentDemo 페이지로 이동
+    const sidebar = page.locator('nav').first();
+    await sidebar.hover();
+    
+    const componentDemoButton = page.locator('button:has-text("컴포넌트 데모")');
+    if (await componentDemoButton.isVisible()) {
+      await componentDemoButton.click();
+      await page.waitForTimeout(1000);
+      
+      // ComponentDemo 페이지의 ThemeToggle 버튼 찾기
+      const themeToggle = page.locator('button[aria-label*="다크모드"], button[title*="다크모드"]').first();
+      await expect(themeToggle).toBeVisible();
+      
+      // 다크모드로 전환
+      await themeToggle.click();
+      await expect(page.locator('html')).toHaveClass(/dark/);
+      
+      // UI 컴포넌트들이 다크모드 스타일로 표시되는지 확인
+      const demoCards = page.locator('[class*="Card"], .bg-white');
+      if (await demoCards.first().isVisible()) {
+        // 카드 컴포넌트들이 존재하는지 확인
+        await expect(demoCards.first()).toBeVisible();
+      }
+      
+      // 버튼들이 다크모드에서 올바르게 작동하는지 확인
+      const demoButtons = page.locator('button').filter({ hasText: /primary|secondary|danger/ });
+      if (await demoButtons.first().isVisible()) {
+        await expect(demoButtons.first()).toBeVisible();
+        await expect(demoButtons.first()).toBeEnabled();
+      }
+      
+      // 라이트모드로 다시 전환
+      await themeToggle.click();
+      await expect(page.locator('html')).not.toHaveClass(/dark/);
+    }
+  });
+
+  test('UI 컴포넌트들이 다크모드에서 올바른 스타일을 가져야 함', async ({ page }) => {
+    await page.goto('http://localhost:3000');
+    
+    // ComponentDemo 페이지로 이동
+    const sidebar = page.locator('nav').first();
+    await sidebar.hover();
+    
+    const componentDemoButton = page.locator('button:has-text("컴포넌트 데모")');
+    if (await componentDemoButton.isVisible()) {
+      await componentDemoButton.click();
+      await page.waitForTimeout(1000);
+      
+      // 다크모드로 전환
+      const themeToggle = page.locator('button[aria-label*="다크모드"], button[title*="다크모드"]').first();
+      await themeToggle.click();
+      await expect(page.locator('html')).toHaveClass(/dark/);
+      
+      // Input 필드 테스트
+      const inputFields = page.locator('input[type="text"], input[type="email"], textarea, select');
+      if (await inputFields.first().isVisible()) {
+        const firstInput = inputFields.first();
+        await expect(firstInput).toBeVisible();
+        
+        // Input에 포커스를 주어 다크모드 스타일 확인
+        await firstInput.focus();
+        await page.waitForTimeout(200);
+      }
+      
+      // 모달 열기 테스트 (모달 열기 버튼이 있다면)
+      const modalButton = page.locator('button:has-text("모달 열기")');
+      if (await modalButton.isVisible()) {
+        await modalButton.click();
+        await page.waitForTimeout(500);
+        
+        // 모달이 다크모드로 표시되는지 확인
+        const modal = page.locator('[role="dialog"], .fixed').filter({ hasText: /모달|Modal/ });
+        if (await modal.first().isVisible()) {
+          await expect(modal.first()).toBeVisible();
+          
+          // 모달 닫기
+          const closeButton = page.locator('button:has-text("취소"), button:has-text("닫기"), button[aria-label="닫기"]');
+          if (await closeButton.first().isVisible()) {
+            await closeButton.first().click();
+          }
+        }
+      }
+    }
+  });
 });

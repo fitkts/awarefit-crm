@@ -34,6 +34,7 @@ import {
   type InputSize,
   type ModalSize,
 } from '../components/ui';
+import ThemeToggle from '../components/ui/ThemeToggle';
 
 const ComponentDemo: React.FC = () => {
   const { addToast } = useToast();
@@ -155,11 +156,14 @@ const ComponentDemo: React.FC = () => {
           <div className="w-16 h-16 bg-white bg-opacity-20 rounded-xl flex items-center justify-center">
             <Code className="w-8 h-8" />
           </div>
-          <div>
+          <div className="flex-1">
             <h1 className="text-3xl font-bold">컴포넌트 데모</h1>
             <p className="text-purple-100 mt-2">
               재사용 가능한 UI 컴포넌트들을 직접 테스트하고 코드를 확인해보세요
             </p>
+          </div>
+          <div className="flex items-start">
+            <ThemeToggle size="lg" />
           </div>
         </div>
 
@@ -191,7 +195,7 @@ const ComponentDemo: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* 컨트롤 패널 */}
             <div className="space-y-4">
-              <h4 className="font-semibold text-gray-900">설정</h4>
+              <h4 className="font-semibold text-gray-900 dark:text-dark-100">설정</h4>
 
               <Select
                 label="Variant"
@@ -242,9 +246,9 @@ const ComponentDemo: React.FC = () => {
 
             {/* 미리보기 */}
             <div className="space-y-4">
-              <h4 className="font-semibold text-gray-900">미리보기</h4>
+              <h4 className="font-semibold text-gray-900 dark:text-dark-100">미리보기</h4>
 
-              <div className="p-6 bg-gray-50 rounded-lg">
+              <div className="p-6 bg-gray-50 dark:bg-dark-700 rounded-lg">
                 <Button
                   variant={buttonVariant}
                   size={buttonSize}
@@ -258,10 +262,10 @@ const ComponentDemo: React.FC = () => {
                 </Button>
               </div>
 
-              <div className="bg-gray-900 text-white p-4 rounded-lg text-sm font-mono relative">
+              <div className="bg-gray-900 dark:bg-dark-900 text-white p-4 rounded-lg text-sm font-mono relative">
                 <button
                   onClick={() => copyToClipboard(generateButtonCode())}
-                  className="absolute top-2 right-2 p-1 hover:bg-gray-700 rounded"
+                  className="absolute top-2 right-2 p-1 hover:bg-gray-700 dark:hover:bg-dark-700 rounded"
                 >
                   <Copy className="w-4 h-4" />
                 </button>
@@ -271,8 +275,8 @@ const ComponentDemo: React.FC = () => {
           </div>
 
           {/* 모든 버튼 variants 예시 */}
-          <div className="mt-8 pt-8 border-t border-gray-200">
-            <h4 className="font-semibold text-gray-900 mb-4">모든 Variants</h4>
+          <div className="mt-8 pt-8 border-t border-gray-200 dark:border-dark-600">
+            <h4 className="font-semibold text-gray-900 dark:text-dark-100 mb-4">모든 Variants</h4>
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
               {buttonVariants.map(variant => (
                 <Button
@@ -300,7 +304,7 @@ const ComponentDemo: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* 컨트롤 패널 */}
             <div className="space-y-4">
-              <h4 className="font-semibold text-gray-900">설정</h4>
+              <h4 className="font-semibold text-gray-900 dark:text-dark-100">설정</h4>
 
               <Select
                 label="Variant"
@@ -334,7 +338,7 @@ const ComponentDemo: React.FC = () => {
 
             {/* 미리보기 */}
             <div className="space-y-4">
-              <h4 className="font-semibold text-gray-900">미리보기</h4>
+              <h4 className="font-semibold text-gray-900 dark:text-dark-100">미리보기</h4>
 
               <Card
                 variant={cardVariant}
@@ -356,10 +360,10 @@ const ComponentDemo: React.FC = () => {
                 </p>
               </Card>
 
-              <div className="bg-gray-900 text-white p-4 rounded-lg text-sm font-mono relative">
+              <div className="bg-gray-900 dark:bg-dark-900 text-white p-4 rounded-lg text-sm font-mono relative">
                 <button
                   onClick={() => copyToClipboard(generateCardCode())}
-                  className="absolute top-2 right-2 p-1 hover:bg-gray-700 rounded"
+                  className="absolute top-2 right-2 p-1 hover:bg-gray-700 dark:hover:bg-dark-700 rounded"
                 >
                   <Copy className="w-4 h-4" />
                 </button>
@@ -380,7 +384,7 @@ const ComponentDemo: React.FC = () => {
         >
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div className="space-y-4">
-              <h4 className="font-semibold text-gray-900">설정</h4>
+              <h4 className="font-semibold text-gray-900 dark:text-dark-100">설정</h4>
 
               <Select
                 label="Size"

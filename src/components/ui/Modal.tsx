@@ -77,12 +77,12 @@ const Modal: React.FC<ModalProps> = ({
       onClick={handleOverlayClick}
     >
       <div
-        className={`bg-white rounded-xl shadow-2xl w-full ${sizeClasses[size]} max-h-[90vh] overflow-hidden flex flex-col ${className}`}
+        className={`bg-white dark:bg-dark-800 rounded-xl shadow-2xl dark:shadow-dark-900/50 w-full ${sizeClasses[size]} max-h-[90vh] overflow-hidden flex flex-col ${className}`}
         onClick={e => e.stopPropagation()}
       >
         {/* Header */}
         {(title || headerContent || showCloseButton) && (
-          <div className="flex items-center justify-between p-6 border-b border-gray-200 bg-gradient-to-r from-blue-500 to-blue-600">
+          <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-dark-600 bg-gradient-to-r from-blue-500 to-blue-600">
             <div className="flex items-center space-x-3">
               {title && <h2 className="text-xl font-bold text-white">{title}</h2>}
               {headerContent}
@@ -104,7 +104,7 @@ const Modal: React.FC<ModalProps> = ({
 
         {/* Footer */}
         {footerContent && (
-          <div className="border-t border-gray-200 p-6 bg-gray-50">{footerContent}</div>
+          <div className="border-t border-gray-200 dark:border-dark-600 p-6 bg-gray-50 dark:bg-dark-700">{footerContent}</div>
         )}
       </div>
     </div>

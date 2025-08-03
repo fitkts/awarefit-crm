@@ -58,9 +58,9 @@ const Input: React.FC<InputProps> = ({
   };
 
   const variantClasses = {
-    default: 'border-gray-300 focus:ring-blue-500 focus:border-blue-500',
-    error: 'border-red-500 focus:ring-red-500 focus:border-red-500',
-    success: 'border-green-500 focus:ring-green-500 focus:border-green-500',
+    default: 'border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:border-dark-600 dark:bg-dark-700 dark:text-dark-100 dark:focus:ring-blue-400 dark:focus:border-blue-400',
+    error: 'border-red-500 focus:ring-red-500 focus:border-red-500 dark:border-red-400 dark:bg-dark-700 dark:text-dark-100 dark:focus:ring-red-400 dark:focus:border-red-400',
+    success: 'border-green-500 focus:ring-green-500 focus:border-green-500 dark:border-green-400 dark:bg-dark-700 dark:text-dark-100 dark:focus:ring-green-400 dark:focus:border-green-400',
   };
 
   const iconSizeClasses = {
@@ -72,7 +72,7 @@ const Input: React.FC<InputProps> = ({
   const inputClasses = [
     'block w-full border rounded-md shadow-sm transition-colors',
     'focus:outline-none focus:ring-1',
-    'disabled:bg-gray-50 disabled:text-gray-500',
+    'disabled:bg-gray-50 disabled:text-gray-500 dark:disabled:bg-dark-800 dark:disabled:text-dark-500',
     sizeClasses[size],
     variantClasses[actualVariant],
     Icon && iconPosition === 'left' ? 'pl-10' : '',
@@ -86,7 +86,7 @@ const Input: React.FC<InputProps> = ({
   return (
     <div className={`${fullWidth ? 'w-full' : ''}`}>
       {label && (
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block text-sm font-medium text-gray-700 dark:text-dark-300 mb-1">
           {label}
           {required && <span className="text-red-500 ml-1">*</span>}
         </label>
@@ -97,7 +97,7 @@ const Input: React.FC<InputProps> = ({
           <div
             className={`absolute inset-y-0 ${iconPosition === 'left' ? 'left-0 pl-3' : 'right-0 pr-3'} flex items-center pointer-events-none`}
           >
-            <Icon className={`${iconSizeClasses[size]} text-gray-400`} />
+            <Icon className={`${iconSizeClasses[size]} text-gray-400 dark:text-dark-500`} />
           </div>
         )}
         <input
@@ -108,7 +108,7 @@ const Input: React.FC<InputProps> = ({
       </div>
 
       {hint && !error && !success && (
-        <p id={`${props.id}-hint`} className="mt-1 text-xs text-gray-500">
+        <p id={`${props.id}-hint`} className="mt-1 text-xs text-gray-500 dark:text-dark-400">
           {hint}
         </p>
       )}
@@ -146,15 +146,15 @@ const Textarea: React.FC<TextareaProps> = ({
   };
 
   const variantClasses = {
-    default: 'border-gray-300 focus:ring-blue-500 focus:border-blue-500',
-    error: 'border-red-500 focus:ring-red-500 focus:border-red-500',
-    success: 'border-green-500 focus:ring-green-500 focus:border-green-500',
+    default: 'border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:border-dark-600 dark:bg-dark-700 dark:text-dark-100 dark:focus:ring-blue-400 dark:focus:border-blue-400',
+    error: 'border-red-500 focus:ring-red-500 focus:border-red-500 dark:border-red-400 dark:bg-dark-700 dark:text-dark-100 dark:focus:ring-red-400 dark:focus:border-red-400',
+    success: 'border-green-500 focus:ring-green-500 focus:border-green-500 dark:border-green-400 dark:bg-dark-700 dark:text-dark-100 dark:focus:ring-green-400 dark:focus:border-green-400',
   };
 
   const textareaClasses = [
     'block w-full border rounded-md shadow-sm transition-colors resize-none',
     'focus:outline-none focus:ring-1',
-    'disabled:bg-gray-50 disabled:text-gray-500',
+    'disabled:bg-gray-50 disabled:text-gray-500 dark:disabled:bg-dark-800 dark:disabled:text-dark-500',
     sizeClasses[size],
     variantClasses[actualVariant],
     !fullWidth ? 'w-auto' : '',
@@ -166,7 +166,7 @@ const Textarea: React.FC<TextareaProps> = ({
   return (
     <div className={`${fullWidth ? 'w-full' : ''}`}>
       {label && (
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block text-sm font-medium text-gray-700 dark:text-dark-300 mb-1">
           {label}
           {required && <span className="text-red-500 ml-1">*</span>}
         </label>
@@ -180,7 +180,7 @@ const Textarea: React.FC<TextareaProps> = ({
       />
 
       {hint && !error && !success && (
-        <p id={`${props.id}-hint`} className="mt-1 text-xs text-gray-500">
+        <p id={`${props.id}-hint`} className="mt-1 text-xs text-gray-500 dark:text-dark-400">
           {hint}
         </p>
       )}
@@ -219,15 +219,15 @@ const Select: React.FC<SelectProps> = ({
   };
 
   const variantClasses = {
-    default: 'border-gray-300 focus:ring-blue-500 focus:border-blue-500',
-    error: 'border-red-500 focus:ring-red-500 focus:border-red-500',
-    success: 'border-green-500 focus:ring-green-500 focus:border-green-500',
+    default: 'border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:border-dark-600 dark:bg-dark-700 dark:text-dark-100 dark:focus:ring-blue-400 dark:focus:border-blue-400',
+    error: 'border-red-500 focus:ring-red-500 focus:border-red-500 dark:border-red-400 dark:bg-dark-700 dark:text-dark-100 dark:focus:ring-red-400 dark:focus:border-red-400',
+    success: 'border-green-500 focus:ring-green-500 focus:border-green-500 dark:border-green-400 dark:bg-dark-700 dark:text-dark-100 dark:focus:ring-green-400 dark:focus:border-green-400',
   };
 
   const selectClasses = [
     'block w-full border rounded-md shadow-sm transition-colors',
     'focus:outline-none focus:ring-1',
-    'disabled:bg-gray-50 disabled:text-gray-500',
+    'disabled:bg-gray-50 disabled:text-gray-500 dark:disabled:bg-dark-800 dark:disabled:text-dark-500',
     sizeClasses[size],
     variantClasses[actualVariant],
     !fullWidth ? 'w-auto' : '',
@@ -239,7 +239,7 @@ const Select: React.FC<SelectProps> = ({
   return (
     <div className={`${fullWidth ? 'w-full' : ''}`}>
       {label && (
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block text-sm font-medium text-gray-700 dark:text-dark-300 mb-1">
           {label}
           {required && <span className="text-red-500 ml-1">*</span>}
         </label>
@@ -263,7 +263,7 @@ const Select: React.FC<SelectProps> = ({
       </select>
 
       {hint && !error && !success && (
-        <p id={`${props.id}-hint`} className="mt-1 text-xs text-gray-500">
+        <p id={`${props.id}-hint`} className="mt-1 text-xs text-gray-500 dark:text-dark-400">
           {hint}
         </p>
       )}
