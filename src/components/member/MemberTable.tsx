@@ -1,28 +1,28 @@
 import {
-  ArrowUpDown,
-  Calendar,
-  CheckSquare,
-  ChevronDown,
-  ChevronUp,
-  Download,
-  Edit,
-  Eye,
-  Mail,
-  Phone,
-  Settings,
-  Square,
-  Trash2,
-  UserCheck,
-  Users,
-  UserX,
+    ArrowUpDown,
+    Calendar,
+    CheckSquare,
+    ChevronDown,
+    ChevronUp,
+    Download,
+    Edit,
+    Eye,
+    Mail,
+    Phone,
+    Settings,
+    Square,
+    Trash2,
+    UserCheck,
+    Users,
+    UserX,
 } from 'lucide-react';
 import React, { useState } from 'react';
 import {
-  BulkAction,
-  Member,
-  MemberTableColumn,
-  PaginationInfo,
-  SortOption,
+    BulkAction,
+    Member,
+    MemberTableColumn,
+    PaginationInfo,
+    SortOption,
 } from '../../types/member';
 
 interface MemberTableProps {
@@ -179,8 +179,8 @@ const MemberTable: React.FC<MemberTableProps> = ({
               {member.name.charAt(0)}
             </div>
             <div>
-              <div className="text-sm font-medium text-gray-900">{member.name}</div>
-              <div className="text-xs text-gray-500">
+              <div className="text-sm font-medium text-gray-900 dark:text-dark-100">{member.name}</div>
+              <div className="text-xs text-gray-500 dark:text-dark-400">
                 {member.phone || member.email || '연락처 없음'}
               </div>
             </div>
@@ -190,18 +190,18 @@ const MemberTable: React.FC<MemberTableProps> = ({
       case 'phone':
         return (
           <div>
-            <div className="flex items-center text-sm text-gray-900">
+            <div className="flex items-center text-sm text-gray-900 dark:text-dark-100">
               {member.phone ? (
                 <>
                   <Phone className="w-3 h-3 mr-1 text-gray-400" />
                   <span className="text-xs">{member.phone}</span>
                 </>
               ) : (
-                <span className="text-xs text-gray-400">미등록</span>
+                <span className="text-xs text-gray-400 dark:text-dark-500">미등록</span>
               )}
             </div>
             {member.email && (
-              <div className="flex items-center text-xs text-gray-500 mt-1">
+              <div className="flex items-center text-xs text-gray-500 dark:text-dark-400 mt-1">
                 <Mail className="w-3 h-3 mr-1 text-gray-400" />
                 {member.email}
               </div>
@@ -214,10 +214,10 @@ const MemberTable: React.FC<MemberTableProps> = ({
           <span
             className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${
               member.gender === '남성'
-                ? 'bg-blue-100 text-blue-800'
+                ? 'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200'
                 : member.gender === '여성'
-                  ? 'bg-pink-100 text-pink-800'
-                  : 'bg-gray-100 text-gray-800'
+                  ? 'bg-pink-100 dark:bg-pink-900 text-pink-800 dark:text-pink-200'
+                  : 'bg-gray-100 dark:bg-dark-600 text-gray-800 dark:text-dark-200'
             }`}
           >
             {member.gender || '미설정'}
@@ -228,12 +228,12 @@ const MemberTable: React.FC<MemberTableProps> = ({
         const birthDate = member.birth_date
           ? new Date(member.birth_date).toLocaleDateString('ko-KR')
           : '-';
-        return <div className="text-sm text-gray-900">{birthDate}</div>;
+        return <div className="text-sm text-gray-900 dark:text-dark-100">{birthDate}</div>;
       }
 
       case 'join_date':
         return (
-          <div className="flex items-center text-xs text-gray-900">
+          <div className="flex items-center text-xs text-gray-900 dark:text-dark-100">
             <Calendar className="w-3 h-3 mr-1 text-gray-400" />
             {new Date(member.join_date).toLocaleDateString('ko-KR')}
           </div>
@@ -241,7 +241,7 @@ const MemberTable: React.FC<MemberTableProps> = ({
 
       case 'assigned_staff':
         return (
-          <div className="text-sm text-gray-900">
+          <div className="text-sm text-gray-900 dark:text-dark-100">
             {(member as any).assigned_staff_name || '미배정'}
           </div>
         );
@@ -249,7 +249,7 @@ const MemberTable: React.FC<MemberTableProps> = ({
       case 'membership_status':
         // TODO: 실제 회원권 상태 로직 구현 필요
         return (
-          <span className="inline-flex px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800">
+          <span className="inline-flex px-2 py-1 text-xs font-medium rounded-full bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200">
             활성
           </span>
         );
@@ -258,7 +258,7 @@ const MemberTable: React.FC<MemberTableProps> = ({
         return (
           <span
             className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-              member.active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+              member.active ? 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200' : 'bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200'
             }`}
           >
             {member.active ? '활성' : '비활성'}
@@ -270,21 +270,21 @@ const MemberTable: React.FC<MemberTableProps> = ({
           <div className="flex items-center space-x-1">
             <button
               onClick={() => onView(member)}
-              className="text-blue-600 hover:text-blue-900 p-1 rounded transition-colors"
+              className="text-blue-600 dark:text-blue-400 hover:text-blue-900 dark:hover:text-blue-300 p-1 rounded transition-colors"
               title="상세보기"
             >
               <Eye className="w-3 h-3" />
             </button>
             <button
               onClick={() => onEdit(member)}
-              className="text-green-600 hover:text-green-900 p-1 rounded transition-colors"
+              className="text-green-600 dark:text-green-400 hover:text-green-900 dark:hover:text-green-300 p-1 rounded transition-colors"
               title="수정"
             >
               <Edit className="w-3 h-3" />
             </button>
             <button
               onClick={() => onDelete(member)}
-              className="text-red-600 hover:text-red-900 p-1 rounded transition-colors"
+              className="text-red-600 dark:text-red-400 hover:text-red-900 dark:hover:text-red-300 p-1 rounded transition-colors"
               title="삭제"
             >
               <Trash2 className="w-3 h-3" />
@@ -298,17 +298,17 @@ const MemberTable: React.FC<MemberTableProps> = ({
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+          <div className="bg-white dark:bg-dark-800 rounded-lg shadow-sm border border-gray-200 dark:border-dark-600 overflow-hidden">
       {/* 테이블 헤더 - 일괄 작업 및 설정 */}
-      <div className="px-4 py-3 border-b border-gray-200 bg-gray-50">
+              <div className="px-4 py-3 border-b border-gray-200 dark:border-dark-600 bg-gray-50 dark:bg-dark-700">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <h3 className="text-sm font-semibold text-gray-900">회원 목록</h3>
+            <h3 className="text-sm font-semibold text-gray-900 dark:text-dark-100">회원 목록</h3>
 
             {/* 선택된 항목 정보 */}
             {selectedMembers.length > 0 && (
               <div className="flex items-center space-x-2">
-                <span className="text-xs text-gray-600">{selectedMembers.length}명 선택됨</span>
+                <span className="text-xs text-gray-600 dark:text-dark-400">{selectedMembers.length}명 선택됨</span>
 
                 {/* 일괄 작업 버튼들 */}
                 <div className="flex items-center space-x-1">
@@ -346,8 +346,8 @@ const MemberTable: React.FC<MemberTableProps> = ({
 
         {/* 컬럼 설정 패널 */}
         {columnSettings && (
-          <div className="mt-3 p-3 bg-white rounded-lg border border-gray-200">
-            <h4 className="text-xs font-medium text-gray-900 mb-2">표시할 컬럼 선택</h4>
+          <div className="mt-3 p-3 bg-white dark:bg-dark-800 rounded-lg border border-gray-200 dark:border-dark-600">
+            <h4 className="text-xs font-medium text-gray-900 dark:text-dark-100 mb-2">표시할 컬럼 선택</h4>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
               {columns.map(column => (
                 <label key={column.key} className="flex items-center space-x-2 cursor-pointer">
@@ -364,7 +364,7 @@ const MemberTable: React.FC<MemberTableProps> = ({
                     className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                     disabled={column.sticky}
                   />
-                  <span className="text-xs text-gray-700">{column.label}</span>
+                  <span className="text-xs text-gray-700 dark:text-dark-300">{column.label}</span>
                 </label>
               ))}
             </div>
@@ -375,7 +375,7 @@ const MemberTable: React.FC<MemberTableProps> = ({
       {/* 테이블 */}
       <div className="overflow-x-auto">
         <table className="w-full">
-          <thead className="bg-gray-50 border-b border-gray-200">
+          <thead className="bg-gray-50 dark:bg-dark-700 border-b border-gray-200 dark:border-dark-600">
             <tr>
               {/* 전체 선택 체크박스 */}
               <th className="w-10 px-4 py-2">
@@ -392,14 +392,14 @@ const MemberTable: React.FC<MemberTableProps> = ({
               {visibleColumns.map(column => (
                 <th
                   key={column.key}
-                  className={`px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider ${
+                  className={`px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-dark-400 uppercase tracking-wider ${
                     column.width ? `w-[${column.width}]` : ''
                   }`}
                 >
                   {column.sortable ? (
                     <button
                       onClick={() => handleSort(column.key)}
-                      className="flex items-center space-x-1 hover:text-gray-700 transition-colors"
+                      className="flex items-center space-x-1 hover:text-gray-700 dark:hover:text-dark-200 transition-colors"
                     >
                       <span>{column.label}</span>
                       {sortOption.field === column.key ? (
@@ -420,13 +420,13 @@ const MemberTable: React.FC<MemberTableProps> = ({
             </tr>
           </thead>
 
-          <tbody className="bg-white divide-y divide-gray-200">
+          <tbody className="bg-white dark:bg-dark-800 divide-y divide-gray-200 dark:divide-dark-600">
             {loading ? (
               <tr>
                 <td colSpan={visibleColumns.length + 1} className="px-4 py-8 text-center">
                   <div className="flex items-center justify-center space-x-2">
                     <div className="animate-spin rounded-full h-6 w-6 border-2 border-blue-600 border-t-transparent"></div>
-                    <span className="text-sm text-gray-500">로딩 중...</span>
+                    <span className="text-sm text-gray-500 dark:text-dark-400">로딩 중...</span>
                   </div>
                 </td>
               </tr>
@@ -435,8 +435,8 @@ const MemberTable: React.FC<MemberTableProps> = ({
                 <td colSpan={visibleColumns.length + 1} className="px-4 py-8 text-center">
                   <div className="flex flex-col items-center space-y-2">
                     <Users className="w-10 h-10 text-gray-300" />
-                    <p className="text-sm text-gray-500">검색 결과가 없습니다.</p>
-                    <p className="text-xs text-gray-400">다른 검색 조건을 시도해보세요.</p>
+                    <p className="text-sm text-gray-500 dark:text-dark-400">검색 결과가 없습니다.</p>
+                    <p className="text-xs text-gray-400 dark:text-dark-500">다른 검색 조건을 시도해보세요.</p>
                   </div>
                 </td>
               </tr>
@@ -444,8 +444,8 @@ const MemberTable: React.FC<MemberTableProps> = ({
               members.map(member => (
                 <tr
                   key={member.id}
-                  className={`hover:bg-gray-50 transition-colors ${
-                    selectedMembers.includes(member.id) ? 'bg-blue-50' : ''
+                  className={`hover:bg-gray-50 dark:hover:bg-dark-700 transition-colors ${
+                    selectedMembers.includes(member.id) ? 'bg-blue-50 dark:bg-blue-900/30' : ''
                   }`}
                 >
                   {/* 선택 체크박스 */}
@@ -474,10 +474,10 @@ const MemberTable: React.FC<MemberTableProps> = ({
 
       {/* 페이지네이션 */}
       {!loading && members.length > 0 && (
-        <div className="px-4 py-3 border-t border-gray-200 bg-gray-50">
+        <div className="px-4 py-3 border-t border-gray-200 dark:border-dark-600 bg-gray-50 dark:bg-dark-700">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <div className="text-xs text-gray-700">
+              <div className="text-xs text-gray-700 dark:text-dark-300">
                 <span>
                   {(pagination.page - 1) * pagination.limit + 1}-
                   {Math.min(pagination.page * pagination.limit, pagination.total)} of{' '}
@@ -487,11 +487,11 @@ const MemberTable: React.FC<MemberTableProps> = ({
 
               {/* 페이지 당 항목 수 선택 */}
               <div className="flex items-center space-x-2">
-                <span className="text-xs text-gray-600">페이지당:</span>
+                <span className="text-xs text-gray-600 dark:text-dark-400">페이지당:</span>
                 <select
                   value={pagination.limit}
                   onChange={e => onLimitChange(parseInt(e.target.value))}
-                  className="px-2 py-1 text-xs border border-gray-300 rounded-md bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="px-2 py-1 text-xs border border-gray-300 dark:border-dark-600 rounded-md bg-white dark:bg-dark-700 dark:text-dark-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   disabled={loading}
                 >
                   <option value={10}>10개</option>
@@ -507,7 +507,7 @@ const MemberTable: React.FC<MemberTableProps> = ({
               <button
                 onClick={() => onPageChange(pagination.page - 1)}
                 disabled={!pagination.hasPrev}
-                className="px-2 py-1 border border-gray-300 rounded-lg text-xs hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="px-2 py-1 border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-800 text-gray-700 dark:text-dark-300 rounded-lg text-xs hover:bg-gray-50 dark:hover:bg-dark-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 이전
               </button>
@@ -519,8 +519,8 @@ const MemberTable: React.FC<MemberTableProps> = ({
                   onClick={() => onPageChange(pageNum)}
                   className={`px-2 py-1 rounded-lg text-xs transition-colors ${
                     pageNum === pagination.page
-                      ? 'bg-blue-600 text-white'
-                      : 'border border-gray-300 hover:bg-gray-50'
+                      ? 'bg-blue-600 dark:bg-blue-500 text-white'
+                      : 'border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-800 text-gray-700 dark:text-dark-300 hover:bg-gray-50 dark:hover:bg-dark-600'
                   }`}
                 >
                   {pageNum}
@@ -531,7 +531,7 @@ const MemberTable: React.FC<MemberTableProps> = ({
               <button
                 onClick={() => onPageChange(pagination.page + 1)}
                 disabled={!pagination.hasNext}
-                className="px-2 py-1 border border-gray-300 rounded-lg text-xs hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="px-2 py-1 border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-800 text-gray-700 dark:text-dark-300 rounded-lg text-xs hover:bg-gray-50 dark:hover:bg-dark-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 다음
               </button>

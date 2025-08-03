@@ -1,11 +1,11 @@
 import {
-  AlertCircle,
-  Calendar,
-  CreditCard,
-  FileText,
-  RefreshCw,
-  TrendingUp,
-  Users,
+    AlertCircle,
+    Calendar,
+    CreditCard,
+    FileText,
+    RefreshCw,
+    TrendingUp,
+    Users,
 } from 'lucide-react';
 import React from 'react';
 
@@ -84,7 +84,7 @@ const StatCard: React.FC<{
   iconBgColor: string;
   change?: number;
 }> = ({ title, value, subtitle, icon, iconBgColor, change }) => (
-  <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+  <div className="bg-white dark:bg-dark-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-dark-600">
     <div className="flex items-center">
       <div className={`p-3 rounded-lg ${iconBgColor}`}>{icon}</div>
       <div className="ml-4 flex-1">
@@ -183,7 +183,7 @@ const PaymentStats: React.FC<PaymentStatsProps> = ({ data, loading = false, onRe
       {/* 상세 통계 */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* 결제 방식별 통계 */}
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+        <div className="bg-white dark:bg-dark-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-dark-600">
           <h4 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
             <CreditCard className="w-5 h-5 mr-2" />
             결제 방식별 현황
@@ -217,7 +217,7 @@ const PaymentStats: React.FC<PaymentStatsProps> = ({ data, loading = false, onRe
         </div>
 
         {/* 결제 유형별 통계 */}
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+        <div className="bg-white dark:bg-dark-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-dark-600">
           <h4 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
             <FileText className="w-5 h-5 mr-2" />
             결제 유형별 현황

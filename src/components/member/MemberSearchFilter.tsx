@@ -171,9 +171,9 @@ const MemberSearchFilterComponent: React.FC<MemberSearchFilterProps> = ({
   }, [searchDebounce]);
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+    <div className="bg-white dark:bg-dark-800 rounded-lg shadow-sm border border-gray-200 dark:border-dark-600">
       {/* 기본 검색 바 */}
-      <div className="p-4 border-b border-gray-200">
+              <div className="p-4 border-b border-gray-200 dark:border-dark-600">
         <div className="flex flex-col lg:flex-row lg:items-center gap-3">
           {/* 검색 입력 - 크기 50% 축소 */}
           <div className="lg:w-96 relative">
@@ -183,7 +183,7 @@ const MemberSearchFilterComponent: React.FC<MemberSearchFilterProps> = ({
               placeholder="회원 이름, 전화번호, 이메일 검색"
               defaultValue={filter.search || ''}
               onChange={e => handleSearchChange(e.target.value)}
-              className="w-full pl-9 pr-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+              className="w-full pl-9 pr-3 py-2 text-sm border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-700 dark:text-dark-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
               disabled={loading}
             />
           </div>
@@ -483,7 +483,7 @@ const MemberSearchFilterComponent: React.FC<MemberSearchFilterProps> = ({
                   className={`flex items-center gap-1 px-2 py-1 text-xs rounded-lg transition-colors ${
                     JSON.stringify(filter) === JSON.stringify(preset.filter)
                       ? 'bg-blue-100 text-blue-700 border border-blue-300'
-                      : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-300'
+                      : 'bg-white dark:bg-dark-700 text-gray-600 dark:text-dark-300 hover:bg-gray-50 dark:hover:bg-dark-600 border border-gray-300 dark:border-dark-600'
                   }`}
                   disabled={loading}
                 >
