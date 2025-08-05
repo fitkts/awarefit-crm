@@ -1,4 +1,4 @@
-import { AlertCircle, CreditCard, Plus, RefreshCw, X } from 'lucide-react';
+import { AlertCircle, Plus, RefreshCw, X } from 'lucide-react';
 import React, { useCallback, useEffect, useState } from 'react';
 import PaymentDetailModal from '../components/payment/PaymentDetailModal';
 import PaymentForm from '../components/payment/PaymentForm';
@@ -7,12 +7,12 @@ import PaymentStats from '../components/payment/PaymentStats';
 import PaymentTable from '../components/payment/PaymentTable';
 import RefundModal from '../components/payment/RefundModal';
 import {
-  CreatePaymentInput,
-  Payment,
-  PaymentDetail,
-  PaymentSearchFilter as PaymentSearchFilterType,
-  PaymentSortOption,
-  UpdatePaymentInput,
+    CreatePaymentInput,
+    Payment,
+    PaymentDetail,
+    PaymentSearchFilter as PaymentSearchFilterType,
+    PaymentSortOption,
+    UpdatePaymentInput,
 } from '../types/payment';
 
 // 간단한 Toast 컴포넌트
@@ -272,34 +272,23 @@ const PaymentPage: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col h-full bg-gray-50">
-      {/* 헤더 */}
-      <div className="bg-white shadow-sm border-b border-gray-200 px-6 py-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center">
-            <CreditCard className="w-8 h-8 text-blue-600 mr-3" />
-            <div>
-              <h1 className="text-2xl font-bold text-gray-900">결제 관리</h1>
-              <p className="text-sm text-gray-600">회원권, PT, 기타 서비스 결제 관리</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-3">
-            <button
-              onClick={loadPayments}
-              disabled={loading}
-              className="flex items-center px-4 py-2 text-gray-600 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50"
-            >
-              <RefreshCw className={`w-4 h-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
-              새로고침
-            </button>
-            <button
-              onClick={handleCreatePayment}
-              className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-            >
-              <Plus className="w-4 h-4 mr-2" />새 결제
-            </button>
-          </div>
-        </div>
+    <div className="flex flex-col h-full bg-gray-50 dark:bg-dark-900">
+      {/* 상단 액션 버튼 영역 */}
+      <div className="flex justify-end px-6 py-4 gap-3">
+        <button
+          onClick={loadPayments}
+          disabled={loading}
+          className="flex items-center px-4 py-2 text-gray-600 dark:text-dark-300 bg-white dark:bg-dark-700 border border-gray-300 dark:border-dark-600 rounded-lg hover:bg-gray-50 dark:hover:bg-dark-600 disabled:opacity-50 transition-colors"
+        >
+          <RefreshCw className={`w-4 h-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
+          새로고침
+        </button>
+        <button
+          onClick={handleCreatePayment}
+          className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+        >
+          <Plus className="w-4 h-4 mr-2" />새 결제
+        </button>
       </div>
 
       {/* 통계 대시보드 */}
@@ -322,7 +311,7 @@ const PaymentPage: React.FC = () => {
       {/* 결제 목록 테이블 */}
       <div className="flex-1 px-6 pb-6">
         {error ? (
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+          <div className="bg-white dark:bg-dark-800 rounded-lg shadow-sm border border-gray-200 dark:border-dark-600 overflow-hidden">
             <div className="flex items-center justify-center py-12">
               <AlertCircle className="w-6 h-6 text-red-400 mr-2" />
               <span className="text-red-600">{error}</span>

@@ -88,11 +88,11 @@ const StatCard: React.FC<{
     <div className="flex items-center">
       <div className={`p-3 rounded-lg ${iconBgColor}`}>{icon}</div>
       <div className="ml-4 flex-1">
-        <p className="text-sm font-medium text-gray-600">{title}</p>
-        <p className="text-2xl font-bold text-gray-900">{value}</p>
+        <p className="text-sm font-medium text-gray-600 dark:text-dark-300">{title}</p>
+        <p className="text-2xl font-bold text-gray-900 dark:text-dark-100">{value}</p>
         {subtitle && (
           <div className="flex items-center mt-1">
-            <p className="text-xs text-gray-500">{subtitle}</p>
+            <p className="text-xs text-gray-500 dark:text-dark-400">{subtitle}</p>
             <ChangeIndicator change={change} />
           </div>
         )}
@@ -108,13 +108,13 @@ const PaymentStats: React.FC<PaymentStatsProps> = ({ data, loading = false, onRe
         {[...Array(4)].map((_, index) => (
           <div
             key={index}
-            className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 animate-pulse"
+            className="bg-white dark:bg-dark-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-dark-600 animate-pulse"
           >
             <div className="flex items-center">
-              <div className="p-3 rounded-lg bg-gray-200 w-12 h-12"></div>
+              <div className="p-3 rounded-lg bg-gray-200 dark:bg-dark-600 w-12 h-12"></div>
               <div className="ml-4 flex-1">
-                <div className="h-4 bg-gray-200 rounded mb-2 w-3/4"></div>
-                <div className="h-6 bg-gray-200 rounded w-1/2"></div>
+                <div className="h-4 bg-gray-200 dark:bg-dark-600 rounded mb-2 w-3/4"></div>
+                <div className="h-6 bg-gray-200 dark:bg-dark-600 rounded w-1/2"></div>
               </div>
             </div>
           </div>
@@ -128,10 +128,10 @@ const PaymentStats: React.FC<PaymentStatsProps> = ({ data, loading = false, onRe
       {/* 새로고침 버튼 */}
       {onRefresh && (
         <div className="flex justify-between items-center">
-          <h3 className="text-lg font-semibold text-gray-900">결제 통계</h3>
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-dark-100">결제 통계</h3>
           <button
             onClick={onRefresh}
-            className="flex items-center px-3 py-2 text-sm text-gray-600 bg-white border border-gray-300 rounded-lg hover:bg-gray-50"
+            className="flex items-center px-3 py-2 text-sm text-gray-600 dark:text-dark-300 bg-white dark:bg-dark-700 border border-gray-300 dark:border-dark-600 rounded-lg hover:bg-gray-50 dark:hover:bg-dark-600 transition-colors"
           >
             <RefreshCw className="w-4 h-4 mr-1" />
             새로고침
@@ -184,32 +184,32 @@ const PaymentStats: React.FC<PaymentStatsProps> = ({ data, loading = false, onRe
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* 결제 방식별 통계 */}
         <div className="bg-white dark:bg-dark-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-dark-600">
-          <h4 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+          <h4 className="text-lg font-semibold text-gray-900 dark:text-dark-100 mb-4 flex items-center">
             <CreditCard className="w-5 h-5 mr-2" />
             결제 방식별 현황
           </h4>
           <div className="space-y-3">
             <div className="flex justify-between items-center">
-              <span className="text-sm text-gray-600">현금</span>
-              <span className="text-sm font-medium text-gray-900">
+              <span className="text-sm text-gray-600 dark:text-dark-300">현금</span>
+              <span className="text-sm font-medium text-gray-900 dark:text-dark-100">
                 {formatCurrency(data.paymentMethods.cash)}
               </span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-sm text-gray-600">카드</span>
-              <span className="text-sm font-medium text-gray-900">
+              <span className="text-sm text-gray-600 dark:text-dark-300">카드</span>
+              <span className="text-sm font-medium text-gray-900 dark:text-dark-100">
                 {formatCurrency(data.paymentMethods.card)}
               </span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-sm text-gray-600">계좌이체</span>
-              <span className="text-sm font-medium text-gray-900">
+              <span className="text-sm text-gray-600 dark:text-dark-300">계좌이체</span>
+              <span className="text-sm font-medium text-gray-900 dark:text-dark-100">
                 {formatCurrency(data.paymentMethods.transfer)}
               </span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-sm text-gray-600">기타</span>
-              <span className="text-sm font-medium text-gray-900">
+              <span className="text-sm text-gray-600 dark:text-dark-300">기타</span>
+              <span className="text-sm font-medium text-gray-900 dark:text-dark-100">
                 {formatCurrency(data.paymentMethods.other)}
               </span>
             </div>
@@ -218,26 +218,26 @@ const PaymentStats: React.FC<PaymentStatsProps> = ({ data, loading = false, onRe
 
         {/* 결제 유형별 통계 */}
         <div className="bg-white dark:bg-dark-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-dark-600">
-          <h4 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+          <h4 className="text-lg font-semibold text-gray-900 dark:text-dark-100 mb-4 flex items-center">
             <FileText className="w-5 h-5 mr-2" />
             결제 유형별 현황
           </h4>
           <div className="space-y-3">
             <div className="flex justify-between items-center">
-              <span className="text-sm text-gray-600">회원권</span>
-              <span className="text-sm font-medium text-gray-900">
+              <span className="text-sm text-gray-600 dark:text-dark-300">회원권</span>
+              <span className="text-sm font-medium text-gray-900 dark:text-dark-100">
                 {formatCurrency(data.topPaymentTypes.membership)}
               </span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-sm text-gray-600">PT</span>
-              <span className="text-sm font-medium text-gray-900">
+              <span className="text-sm text-gray-600 dark:text-dark-300">PT</span>
+              <span className="text-sm font-medium text-gray-900 dark:text-dark-100">
                 {formatCurrency(data.topPaymentTypes.pt)}
               </span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-sm text-gray-600">기타</span>
-              <span className="text-sm font-medium text-gray-900">
+              <span className="text-sm text-gray-600 dark:text-dark-300">기타</span>
+              <span className="text-sm font-medium text-gray-900 dark:text-dark-100">
                 {formatCurrency(data.topPaymentTypes.other)}
               </span>
             </div>

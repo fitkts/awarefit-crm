@@ -104,18 +104,18 @@ const PaymentSearchFilter: React.FC<PaymentSearchFilterProps> = ({
   };
 
   return (
-    <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 space-y-4">
+    <div className="bg-white dark:bg-dark-800 p-4 rounded-lg shadow-sm border border-gray-200 dark:border-dark-600 space-y-4">
       {/* 상단 검색 바 */}
       <div className="flex flex-col sm:flex-row gap-4">
         {/* 검색어 입력 */}
         <div className="flex-1 relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 dark:text-dark-400" />
           <input
             type="text"
             placeholder="회원명, 전화번호, 결제번호로 검색..."
             value={filter.search || ''}
             onChange={e => handleFilterChange('search', e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-700 text-gray-900 dark:text-dark-100 placeholder-gray-400 dark:placeholder-dark-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
 
@@ -123,19 +123,19 @@ const PaymentSearchFilter: React.FC<PaymentSearchFilterProps> = ({
         <div className="flex gap-2">
           <button
             onClick={() => setDatePreset('today')}
-            className="px-3 py-2 text-xs bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200"
+            className="px-3 py-2 text-xs bg-gray-100 dark:bg-dark-700 text-gray-700 dark:text-dark-300 rounded-md hover:bg-gray-200 dark:hover:bg-dark-600 transition-colors"
           >
             오늘
           </button>
           <button
             onClick={() => setDatePreset('week')}
-            className="px-3 py-2 text-xs bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200"
+            className="px-3 py-2 text-xs bg-gray-100 dark:bg-dark-700 text-gray-700 dark:text-dark-300 rounded-md hover:bg-gray-200 dark:hover:bg-dark-600 transition-colors"
           >
             1주일
           </button>
           <button
             onClick={() => setDatePreset('month')}
-            className="px-3 py-2 text-xs bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200"
+            className="px-3 py-2 text-xs bg-gray-100 dark:bg-dark-700 text-gray-700 dark:text-dark-300 rounded-md hover:bg-gray-200 dark:hover:bg-dark-600 transition-colors"
           >
             1개월
           </button>
@@ -144,7 +144,7 @@ const PaymentSearchFilter: React.FC<PaymentSearchFilterProps> = ({
         {/* 고급 필터 토글 */}
         <button
           onClick={() => setShowAdvanced(!showAdvanced)}
-          className="flex items-center px-3 py-2 text-sm text-gray-600 bg-gray-100 rounded-md hover:bg-gray-200"
+          className="flex items-center px-3 py-2 text-sm text-gray-600 dark:text-dark-300 bg-gray-100 dark:bg-dark-700 rounded-md hover:bg-gray-200 dark:hover:bg-dark-600 transition-colors"
         >
           <Filter className="w-4 h-4 mr-1" />
           고급 필터
@@ -159,7 +159,7 @@ const PaymentSearchFilter: React.FC<PaymentSearchFilterProps> = ({
         {getActiveFilterCount() > 0 && (
           <button
             onClick={onReset}
-            className="flex items-center px-3 py-2 text-sm text-red-600 bg-red-50 rounded-md hover:bg-red-100"
+            className="flex items-center px-3 py-2 text-sm text-red-600 bg-red-50 dark:bg-red-900/20 rounded-md hover:bg-red-100 dark:hover:bg-red-900/30 transition-colors"
           >
             <X className="w-4 h-4 mr-1" />
             초기화
@@ -169,10 +169,10 @@ const PaymentSearchFilter: React.FC<PaymentSearchFilterProps> = ({
 
       {/* 고급 필터 섹션 */}
       {showAdvanced && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 border-t border-gray-200">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 border-t border-gray-200 dark:border-dark-600">
           {/* 날짜 범위 */}
           <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">
               <Calendar className="w-4 h-4 inline mr-1" />
               시작일
             </label>
@@ -180,12 +180,12 @@ const PaymentSearchFilter: React.FC<PaymentSearchFilterProps> = ({
               type="date"
               value={filter.payment_date_from || ''}
               onChange={e => handleFilterChange('payment_date_from', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-700 text-gray-900 dark:text-dark-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
           <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">
               <Calendar className="w-4 h-4 inline mr-1" />
               종료일
             </label>
@@ -193,13 +193,13 @@ const PaymentSearchFilter: React.FC<PaymentSearchFilterProps> = ({
               type="date"
               value={filter.payment_date_to || ''}
               onChange={e => handleFilterChange('payment_date_to', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-700 text-gray-900 dark:text-dark-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
           {/* 결제 유형 */}
           <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">
               <Package className="w-4 h-4 inline mr-1" />
               결제 유형
             </label>
@@ -211,7 +211,7 @@ const PaymentSearchFilter: React.FC<PaymentSearchFilterProps> = ({
                   e.target.value === 'all' ? undefined : e.target.value
                 )
               }
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-700 text-gray-900 dark:text-dark-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="all">전체</option>
               <option value="membership">회원권</option>
@@ -222,7 +222,7 @@ const PaymentSearchFilter: React.FC<PaymentSearchFilterProps> = ({
 
           {/* 결제 방식 */}
           <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">
               <CreditCard className="w-4 h-4 inline mr-1" />
               결제 방식
             </label>
@@ -234,7 +234,7 @@ const PaymentSearchFilter: React.FC<PaymentSearchFilterProps> = ({
                   e.target.value === 'all' ? undefined : e.target.value
                 )
               }
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-700 text-gray-900 dark:text-dark-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="all">전체</option>
               <option value="현금">현금</option>
@@ -246,7 +246,7 @@ const PaymentSearchFilter: React.FC<PaymentSearchFilterProps> = ({
 
           {/* 담당 직원 */}
           <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">
               <User className="w-4 h-4 inline mr-1" />
               담당 직원
             </label>
@@ -258,7 +258,7 @@ const PaymentSearchFilter: React.FC<PaymentSearchFilterProps> = ({
                   e.target.value ? parseInt(e.target.value) : undefined
                 )
               }
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-700 text-gray-900 dark:text-dark-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="">전체 직원</option>
               {staffList.map(staff => (
@@ -271,13 +271,13 @@ const PaymentSearchFilter: React.FC<PaymentSearchFilterProps> = ({
 
           {/* 결제 상태 */}
           <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700">상태</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">상태</label>
             <select
               value={filter.status || 'all'}
               onChange={e =>
                 handleFilterChange('status', e.target.value === 'all' ? undefined : e.target.value)
               }
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-700 text-gray-900 dark:text-dark-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="all">전체</option>
               <option value="completed">완료</option>
@@ -289,7 +289,7 @@ const PaymentSearchFilter: React.FC<PaymentSearchFilterProps> = ({
 
           {/* 금액 범위 */}
           <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700">최소 금액</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">최소 금액</label>
             <input
               type="number"
               placeholder="0"
@@ -300,12 +300,12 @@ const PaymentSearchFilter: React.FC<PaymentSearchFilterProps> = ({
                   e.target.value ? parseInt(e.target.value) : undefined
                 )
               }
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-700 text-gray-900 dark:text-dark-100 placeholder-gray-400 dark:placeholder-dark-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
           <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700">최대 금액</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">최대 금액</label>
             <input
               type="number"
               placeholder="∞"
@@ -316,7 +316,7 @@ const PaymentSearchFilter: React.FC<PaymentSearchFilterProps> = ({
                   e.target.value ? parseInt(e.target.value) : undefined
                 )
               }
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-700 text-gray-900 dark:text-dark-100 placeholder-gray-400 dark:placeholder-dark-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
         </div>
@@ -326,14 +326,14 @@ const PaymentSearchFilter: React.FC<PaymentSearchFilterProps> = ({
       {loading && (
         <div className="flex items-center justify-center py-2">
           <RefreshCw className="w-4 h-4 animate-spin text-blue-600 mr-2" />
-          <span className="text-sm text-gray-600">검색 중...</span>
+          <span className="text-sm text-gray-600 dark:text-dark-400">검색 중...</span>
         </div>
       )}
 
       {/* 활성 필터 표시 */}
       {getActiveFilterCount() > 0 && !showAdvanced && (
-        <div className="flex flex-wrap gap-2 pt-2 border-t border-gray-200">
-          <span className="text-xs text-gray-500">활성 필터:</span>
+        <div className="flex flex-wrap gap-2 pt-2 border-t border-gray-200 dark:border-dark-600">
+          <span className="text-xs text-gray-500 dark:text-dark-400">활성 필터:</span>
           {filter.search && (
             <span className="inline-flex items-center px-2 py-1 text-xs bg-blue-100 text-blue-800 rounded-full">
               검색: {filter.search}

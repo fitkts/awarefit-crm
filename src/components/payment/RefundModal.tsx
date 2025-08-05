@@ -1,12 +1,12 @@
 import {
-  AlertTriangle,
-  Calculator,
-  CreditCard,
-  DollarSign,
-  FileText,
-  Lock,
-  RefreshCw,
-  X,
+    AlertTriangle,
+    Calculator,
+    CreditCard,
+    DollarSign,
+    FileText,
+    Lock,
+    RefreshCw,
+    X,
 } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import { PaymentDetail, RefundEligibility } from '../../types/payment';
@@ -167,14 +167,14 @@ const RefundModal: React.FC<RefundModalProps> = ({
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg shadow-lg w-full max-w-2xl max-h-[90vh] overflow-hidden">
+      <div className="bg-white dark:bg-dark-800 rounded-lg shadow-lg w-full max-w-2xl max-h-[90vh] overflow-hidden">
         {/* 헤더 */}
-        <div className="flex items-center justify-between p-6 border-b border-gray-200">
+        <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-dark-600">
           <div className="flex items-center">
             <RefreshCw className="w-6 h-6 text-yellow-600 mr-3" />
-            <h2 className="text-xl font-semibold text-gray-900">환불 처리</h2>
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-dark-100">환불 처리</h2>
           </div>
-          <button onClick={onClose} className="text-gray-400 hover:text-gray-600 transition-colors">
+          <button onClick={onClose} className="text-gray-400 dark:text-dark-400 hover:text-gray-600 dark:hover:text-dark-300 transition-colors">
             <X className="w-6 h-6" />
           </button>
         </div>
@@ -374,11 +374,11 @@ const RefundModal: React.FC<RefundModalProps> = ({
           )}
 
           {/* 버튼 */}
-          <div className="flex justify-end gap-3 mt-6 pt-6 border-t border-gray-200">
+          <div className="flex justify-end gap-3 mt-6 pt-6 border-t border-gray-200 dark:border-dark-600">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors"
+              className="px-4 py-2 text-gray-700 dark:text-dark-300 bg-gray-100 dark:bg-dark-700 rounded-md hover:bg-gray-200 dark:hover:bg-dark-600 transition-colors"
               disabled={isLoading}
             >
               취소

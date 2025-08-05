@@ -1,15 +1,15 @@
 import {
-  ArrowUpDown,
-  Calendar,
-  CheckCircle,
-  Clock,
-  CreditCard,
-  DollarSign,
-  Edit,
-  Eye,
-  RefreshCw,
-  User,
-  X,
+    ArrowUpDown,
+    Calendar,
+    CheckCircle,
+    Clock,
+    CreditCard,
+    DollarSign,
+    Edit,
+    Eye,
+    RefreshCw,
+    User,
+    X,
 } from 'lucide-react';
 import React from 'react';
 import { PaymentDetail, PaymentSortOption } from '../../types/payment';
@@ -117,10 +117,10 @@ const PaymentTable: React.FC<PaymentTableProps> = ({
   // 로딩 상태
   if (loading) {
     return (
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+      <div className="bg-white dark:bg-dark-800 rounded-lg shadow-sm border border-gray-200 dark:border-dark-600 overflow-hidden">
         <div className="flex items-center justify-center py-12">
-          <RefreshCw className="w-6 h-6 animate-spin text-gray-400 mr-2" />
-          <span className="text-gray-600">결제 목록을 불러오는 중...</span>
+          <RefreshCw className="w-6 h-6 animate-spin text-gray-400 dark:text-dark-400 mr-2" />
+          <span className="text-gray-600 dark:text-dark-400">결제 목록을 불러오는 중...</span>
         </div>
       </div>
     );
@@ -129,10 +129,10 @@ const PaymentTable: React.FC<PaymentTableProps> = ({
   // 데이터 없음
   if (!payments || payments.length === 0) {
     return (
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+      <div className="bg-white dark:bg-dark-800 rounded-lg shadow-sm border border-gray-200 dark:border-dark-600 overflow-hidden">
         <div className="flex items-center justify-center py-12">
-          <CreditCard className="w-6 h-6 text-gray-400 mr-2" />
-          <span className="text-gray-600">결제 내역이 없습니다.</span>
+          <CreditCard className="w-6 h-6 text-gray-400 dark:text-dark-400 mr-2" />
+          <span className="text-gray-600 dark:text-dark-400">결제 내역이 없습니다.</span>
         </div>
       </div>
     );
@@ -140,16 +140,16 @@ const PaymentTable: React.FC<PaymentTableProps> = ({
 
   return (
     <div
-      className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden"
+      className="bg-white dark:bg-dark-800 rounded-lg shadow-sm border border-gray-200 dark:border-dark-600 overflow-hidden"
       data-testid="payment-table"
     >
       <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
+        <table className="min-w-full divide-y divide-gray-200 dark:divide-dark-600">
+          <thead className="bg-gray-50 dark:bg-dark-700">
             <tr>
               {/* 결제일시 */}
               <th
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
+                className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-dark-300 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-dark-600"
                 onClick={() => handleSort('payment_date')}
               >
                 <div className="flex items-center">
@@ -161,7 +161,7 @@ const PaymentTable: React.FC<PaymentTableProps> = ({
 
               {/* 회원명 */}
               <th
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
+                className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-dark-300 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-dark-600"
                 onClick={() => handleSort('member_name')}
               >
                 <div className="flex items-center">
@@ -172,18 +172,18 @@ const PaymentTable: React.FC<PaymentTableProps> = ({
               </th>
 
               {/* 결제 유형 */}
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-dark-300 uppercase tracking-wider">
                 결제 유형
               </th>
 
               {/* 상품명 */}
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-dark-300 uppercase tracking-wider">
                 상품명
               </th>
 
               {/* 금액 */}
               <th
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
+                className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-dark-300 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-dark-600"
                 onClick={() => handleSort('amount')}
               >
                 <div className="flex items-center">
@@ -194,67 +194,67 @@ const PaymentTable: React.FC<PaymentTableProps> = ({
               </th>
 
               {/* 결제 방식 */}
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-dark-300 uppercase tracking-wider">
                 결제 방식
               </th>
 
               {/* 담당 직원 */}
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-dark-300 uppercase tracking-wider">
                 담당 직원
               </th>
 
               {/* 상태 */}
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-dark-300 uppercase tracking-wider">
                 상태
               </th>
 
               {/* 액션 */}
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-dark-300 uppercase tracking-wider">
                 액션
               </th>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
+          <tbody className="bg-white dark:bg-dark-800 divide-y divide-gray-200 dark:divide-dark-600">
             {payments.map(payment => (
               <React.Fragment key={payment.id}>
-                <tr className="hover:bg-gray-50">
+                <tr className="hover:bg-gray-50 dark:hover:bg-dark-700">
                   {/* 결제일시 */}
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-dark-100">
                     {formatDate(payment.payment_date)}
                   </td>
 
                   {/* 회원명 */}
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex flex-col">
-                      <div className="text-sm font-medium text-gray-900">{payment.member_name}</div>
-                      <div className="text-sm text-gray-500">
+                      <div className="text-sm font-medium text-gray-900 dark:text-dark-100">{payment.member_name}</div>
+                      <div className="text-sm text-gray-500 dark:text-dark-400">
                         {payment.member_phone || payment.member_email || '연락처 없음'}
                       </div>
                     </div>
                   </td>
 
                   {/* 결제 유형 */}
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-dark-100">
                     {getPaymentTypeText(payment.payment_type)}
                   </td>
 
                   {/* 상품명 */}
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-dark-100">
                     {payment.membership_type_name || payment.pt_package_name || '-'}
                   </td>
 
                   {/* 금액 */}
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-dark-100">
                     {formatCurrency(payment.amount)}
                   </td>
 
                   {/* 결제 방식 */}
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-dark-100">
                     {payment.payment_method}
                   </td>
 
                   {/* 담당 직원 */}
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-dark-100">
                     {payment.staff_name}
                   </td>
 
@@ -273,14 +273,14 @@ const PaymentTable: React.FC<PaymentTableProps> = ({
                     <div className="flex space-x-2">
                       <button
                         onClick={() => onView(payment)}
-                        className="text-blue-600 hover:text-blue-900"
+                        className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300"
                         title="상세보기"
                       >
                         <Eye className="w-4 h-4" />
                       </button>
                       <button
                         onClick={() => onEdit(payment)}
-                        className="text-green-600 hover:text-green-900"
+                        className="text-green-600 hover:text-green-900 dark:text-green-400 dark:hover:text-green-300"
                         title="수정"
                       >
                         <Edit className="w-4 h-4" />
@@ -288,7 +288,7 @@ const PaymentTable: React.FC<PaymentTableProps> = ({
                       {payment.status === 'completed' && (
                         <button
                           onClick={() => onCancel(payment.id)}
-                          className="text-red-600 hover:text-red-900"
+                          className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300"
                           title="취소/환불"
                         >
                           <X className="w-4 h-4" />
