@@ -149,9 +149,9 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
   }, [searchDebounce]);
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200 sticky top-4 z-20">
+    <div className="bg-white dark:bg-dark-800 rounded-lg shadow-sm border border-gray-200 dark:border-dark-600 sticky top-4 z-20">
       {/* 메인 필터 헤더 */}
-      <div className="px-4 py-3 border-b border-gray-200">
+      <div className="px-4 py-3 border-b border-gray-200 dark:border-dark-600">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
             {/* 검색 입력 */}
@@ -163,7 +163,7 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
                 type="text"
                 placeholder="이름, 연락처, 직원번호 검색..."
                 onChange={e => handleSearchChange(e.target.value)}
-                className="block w-full pl-10 pr-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="block w-full pl-10 pr-3 py-2 text-sm border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-700 dark:text-dark-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 disabled={loading}
               />
             </div>
@@ -173,8 +173,8 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
               onClick={() => setIsAdvancedOpen(!isAdvancedOpen)}
               className={`flex items-center gap-2 px-3 py-2 text-sm border rounded-lg transition-colors ${
                 isAdvancedOpen || activeFilterCount > 0
-                  ? 'bg-blue-50 text-blue-700 border-blue-300'
-                  : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
+                  ? 'bg-blue-50 dark:bg-blue-900 text-blue-700 dark:text-blue-300 border-blue-300 dark:border-blue-700'
+                  : 'bg-white dark:bg-dark-800 text-gray-700 dark:text-dark-300 border-gray-300 dark:border-dark-600 hover:bg-gray-50 dark:hover:bg-dark-700'
               }`}
               disabled={loading}
             >
@@ -194,7 +194,7 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
             {activeFilterCount > 0 && (
               <button
                 onClick={onReset}
-                className="flex items-center gap-1 px-2 py-2 text-sm text-gray-600 hover:text-gray-900 transition-colors"
+                className="flex items-center gap-1 px-2 py-2 text-sm text-gray-600 dark:text-dark-400 hover:text-gray-900 dark:hover:text-dark-100 transition-colors"
                 disabled={loading}
                 title="필터 초기화"
               >
@@ -207,7 +207,7 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
             {/* 새로고침 */}
             <button
               onClick={onRefresh}
-              className="p-2 text-gray-500 hover:text-gray-700 transition-colors"
+              className="p-2 text-gray-500 dark:text-dark-400 hover:text-gray-700 dark:hover:text-dark-200 transition-colors"
               disabled={loading}
               title="새로고침"
             >
@@ -228,7 +228,7 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
 
         {/* 결과 카운트 및 프리셋 */}
         <div className="flex items-center justify-between mt-3">
-          <div className="text-sm text-gray-600">
+          <div className="text-sm text-gray-600 dark:text-dark-400">
             {loading ? (
               <span className="flex items-center gap-2">
                 <div className="w-4 h-4 border-2 border-gray-300 border-t-blue-600 rounded-full animate-spin"></div>
@@ -237,7 +237,7 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
             ) : (
               <span>
                 총{' '}
-                <span className="font-semibold text-gray-900">{staffCount.toLocaleString()}명</span>
+                <span className="font-semibold text-gray-900 dark:text-dark-100">{staffCount.toLocaleString()}명</span>
                 의 직원
               </span>
             )}
@@ -251,8 +251,8 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
                 onClick={() => applyPreset(preset)}
                 className={`flex items-center gap-1 px-2 py-1 text-xs rounded-full transition-colors ${
                   JSON.stringify(filter) === JSON.stringify(preset.filter)
-                    ? 'bg-blue-100 text-blue-700 border border-blue-300'
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    ? 'bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 border border-blue-300 dark:border-blue-700'
+                    : 'bg-gray-100 dark:bg-dark-700 text-gray-600 dark:text-dark-400 hover:bg-gray-200 dark:hover:bg-dark-600'
                 }`}
                 disabled={loading}
               >
@@ -266,15 +266,15 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
 
       {/* 고급 필터 패널 */}
       {isAdvancedOpen && (
-        <div className="p-4 border-b border-gray-200 bg-gray-50">
+        <div className="p-4 border-b border-gray-200 dark:border-dark-600 bg-gray-50 dark:bg-dark-700">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {/* 성별 필터 */}
             <div>
-              <label className="block text-xs font-medium text-gray-700 mb-1">성별</label>
+              <label className="block text-xs font-medium text-gray-700 dark:text-dark-300 mb-1">성별</label>
               <select
                 value={filter.gender || ''}
                 onChange={e => updateFilter({ gender: e.target.value as '남성' | '여성' | '' })}
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-800 dark:text-dark-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 disabled={loading}
               >
                 <option value="">전체</option>
@@ -285,11 +285,11 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
 
             {/* 직책 필터 */}
             <div>
-              <label className="block text-xs font-medium text-gray-700 mb-1">직책</label>
+              <label className="block text-xs font-medium text-gray-700 dark:text-dark-300 mb-1">직책</label>
               <select
                 value={filter.position || ''}
                 onChange={e => updateFilter({ position: e.target.value })}
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-800 dark:text-dark-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 disabled={loading}
               >
                 <option value="">전체</option>
@@ -303,11 +303,11 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
 
             {/* 부서 필터 */}
             <div>
-              <label className="block text-xs font-medium text-gray-700 mb-1">부서</label>
+              <label className="block text-xs font-medium text-gray-700 dark:text-dark-300 mb-1">부서</label>
               <select
                 value={filter.department || ''}
                 onChange={e => updateFilter({ department: e.target.value })}
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-800 dark:text-dark-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 disabled={loading}
               >
                 <option value="">전체</option>
@@ -320,7 +320,7 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
 
             {/* 역할 필터 */}
             <div>
-              <label className="block text-xs font-medium text-gray-700 mb-1">역할</label>
+              <label className="block text-xs font-medium text-gray-700 dark:text-dark-300 mb-1">역할</label>
               <select
                 value={filter.role_id === 'all' ? 'all' : filter.role_id?.toString() || ''}
                 onChange={e => {
@@ -329,7 +329,7 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
                     role_id: value === '' ? undefined : value === 'all' ? 'all' : parseInt(value),
                   });
                 }}
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-800 dark:text-dark-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 disabled={loading}
               >
                 <option value="">전체</option>
@@ -343,7 +343,7 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
 
             {/* 활성 상태 필터 */}
             <div>
-              <label className="block text-xs font-medium text-gray-700 mb-1">직원 상태</label>
+              <label className="block text-xs font-medium text-gray-700 dark:text-dark-300 mb-1">직원 상태</label>
               <select
                 value={
                   filter.is_active === true ? 'true' : filter.is_active === false ? 'false' : 'all'
@@ -354,7 +354,7 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
                     is_active: value === 'all' ? 'all' : value === 'true' ? true : false,
                   });
                 }}
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-800 dark:text-dark-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 disabled={loading}
               >
                 <option value="all">전체</option>
@@ -365,30 +365,30 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
 
             {/* 입사일 범위 */}
             <div>
-              <label className="block text-xs font-medium text-gray-700 mb-1">입사일 (시작)</label>
+              <label className="block text-xs font-medium text-gray-700 dark:text-dark-300 mb-1">입사일 (시작)</label>
               <input
                 type="date"
                 value={filter.hire_date_from || ''}
                 onChange={e => updateFilter({ hire_date_from: e.target.value })}
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-800 dark:text-dark-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 disabled={loading}
               />
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-gray-700 mb-1">입사일 (종료)</label>
+              <label className="block text-xs font-medium text-gray-700 dark:text-dark-300 mb-1">입사일 (종료)</label>
               <input
                 type="date"
                 value={filter.hire_date_to || ''}
                 onChange={e => updateFilter({ hire_date_to: e.target.value })}
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-800 dark:text-dark-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 disabled={loading}
               />
             </div>
 
             {/* 급여 범위 */}
             <div>
-              <label className="block text-xs font-medium text-gray-700 mb-1">
+              <label className="block text-xs font-medium text-gray-700 dark:text-dark-300 mb-1">
                 최소 급여 (만원)
               </label>
               <input
@@ -400,13 +400,13 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
                     salary_min: e.target.value ? parseInt(e.target.value) * 10000 : undefined,
                   })
                 }
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-800 dark:text-dark-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 disabled={loading}
               />
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-gray-700 mb-1">
+              <label className="block text-xs font-medium text-gray-700 dark:text-dark-300 mb-1">
                 최대 급여 (만원)
               </label>
               <input
@@ -418,41 +418,41 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
                     salary_max: e.target.value ? parseInt(e.target.value) * 10000 : undefined,
                   })
                 }
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-800 dark:text-dark-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 disabled={loading}
               />
             </div>
 
             {/* 생년월일 범위 */}
             <div>
-              <label className="block text-xs font-medium text-gray-700 mb-1">
+              <label className="block text-xs font-medium text-gray-700 dark:text-dark-300 mb-1">
                 생년월일 (시작)
               </label>
               <input
                 type="date"
                 value={filter.birth_date_from || ''}
                 onChange={e => updateFilter({ birth_date_from: e.target.value })}
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-800 dark:text-dark-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 disabled={loading}
               />
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-gray-700 mb-1">
+              <label className="block text-xs font-medium text-gray-700 dark:text-dark-300 mb-1">
                 생년월일 (종료)
               </label>
               <input
                 type="date"
                 value={filter.birth_date_to || ''}
                 onChange={e => updateFilter({ birth_date_to: e.target.value })}
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-800 dark:text-dark-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 disabled={loading}
               />
             </div>
 
             {/* 나이 범위 */}
             <div>
-              <label className="block text-xs font-medium text-gray-700 mb-1">최소 나이</label>
+              <label className="block text-xs font-medium text-gray-700 dark:text-dark-300 mb-1">최소 나이</label>
               <input
                 type="number"
                 placeholder="예: 20"
@@ -460,13 +460,13 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
                 onChange={e =>
                   updateFilter({ age_min: e.target.value ? parseInt(e.target.value) : undefined })
                 }
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-800 dark:text-dark-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 disabled={loading}
               />
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-gray-700 mb-1">최대 나이</label>
+              <label className="block text-xs font-medium text-gray-700 dark:text-dark-300 mb-1">최대 나이</label>
               <input
                 type="number"
                 placeholder="예: 65"
@@ -474,14 +474,14 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
                 onChange={e =>
                   updateFilter({ age_max: e.target.value ? parseInt(e.target.value) : undefined })
                 }
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-800 dark:text-dark-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 disabled={loading}
               />
             </div>
 
             {/* 연락처 필터 */}
             <div>
-              <label className="block text-xs font-medium text-gray-700 mb-1">연락처</label>
+              <label className="block text-xs font-medium text-gray-700 dark:text-dark-300 mb-1">연락처</label>
               <select
                 value={
                   filter.has_phone === true ? 'true' : filter.has_phone === false ? 'false' : ''
@@ -492,7 +492,7 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
                     has_phone: value === '' ? undefined : value === 'true' ? true : false,
                   });
                 }}
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-800 dark:text-dark-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 disabled={loading}
               >
                 <option value="">전체</option>
@@ -503,7 +503,7 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
 
             {/* 이메일 필터 */}
             <div>
-              <label className="block text-xs font-medium text-gray-700 mb-1">이메일</label>
+              <label className="block text-xs font-medium text-gray-700 dark:text-dark-300 mb-1">이메일</label>
               <select
                 value={
                   filter.has_email === true ? 'true' : filter.has_email === false ? 'false' : ''
@@ -514,7 +514,7 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
                     has_email: value === '' ? undefined : value === 'true' ? true : false,
                   });
                 }}
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-800 dark:text-dark-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 disabled={loading}
               >
                 <option value="">전체</option>

@@ -1,18 +1,18 @@
 import {
-  Briefcase,
-  Calendar,
-  Clock,
-  CreditCard,
-  Edit,
-  History,
-  Mail,
-  MapPin,
-  Phone,
-  Shield,
-  TrendingUp,
-  User,
-  Users,
-  X,
+    Briefcase,
+    Calendar,
+    Clock,
+    CreditCard,
+    Edit,
+    History,
+    Mail,
+    MapPin,
+    Phone,
+    Shield,
+    TrendingUp,
+    User,
+    Users,
+    X,
 } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import { Staff, StaffDetail } from '../../types/staff';
@@ -172,7 +172,7 @@ const StaffDetailModal: React.FC<StaffDetailModalProps> = ({ isOpen, onClose, st
       onClick={handleOverlayClick}
     >
       <div
-        className="bg-white rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden"
+        className="bg-white dark:bg-dark-800 rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden"
         onClick={e => e.stopPropagation()}
       >
         {/* 헤더 */}
@@ -224,7 +224,7 @@ const StaffDetailModal: React.FC<StaffDetailModalProps> = ({ isOpen, onClose, st
         </div>
 
         {/* 탭 네비게이션 */}
-        <div className="border-b border-gray-200 bg-gray-50">
+        <div className="border-b border-gray-200 dark:border-dark-600 bg-gray-50 dark:bg-dark-700">
           <nav className="flex space-x-8 px-6">
             {[
               { id: 'overview', label: '개요', icon: User },
@@ -240,8 +240,8 @@ const StaffDetailModal: React.FC<StaffDetailModalProps> = ({ isOpen, onClose, st
                   onClick={() => setActiveTab(tab.id as any)}
                   className={`flex items-center space-x-2 py-4 border-b-2 transition-colors ${
                     activeTab === tab.id
-                      ? 'border-blue-600 text-blue-600'
-                      : 'border-transparent text-gray-500 hover:text-gray-700'
+                      ? 'border-blue-600 text-blue-600 dark:text-blue-400'
+                      : 'border-transparent text-gray-500 dark:text-dark-400 hover:text-gray-700 dark:hover:text-dark-200'
                   }`}
                 >
                   <Icon className="w-4 h-4" />
@@ -257,7 +257,7 @@ const StaffDetailModal: React.FC<StaffDetailModalProps> = ({ isOpen, onClose, st
           {loading ? (
             <div className="flex items-center justify-center p-12">
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-              <span className="ml-3 text-gray-500">로딩 중...</span>
+              <span className="ml-3 text-gray-500 dark:text-dark-400">로딩 중...</span>
             </div>
           ) : (
             <>
@@ -267,25 +267,25 @@ const StaffDetailModal: React.FC<StaffDetailModalProps> = ({ isOpen, onClose, st
                   {/* 기본 정보 카드 */}
                   <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                     {/* 개인 정보 */}
-                    <div className="bg-white rounded-lg border border-gray-200 p-6">
-                      <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                    <div className="bg-white dark:bg-dark-800 rounded-lg border border-gray-200 dark:border-dark-600 p-6">
+                      <h3 className="text-lg font-semibold text-gray-900 dark:text-dark-100 mb-4 flex items-center">
                         <User className="w-5 h-5 mr-2" />
                         개인 정보
                       </h3>
                       <div className="space-y-3">
                         <div className="flex items-center space-x-3">
                           <Phone className="w-4 h-4 text-gray-400" />
-                          <span className="text-sm text-gray-600">
+                          <span className="text-sm text-gray-600 dark:text-dark-400">
                             {formatPhoneNumber(staff.phone)}
                           </span>
                         </div>
                         <div className="flex items-center space-x-3">
                           <Mail className="w-4 h-4 text-gray-400" />
-                          <span className="text-sm text-gray-600">{formatEmail(staff.email)}</span>
+                          <span className="text-sm text-gray-600 dark:text-dark-400">{formatEmail(staff.email)}</span>
                         </div>
                         <div className="flex items-center space-x-3">
                           <Calendar className="w-4 h-4 text-gray-400" />
-                          <span className="text-sm text-gray-600">
+                          <span className="text-sm text-gray-600 dark:text-dark-400">
                             {staff.birth_date
                               ? `${formatDate(staff.birth_date)} (${staffDetail.age}세)`
                               : '미등록'}
@@ -293,37 +293,37 @@ const StaffDetailModal: React.FC<StaffDetailModalProps> = ({ isOpen, onClose, st
                         </div>
                         <div className="flex items-center space-x-3">
                           <MapPin className="w-4 h-4 text-gray-400" />
-                          <span className="text-sm text-gray-600">
+                          <span className="text-sm text-gray-600 dark:text-dark-400">
                             {formatAddress(staff.address)}
                           </span>
                         </div>
                         {staff.gender && (
                           <div className="flex items-center space-x-3">
                             <Users className="w-4 h-4 text-gray-400" />
-                            <span className="text-sm text-gray-600">{staff.gender}</span>
+                            <span className="text-sm text-gray-600 dark:text-dark-400">{staff.gender}</span>
                           </div>
                         )}
                       </div>
                     </div>
 
                     {/* 근무 정보 */}
-                    <div className="bg-white rounded-lg border border-gray-200 p-6">
-                      <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                    <div className="bg-white dark:bg-dark-800 rounded-lg border border-gray-200 dark:border-dark-600 p-6">
+                      <h3 className="text-lg font-semibold text-gray-900 dark:text-dark-100 mb-4 flex items-center">
                         <Briefcase className="w-5 h-5 mr-2" />
                         근무 정보
                       </h3>
                       <div className="space-y-4">
                         <div>
                           <div className="flex justify-between items-center mb-1">
-                            <span className="text-sm text-gray-600">입사일</span>
-                            <span className="text-sm font-medium text-gray-900">
+                            <span className="text-sm text-gray-600 dark:text-dark-400">입사일</span>
+                            <span className="text-sm font-medium text-gray-900 dark:text-dark-100">
                               {formatDate(staff.hire_date)}
                             </span>
                           </div>
                         </div>
                         <div>
                           <div className="flex justify-between items-center mb-1">
-                            <span className="text-sm text-gray-600">근속 기간</span>
+                            <span className="text-sm text-gray-600 dark:text-dark-400">근속 기간</span>
                             <span className="text-lg font-bold text-blue-600">
                               {formatTenure(staffDetail.tenure_months)}
                             </span>
@@ -331,7 +331,7 @@ const StaffDetailModal: React.FC<StaffDetailModalProps> = ({ isOpen, onClose, st
                         </div>
                         <div>
                           <div className="flex justify-between items-center mb-1">
-                            <span className="text-sm text-gray-600">현재 급여</span>
+                            <span className="text-sm text-gray-600 dark:text-dark-400">현재 급여</span>
                             <span className="text-lg font-bold text-green-600">
                               {formatSalary(staff.salary)}
                             </span>
@@ -339,8 +339,8 @@ const StaffDetailModal: React.FC<StaffDetailModalProps> = ({ isOpen, onClose, st
                         </div>
                         <div>
                           <div className="flex justify-between items-center mb-1">
-                            <span className="text-sm text-gray-600">부서</span>
-                            <span className="text-sm text-gray-900">
+                            <span className="text-sm text-gray-600 dark:text-dark-400">부서</span>
+                            <span className="text-sm text-gray-900 dark:text-dark-100">
                               {staff.department || '미설정'}
                             </span>
                           </div>
@@ -349,15 +349,15 @@ const StaffDetailModal: React.FC<StaffDetailModalProps> = ({ isOpen, onClose, st
                     </div>
 
                     {/* 성과 정보 */}
-                    <div className="bg-white rounded-lg border border-gray-200 p-6">
-                      <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                    <div className="bg-white dark:bg-dark-800 rounded-lg border border-gray-200 dark:border-dark-600 p-6">
+                      <h3 className="text-lg font-semibold text-gray-900 dark:text-dark-100 mb-4 flex items-center">
                         <TrendingUp className="w-5 h-5 mr-2" />
                         성과 정보
                       </h3>
                       <div className="space-y-4">
                         <div>
                           <div className="flex justify-between items-center mb-1">
-                            <span className="text-sm text-gray-600">관리 회원 수</span>
+                            <span className="text-sm text-gray-600 dark:text-dark-400">관리 회원 수</span>
                             <span className="text-lg font-bold text-purple-600">
                               {staffDetail.managed_members_count}명
                             </span>
@@ -365,7 +365,7 @@ const StaffDetailModal: React.FC<StaffDetailModalProps> = ({ isOpen, onClose, st
                         </div>
                         <div>
                           <div className="flex justify-between items-center mb-1">
-                            <span className="text-sm text-gray-600">총 매출 기여</span>
+                            <span className="text-sm text-gray-600 dark:text-dark-400">총 매출 기여</span>
                             <span className="text-lg font-bold text-green-600">
                               {(staffDetail.total_sales_amount / 10000).toLocaleString()}만원
                             </span>
@@ -373,8 +373,8 @@ const StaffDetailModal: React.FC<StaffDetailModalProps> = ({ isOpen, onClose, st
                         </div>
                         <div>
                           <div className="flex justify-between items-center mb-1">
-                            <span className="text-sm text-gray-600">월 평균 매출</span>
-                            <span className="text-sm text-gray-900">
+                            <span className="text-sm text-gray-600 dark:text-dark-400">월 평균 매출</span>
+                            <span className="text-sm text-gray-900 dark:text-dark-100">
                               {Math.round(
                                 staffDetail.total_sales_amount /
                                   (staffDetail.tenure_months || 1) /

@@ -1,12 +1,12 @@
 import {
-  Calculator,
-  CreditCard,
-  History,
-  Save,
-  TrendingDown,
-  TrendingUp,
-  User,
-  X,
+    Calculator,
+    CreditCard,
+    History,
+    Save,
+    TrendingDown,
+    TrendingUp,
+    User,
+    X,
 } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import { SalaryAdjustmentInput, Staff, StaffSalaryHistory } from '../../types/staff';
@@ -215,7 +215,7 @@ const SalaryManagementModal: React.FC<SalaryManagementModalProps> = ({
       onClick={handleOverlayClick}
     >
       <div
-        className="bg-white rounded-xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-hidden"
+        className="bg-white dark:bg-dark-800 rounded-xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-hidden"
         onClick={e => e.stopPropagation()}
       >
         {/* 헤더 */}
@@ -230,7 +230,7 @@ const SalaryManagementModal: React.FC<SalaryManagementModalProps> = ({
                 <p className="text-green-100">
                   {staff.name} - {staff.position}
                   {(staff.phone || staff.email) && (
-                    <span className="text-gray-500 text-sm ml-2">
+                    <span className="text-gray-300 text-sm ml-2">
                       ({staff.phone || staff.email})
                     </span>
                   )}
@@ -249,29 +249,29 @@ const SalaryManagementModal: React.FC<SalaryManagementModalProps> = ({
 
         <div className="flex flex-col lg:flex-row">
           {/* 좌측: 급여 조정 폼 */}
-          <div className="lg:w-1/2 p-6 border-r border-gray-200">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+          <div className="lg:w-1/2 p-6 border-r border-gray-200 dark:border-dark-600">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-dark-100 mb-4 flex items-center">
               <Calculator className="w-5 h-5 mr-2 text-green-600" />
               급여 조정
             </h3>
 
             <form onSubmit={handleSubmit} className="space-y-4">
               {/* 현재 급여 표시 */}
-              <div className="bg-gray-50 rounded-lg p-4">
-                <label className="block text-sm font-medium text-gray-700 mb-1">현재 급여</label>
-                <div className="text-2xl font-bold text-gray-900">
+              <div className="bg-gray-50 dark:bg-dark-700 rounded-lg p-4">
+                <label className="block text-sm font-medium text-gray-700 dark:text-dark-300 mb-1">현재 급여</label>
+                <div className="text-2xl font-bold text-gray-900 dark:text-dark-100">
                   {staff.salary ? formatSalary(staff.salary) : '미설정'}
                 </div>
               </div>
 
               {/* 신규 급여 입력 */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">신규 급여 *</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-dark-300 mb-1">신규 급여 *</label>
                 <input
                   type="number"
                   value={formData.new_salary}
                   onChange={e => handleInputChange('new_salary', e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-700 dark:text-dark-100 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
                   placeholder="예: 3000000"
                   required
                 />
@@ -279,11 +279,11 @@ const SalaryManagementModal: React.FC<SalaryManagementModalProps> = ({
 
               {/* 조정 사유 */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">조정 사유</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-dark-300 mb-1">조정 사유</label>
                 <textarea
                   value={formData.adjustment_reason}
                   onChange={e => handleInputChange('adjustment_reason', e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-700 dark:text-dark-100 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
                   placeholder="급여 조정 사유를 입력하세요"
                   rows={3}
                 />
@@ -291,23 +291,23 @@ const SalaryManagementModal: React.FC<SalaryManagementModalProps> = ({
 
               {/* 적용일 */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">적용일 *</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-dark-300 mb-1">적용일 *</label>
                 <input
                   type="date"
                   value={formData.effective_date}
                   onChange={e => handleInputChange('effective_date', e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-700 dark:text-dark-100 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
                   required
                 />
               </div>
 
               {/* 계산 결과 */}
               {formData.new_salary && (
-                <div className="bg-gradient-to-r from-blue-50 to-green-50 rounded-lg p-4 border border-blue-200">
-                  <h4 className="text-sm font-medium text-gray-900 mb-3">조정 내역</h4>
+                <div className="bg-gradient-to-r from-blue-50 dark:from-blue-900 to-green-50 dark:to-green-900 rounded-lg p-4 border border-blue-200 dark:border-blue-700">
+                  <h4 className="text-sm font-medium text-gray-900 dark:text-dark-100 mb-3">조정 내역</h4>
                   <div className="space-y-2">
                     <div className="flex justify-between items-center">
-                      <span className="text-sm text-gray-600">금액 변화</span>
+                      <span className="text-sm text-gray-600 dark:text-dark-400">금액 변화</span>
                       <div className="flex items-center">
                         {calculations.adjustment_amount > 0 ? (
                           <TrendingUp className="w-4 h-4 text-green-500 mr-1" />
@@ -329,7 +329,7 @@ const SalaryManagementModal: React.FC<SalaryManagementModalProps> = ({
                       </div>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-sm text-gray-600">변화율</span>
+                      <span className="text-sm text-gray-600 dark:text-dark-400">변화율</span>
                       <span
                         className={`font-medium ${
                           calculations.adjustment_percentage > 0
@@ -365,7 +365,7 @@ const SalaryManagementModal: React.FC<SalaryManagementModalProps> = ({
 
           {/* 우측: 급여 이력 */}
           <div className="lg:w-1/2 p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-dark-100 mb-4 flex items-center">
               <History className="w-5 h-5 mr-2 text-blue-600" />
               급여 조정 이력
             </h3>

@@ -1,12 +1,12 @@
 import {
-  Briefcase,
-  Building,
-  CreditCard,
-  Shield,
-  TrendingUp,
-  UserCheck,
-  UserPlus,
-  Users,
+    Briefcase,
+    Building,
+    CreditCard,
+    Shield,
+    TrendingUp,
+    UserCheck,
+    UserPlus,
+    Users,
 } from 'lucide-react';
 import React from 'react';
 import { StaffStats } from '../../types/staff';
@@ -23,11 +23,11 @@ const StaffStatsComponent: React.FC<StaffStatsProps> = ({ stats, loading = false
         {[...Array(4)].map((_, index) => (
           <div
             key={index}
-            className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 animate-pulse"
+            className="bg-white dark:bg-dark-800 rounded-lg shadow-sm border border-gray-200 dark:border-dark-600 p-4 animate-pulse"
           >
-            <div className="h-3 bg-gray-200 rounded w-3/4 mb-2"></div>
-            <div className="h-6 bg-gray-200 rounded w-1/2 mb-2"></div>
-            <div className="h-2 bg-gray-200 rounded w-full"></div>
+            <div className="h-3 bg-gray-200 dark:bg-dark-600 rounded w-3/4 mb-2"></div>
+            <div className="h-6 bg-gray-200 dark:bg-dark-600 rounded w-1/2 mb-2"></div>
+            <div className="h-2 bg-gray-200 dark:bg-dark-600 rounded w-full"></div>
           </div>
         ))}
       </div>
@@ -70,12 +70,12 @@ const StaffStatsComponent: React.FC<StaffStatsProps> = ({ stats, loading = false
       {/* 상단 주요 지표 */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* 전체 직원 수 */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
+        <div className="bg-white dark:bg-dark-800 rounded-lg shadow-sm border border-gray-200 dark:border-dark-600 p-4 hover:shadow-md transition-shadow">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-xs font-medium text-gray-600">전체 직원</p>
-              <p className="text-xl font-bold text-gray-900">{totalStaff.toLocaleString()}</p>
-              <p className="text-xs text-gray-500 mt-1">신규 직원 {newThisMonth}명 (이번 달)</p>
+              <p className="text-xs font-medium text-gray-600 dark:text-dark-400">전체 직원</p>
+              <p className="text-xl font-bold text-gray-900 dark:text-dark-100">{totalStaff.toLocaleString()}</p>
+              <p className="text-xs text-gray-500 dark:text-dark-400 mt-1">신규 직원 {newThisMonth}명 (이번 달)</p>
             </div>
             <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
               <Users className="w-5 h-5 text-blue-600" />
@@ -84,12 +84,12 @@ const StaffStatsComponent: React.FC<StaffStatsProps> = ({ stats, loading = false
         </div>
 
         {/* 활성 직원 */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
+        <div className="bg-white dark:bg-dark-800 rounded-lg shadow-sm border border-gray-200 dark:border-dark-600 p-4 hover:shadow-md transition-shadow">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-xs font-medium text-gray-600">활성 직원</p>
+              <p className="text-xs font-medium text-gray-600 dark:text-dark-400">활성 직원</p>
               <p className="text-xl font-bold text-green-600">{activeStaff.toLocaleString()}</p>
-              <p className="text-xs text-gray-500 mt-1">
+              <p className="text-xs text-gray-500 dark:text-dark-400 mt-1">
                 {getPercentage(activeStaff, totalStaff)}% 활성률
               </p>
             </div>
@@ -100,12 +100,12 @@ const StaffStatsComponent: React.FC<StaffStatsProps> = ({ stats, loading = false
         </div>
 
         {/* 평균 근속 기간 */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
+        <div className="bg-white dark:bg-dark-800 rounded-lg shadow-sm border border-gray-200 dark:border-dark-600 p-4 hover:shadow-md transition-shadow">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-xs font-medium text-gray-600">평균 근속</p>
+              <p className="text-xs font-medium text-gray-600 dark:text-dark-400">평균 근속</p>
               <p className="text-xl font-bold text-blue-600">{averageTenure}개월</p>
-              <p className="text-xs text-gray-500 mt-1">
+              <p className="text-xs text-gray-500 dark:text-dark-400 mt-1">
                 약 {Math.round((averageTenure / 12) * 10) / 10}년
               </p>
             </div>
@@ -116,12 +116,12 @@ const StaffStatsComponent: React.FC<StaffStatsProps> = ({ stats, loading = false
         </div>
 
         {/* 총 급여 비용 */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
+        <div className="bg-white dark:bg-dark-800 rounded-lg shadow-sm border border-gray-200 dark:border-dark-600 p-4 hover:shadow-md transition-shadow">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-xs font-medium text-gray-600">총 급여 비용</p>
+              <p className="text-xs font-medium text-gray-600 dark:text-dark-400">총 급여 비용</p>
               <p className="text-xl font-bold text-purple-600">{formatSalary(totalSalaryCost)}원</p>
-              <p className="text-xs text-gray-500 mt-1">평균 {formatSalary(averageSalary)}원</p>
+              <p className="text-xs text-gray-500 dark:text-dark-400 mt-1">평균 {formatSalary(averageSalary)}원</p>
             </div>
             <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
               <CreditCard className="w-5 h-5 text-purple-600" />
@@ -133,10 +133,10 @@ const StaffStatsComponent: React.FC<StaffStatsProps> = ({ stats, loading = false
       {/* 하단 상세 분석 */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         {/* 직책별 분포 */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+        <div className="bg-white dark:bg-dark-800 rounded-lg shadow-sm border border-gray-200 dark:border-dark-600 p-4">
           <div className="flex items-center mb-3">
-            <Briefcase className="w-4 h-4 text-gray-600 mr-2" />
-            <h3 className="text-sm font-medium text-gray-900">직책별 분포</h3>
+            <Briefcase className="w-4 h-4 text-gray-600 dark:text-dark-400 mr-2" />
+            <h3 className="text-sm font-medium text-gray-900 dark:text-dark-100">직책별 분포</h3>
           </div>
           <div className="space-y-2">
             {Object.entries(byPosition).map(([position, count]) => (
@@ -153,10 +153,10 @@ const StaffStatsComponent: React.FC<StaffStatsProps> = ({ stats, loading = false
                             : 'bg-gray-500'
                     }`}
                   ></div>
-                  <span className="text-xs text-gray-600">{position}</span>
+                  <span className="text-xs text-gray-600 dark:text-dark-400">{position}</span>
                 </div>
                 <div className="flex items-center">
-                  <span className="text-sm font-medium text-gray-900 mr-2">{count}명</span>
+                  <span className="text-sm font-medium text-gray-900 dark:text-dark-100 mr-2">{count}명</span>
                   <span className="text-xs text-gray-500">
                     ({getPercentage(count, totalStaff)}%)
                   </span>
@@ -164,16 +164,16 @@ const StaffStatsComponent: React.FC<StaffStatsProps> = ({ stats, loading = false
               </div>
             ))}
             {Object.keys(byPosition).length === 0 && (
-              <p className="text-xs text-gray-500 text-center py-2">데이터가 없습니다</p>
+              <p className="text-xs text-gray-500 dark:text-dark-400 text-center py-2">데이터가 없습니다</p>
             )}
           </div>
         </div>
 
         {/* 부서별 분포 */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+        <div className="bg-white dark:bg-dark-800 rounded-lg shadow-sm border border-gray-200 dark:border-dark-600 p-4">
           <div className="flex items-center mb-3">
-            <Building className="w-4 h-4 text-gray-600 mr-2" />
-            <h3 className="text-sm font-medium text-gray-900">부서별 분포</h3>
+            <Building className="w-4 h-4 text-gray-600 dark:text-dark-400 mr-2" />
+            <h3 className="text-sm font-medium text-gray-900 dark:text-dark-100">부서별 분포</h3>
           </div>
           <div className="space-y-2">
             {Object.entries(byDepartment).map(([department, count]) => (
@@ -192,10 +192,10 @@ const StaffStatsComponent: React.FC<StaffStatsProps> = ({ stats, loading = false
                               : 'bg-gray-500'
                     }`}
                   ></div>
-                  <span className="text-xs text-gray-600">{department}</span>
+                  <span className="text-xs text-gray-600 dark:text-dark-400">{department}</span>
                 </div>
                 <div className="flex items-center">
-                  <span className="text-sm font-medium text-gray-900 mr-2">{count}명</span>
+                  <span className="text-sm font-medium text-gray-900 dark:text-dark-100 mr-2">{count}명</span>
                   <span className="text-xs text-gray-500">
                     ({getPercentage(count, totalStaff)}%)
                   </span>
@@ -203,16 +203,16 @@ const StaffStatsComponent: React.FC<StaffStatsProps> = ({ stats, loading = false
               </div>
             ))}
             {Object.keys(byDepartment).length === 0 && (
-              <p className="text-xs text-gray-500 text-center py-2">데이터가 없습니다</p>
+              <p className="text-xs text-gray-500 dark:text-dark-400 text-center py-2">데이터가 없습니다</p>
             )}
           </div>
         </div>
 
         {/* 역할별 분포 */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+        <div className="bg-white dark:bg-dark-800 rounded-lg shadow-sm border border-gray-200 dark:border-dark-600 p-4">
           <div className="flex items-center mb-3">
-            <Shield className="w-4 h-4 text-gray-600 mr-2" />
-            <h3 className="text-sm font-medium text-gray-900">역할별 분포</h3>
+            <Shield className="w-4 h-4 text-gray-600 dark:text-dark-400 mr-2" />
+            <h3 className="text-sm font-medium text-gray-900 dark:text-dark-100">역할별 분포</h3>
           </div>
           <div className="space-y-2">
             {Object.entries(byRole).map(([role, count]) => (
@@ -229,10 +229,10 @@ const StaffStatsComponent: React.FC<StaffStatsProps> = ({ stats, loading = false
                             : 'bg-gray-500'
                     }`}
                   ></div>
-                  <span className="text-xs text-gray-600">{role}</span>
+                  <span className="text-xs text-gray-600 dark:text-dark-400">{role}</span>
                 </div>
                 <div className="flex items-center">
-                  <span className="text-sm font-medium text-gray-900 mr-2">{count}명</span>
+                  <span className="text-sm font-medium text-gray-900 dark:text-dark-100 mr-2">{count}명</span>
                   <span className="text-xs text-gray-500">
                     ({getPercentage(count, totalStaff)}%)
                   </span>
@@ -240,7 +240,7 @@ const StaffStatsComponent: React.FC<StaffStatsProps> = ({ stats, loading = false
               </div>
             ))}
             {Object.keys(byRole).length === 0 && (
-              <p className="text-xs text-gray-500 text-center py-2">데이터가 없습니다</p>
+              <p className="text-xs text-gray-500 dark:text-dark-400 text-center py-2">데이터가 없습니다</p>
             )}
           </div>
         </div>

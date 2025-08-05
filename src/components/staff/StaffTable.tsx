@@ -1,20 +1,20 @@
 import {
-  ArrowUpDown,
-  Briefcase,
-  Building,
-  Calendar,
-  CheckSquare,
-  CreditCard,
-  Download,
-  Edit,
-  Eye,
-  Mail,
-  Phone,
-  Settings,
-  Square,
-  Trash2,
-  User,
-  Users,
+    ArrowUpDown,
+    Briefcase,
+    Building,
+    Calendar,
+    CheckSquare,
+    CreditCard,
+    Download,
+    Edit,
+    Eye,
+    Mail,
+    Phone,
+    Settings,
+    Square,
+    Trash2,
+    User,
+    Users,
 } from 'lucide-react';
 import React, { useState } from 'react';
 import { Staff, StaffBulkAction, StaffPaginationInfo, StaffSortOption } from '../../types/staff';
@@ -304,7 +304,7 @@ const StaffTable: React.FC<StaffTableProps> = ({
         return (
           <span
             className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-              staffMember.is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+              staffMember.is_active ? 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-300' : 'bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-300'
             }`}
           >
             {staffMember.is_active ? '활성' : '비활성'}
@@ -344,14 +344,14 @@ const StaffTable: React.FC<StaffTableProps> = ({
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+    <div className="bg-white dark:bg-dark-800 rounded-lg shadow-sm border border-gray-200 dark:border-dark-600 overflow-hidden">
       {/* 테이블 헤더 - 일괄 작업 및 설정 */}
-      <div className="px-4 py-3 border-b border-gray-200 bg-gray-50">
+      <div className="px-4 py-3 border-b border-gray-200 dark:border-dark-600 bg-gray-50 dark:bg-dark-700">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
             {selectedStaff.length > 0 && (
               <div className="flex items-center space-x-2">
-                <span className="text-sm font-medium text-gray-700">
+                <span className="text-sm font-medium text-gray-700 dark:text-dark-300">
                   {selectedStaff.length}명 선택됨
                 </span>
                 <div className="flex items-center space-x-1">
@@ -359,7 +359,7 @@ const StaffTable: React.FC<StaffTableProps> = ({
                     <button
                       key={action.type}
                       onClick={() => handleBulkAction(action.type)}
-                      className="px-2 py-1 text-xs bg-gray-200 text-gray-700 rounded hover:bg-gray-300 transition-colors"
+                      className="px-2 py-1 text-xs bg-gray-200 dark:bg-dark-600 text-gray-700 dark:text-dark-300 rounded hover:bg-gray-300 dark:hover:bg-dark-500 transition-colors"
                     >
                       {action.label}
                     </button>
@@ -377,14 +377,14 @@ const StaffTable: React.FC<StaffTableProps> = ({
                   staff.map(s => s.id)
                 )
               }
-              className="p-1 text-gray-500 hover:text-gray-700 rounded transition-colors"
+              className="p-1 text-gray-500 dark:text-dark-400 hover:text-gray-700 dark:hover:text-dark-200 rounded transition-colors"
               title="내보내기"
             >
               <Download className="w-4 h-4" />
             </button>
             <button
               onClick={() => setColumnSettings(!columnSettings)}
-              className="p-1 text-gray-500 hover:text-gray-700 rounded transition-colors"
+              className="p-1 text-gray-500 dark:text-dark-400 hover:text-gray-700 dark:hover:text-dark-200 rounded transition-colors"
               title="컬럼 설정"
             >
               <Settings className="w-4 h-4" />
@@ -395,8 +395,8 @@ const StaffTable: React.FC<StaffTableProps> = ({
 
       {/* 테이블 */}
       <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
+        <table className="min-w-full divide-y divide-gray-200 dark:divide-dark-600">
+          <thead className="bg-gray-50 dark:bg-dark-700">
             <tr>
               <th className="w-8 px-4 py-3 text-left">
                 <button onClick={handleSelectAll} className="flex items-center">
@@ -412,15 +412,15 @@ const StaffTable: React.FC<StaffTableProps> = ({
                 .map(column => (
                   <th
                     key={column.key}
-                    className={`px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider ${
-                      column.sticky ? 'sticky bg-gray-50' : ''
+                    className={`px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-dark-400 uppercase tracking-wider ${
+                      column.sticky ? 'sticky bg-gray-50 dark:bg-dark-700' : ''
                     }`}
                     style={{ width: column.width }}
                   >
                     {column.sortable ? (
                       <button
                         onClick={() => handleSort(column.key as StaffSortOption['field'])}
-                        className="flex items-center space-x-1 hover:text-gray-700"
+                        className="flex items-center space-x-1 hover:text-gray-700 dark:hover:text-dark-200"
                       >
                         <span>{column.label}</span>
                         <ArrowUpDown className="w-3 h-3" />
@@ -432,16 +432,16 @@ const StaffTable: React.FC<StaffTableProps> = ({
                 ))}
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
+          <tbody className="bg-white dark:bg-dark-800 divide-y divide-gray-200 dark:divide-dark-600">
             {loading ? (
               <tr>
                 <td
                   colSpan={columns.filter(c => c.visible).length + 1}
-                  className="px-4 py-8 text-center"
+                  className="px-4 py-8 text-center dark:text-dark-300"
                 >
                   <div className="flex justify-center items-center">
                     <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600"></div>
-                    <span className="ml-2 text-sm text-gray-500">로딩 중...</span>
+                    <span className="ml-2 text-sm text-gray-500 dark:text-dark-400">로딩 중...</span>
                   </div>
                 </td>
               </tr>
@@ -449,11 +449,11 @@ const StaffTable: React.FC<StaffTableProps> = ({
               <tr>
                 <td
                   colSpan={columns.filter(c => c.visible).length + 1}
-                  className="px-4 py-8 text-center"
+                  className="px-4 py-8 text-center dark:text-dark-300"
                 >
                   <div className="flex flex-col items-center">
                     <Users className="w-12 h-12 text-gray-400 mb-3" />
-                    <p className="text-sm text-gray-500">직원 데이터가 없습니다.</p>
+                    <p className="text-sm text-gray-500 dark:text-dark-400">직원 데이터가 없습니다.</p>
                   </div>
                 </td>
               </tr>
@@ -461,8 +461,8 @@ const StaffTable: React.FC<StaffTableProps> = ({
               staff.map(staffMember => (
                 <tr
                   key={staffMember.id}
-                  className={`hover:bg-gray-50 ${
-                    selectedStaff.includes(staffMember.id) ? 'bg-blue-50' : ''
+                  className={`hover:bg-gray-50 dark:hover:bg-dark-700 ${
+                    selectedStaff.includes(staffMember.id) ? 'bg-blue-50 dark:bg-blue-900' : ''
                   }`}
                 >
                   <td className="w-8 px-4 py-3">
@@ -482,7 +482,7 @@ const StaffTable: React.FC<StaffTableProps> = ({
                     .map(column => (
                       <td
                         key={column.key}
-                        className={`px-4 py-3 text-sm ${column.sticky ? 'sticky bg-white' : ''}`}
+                        className={`px-4 py-3 text-sm dark:text-dark-200 ${column.sticky ? 'sticky bg-white dark:bg-dark-800' : ''}`}
                       >
                         {renderCell(staffMember, column)}
                       </td>
@@ -496,9 +496,9 @@ const StaffTable: React.FC<StaffTableProps> = ({
 
       {/* 페이지네이션 */}
       {!loading && staff.length > 0 && (
-        <div className="px-4 py-3 border-t border-gray-200 bg-gray-50">
+        <div className="px-4 py-3 border-t border-gray-200 dark:border-dark-600 bg-gray-50 dark:bg-dark-700">
           <div className="flex items-center justify-between">
-            <div className="text-sm text-gray-700">
+            <div className="text-sm text-gray-700 dark:text-dark-300">
               전체 {pagination.total}명 중 {(pagination.page - 1) * pagination.limit + 1}-
               {Math.min(pagination.page * pagination.limit, pagination.total)}명 표시
             </div>
@@ -506,17 +506,17 @@ const StaffTable: React.FC<StaffTableProps> = ({
               <button
                 onClick={() => onPageChange(pagination.page - 1)}
                 disabled={!pagination.hasPrev}
-                className="px-3 py-1 text-sm border border-gray-300 rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100"
+                className="px-3 py-1 text-sm border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-800 text-gray-700 dark:text-dark-300 rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 dark:hover:bg-dark-600"
               >
                 이전
               </button>
-              <span className="text-sm text-gray-700">
+              <span className="text-sm text-gray-700 dark:text-dark-300">
                 {pagination.page} / {pagination.totalPages}
               </span>
               <button
                 onClick={() => onPageChange(pagination.page + 1)}
                 disabled={!pagination.hasNext}
-                className="px-3 py-1 text-sm border border-gray-300 rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100"
+                className="px-3 py-1 text-sm border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-800 text-gray-700 dark:text-dark-300 rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 dark:hover:bg-dark-600"
               >
                 다음
               </button>

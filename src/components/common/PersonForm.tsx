@@ -317,9 +317,9 @@ const PersonForm: React.FC<PersonFormProps> = ({
       className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
       onClick={handleOverlayClick}
     >
-      <div className="bg-white rounded-lg shadow-xl max-w-md w-full max-h-[85vh] overflow-hidden">
+      <div className="bg-white dark:bg-dark-800 rounded-lg shadow-xl max-w-md w-full max-h-[85vh] overflow-hidden">
         {/* 헤더 */}
-        <div className="flex items-center justify-between p-3 border-b border-gray-200 bg-gradient-to-r from-blue-500 to-blue-600">
+        <div className="flex items-center justify-between p-3 border-b border-gray-200 dark:border-dark-600 bg-gradient-to-r from-blue-500 to-blue-600">
           <div className="flex items-center space-x-2">
             {config.entityType === 'member' ? (
               <User className="w-4 h-4 text-white" />
@@ -342,19 +342,19 @@ const PersonForm: React.FC<PersonFormProps> = ({
           <form onSubmit={handleSubmit} className="p-3 space-y-3">
             {/* 기본 정보 */}
             <div className="space-y-3">
-              <h3 className="text-sm font-medium text-gray-700">기본 정보</h3>
+              <h3 className="text-sm font-medium text-gray-700 dark:text-dark-300">기본 정보</h3>
 
               {/* 이름 */}
               <div>
-                <label className="block text-xs font-medium text-gray-600 mb-1">
+                <label className="block text-xs font-medium text-gray-600 dark:text-dark-400 mb-1">
                   이름 <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
                   value={formData.name}
                   onChange={e => handleInputChange('name', e.target.value)}
-                  className={`w-full px-2 py-1.5 text-sm border rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
-                    errors.name ? 'border-red-500' : 'border-gray-300'
+                  className={`w-full px-2 py-1.5 text-sm border rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white dark:bg-dark-700 dark:text-dark-100 ${
+                    errors.name ? 'border-red-500' : 'border-gray-300 dark:border-dark-600'
                   }`}
                   placeholder="이름을 입력하세요"
                   disabled={isLoading}
@@ -365,11 +365,11 @@ const PersonForm: React.FC<PersonFormProps> = ({
               {/* 성별과 생년월일 - 한 줄 */}
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <label className="block text-xs font-medium text-gray-600 mb-1">성별</label>
+                  <label className="block text-xs font-medium text-gray-600 dark:text-dark-400 mb-1">성별</label>
                   <select
                     value={formData.gender || ''}
                     onChange={e => handleInputChange('gender', e.target.value)}
-                    className="w-full px-2 py-1.5 text-sm border border-gray-300 rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                    className="w-full px-2 py-1.5 text-sm border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-700 dark:text-dark-100 rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                     disabled={isLoading}
                   >
                     <option value="">선택</option>
@@ -379,13 +379,13 @@ const PersonForm: React.FC<PersonFormProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-gray-600 mb-1">생년월일</label>
+                  <label className="block text-xs font-medium text-gray-600 dark:text-dark-400 mb-1">생년월일</label>
                   <input
                     type="date"
                     value={formData.birth_date}
                     onChange={e => handleInputChange('birth_date', e.target.value)}
-                    className={`w-full px-2 py-1.5 text-sm border rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
-                      errors.birth_date ? 'border-red-500' : 'border-gray-300'
+                    className={`w-full px-2 py-1.5 text-sm border rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white dark:bg-dark-700 dark:text-dark-100 ${
+                      errors.birth_date ? 'border-red-500' : 'border-gray-300 dark:border-dark-600'
                     }`}
                     disabled={isLoading}
                   />
@@ -395,12 +395,12 @@ const PersonForm: React.FC<PersonFormProps> = ({
               {/* 회원 전용: 가입일 */}
               {config.entityType === 'member' && (
                 <div>
-                  <label className="block text-xs font-medium text-gray-600 mb-1">가입일</label>
+                  <label className="block text-xs font-medium text-gray-600 dark:text-dark-400 mb-1">가입일</label>
                   <input
                     type="date"
                     value={formData.join_date || new Date().toISOString().split('T')[0]}
                     onChange={e => handleInputChange('join_date', e.target.value)}
-                    className="w-full px-2 py-1.5 text-sm border border-gray-300 rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                    className="w-full px-2 py-1.5 text-sm border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-700 dark:text-dark-100 rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                     disabled={isLoading}
                   />
                 </div>
@@ -410,15 +410,15 @@ const PersonForm: React.FC<PersonFormProps> = ({
               {config.entityType === 'staff' && (
                 <div className="grid grid-cols-2 gap-2">
                   <div>
-                    <label className="block text-xs font-medium text-gray-600 mb-1">
+                    <label className="block text-xs font-medium text-gray-600 dark:text-dark-400 mb-1">
                       직책 <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="text"
                       value={formData.position || ''}
                       onChange={e => handleInputChange('position', e.target.value)}
-                      className={`w-full px-2 py-1.5 text-sm border rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
-                        errors.position ? 'border-red-500' : 'border-gray-300'
+                      className={`w-full px-2 py-1.5 text-sm border rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white dark:bg-dark-700 dark:text-dark-100 ${
+                        errors.position ? 'border-red-500' : 'border-gray-300 dark:border-dark-600'
                       }`}
                       placeholder="트레이너, 관리자"
                       disabled={isLoading}
@@ -429,12 +429,12 @@ const PersonForm: React.FC<PersonFormProps> = ({
                   </div>
 
                   <div>
-                    <label className="block text-xs font-medium text-gray-600 mb-1">부서</label>
+                    <label className="block text-xs font-medium text-gray-600 dark:text-dark-400 mb-1">부서</label>
                     <input
                       type="text"
                       value={formData.department || ''}
                       onChange={e => handleInputChange('department', e.target.value)}
-                      className="w-full px-2 py-1.5 text-sm border border-gray-300 rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                      className="w-full px-2 py-1.5 text-sm border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-700 dark:text-dark-100 rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                       placeholder="헬스팀"
                       disabled={isLoading}
                     />
@@ -445,7 +445,7 @@ const PersonForm: React.FC<PersonFormProps> = ({
               {/* 직원 전용: 급여 */}
               {config.entityType === 'staff' && (
                 <div>
-                  <label className="block text-xs font-medium text-gray-600 mb-1">월급여</label>
+                  <label className="block text-xs font-medium text-gray-600 dark:text-dark-400 mb-1">월급여</label>
                   <input
                     type="number"
                     value={formData.salary || ''}
@@ -468,7 +468,7 @@ const PersonForm: React.FC<PersonFormProps> = ({
               {/* 휴대폰과 이메일 - 한 줄 */}
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <label className="block text-xs font-medium text-gray-600 mb-1">휴대폰</label>
+                  <label className="block text-xs font-medium text-gray-600 dark:text-dark-400 mb-1">휴대폰</label>
                   <input
                     type="tel"
                     value={formData.phone}
@@ -484,7 +484,7 @@ const PersonForm: React.FC<PersonFormProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-gray-600 mb-1">이메일</label>
+                  <label className="block text-xs font-medium text-gray-600 dark:text-dark-400 mb-1">이메일</label>
                   <input
                     type="email"
                     value={formData.email}
@@ -501,7 +501,7 @@ const PersonForm: React.FC<PersonFormProps> = ({
 
               {/* 주소 */}
               <div>
-                <label className="block text-xs font-medium text-gray-600 mb-1">주소</label>
+                <label className="block text-xs font-medium text-gray-600 dark:text-dark-400 mb-1">주소</label>
                 <input
                   type="text"
                   value={formData.address}
@@ -533,7 +533,7 @@ const PersonForm: React.FC<PersonFormProps> = ({
 
                 {config.additionalFields.map(field => (
                   <div key={field.key}>
-                    <label className="block text-xs font-medium text-gray-600 mb-1">
+                    <label className="block text-xs font-medium text-gray-600 dark:text-dark-400 mb-1">
                       {field.label}
                       {field.required && <span className="text-red-500"> *</span>}
                     </label>
@@ -588,11 +588,11 @@ const PersonForm: React.FC<PersonFormProps> = ({
         </div>
 
         {/* 버튼 */}
-        <div className="flex justify-end space-x-2 p-3 border-t border-gray-200 bg-gray-50">
+        <div className="flex justify-end space-x-2 p-3 border-t border-gray-200 dark:border-dark-600 bg-gray-50 dark:bg-dark-700">
           <button
             type="button"
             onClick={onClose}
-            className="px-3 py-1.5 text-sm border border-gray-300 text-gray-700 rounded hover:bg-gray-100 transition-colors"
+            className="px-3 py-1.5 text-sm border border-gray-300 dark:border-dark-600 text-gray-700 dark:text-dark-300 bg-white dark:bg-dark-800 rounded hover:bg-gray-100 dark:hover:bg-dark-600 transition-colors"
             disabled={isLoading}
           >
             취소
