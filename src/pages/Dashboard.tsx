@@ -8,7 +8,7 @@ import {
   TrendingDown,
   DollarSign,
   Clock,
-} from 'lucide-react';
+} from '@/utils/lucide-shim';
 
 const Dashboard: React.FC = () => {
   // 임시 통계 데이터 (나중에 실제 데이터베이스에서 가져올 예정)

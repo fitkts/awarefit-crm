@@ -28,34 +28,45 @@ if (process.platform === 'darwin') {
 let mainWindow: BrowserWindow | null = null;
 
 // 앱 준비 완료 시 윈도우 생성
-app.whenReady().then(() => {
-  // 데이터베이스 초기화 (실패해도 앱 계속 실행)
-  try {
-    initializeDatabase();
-    console.log('✅ 데이터베이스 초기화 완료');
-  } catch (error) {
-    console.error('❌ 데이터베이스 초기화 실패:', error);
-    console.log('⚠️ 데이터베이스 없이 앱을 실행합니다. 일부 기능이 제한될 수 있습니다.');
-  }
-
-  // IPC 핸들러는 항상 등록 (데이터베이스 실패와 무관하게)
-  try {
-    // 시스템 핸들러부터 등록 (데이터베이스 의존성이 적음)
-    registerSystemHandlers();
-
-    // 데이터베이스 의존적 핸들러들은 안전하게 등록
-    registerMemberHandlers();
-    registerStaffHandlers();
-    registerPaymentHandlers();
-
-    console.log('✅ IPC 핸들러 등록 완료');
-  } catch (error) {
-    console.error('❌ IPC 핸들러 등록 실패:', error);
-    console.log('⚠️ 백엔드 기능이 제한될 수 있습니다.');
-  }
-
+app.whenReady().then(async () => {
+  // 🚀 UI 먼저 즉시 표시 (가장 우선순위)
   createMainWindow();
-  createMenu();
+
+  // 🚀 메뉴는 필수가 아니므로 지연 생성
+  setImmediate(() => {
+    createMenu();
+  });
+
+  // 🚀 IPC 핸들러를 비동기로 단계적 등록
+  setImmediate(async () => {
+    try {
+      // 시스템 핸들러는 우선 등록 (기본 기능)
+      registerSystemHandlers();
+
+      // 나머지는 더 지연시켜서 등록
+      setTimeout(() => {
+        registerMemberHandlers();
+        registerStaffHandlers();
+        registerPaymentHandlers();
+        console.log('✅ 모든 IPC 핸들러 등록 완료');
+      }, 100);
+    } catch (error) {
+      console.error('❌ IPC 핸들러 등록 실패:', error);
+      console.log('⚠️ 백엔드 기능이 제한될 수 있습니다.');
+    }
+  });
+
+  // 🚀 데이터베이스 초기화는 가장 마지막에 비동기로 처리
+  setTimeout(async () => {
+    try {
+      console.log('🔄 백그라운드에서 데이터베이스 초기화 시작...');
+      await initializeDatabase();
+      console.log('✅ 데이터베이스 초기화 완료');
+    } catch (error) {
+      console.error('❌ 데이터베이스 초기화 실패:', error);
+      console.log('⚠️ 데이터베이스 없이 앱을 실행합니다. 일부 기능이 제한될 수 있습니다.');
+    }
+  }, 200);
 
   // macOS에서 dock 아이콘 클릭 시 윈도우 재생성
   app.on('activate', () => {
@@ -107,10 +118,16 @@ function createMainWindow(): void {
         : undefined,
   });
 
-  // 개발 환경과 프로덕션 환경에 따른 로드
+  // 🚀 개발 환경과 프로덕션 환경에 따른 로드 (최적화)
   if (isDev) {
     mainWindow.loadURL('http://localhost:3002');
-    mainWindow.webContents.openDevTools(); // 개발 도구 열기
+    // 개발 도구는 더 많이 지연시켜서 시작 시간 최대 단축
+    setTimeout(() => {
+      if (mainWindow && !mainWindow.isDestroyed()) {
+        // 사용자가 필요할 때만 DevTools 열기
+        // mainWindow.webContents.openDevTools();
+      }
+    }, 3000);
   } else {
     mainWindow.loadFile(path.join(__dirname, '../index.html'));
   }

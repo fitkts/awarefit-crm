@@ -7,7 +7,7 @@ import {
     UserCheck,
     UserPlus,
     Users,
-} from 'lucide-react';
+} from '@/utils/lucide-shim';
 import React from 'react';
 import { StaffStats } from '../../types/staff';
 
@@ -74,8 +74,12 @@ const StaffStatsComponent: React.FC<StaffStatsProps> = ({ stats, loading = false
           <div className="flex items-center justify-between">
             <div>
               <p className="text-xs font-medium text-gray-600 dark:text-dark-400">전체 직원</p>
-              <p className="text-xl font-bold text-gray-900 dark:text-dark-100">{totalStaff.toLocaleString()}</p>
-              <p className="text-xs text-gray-500 dark:text-dark-400 mt-1">신규 직원 {newThisMonth}명 (이번 달)</p>
+              <p className="text-xl font-bold text-gray-900 dark:text-dark-100">
+                {totalStaff.toLocaleString()}
+              </p>
+              <p className="text-xs text-gray-500 dark:text-dark-400 mt-1">
+                신규 직원 {newThisMonth}명 (이번 달)
+              </p>
             </div>
             <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
               <Users className="w-5 h-5 text-blue-600" />
@@ -121,7 +125,9 @@ const StaffStatsComponent: React.FC<StaffStatsProps> = ({ stats, loading = false
             <div>
               <p className="text-xs font-medium text-gray-600 dark:text-dark-400">총 급여 비용</p>
               <p className="text-xl font-bold text-purple-600">{formatSalary(totalSalaryCost)}원</p>
-              <p className="text-xs text-gray-500 dark:text-dark-400 mt-1">평균 {formatSalary(averageSalary)}원</p>
+              <p className="text-xs text-gray-500 dark:text-dark-400 mt-1">
+                평균 {formatSalary(averageSalary)}원
+              </p>
             </div>
             <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
               <CreditCard className="w-5 h-5 text-purple-600" />
@@ -156,7 +162,9 @@ const StaffStatsComponent: React.FC<StaffStatsProps> = ({ stats, loading = false
                   <span className="text-xs text-gray-600 dark:text-dark-400">{position}</span>
                 </div>
                 <div className="flex items-center">
-                  <span className="text-sm font-medium text-gray-900 dark:text-dark-100 mr-2">{count}명</span>
+                  <span className="text-sm font-medium text-gray-900 dark:text-dark-100 mr-2">
+                    {count}명
+                  </span>
                   <span className="text-xs text-gray-500">
                     ({getPercentage(count, totalStaff)}%)
                   </span>
@@ -164,7 +172,9 @@ const StaffStatsComponent: React.FC<StaffStatsProps> = ({ stats, loading = false
               </div>
             ))}
             {Object.keys(byPosition).length === 0 && (
-              <p className="text-xs text-gray-500 dark:text-dark-400 text-center py-2">데이터가 없습니다</p>
+              <p className="text-xs text-gray-500 dark:text-dark-400 text-center py-2">
+                데이터가 없습니다
+              </p>
             )}
           </div>
         </div>
@@ -195,7 +205,9 @@ const StaffStatsComponent: React.FC<StaffStatsProps> = ({ stats, loading = false
                   <span className="text-xs text-gray-600 dark:text-dark-400">{department}</span>
                 </div>
                 <div className="flex items-center">
-                  <span className="text-sm font-medium text-gray-900 dark:text-dark-100 mr-2">{count}명</span>
+                  <span className="text-sm font-medium text-gray-900 dark:text-dark-100 mr-2">
+                    {count}명
+                  </span>
                   <span className="text-xs text-gray-500">
                     ({getPercentage(count, totalStaff)}%)
                   </span>
@@ -203,7 +215,9 @@ const StaffStatsComponent: React.FC<StaffStatsProps> = ({ stats, loading = false
               </div>
             ))}
             {Object.keys(byDepartment).length === 0 && (
-              <p className="text-xs text-gray-500 dark:text-dark-400 text-center py-2">데이터가 없습니다</p>
+              <p className="text-xs text-gray-500 dark:text-dark-400 text-center py-2">
+                데이터가 없습니다
+              </p>
             )}
           </div>
         </div>
@@ -232,7 +246,9 @@ const StaffStatsComponent: React.FC<StaffStatsProps> = ({ stats, loading = false
                   <span className="text-xs text-gray-600 dark:text-dark-400">{role}</span>
                 </div>
                 <div className="flex items-center">
-                  <span className="text-sm font-medium text-gray-900 dark:text-dark-100 mr-2">{count}명</span>
+                  <span className="text-sm font-medium text-gray-900 dark:text-dark-100 mr-2">
+                    {count}명
+                  </span>
                   <span className="text-xs text-gray-500">
                     ({getPercentage(count, totalStaff)}%)
                   </span>
@@ -240,7 +256,9 @@ const StaffStatsComponent: React.FC<StaffStatsProps> = ({ stats, loading = false
               </div>
             ))}
             {Object.keys(byRole).length === 0 && (
-              <p className="text-xs text-gray-500 dark:text-dark-400 text-center py-2">데이터가 없습니다</p>
+              <p className="text-xs text-gray-500 dark:text-dark-400 text-center py-2">
+                데이터가 없습니다
+              </p>
             )}
           </div>
         </div>

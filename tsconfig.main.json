@@ -1,0 +1,21 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "incremental": true,
+    "tsBuildInfoFile": "./dist/.tsbuildinfo"
+  },
+  "include": [
+    "src/main/**/*",
+    "src/database/**/*"
+  ],
+  "exclude": [
+    "src/renderer/**/*",
+    "src/pages/**/*",
+    "src/components/**/*",
+    "src/stories/**/*",
+    "src/__tests__/**/*"
+  ]
+}
+

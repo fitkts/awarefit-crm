@@ -1,4 +1,4 @@
-import { Calculator, CreditCard, Package, User, X } from 'lucide-react';
+import { Calculator, CreditCard, Package, User, X } from '@/utils/lucide-shim';
 import React, { useCallback, useEffect, useState } from 'react';
 import {
     CreatePaymentInput,
@@ -285,7 +285,10 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
               {payment ? '결제 정보 수정' : '새 결제 등록'}
             </h2>
           </div>
-          <button onClick={onClose} className="text-gray-400 dark:text-dark-400 hover:text-gray-600 dark:hover:text-dark-300 transition-colors">
+          <button
+            onClick={onClose}
+            className="text-gray-400 dark:text-dark-400 hover:text-gray-600 dark:hover:text-dark-300 transition-colors"
+          >
             <X className="w-6 h-6" />
           </button>
         </div>

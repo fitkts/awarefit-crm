@@ -1,4 +1,4 @@
-import { Calendar, CreditCard, Filter, Package, RefreshCw, Search, User, X } from 'lucide-react';
+import { Calendar, CreditCard, Filter, Package, RefreshCw, Search, User, X } from '@/utils/lucide-shim';
 import React, { useEffect, useState } from 'react';
 import { PaymentSearchFilter as PaymentSearchFilterType } from '../../types/payment';
 
@@ -271,7 +271,9 @@ const PaymentSearchFilter: React.FC<PaymentSearchFilterProps> = ({
 
           {/* 결제 상태 */}
           <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">상태</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">
+              상태
+            </label>
             <select
               value={filter.status || 'all'}
               onChange={e =>
@@ -289,7 +291,9 @@ const PaymentSearchFilter: React.FC<PaymentSearchFilterProps> = ({
 
           {/* 금액 범위 */}
           <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">최소 금액</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">
+              최소 금액
+            </label>
             <input
               type="number"
               placeholder="0"
@@ -305,7 +309,9 @@ const PaymentSearchFilter: React.FC<PaymentSearchFilterProps> = ({
           </div>
 
           <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">최대 금액</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">
+              최대 금액
+            </label>
             <input
               type="number"
               placeholder="∞"

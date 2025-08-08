@@ -1,4 +1,4 @@
-import { LucideIcon } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import React from 'react';
 
 export type InputSize = 'sm' | 'md' | 'lg';
@@ -58,9 +58,12 @@ const Input: React.FC<InputProps> = ({
   };
 
   const variantClasses = {
-    default: 'border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:border-dark-600 dark:bg-dark-700 dark:text-dark-100 dark:focus:ring-blue-400 dark:focus:border-blue-400',
-    error: 'border-red-500 focus:ring-red-500 focus:border-red-500 dark:border-red-400 dark:bg-dark-700 dark:text-dark-100 dark:focus:ring-red-400 dark:focus:border-red-400',
-    success: 'border-green-500 focus:ring-green-500 focus:border-green-500 dark:border-green-400 dark:bg-dark-700 dark:text-dark-100 dark:focus:ring-green-400 dark:focus:border-green-400',
+    default:
+      'border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:border-dark-600 dark:bg-dark-700 dark:text-dark-100 dark:focus:ring-blue-400 dark:focus:border-blue-400',
+    error:
+      'border-red-500 focus:ring-red-500 focus:border-red-500 dark:border-red-400 dark:bg-dark-700 dark:text-dark-100 dark:focus:ring-red-400 dark:focus:border-red-400',
+    success:
+      'border-green-500 focus:ring-green-500 focus:border-green-500 dark:border-green-400 dark:bg-dark-700 dark:text-dark-100 dark:focus:ring-green-400 dark:focus:border-green-400',
   };
 
   const iconSizeClasses = {
@@ -146,9 +149,12 @@ const Textarea: React.FC<TextareaProps> = ({
   };
 
   const variantClasses = {
-    default: 'border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:border-dark-600 dark:bg-dark-700 dark:text-dark-100 dark:focus:ring-blue-400 dark:focus:border-blue-400',
-    error: 'border-red-500 focus:ring-red-500 focus:border-red-500 dark:border-red-400 dark:bg-dark-700 dark:text-dark-100 dark:focus:ring-red-400 dark:focus:border-red-400',
-    success: 'border-green-500 focus:ring-green-500 focus:border-green-500 dark:border-green-400 dark:bg-dark-700 dark:text-dark-100 dark:focus:ring-green-400 dark:focus:border-green-400',
+    default:
+      'border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:border-dark-600 dark:bg-dark-700 dark:text-dark-100 dark:focus:ring-blue-400 dark:focus:border-blue-400',
+    error:
+      'border-red-500 focus:ring-red-500 focus:border-red-500 dark:border-red-400 dark:bg-dark-700 dark:text-dark-100 dark:focus:ring-red-400 dark:focus:border-red-400',
+    success:
+      'border-green-500 focus:ring-green-500 focus:border-green-500 dark:border-green-400 dark:bg-dark-700 dark:text-dark-100 dark:focus:ring-green-400 dark:focus:border-green-400',
   };
 
   const textareaClasses = [
@@ -219,9 +225,12 @@ const Select: React.FC<SelectProps> = ({
   };
 
   const variantClasses = {
-    default: 'border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:border-dark-600 dark:bg-dark-700 dark:text-dark-100 dark:focus:ring-blue-400 dark:focus:border-blue-400',
-    error: 'border-red-500 focus:ring-red-500 focus:border-red-500 dark:border-red-400 dark:bg-dark-700 dark:text-dark-100 dark:focus:ring-red-400 dark:focus:border-red-400',
-    success: 'border-green-500 focus:ring-green-500 focus:border-green-500 dark:border-green-400 dark:bg-dark-700 dark:text-dark-100 dark:focus:ring-green-400 dark:focus:border-green-400',
+    default:
+      'border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:border-dark-600 dark:bg-dark-700 dark:text-dark-100 dark:focus:ring-blue-400 dark:focus:border-blue-400',
+    error:
+      'border-red-500 focus:ring-red-500 focus:border-red-500 dark:border-red-400 dark:bg-dark-700 dark:text-dark-100 dark:focus:ring-red-400 dark:focus:border-red-400',
+    success:
+      'border-green-500 focus:ring-green-500 focus:border-green-500 dark:border-green-400 dark:bg-dark-700 dark:text-dark-100 dark:focus:ring-green-400 dark:focus:border-green-400',
   };
 
   const selectClasses = [

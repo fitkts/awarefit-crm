@@ -1,4 +1,4 @@
-import { Moon, Sun } from 'lucide-react';
+import { Moon, Sun } from '@/utils/lucide-shim';
 import React from 'react';
 import { useTheme } from '../../contexts/ThemeContext';
 
@@ -12,14 +12,14 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ className = '', size = 'md' }
 
   const sizeClasses = {
     sm: 'w-6 h-6',
-    md: 'w-8 h-8', 
-    lg: 'w-10 h-10'
+    md: 'w-8 h-8',
+    lg: 'w-10 h-10',
   };
 
   const iconSizeClasses = {
     sm: 'w-3 h-3',
     md: 'w-4 h-4',
-    lg: 'w-5 h-5'
+    lg: 'w-5 h-5',
   };
 
   return (

@@ -15,7 +15,7 @@ import {
     Trash2,
     User,
     Users,
-} from 'lucide-react';
+} from '@/utils/lucide-shim';
 import React, { useState } from 'react';
 import { Staff, StaffBulkAction, StaffPaginationInfo, StaffSortOption } from '../../types/staff';
 
@@ -304,7 +304,9 @@ const StaffTable: React.FC<StaffTableProps> = ({
         return (
           <span
             className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-              staffMember.is_active ? 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-300' : 'bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-300'
+              staffMember.is_active
+                ? 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-300'
+                : 'bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-300'
             }`}
           >
             {staffMember.is_active ? '활성' : '비활성'}
@@ -441,7 +443,9 @@ const StaffTable: React.FC<StaffTableProps> = ({
                 >
                   <div className="flex justify-center items-center">
                     <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600"></div>
-                    <span className="ml-2 text-sm text-gray-500 dark:text-dark-400">로딩 중...</span>
+                    <span className="ml-2 text-sm text-gray-500 dark:text-dark-400">
+                      로딩 중...
+                    </span>
                   </div>
                 </td>
               </tr>
@@ -453,7 +457,9 @@ const StaffTable: React.FC<StaffTableProps> = ({
                 >
                   <div className="flex flex-col items-center">
                     <Users className="w-12 h-12 text-gray-400 mb-3" />
-                    <p className="text-sm text-gray-500 dark:text-dark-400">직원 데이터가 없습니다.</p>
+                    <p className="text-sm text-gray-500 dark:text-dark-400">
+                      직원 데이터가 없습니다.
+                    </p>
                   </div>
                 </td>
               </tr>

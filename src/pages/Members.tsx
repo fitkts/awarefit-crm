@@ -1,4 +1,4 @@
-import { Plus } from 'lucide-react';
+import { Plus } from '@/utils/lucide-shim';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useToastHelpers } from '../components/common/Toast';
 import MemberDetailModal from '../components/member/MemberDetailModal';
@@ -7,15 +7,16 @@ import MemberSearchFilter from '../components/member/MemberSearchFilter';
 import MemberStats from '../components/member/MemberStats';
 import MemberTable from '../components/member/MemberTable';
 import {
-  BulkAction,
-  CreateMemberInput,
-  Member,
-  MemberSearchFilter as MemberSearchFilterType,
-  MemberStats as MemberStatsType,
-  PaginationInfo,
-  SortOption,
-  UpdateMemberInput,
+    BulkAction,
+    CreateMemberInput,
+    Member,
+    MemberSearchFilter as MemberSearchFilterType,
+    MemberStats as MemberStatsType,
+    PaginationInfo,
+    SortOption,
+    UpdateMemberInput,
 } from '../types/member';
+import { mockData, safeElectronCall } from '../utils/environmentUtils';
 
 const Members: React.FC = () => {
   // 상태 관리
@@ -99,40 +100,28 @@ const Members: React.FC = () => {
 
       console.log('🔍 [Members] 회원 목록 로딩 시도:', { searchFilter, sortOption });
 
-      // API 단계별 존재 여부 확인
-      if (!window.electronAPI) {
-        throw new Error('electronAPI가 로드되지 않았습니다.');
-      }
-
-      if (!window.electronAPI.database) {
-        throw new Error('database API가 로드되지 않았습니다.');
-      }
-
-      if (!window.electronAPI.database.member) {
-        throw new Error('member API가 로드되지 않았습니다.');
-      }
-
-      if (typeof window.electronAPI.database.member.getAll !== 'function') {
-        throw new Error('getAll 함수가 존재하지 않습니다.');
-      }
-
-      const result = await window.electronAPI.database.member.getAll({
-        ...searchFilter,
-        sort: sortOption,
-        page: pagination.page,
-        limit: pagination.limit,
-      });
+      const result = await safeElectronCall(
+        async () =>
+          window.electronAPI.database.member.getAll({
+            ...searchFilter,
+            sort: sortOption,
+            page: pagination.page,
+            limit: pagination.limit,
+          }),
+        mockData.members,
+        undefined
+      );
 
       console.log('✅ [Members] 회원 목록 결과:', result);
 
-      if (result) {
+      if (result.data) {
         // API가 배열을 반환하므로 직접 설정
-        if (Array.isArray(result)) {
-          setMembers(result);
-          console.log('✅ [Members] 배열 형태로 회원 목록 설정:', result.length, '명');
+        if (Array.isArray(result.data)) {
+          setMembers(result.data);
+          console.log('✅ [Members] 배열 형태로 회원 목록 설정:', result.data.length, '명');
         } else {
           // 타입 가드를 사용해서 안전하게 처리
-          const resultWithPagination = result as any;
+          const resultWithPagination = result.data as any;
           const members = resultWithPagination.members || [];
           setMembers(members);
           console.log('✅ [Members] 페이지네이션 형태로 회원 목록 설정:', members.length, '명');
@@ -149,6 +138,12 @@ const Members: React.FC = () => {
         console.warn('⚠️ [Members] 빈 결과 반환됨');
         setMembers([]);
       }
+
+      // 브라우저 환경일 때 사용자에게 안내
+      if (result.message && !result.isFromElectron) {
+        setError(null); // 오류가 아닌 안내 메시지이므로 error state는 clear
+        console.warn('🌐 [Browser Mode]', result.message);
+      }
     } catch (error) {
       console.error('🚨 [Members] 회원 목록 로드 실패:', error);
       const errorMessage = error instanceof Error ? error.message : String(error);
@@ -164,32 +159,14 @@ const Members: React.FC = () => {
     try {
       setStatsLoading(true);
 
-      // API 존재 여부를 더 정확하게 확인
-      console.log('🔍 [Debug] electronAPI 객체:', window.electronAPI);
-      console.log('🔍 [Debug] database 객체:', window.electronAPI?.database);
-      console.log('🔍 [Debug] member 객체:', window.electronAPI?.database?.member);
-      console.log('🔍 [Debug] getStats 함수:', window.electronAPI?.database?.member?.getStats);
+      const result = await safeElectronCall(
+        async () => window.electronAPI.database.member.getStats(),
+        mockData.memberStats,
+        undefined
+      );
 
-      if (!window.electronAPI) {
-        throw new Error('electronAPI가 로드되지 않았습니다.');
-      }
-
-      if (!window.electronAPI.database) {
-        throw new Error('database API가 로드되지 않았습니다.');
-      }
-
-      if (!window.electronAPI.database.member) {
-        throw new Error('member API가 로드되지 않았습니다.');
-      }
-
-      if (typeof window.electronAPI.database.member.getStats !== 'function') {
-        throw new Error('getStats 함수가 존재하지 않습니다.');
-      }
-
-      const stats = await window.electronAPI.database.member.getStats();
-      console.log('회원 통계 결과:', stats);
-
-      setMemberStats(stats);
+      console.log('회원 통계 결과:', result);
+      setMemberStats(result.data);
     } catch (error) {
       console.error('회원 통계 로드 실패:', error);
 

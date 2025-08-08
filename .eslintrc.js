@@ -17,7 +17,17 @@ module.exports = {
   extends: ['eslint:recommended', 'plugin:storybook/recommended'],
   rules: {
     // TypeScript 관련 규칙들
-    '@typescript-eslint/no-unused-vars': 'error',
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      {
+        vars: 'all',
+        varsIgnorePattern: '^_',
+        args: 'after-used',
+        argsIgnorePattern: '^_',
+        caughtErrors: 'all',
+        caughtErrorsIgnorePattern: '^_',
+      },
+    ],
 
     // Import 관련 규칙들
     'unused-imports/no-unused-imports': 'error',
@@ -28,6 +38,8 @@ module.exports = {
         varsIgnorePattern: '^_',
         args: 'after-used',
         argsIgnorePattern: '^_',
+        caughtErrors: 'all',
+        caughtErrorsIgnorePattern: '^_',
       },
     ],
 

@@ -13,7 +13,7 @@ import {
     User,
     Users,
     X,
-} from 'lucide-react';
+} from '@/utils/lucide-shim';
 import React, { useEffect, useState } from 'react';
 import { Staff, StaffDetail } from '../../types/staff';
 import SalaryManagementModal from './SalaryManagementModal';
@@ -281,7 +281,9 @@ const StaffDetailModal: React.FC<StaffDetailModalProps> = ({ isOpen, onClose, st
                         </div>
                         <div className="flex items-center space-x-3">
                           <Mail className="w-4 h-4 text-gray-400" />
-                          <span className="text-sm text-gray-600 dark:text-dark-400">{formatEmail(staff.email)}</span>
+                          <span className="text-sm text-gray-600 dark:text-dark-400">
+                            {formatEmail(staff.email)}
+                          </span>
                         </div>
                         <div className="flex items-center space-x-3">
                           <Calendar className="w-4 h-4 text-gray-400" />
@@ -300,7 +302,9 @@ const StaffDetailModal: React.FC<StaffDetailModalProps> = ({ isOpen, onClose, st
                         {staff.gender && (
                           <div className="flex items-center space-x-3">
                             <Users className="w-4 h-4 text-gray-400" />
-                            <span className="text-sm text-gray-600 dark:text-dark-400">{staff.gender}</span>
+                            <span className="text-sm text-gray-600 dark:text-dark-400">
+                              {staff.gender}
+                            </span>
                           </div>
                         )}
                       </div>
@@ -323,7 +327,9 @@ const StaffDetailModal: React.FC<StaffDetailModalProps> = ({ isOpen, onClose, st
                         </div>
                         <div>
                           <div className="flex justify-between items-center mb-1">
-                            <span className="text-sm text-gray-600 dark:text-dark-400">근속 기간</span>
+                            <span className="text-sm text-gray-600 dark:text-dark-400">
+                              근속 기간
+                            </span>
                             <span className="text-lg font-bold text-blue-600">
                               {formatTenure(staffDetail.tenure_months)}
                             </span>
@@ -331,7 +337,9 @@ const StaffDetailModal: React.FC<StaffDetailModalProps> = ({ isOpen, onClose, st
                         </div>
                         <div>
                           <div className="flex justify-between items-center mb-1">
-                            <span className="text-sm text-gray-600 dark:text-dark-400">현재 급여</span>
+                            <span className="text-sm text-gray-600 dark:text-dark-400">
+                              현재 급여
+                            </span>
                             <span className="text-lg font-bold text-green-600">
                               {formatSalary(staff.salary)}
                             </span>
@@ -357,7 +365,9 @@ const StaffDetailModal: React.FC<StaffDetailModalProps> = ({ isOpen, onClose, st
                       <div className="space-y-4">
                         <div>
                           <div className="flex justify-between items-center mb-1">
-                            <span className="text-sm text-gray-600 dark:text-dark-400">관리 회원 수</span>
+                            <span className="text-sm text-gray-600 dark:text-dark-400">
+                              관리 회원 수
+                            </span>
                             <span className="text-lg font-bold text-purple-600">
                               {staffDetail.managed_members_count}명
                             </span>
@@ -365,7 +375,9 @@ const StaffDetailModal: React.FC<StaffDetailModalProps> = ({ isOpen, onClose, st
                         </div>
                         <div>
                           <div className="flex justify-between items-center mb-1">
-                            <span className="text-sm text-gray-600 dark:text-dark-400">총 매출 기여</span>
+                            <span className="text-sm text-gray-600 dark:text-dark-400">
+                              총 매출 기여
+                            </span>
                             <span className="text-lg font-bold text-green-600">
                               {(staffDetail.total_sales_amount / 10000).toLocaleString()}만원
                             </span>
@@ -373,7 +385,9 @@ const StaffDetailModal: React.FC<StaffDetailModalProps> = ({ isOpen, onClose, st
                         </div>
                         <div>
                           <div className="flex justify-between items-center mb-1">
-                            <span className="text-sm text-gray-600 dark:text-dark-400">월 평균 매출</span>
+                            <span className="text-sm text-gray-600 dark:text-dark-400">
+                              월 평균 매출
+                            </span>
                             <span className="text-sm text-gray-900 dark:text-dark-100">
                               {Math.round(
                                 staffDetail.total_sales_amount /

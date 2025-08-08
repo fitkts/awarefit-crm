@@ -15,7 +15,7 @@ import {
     UserCheck,
     Users,
     UserX,
-} from 'lucide-react';
+} from '@/utils/lucide-shim';
 import React, { useState } from 'react';
 import {
     BulkAction,
@@ -179,7 +179,9 @@ const MemberTable: React.FC<MemberTableProps> = ({
               {member.name.charAt(0)}
             </div>
             <div>
-              <div className="text-sm font-medium text-gray-900 dark:text-dark-100">{member.name}</div>
+              <div className="text-sm font-medium text-gray-900 dark:text-dark-100">
+                {member.name}
+              </div>
               <div className="text-xs text-gray-500 dark:text-dark-400">
                 {member.phone || member.email || '연락처 없음'}
               </div>
@@ -258,7 +260,9 @@ const MemberTable: React.FC<MemberTableProps> = ({
         return (
           <span
             className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-              member.active ? 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200' : 'bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200'
+              member.active
+                ? 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200'
+                : 'bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200'
             }`}
           >
             {member.active ? '활성' : '비활성'}
@@ -298,9 +302,9 @@ const MemberTable: React.FC<MemberTableProps> = ({
   };
 
   return (
-          <div className="bg-white dark:bg-dark-800 rounded-lg shadow-sm border border-gray-200 dark:border-dark-600 overflow-hidden">
+    <div className="bg-white dark:bg-dark-800 rounded-lg shadow-sm border border-gray-200 dark:border-dark-600 overflow-hidden">
       {/* 테이블 헤더 - 일괄 작업 및 설정 */}
-              <div className="px-4 py-3 border-b border-gray-200 dark:border-dark-600 bg-gray-50 dark:bg-dark-700">
+      <div className="px-4 py-3 border-b border-gray-200 dark:border-dark-600 bg-gray-50 dark:bg-dark-700">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
             <h3 className="text-sm font-semibold text-gray-900 dark:text-dark-100">회원 목록</h3>
@@ -308,7 +312,9 @@ const MemberTable: React.FC<MemberTableProps> = ({
             {/* 선택된 항목 정보 */}
             {selectedMembers.length > 0 && (
               <div className="flex items-center space-x-2">
-                <span className="text-xs text-gray-600 dark:text-dark-400">{selectedMembers.length}명 선택됨</span>
+                <span className="text-xs text-gray-600 dark:text-dark-400">
+                  {selectedMembers.length}명 선택됨
+                </span>
 
                 {/* 일괄 작업 버튼들 */}
                 <div className="flex items-center space-x-1">
@@ -347,7 +353,9 @@ const MemberTable: React.FC<MemberTableProps> = ({
         {/* 컬럼 설정 패널 */}
         {columnSettings && (
           <div className="mt-3 p-3 bg-white dark:bg-dark-800 rounded-lg border border-gray-200 dark:border-dark-600">
-            <h4 className="text-xs font-medium text-gray-900 dark:text-dark-100 mb-2">표시할 컬럼 선택</h4>
+            <h4 className="text-xs font-medium text-gray-900 dark:text-dark-100 mb-2">
+              표시할 컬럼 선택
+            </h4>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
               {columns.map(column => (
                 <label key={column.key} className="flex items-center space-x-2 cursor-pointer">
@@ -435,8 +443,12 @@ const MemberTable: React.FC<MemberTableProps> = ({
                 <td colSpan={visibleColumns.length + 1} className="px-4 py-8 text-center">
                   <div className="flex flex-col items-center space-y-2">
                     <Users className="w-10 h-10 text-gray-300" />
-                    <p className="text-sm text-gray-500 dark:text-dark-400">검색 결과가 없습니다.</p>
-                    <p className="text-xs text-gray-400 dark:text-dark-500">다른 검색 조건을 시도해보세요.</p>
+                    <p className="text-sm text-gray-500 dark:text-dark-400">
+                      검색 결과가 없습니다.
+                    </p>
+                    <p className="text-xs text-gray-400 dark:text-dark-500">
+                      다른 검색 조건을 시도해보세요.
+                    </p>
                   </div>
                 </td>
               </tr>

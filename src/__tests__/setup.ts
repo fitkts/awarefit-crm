@@ -65,20 +65,32 @@ afterAll(() => {
 });
 
 // IntersectionObserver Mock (일부 컴포넌트에서 사용할 수 있음)
-global.IntersectionObserver = class IntersectionObserver {
-  constructor() {}
-  disconnect() {}
-  observe() {}
-  unobserve() {}
-};
+class MockIntersectionObserver implements IntersectionObserver {
+  readonly root: Element | Document | null = null;
+  readonly rootMargin: string = '0px';
+  readonly thresholds: ReadonlyArray<number> = [0];
+
+  constructor(_callback: IntersectionObserverCallback, _options?: IntersectionObserverInit) {}
+
+  disconnect(): void {}
+  observe(_target: Element): void {}
+  unobserve(_target: Element): void {}
+  takeRecords(): IntersectionObserverEntry[] { return []; }
+}
+// jsdom 환경에서 전역에 주입
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+(global as any).IntersectionObserver = MockIntersectionObserver as any;
 
 // ResizeObserver Mock
-global.ResizeObserver = class ResizeObserver {
-  constructor() {}
-  disconnect() {}
-  observe() {}
-  unobserve() {}
-};
+class MockResizeObserver implements ResizeObserver {
+  constructor(_callback?: ResizeObserverCallback) {}
+  disconnect(): void {}
+  observe(_target: Element, _options?: ResizeObserverOptions): void {}
+  unobserve(_target: Element): void {}
+}
+// jsdom 환경에서 전역에 주입
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+(global as any).ResizeObserver = MockResizeObserver as any;
 
 // matchMedia Mock
 Object.defineProperty(window, 'matchMedia', {

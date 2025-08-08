@@ -1,9 +1,9 @@
-import { Award, UserCheck, UserPlus, Users } from 'lucide-react';
+import { Award, UserCheck, UserPlus, Users } from '@/utils/lucide-shim';
 import React from 'react';
 import { MemberStats } from '../../types/member';
 
 interface MemberStatsProps {
-  stats: MemberStats;
+  stats: MemberStats | null | undefined;
   loading?: boolean;
 }
 
@@ -25,6 +25,17 @@ const MemberStatsComponent: React.FC<MemberStatsProps> = ({ stats, loading = fal
     );
   }
 
+  // stats가 undefined이거나 null인 경우 기본값 설정
+  if (!stats) {
+    return (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 mb-2">
+        <div className="bg-white dark:bg-dark-800 rounded-md shadow-sm border border-gray-200 dark:border-dark-600 p-2">
+          <p className="text-sm text-gray-500 dark:text-dark-400">통계 데이터를 불러오는 중...</p>
+        </div>
+      </div>
+    );
+  }
+
   // 백분율 계산 헬퍼
   const getPercentage = (value: number, total: number) => {
     return total > 0 ? Math.round((value / total) * 100) : 0;
@@ -36,12 +47,14 @@ const MemberStatsComponent: React.FC<MemberStatsProps> = ({ stats, loading = fal
       <div className="bg-white dark:bg-dark-800 rounded-md shadow-sm border border-gray-200 dark:border-dark-600 p-2 hover:shadow-md transition-shadow">
         <div className="flex items-center justify-between">
           <div className="flex-1 min-w-0">
-            <p className="text-[10px] font-medium text-gray-600 dark:text-dark-400 leading-tight">전체 회원</p>
+            <p className="text-[10px] font-medium text-gray-600 dark:text-dark-400 leading-tight">
+              전체 회원
+            </p>
             <p className="text-sm font-bold text-gray-900 dark:text-dark-100 leading-tight">
-              {stats.total.toLocaleString()}
+              {(stats.total || 0).toLocaleString()}
             </p>
             <p className="text-[9px] text-gray-500 dark:text-dark-400 leading-tight">
-              신규 {stats.new_this_week}명 (이번 주)
+              신규 {stats.new_this_week || 0}명 (이번 주)
             </p>
           </div>
           <div className="w-5 h-5 bg-blue-100 rounded-md flex items-center justify-center flex-shrink-0 ml-1">
@@ -54,12 +67,14 @@ const MemberStatsComponent: React.FC<MemberStatsProps> = ({ stats, loading = fal
       <div className="bg-white dark:bg-dark-800 rounded-md shadow-sm border border-gray-200 dark:border-dark-600 p-2 hover:shadow-md transition-shadow">
         <div className="flex items-center justify-between">
           <div className="flex-1 min-w-0">
-            <p className="text-[10px] font-medium text-gray-600 dark:text-dark-400 leading-tight">활성 회원</p>
+            <p className="text-[10px] font-medium text-gray-600 dark:text-dark-400 leading-tight">
+              활성 회원
+            </p>
             <p className="text-sm font-bold text-green-600 leading-tight">
-              {stats.active.toLocaleString()}
+              {(stats.active || 0).toLocaleString()}
             </p>
             <p className="text-[9px] text-gray-500 dark:text-dark-400 leading-tight">
-              {getPercentage(stats.active, stats.total)}% 활성률
+              {getPercentage(stats.active || 0, stats.total || 0)}% 활성률
             </p>
           </div>
           <div className="w-5 h-5 bg-green-100 rounded-md flex items-center justify-center flex-shrink-0 ml-1">
@@ -72,11 +87,15 @@ const MemberStatsComponent: React.FC<MemberStatsProps> = ({ stats, loading = fal
       <div className="bg-white dark:bg-dark-800 rounded-md shadow-sm border border-gray-200 dark:border-dark-600 p-2 hover:shadow-md transition-shadow">
         <div className="flex items-center justify-between">
           <div className="flex-1 min-w-0">
-            <p className="text-[10px] font-medium text-gray-600 dark:text-dark-400 leading-tight">이번 달 신규</p>
-            <p className="text-sm font-bold text-blue-600 leading-tight">
-              {stats.new_this_month.toLocaleString()}
+            <p className="text-[10px] font-medium text-gray-600 dark:text-dark-400 leading-tight">
+              이번 달 신규
             </p>
-            <p className="text-[9px] text-gray-500 dark:text-dark-400 leading-tight">-, 전월 대비</p>
+            <p className="text-sm font-bold text-blue-600 leading-tight">
+              {(stats.new_this_month || 0).toLocaleString()}
+            </p>
+            <p className="text-[9px] text-gray-500 dark:text-dark-400 leading-tight">
+              -, 전월 대비
+            </p>
           </div>
           <div className="w-5 h-5 bg-blue-100 rounded-md flex items-center justify-center flex-shrink-0 ml-1">
             <UserPlus className="w-3 h-3 text-blue-600" />
@@ -88,12 +107,14 @@ const MemberStatsComponent: React.FC<MemberStatsProps> = ({ stats, loading = fal
       <div className="bg-white dark:bg-dark-800 rounded-md shadow-sm border border-gray-200 dark:border-dark-600 p-2 hover:shadow-md transition-shadow">
         <div className="flex items-center justify-between">
           <div className="flex-1 min-w-0">
-            <p className="text-[10px] font-medium text-gray-600 dark:text-dark-400 leading-tight">회원권 보유</p>
+            <p className="text-[10px] font-medium text-gray-600 dark:text-dark-400 leading-tight">
+              회원권 보유
+            </p>
             <p className="text-sm font-bold text-purple-600 leading-tight">
-              {stats.with_membership.toLocaleString()}
+              {(stats.with_membership || 0).toLocaleString()}
             </p>
             <p className="text-[9px] text-gray-500 dark:text-dark-400 leading-tight">
-              {getPercentage(stats.with_membership, stats.total)}% 보유율
+              {getPercentage(stats.with_membership || 0, stats.total || 0)}% 보유율
             </p>
           </div>
           <div className="w-5 h-5 bg-purple-100 rounded-md flex items-center justify-center flex-shrink-0 ml-1">

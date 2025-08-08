@@ -1,3 +1,4 @@
+// 🚀 필요한 아이콘만 import (번들 크기 최적화)
 import {
   AlertTriangle,
   Bell,
@@ -18,8 +19,9 @@ import {
   User,
   XCircle,
   Zap,
-} from 'lucide-react';
+} from '@/utils/lucide-shim';
 import React, { useState } from 'react';
+
 import {
   Button,
   Card,

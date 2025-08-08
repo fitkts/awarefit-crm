@@ -5,6 +5,7 @@ export type { ButtonSize, ButtonVariant } from './Button';
 export { default as Card } from './Card';
 export type { CardVariant } from './Card';
 
+export { default as Icon, OptimizedIcon } from './IconOptimizer';
 export { default as Modal } from './Modal';
 export type { ModalSize } from './Modal';
 

@@ -1,4 +1,4 @@
-import { AlertCircle, Plus, RefreshCw, X } from 'lucide-react';
+import { AlertCircle, Plus, RefreshCw, X } from '@/utils/lucide-shim';
 import React, { useCallback, useEffect, useState } from 'react';
 import PaymentDetailModal from '../components/payment/PaymentDetailModal';
 import PaymentForm from '../components/payment/PaymentForm';

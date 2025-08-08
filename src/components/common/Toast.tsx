@@ -1,4 +1,4 @@
-import { AlertCircle, CheckCircle, Info, X, XCircle } from 'lucide-react';
+import { AlertCircle, CheckCircle, Info, X, XCircle } from '@/utils/lucide-shim';
 import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
 
 // 토스트 타입 정의

@@ -6,7 +6,7 @@ import {
     RefreshCw,
     TrendingUp,
     Users,
-} from 'lucide-react';
+} from '@/utils/lucide-shim';
 import React from 'react';
 
 interface PaymentStatsData {

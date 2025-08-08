@@ -38,7 +38,8 @@ const Card: React.FC<CardProps> = ({
     default: 'border border-gray-200 dark:border-dark-600',
     bordered: 'border-2 border-gray-300 dark:border-dark-500',
     elevated: 'shadow-lg border border-gray-100 dark:border-dark-700 dark:shadow-dark-900/20',
-    gradient: 'bg-gradient-to-br from-white to-gray-50 dark:from-dark-800 dark:to-dark-700 border border-gray-200 dark:border-dark-600',
+    gradient:
+      'bg-gradient-to-br from-white to-gray-50 dark:from-dark-800 dark:to-dark-700 border border-gray-200 dark:border-dark-600',
   };
 
   const combinedClasses = [
@@ -64,7 +65,9 @@ const Card: React.FC<CardProps> = ({
               </div>
             )}
             <div>
-              {title && <h3 className="text-lg font-semibold text-gray-900 dark:text-dark-100">{title}</h3>}
+              {title && (
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-dark-100">{title}</h3>
+              )}
               {subtitle && <p className="text-sm text-gray-600 dark:text-dark-400">{subtitle}</p>}
             </div>
           </div>
@@ -81,7 +84,11 @@ const Card: React.FC<CardProps> = ({
       )}
 
       {footer && (
-        <div className={`border-t border-gray-200 dark:border-dark-600 ${padding ? 'p-6 pt-4' : 'p-4'}`}>{footer}</div>
+        <div
+          className={`border-t border-gray-200 dark:border-dark-600 ${padding ? 'p-6 pt-4' : 'p-4'}`}
+        >
+          {footer}
+        </div>
       )}
     </div>
   );

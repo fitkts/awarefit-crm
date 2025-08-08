@@ -84,7 +84,7 @@ export class MigrationRunner {
           // 트랜잭션 롤백 후 성공적인 부분만 실행
           try {
             this.db.exec('ROLLBACK;');
-          } catch (rollbackError) {
+          } catch (_rollbackError) {
             // 롤백 에러는 무시
           }
 

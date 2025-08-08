@@ -10,7 +10,7 @@ import {
     RefreshCw,
     User,
     X,
-} from 'lucide-react';
+} from '@/utils/lucide-shim';
 import React from 'react';
 import { PaymentDetail, PaymentSortOption } from '../../types/payment';
 
@@ -226,7 +226,9 @@ const PaymentTable: React.FC<PaymentTableProps> = ({
                   {/* 회원명 */}
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex flex-col">
-                      <div className="text-sm font-medium text-gray-900 dark:text-dark-100">{payment.member_name}</div>
+                      <div className="text-sm font-medium text-gray-900 dark:text-dark-100">
+                        {payment.member_name}
+                      </div>
                       <div className="text-sm text-gray-500 dark:text-dark-400">
                         {payment.member_phone || payment.member_email || '연락처 없음'}
                       </div>

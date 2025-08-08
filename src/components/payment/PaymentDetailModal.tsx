@@ -7,7 +7,7 @@ import {
     RefreshCw,
     User,
     X,
-} from 'lucide-react';
+} from '@/utils/lucide-shim';
 import React, { useEffect, useState } from 'react';
 import { PaymentDetail } from '../../types/payment';
 
@@ -133,9 +133,14 @@ const PaymentDetailModal: React.FC<PaymentDetailModalProps> = ({
         <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-dark-600">
           <div className="flex items-center">
             <FileText className="w-6 h-6 text-blue-600 mr-3" />
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-dark-100">결제 상세 정보</h2>
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-dark-100">
+              결제 상세 정보
+            </h2>
           </div>
-          <button onClick={onClose} className="text-gray-400 dark:text-dark-400 hover:text-gray-600 dark:hover:text-dark-300 transition-colors">
+          <button
+            onClick={onClose}
+            className="text-gray-400 dark:text-dark-400 hover:text-gray-600 dark:hover:text-dark-300 transition-colors"
+          >
             <X className="w-6 h-6" />
           </button>
         </div>
@@ -161,21 +166,33 @@ const PaymentDetailModal: React.FC<PaymentDetailModalProps> = ({
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">결제번호</label>
-                    <p className="mt-1 text-sm text-gray-900 dark:text-dark-100">{payment.payment_number}</p>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">
+                      결제번호
+                    </label>
+                    <p className="mt-1 text-sm text-gray-900 dark:text-dark-100">
+                      {payment.payment_number}
+                    </p>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">결제일시</label>
-                    <p className="mt-1 text-sm text-gray-900 dark:text-dark-100">{formatDate(payment.payment_date)}</p>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">
+                      결제일시
+                    </label>
+                    <p className="mt-1 text-sm text-gray-900 dark:text-dark-100">
+                      {formatDate(payment.payment_date)}
+                    </p>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">결제 유형</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">
+                      결제 유형
+                    </label>
                     <p className="mt-1 text-sm text-gray-900 dark:text-dark-100">
                       {getPaymentTypeText(payment.payment_type)}
                     </p>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">상태</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">
+                      상태
+                    </label>
                     <span
                       className={`inline-flex items-center px-2 py-1 text-xs font-medium rounded-full ${getStatusStyle(payment.status)}`}
                     >
@@ -183,14 +200,20 @@ const PaymentDetailModal: React.FC<PaymentDetailModalProps> = ({
                     </span>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">결제 금액</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">
+                      결제 금액
+                    </label>
                     <p className="mt-1 text-lg font-bold text-gray-900 dark:text-dark-100">
                       {formatCurrency(payment.amount)}
                     </p>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">결제 방식</label>
-                    <p className="mt-1 text-sm text-gray-900 dark:text-dark-100">{payment.payment_method}</p>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">
+                      결제 방식
+                    </label>
+                    <p className="mt-1 text-sm text-gray-900 dark:text-dark-100">
+                      {payment.payment_method}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -203,24 +226,38 @@ const PaymentDetailModal: React.FC<PaymentDetailModalProps> = ({
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">회원명</label>
-                    <p className="mt-1 text-sm text-gray-900 dark:text-dark-100">{payment.member_name}</p>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">
+                      회원명
+                    </label>
+                    <p className="mt-1 text-sm text-gray-900 dark:text-dark-100">
+                      {payment.member_name}
+                    </p>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">회원번호</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">
+                      회원번호
+                    </label>
                     <p className="mt-1 text-sm text-gray-900 dark:text-dark-100">
                       {payment.member_phone || payment.member_email || '연락처 없음'}
                     </p>
                   </div>
                   {payment.member_phone && (
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">전화번호</label>
-                      <p className="mt-1 text-sm text-gray-900 dark:text-dark-100">{payment.member_phone}</p>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">
+                        전화번호
+                      </label>
+                      <p className="mt-1 text-sm text-gray-900 dark:text-dark-100">
+                        {payment.member_phone}
+                      </p>
                     </div>
                   )}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">담당 직원</label>
-                    <p className="mt-1 text-sm text-gray-900 dark:text-dark-100">{payment.staff_name}</p>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">
+                      담당 직원
+                    </label>
+                    <p className="mt-1 text-sm text-gray-900 dark:text-dark-100">
+                      {payment.staff_name}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -233,25 +270,39 @@ const PaymentDetailModal: React.FC<PaymentDetailModalProps> = ({
                 </h3>
                 {payment.membership_type_name && (
                   <div className="mb-3">
-                    <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">회원권</label>
-                    <p className="mt-1 text-sm text-gray-900 dark:text-dark-100">{payment.membership_type_name}</p>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">
+                      회원권
+                    </label>
+                    <p className="mt-1 text-sm text-gray-900 dark:text-dark-100">
+                      {payment.membership_type_name}
+                    </p>
                   </div>
                 )}
                 {payment.pt_package_name && (
                   <div className="mb-3">
-                    <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">PT 패키지</label>
-                    <p className="mt-1 text-sm text-gray-900 dark:text-dark-100">{payment.pt_package_name}</p>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">
+                      PT 패키지
+                    </label>
+                    <p className="mt-1 text-sm text-gray-900 dark:text-dark-100">
+                      {payment.pt_package_name}
+                    </p>
                   </div>
                 )}
                 {payment.expiry_date && (
                   <div className="mb-3">
-                    <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">만료일</label>
-                    <p className="mt-1 text-sm text-gray-900 dark:text-dark-100">{formatDate(payment.expiry_date)}</p>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">
+                      만료일
+                    </label>
+                    <p className="mt-1 text-sm text-gray-900 dark:text-dark-100">
+                      {formatDate(payment.expiry_date)}
+                    </p>
                   </div>
                 )}
                 {payment.notes && (
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">메모</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">
+                      메모
+                    </label>
                     <p className="mt-1 text-sm text-gray-900 dark:text-dark-100">{payment.notes}</p>
                   </div>
                 )}
@@ -314,13 +365,18 @@ const PaymentDetailModal: React.FC<PaymentDetailModalProps> = ({
                   </h3>
                   <div className="space-y-3">
                     {payment.refunds.map(refund => (
-                      <div key={refund.id} className="bg-yellow-50 dark:bg-yellow-900/20 p-3 rounded-lg">
+                      <div
+                        key={refund.id}
+                        className="bg-yellow-50 dark:bg-yellow-900/20 p-3 rounded-lg"
+                      >
                         <div className="flex justify-between items-start">
                           <div>
                             <p className="text-sm font-medium text-gray-900 dark:text-dark-100">
                               환불 금액: {formatCurrency(refund.refund_amount)}
                             </p>
-                            <p className="text-sm text-gray-600 dark:text-dark-300">사유: {refund.reason}</p>
+                            <p className="text-sm text-gray-600 dark:text-dark-300">
+                              사유: {refund.reason}
+                            </p>
                             <p className="text-sm text-gray-600 dark:text-dark-300">
                               신청일: {formatDateTime(refund.requested_at)}
                             </p>
@@ -371,7 +427,9 @@ const PaymentDetailModal: React.FC<PaymentDetailModalProps> = ({
                                         : history.action}
                             </p>
                             {history.notes && (
-                              <p className="text-sm text-gray-600 dark:text-dark-300">{history.notes}</p>
+                              <p className="text-sm text-gray-600 dark:text-dark-300">
+                                {history.notes}
+                              </p>
                             )}
                           </div>
                           <div className="text-right">

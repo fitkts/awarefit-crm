@@ -15,6 +15,7 @@ import {
   StaffStats as StaffStatsType,
   UpdateStaffInput,
 } from '../types/staff';
+import { mockData, safeElectronCall } from '../utils/environmentUtils';
 
 const StaffPage: React.FC = () => {
   // 상태 관리
@@ -88,17 +89,17 @@ const StaffPage: React.FC = () => {
 
       console.log('직원 목록 로딩 시도:', { searchFilter, sortOption });
 
-      if (!window.electronAPI?.database?.staff?.getAll) {
-        throw new Error('electronAPI가 사용할 수 없습니다.');
-      }
+      const result = await safeElectronCall(
+        async () => window.electronAPI.database.staff.getAll(searchFilter),
+        mockData.staff,
+        undefined
+      );
 
-      // 필터 적용하여 직원 목록 조회
-      const result = await window.electronAPI.database.staff.getAll(searchFilter);
       console.log('직원 목록 조회 결과:', result);
 
-      if (Array.isArray(result)) {
+      if (Array.isArray(result.data)) {
         // 정렬 적용
-        const sortedStaff = [...result].sort((a, b) => {
+        const sortedStaff = [...result.data].sort((a, b) => {
           const aValue = a[sortOption.field];
           const bValue = b[sortOption.field];
 

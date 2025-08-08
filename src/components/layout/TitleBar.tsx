@@ -1,4 +1,4 @@
-import { Zap } from 'lucide-react';
+import { Zap } from '@/utils/lucide-shim';
 import React, { useEffect, useState } from 'react';
 import ThemeToggle from '../ui/ThemeToggle';
 
@@ -35,7 +35,9 @@ const TitleBar: React.FC<TitleBarProps> = ({ title, description }) => {
     >
       <div className="flex items-center justify-between">
         <div className="min-w-0 flex-1">
-          <h2 className="text-base font-semibold text-gray-900 dark:text-dark-100 truncate">{title}</h2>
+          <h2 className="text-base font-semibold text-gray-900 dark:text-dark-100 truncate">
+            {title}
+          </h2>
           <p className="text-xs text-gray-500 dark:text-dark-400 truncate">{description}</p>
         </div>
 
@@ -49,25 +51,27 @@ const TitleBar: React.FC<TitleBarProps> = ({ title, description }) => {
             className="flex flex-col items-end space-y-1 text-xs text-gray-600 dark:text-dark-400 whitespace-nowrap"
             style={{ WebkitAppRegion: 'no-drag' } as React.CSSProperties}
           >
-          {/* 로고 */}
-          <div className="flex items-center space-x-1.5 mb-1">
-            <div className="w-5 h-5 bg-gradient-to-r from-blue-500 to-purple-600 rounded-md flex items-center justify-center">
-              <Zap className="w-3 h-3 text-white" />
+            {/* 로고 */}
+            <div className="flex items-center space-x-1.5 mb-1">
+              <div className="w-5 h-5 bg-gradient-to-r from-blue-500 to-purple-600 rounded-md flex items-center justify-center">
+                <Zap className="w-3 h-3 text-white" />
+              </div>
+              <div className="text-right">
+                <div className="text-xs font-bold text-gray-900 dark:text-dark-100">Awarefit</div>
+                <div className="text-xs text-gray-500 dark:text-dark-400 leading-tight">
+                  CRM System
+                </div>
+              </div>
             </div>
-            <div className="text-right">
-              <div className="text-xs font-bold text-gray-900 dark:text-dark-100">Awarefit</div>
-              <div className="text-xs text-gray-500 dark:text-dark-400 leading-tight">CRM System</div>
-            </div>
-          </div>
 
-          {/* 날짜/시간 */}
-          <div className="text-right">
-            <div className="text-xs text-gray-600 dark:text-dark-400">{formattedDate}</div>
-            <div className="text-xs font-semibold text-gray-800 dark:text-dark-200 bg-gray-100 dark:bg-dark-700 px-1.5 py-0.5 rounded-sm mt-0.5">
-              {formattedTime}
+            {/* 날짜/시간 */}
+            <div className="text-right">
+              <div className="text-xs text-gray-600 dark:text-dark-400">{formattedDate}</div>
+              <div className="text-xs font-semibold text-gray-800 dark:text-dark-200 bg-gray-100 dark:bg-dark-700 px-1.5 py-0.5 rounded-sm mt-0.5">
+                {formattedTime}
+              </div>
             </div>
           </div>
-        </div>
         </div>
       </div>
     </header>

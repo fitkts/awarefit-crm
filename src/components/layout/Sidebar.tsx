@@ -7,7 +7,7 @@ import {
     Settings,
     UserCog,
     Users,
-} from 'lucide-react';
+} from '@/utils/lucide-shim';
 import React from 'react';
 
 interface SidebarProps {
@@ -116,7 +116,11 @@ const Sidebar: React.FC<SidebarProps> = ({ currentPage, onPageChange }) => {
             >
               <IconComponent
                 className={`w-4 h-4 flex-shrink-0 ${
-                  isActive ? 'text-blue-600 dark:text-blue-400' : isDisabled ? 'text-gray-400 dark:text-dark-500' : 'text-gray-500 dark:text-dark-400'
+                  isActive
+                    ? 'text-blue-600 dark:text-blue-400'
+                    : isDisabled
+                      ? 'text-gray-400 dark:text-dark-500'
+                      : 'text-gray-500 dark:text-dark-400'
                 }`}
               />
 

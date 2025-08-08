@@ -22,7 +22,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
       if (savedTheme === 'light' || savedTheme === 'dark') {
         return savedTheme;
       }
-      
+
       // 시스템 테마 감지
       if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
         return 'dark';
@@ -33,13 +33,13 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
 
   useEffect(() => {
     const root = document.documentElement;
-    
+
     if (theme === 'dark') {
       root.classList.add('dark');
     } else {
       root.classList.remove('dark');
     }
-    
+
     // 로컬스토리지에 저장
     localStorage.setItem('awarefit-theme', theme);
   }, [theme]);
@@ -47,7 +47,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   // 시스템 테마 변경 감지
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    
+
     const handleChange = (e: MediaQueryListEvent) => {
       // 사용자가 수동으로 테마를 변경하지 않은 경우에만 시스템 테마 따라가기
       const savedTheme = localStorage.getItem('awarefit-theme');
@@ -61,7 +61,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   }, []);
 
   const toggleTheme = () => {
-    setThemeState(prev => prev === 'light' ? 'dark' : 'light');
+    setThemeState(prev => (prev === 'light' ? 'dark' : 'light'));
   };
 
   const setTheme = (newTheme: Theme) => {

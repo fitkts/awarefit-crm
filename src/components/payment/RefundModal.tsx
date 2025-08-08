@@ -7,7 +7,7 @@ import {
     Lock,
     RefreshCw,
     X,
-} from 'lucide-react';
+} from '@/utils/lucide-shim';
 import React, { useEffect, useState } from 'react';
 import { PaymentDetail, RefundEligibility } from '../../types/payment';
 
@@ -174,7 +174,10 @@ const RefundModal: React.FC<RefundModalProps> = ({
             <RefreshCw className="w-6 h-6 text-yellow-600 mr-3" />
             <h2 className="text-xl font-semibold text-gray-900 dark:text-dark-100">환불 처리</h2>
           </div>
-          <button onClick={onClose} className="text-gray-400 dark:text-dark-400 hover:text-gray-600 dark:hover:text-dark-300 transition-colors">
+          <button
+            onClick={onClose}
+            className="text-gray-400 dark:text-dark-400 hover:text-gray-600 dark:hover:text-dark-300 transition-colors"
+          >
             <X className="w-6 h-6" />
           </button>
         </div>

@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import { ToastProvider } from '../components/common/Toast';
 import Layout from '../components/layout/Layout';
 import { ThemeProvider } from '../contexts/ThemeContext';
-import ComponentDemo from '../pages/ComponentDemo';
-import Dashboard from '../pages/Dashboard';
-import Members from '../pages/Members';
-import Payment from '../pages/Payment';
-import Staff from '../pages/Staff';
+
+// 🚀 지연 로딩으로 초기 번들 크기 최적화
+const Dashboard = React.lazy(() => import('../pages/Dashboard'));
+const Members = React.lazy(() => import('../pages/Members'));
+const Payment = React.lazy(() => import('../pages/Payment'));
+const Staff = React.lazy(() => import('../pages/Staff'));
+const ComponentDemo = React.lazy(() => import('../pages/ComponentDemo'));
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<string>('dashboard');
@@ -29,7 +31,9 @@ const App: React.FC = () => {
         return (
           <div className="bg-white dark:bg-dark-800 rounded-xl p-8 text-center">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-dark-100 mb-4">통계 분석</h2>
-            <p className="text-gray-600 dark:text-dark-400">통계 분석 기능이 곧 추가될 예정입니다.</p>
+            <p className="text-gray-600 dark:text-dark-400">
+              통계 분석 기능이 곧 추가될 예정입니다.
+            </p>
           </div>
         );
       case 'schedule':
@@ -42,7 +46,9 @@ const App: React.FC = () => {
       case 'settings':
         return (
           <div className="bg-white dark:bg-dark-800 rounded-xl p-8 text-center">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-dark-100 mb-4">시스템 설정</h2>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-dark-100 mb-4">
+              시스템 설정
+            </h2>
             <p className="text-gray-600 dark:text-dark-400">시스템 설정 기능은 개발 중입니다.</p>
           </div>
         );
@@ -57,7 +63,16 @@ const App: React.FC = () => {
     <ThemeProvider>
       <ToastProvider>
         <Layout currentPage={currentPage} onPageChange={handlePageChange}>
-          {renderCurrentPage()}
+          <Suspense
+            fallback={
+              <div className="flex items-center justify-center h-full">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+                <span className="ml-2 text-gray-600 dark:text-gray-400">페이지 로딩 중...</span>
+              </div>
+            }
+          >
+            {renderCurrentPage()}
+          </Suspense>
         </Layout>
       </ToastProvider>
     </ThemeProvider>

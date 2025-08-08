@@ -1,4 +1,4 @@
-import { Bookmark, ChevronDown, Filter, Plus, RefreshCw, RotateCcw, Search } from 'lucide-react';
+import { Bookmark, ChevronDown, Filter, Plus, RefreshCw, RotateCcw, Search } from '@/utils/lucide-shim';
 import React, { useEffect, useState } from 'react';
 import { StaffRole, StaffSearchFilter } from '../../types/staff';
 
@@ -237,7 +237,9 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
             ) : (
               <span>
                 총{' '}
-                <span className="font-semibold text-gray-900 dark:text-dark-100">{staffCount.toLocaleString()}명</span>
+                <span className="font-semibold text-gray-900 dark:text-dark-100">
+                  {staffCount.toLocaleString()}명
+                </span>
                 의 직원
               </span>
             )}
@@ -270,7 +272,9 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {/* 성별 필터 */}
             <div>
-              <label className="block text-xs font-medium text-gray-700 dark:text-dark-300 mb-1">성별</label>
+              <label className="block text-xs font-medium text-gray-700 dark:text-dark-300 mb-1">
+                성별
+              </label>
               <select
                 value={filter.gender || ''}
                 onChange={e => updateFilter({ gender: e.target.value as '남성' | '여성' | '' })}
@@ -285,7 +289,9 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
 
             {/* 직책 필터 */}
             <div>
-              <label className="block text-xs font-medium text-gray-700 dark:text-dark-300 mb-1">직책</label>
+              <label className="block text-xs font-medium text-gray-700 dark:text-dark-300 mb-1">
+                직책
+              </label>
               <select
                 value={filter.position || ''}
                 onChange={e => updateFilter({ position: e.target.value })}
@@ -303,7 +309,9 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
 
             {/* 부서 필터 */}
             <div>
-              <label className="block text-xs font-medium text-gray-700 dark:text-dark-300 mb-1">부서</label>
+              <label className="block text-xs font-medium text-gray-700 dark:text-dark-300 mb-1">
+                부서
+              </label>
               <select
                 value={filter.department || ''}
                 onChange={e => updateFilter({ department: e.target.value })}
@@ -320,7 +328,9 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
 
             {/* 역할 필터 */}
             <div>
-              <label className="block text-xs font-medium text-gray-700 dark:text-dark-300 mb-1">역할</label>
+              <label className="block text-xs font-medium text-gray-700 dark:text-dark-300 mb-1">
+                역할
+              </label>
               <select
                 value={filter.role_id === 'all' ? 'all' : filter.role_id?.toString() || ''}
                 onChange={e => {
@@ -343,7 +353,9 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
 
             {/* 활성 상태 필터 */}
             <div>
-              <label className="block text-xs font-medium text-gray-700 dark:text-dark-300 mb-1">직원 상태</label>
+              <label className="block text-xs font-medium text-gray-700 dark:text-dark-300 mb-1">
+                직원 상태
+              </label>
               <select
                 value={
                   filter.is_active === true ? 'true' : filter.is_active === false ? 'false' : 'all'
@@ -365,7 +377,9 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
 
             {/* 입사일 범위 */}
             <div>
-              <label className="block text-xs font-medium text-gray-700 dark:text-dark-300 mb-1">입사일 (시작)</label>
+              <label className="block text-xs font-medium text-gray-700 dark:text-dark-300 mb-1">
+                입사일 (시작)
+              </label>
               <input
                 type="date"
                 value={filter.hire_date_from || ''}
@@ -376,7 +390,9 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-gray-700 dark:text-dark-300 mb-1">입사일 (종료)</label>
+              <label className="block text-xs font-medium text-gray-700 dark:text-dark-300 mb-1">
+                입사일 (종료)
+              </label>
               <input
                 type="date"
                 value={filter.hire_date_to || ''}
@@ -452,7 +468,9 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
 
             {/* 나이 범위 */}
             <div>
-              <label className="block text-xs font-medium text-gray-700 dark:text-dark-300 mb-1">최소 나이</label>
+              <label className="block text-xs font-medium text-gray-700 dark:text-dark-300 mb-1">
+                최소 나이
+              </label>
               <input
                 type="number"
                 placeholder="예: 20"
@@ -466,7 +484,9 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-gray-700 dark:text-dark-300 mb-1">최대 나이</label>
+              <label className="block text-xs font-medium text-gray-700 dark:text-dark-300 mb-1">
+                최대 나이
+              </label>
               <input
                 type="number"
                 placeholder="예: 65"
@@ -481,7 +501,9 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
 
             {/* 연락처 필터 */}
             <div>
-              <label className="block text-xs font-medium text-gray-700 dark:text-dark-300 mb-1">연락처</label>
+              <label className="block text-xs font-medium text-gray-700 dark:text-dark-300 mb-1">
+                연락처
+              </label>
               <select
                 value={
                   filter.has_phone === true ? 'true' : filter.has_phone === false ? 'false' : ''
@@ -503,7 +525,9 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
 
             {/* 이메일 필터 */}
             <div>
-              <label className="block text-xs font-medium text-gray-700 dark:text-dark-300 mb-1">이메일</label>
+              <label className="block text-xs font-medium text-gray-700 dark:text-dark-300 mb-1">
+                이메일
+              </label>
               <select
                 value={
                   filter.has_email === true ? 'true' : filter.has_email === false ? 'false' : ''

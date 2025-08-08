@@ -1,4 +1,4 @@
-import { X } from 'lucide-react';
+import { X } from '@/utils/lucide-shim';
 import React, { useEffect } from 'react';
 
 export type ModalSize = 'sm' | 'md' | 'lg' | 'xl' | 'full';
@@ -104,7 +104,9 @@ const Modal: React.FC<ModalProps> = ({
 
         {/* Footer */}
         {footerContent && (
-          <div className="border-t border-gray-200 dark:border-dark-600 p-6 bg-gray-50 dark:bg-dark-700">{footerContent}</div>
+          <div className="border-t border-gray-200 dark:border-dark-600 p-6 bg-gray-50 dark:bg-dark-700">
+            {footerContent}
+          </div>
         )}
       </div>
     </div>

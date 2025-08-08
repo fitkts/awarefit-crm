@@ -1,4 +1,4 @@
-import { Bookmark, ChevronDown, Filter, Plus, RefreshCw, RotateCcw, Search } from 'lucide-react';
+import { Bookmark, ChevronDown, Filter, Plus, RefreshCw, RotateCcw, Search } from '@/utils/lucide-shim';
 import React, { useEffect, useState } from 'react';
 import { FilterPreset, MemberSearchFilter } from '../../types/member';
 
@@ -173,7 +173,7 @@ const MemberSearchFilterComponent: React.FC<MemberSearchFilterProps> = ({
   return (
     <div className="bg-white dark:bg-dark-800 rounded-lg shadow-sm border border-gray-200 dark:border-dark-600">
       {/* 기본 검색 바 */}
-              <div className="p-4 border-b border-gray-200 dark:border-dark-600">
+      <div className="p-4 border-b border-gray-200 dark:border-dark-600">
         <div className="flex flex-col lg:flex-row lg:items-center gap-3">
           {/* 검색 입력 - 크기 50% 축소 */}
           <div className="lg:w-96 relative">

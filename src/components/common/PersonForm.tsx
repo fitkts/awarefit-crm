@@ -1,4 +1,4 @@
-import { Save, User, UserCheck } from 'lucide-react';
+import { Save, User, UserCheck } from '@/utils/lucide-shim';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Member } from '../../types/member';
 import { FormConfig, Staff } from '../../types/staff';
@@ -365,7 +365,9 @@ const PersonForm: React.FC<PersonFormProps> = ({
               {/* 성별과 생년월일 - 한 줄 */}
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <label className="block text-xs font-medium text-gray-600 dark:text-dark-400 mb-1">성별</label>
+                  <label className="block text-xs font-medium text-gray-600 dark:text-dark-400 mb-1">
+                    성별
+                  </label>
                   <select
                     value={formData.gender || ''}
                     onChange={e => handleInputChange('gender', e.target.value)}
@@ -379,7 +381,9 @@ const PersonForm: React.FC<PersonFormProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-gray-600 dark:text-dark-400 mb-1">생년월일</label>
+                  <label className="block text-xs font-medium text-gray-600 dark:text-dark-400 mb-1">
+                    생년월일
+                  </label>
                   <input
                     type="date"
                     value={formData.birth_date}
@@ -395,7 +399,9 @@ const PersonForm: React.FC<PersonFormProps> = ({
               {/* 회원 전용: 가입일 */}
               {config.entityType === 'member' && (
                 <div>
-                  <label className="block text-xs font-medium text-gray-600 dark:text-dark-400 mb-1">가입일</label>
+                  <label className="block text-xs font-medium text-gray-600 dark:text-dark-400 mb-1">
+                    가입일
+                  </label>
                   <input
                     type="date"
                     value={formData.join_date || new Date().toISOString().split('T')[0]}
@@ -429,7 +435,9 @@ const PersonForm: React.FC<PersonFormProps> = ({
                   </div>
 
                   <div>
-                    <label className="block text-xs font-medium text-gray-600 dark:text-dark-400 mb-1">부서</label>
+                    <label className="block text-xs font-medium text-gray-600 dark:text-dark-400 mb-1">
+                      부서
+                    </label>
                     <input
                       type="text"
                       value={formData.department || ''}
@@ -445,7 +453,9 @@ const PersonForm: React.FC<PersonFormProps> = ({
               {/* 직원 전용: 급여 */}
               {config.entityType === 'staff' && (
                 <div>
-                  <label className="block text-xs font-medium text-gray-600 dark:text-dark-400 mb-1">월급여</label>
+                  <label className="block text-xs font-medium text-gray-600 dark:text-dark-400 mb-1">
+                    월급여
+                  </label>
                   <input
                     type="number"
                     value={formData.salary || ''}
@@ -468,7 +478,9 @@ const PersonForm: React.FC<PersonFormProps> = ({
               {/* 휴대폰과 이메일 - 한 줄 */}
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <label className="block text-xs font-medium text-gray-600 dark:text-dark-400 mb-1">휴대폰</label>
+                  <label className="block text-xs font-medium text-gray-600 dark:text-dark-400 mb-1">
+                    휴대폰
+                  </label>
                   <input
                     type="tel"
                     value={formData.phone}
@@ -484,7 +496,9 @@ const PersonForm: React.FC<PersonFormProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-gray-600 dark:text-dark-400 mb-1">이메일</label>
+                  <label className="block text-xs font-medium text-gray-600 dark:text-dark-400 mb-1">
+                    이메일
+                  </label>
                   <input
                     type="email"
                     value={formData.email}
@@ -501,7 +515,9 @@ const PersonForm: React.FC<PersonFormProps> = ({
 
               {/* 주소 */}
               <div>
-                <label className="block text-xs font-medium text-gray-600 dark:text-dark-400 mb-1">주소</label>
+                <label className="block text-xs font-medium text-gray-600 dark:text-dark-400 mb-1">
+                  주소
+                </label>
                 <input
                   type="text"
                   value={formData.address}
