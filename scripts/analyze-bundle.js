@@ -20,6 +20,10 @@ try {
   
   console.log('📦 webpack-bundle-analyzer 모듈 확인됨');
   
+  // 모드 결정: CI/자동 실행 시에는 static 모드로 리포트만 생성
+  const analyzeMode = process.env.ANALYZE_MODE || (process.env.CI ? 'static' : 'server');
+  const openAnalyzer = process.env.ANALYZE_OPEN ? process.env.ANALYZE_OPEN !== 'false' : analyzeMode !== 'static';
+
   // Bundle Analyzer 플러그인 추가
   const configWithAnalyzer = {
     ...webpackConfig,
@@ -27,11 +31,12 @@ try {
     plugins: [
       ...webpackConfig.plugins,
       new BundleAnalyzerPlugin({
-        analyzerMode: 'server',
-        openAnalyzer: true,
+        analyzerMode: analyzeMode,
+        openAnalyzer,
         analyzerPort: 8888,
         generateStatsFile: true,
         statsFilename: 'bundle-stats.json',
+        reportFilename: 'bundle-report.html',
       }),
     ],
   };
@@ -59,7 +64,11 @@ try {
     }
 
     console.log('✅ 번들 분석이 완료되었습니다!');
-    console.log('🌐 브라우저에서 http://localhost:8888 을 열어 결과를 확인하세요.');
+    if (analyzeMode === 'server') {
+      console.log('🌐 브라우저에서 http://localhost:8888 을 열어 결과를 확인하세요.');
+    } else {
+      console.log('📄 정적 리포트: bundle-report.html');
+    }
     console.log('📊 번들 통계가 bundle-stats.json 파일에 저장되었습니다.');
   });
 
