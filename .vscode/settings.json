@@ -1,78 +1,16 @@
 {
-  "typescript.preferences.includePackageJsonAutoImports": "auto",
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit",
-    "source.organizeImports": "explicit"
-  },
   "editor.formatOnSave": true,
-  "files.autoSave": "afterDelay",
-  "files.autoSaveDelay": 1000,
-  "editor.rulers": [100],
-  "editor.wordWrap": "wordWrapColumn",
-  "editor.wordWrapColumn": 100,
-  
-  // TypeScript 관련 설정
-  "typescript.suggest.autoImports": true,
-  "typescript.updateImportsOnFileMove.enabled": "always",
-  "typescript.preferences.quoteStyle": "single",
-  
-  // ESLint 설정
-  "eslint.enable": true,
-  "eslint.run": "onSave",
-  "eslint.format.enable": true,
-  
-  // 파일 연관성
-  "files.associations": {
-    "*.ts": "typescript",
-    "*.tsx": "typescriptreact",
-    ".cursorrules": "markdown"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
   },
-  
-  // 자동 완성 및 IntelliSense
-  "editor.quickSuggestions": {
-    "other": "on",
-    "comments": "off",
-    "strings": "on"
-  },
-  "editor.suggestOnTriggerCharacters": true,
-  "editor.acceptSuggestionOnCommitCharacter": true,
-  "editor.acceptSuggestionOnEnter": "on",
-  
-  // SQL 쿼리 하이라이팅
-  "editor.tokenColorCustomizations": {
-    "textMateRules": [
-      {
-        "scope": "string.quoted.single.js",
-        "settings": {
-          "foreground": "#CE9178"
-        }
-      }
-    ]
-  },
-  
-  // 프로젝트별 설정
-  "search.exclude": {
-    "**/node_modules": true,
-    "**/dist": true,
-    "**/.git": true,
-    "**/playwright-report": true,
-    "**/test-results": true
-  },
-  
-  // 디버깅 설정
-  "debug.allowBreakpointsEverywhere": true,
-  "debug.showInlineBreakpointCandidates": true,
-  
-  // Git 설정
-  "git.autofetch": true,
-  "git.confirmSync": false,
-  "git.enableSmartCommit": true,
-  
-  // 코드 스니펫 및 자동 완성
-  "editor.snippetSuggestions": "top",
-  "editor.tabCompletion": "on",
-  
-  // 경고 및 에러 표시
-  "problems.showCurrentInStatus": true,
-  "typescript.reportStyleChecksAsWarnings": true
+  "typescript.preferences.organizeImports": true,
+  "eslint.autoFixOnSave": true,
+  "prettier.requireConfig": true,
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "typescript.format.enable": true,
+  "javascript.format.enable": true
 }
