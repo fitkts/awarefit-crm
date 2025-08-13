@@ -1,21 +1,32 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { Suspense, useCallback, useEffect, useState } from 'react';
 import { useToastHelpers } from '../components/common/Toast';
-import StaffDetailModal from '../components/staff/StaffDetailModal';
-import StaffForm from '../components/staff/StaffForm';
-import StaffSearchFilter from '../components/staff/StaffSearchFilter';
-import StaffStats from '../components/staff/StaffStats';
-import StaffTable from '../components/staff/StaffTable';
 import {
-  CreateStaffInput,
-  Staff,
-  StaffBulkAction,
-  StaffPaginationInfo,
-  StaffSearchFilter as StaffSearchFilterType,
-  StaffSortOption,
-  StaffStats as StaffStatsType,
-  UpdateStaffInput,
+    CreateStaffInput,
+    Staff,
+    StaffBulkAction,
+    StaffPaginationInfo,
+    StaffSearchFilter as StaffSearchFilterType,
+    StaffSortOption,
+    StaffStats as StaffStatsType,
+    UpdateStaffInput,
 } from '../types/staff';
 import { mockData, safeElectronCall } from '../utils/environmentUtils';
+// 코드 스플리팅: 초기 엔트리 최소화를 위해 지연 로딩
+const StaffDetailModal = React.lazy(
+  () => import(/* webpackChunkName: "staff-detail-modal" */ '../components/staff/StaffDetailModal')
+);
+const StaffForm = React.lazy(
+  () => import(/* webpackChunkName: "staff-form" */ '../components/staff/StaffForm')
+);
+const StaffSearchFilter = React.lazy(
+  () => import(/* webpackChunkName: "staff-search-filter" */ '../components/staff/StaffSearchFilter')
+);
+const StaffStats = React.lazy(
+  () => import(/* webpackChunkName: "staff-stats" */ '../components/staff/StaffStats')
+);
+const StaffTable = React.lazy(
+  () => import(/* webpackChunkName: "staff-table" */ '../components/staff/StaffTable')
+);
 
 const StaffPage: React.FC = () => {
   // 상태 관리
@@ -364,51 +375,85 @@ const StaffPage: React.FC = () => {
       )}
 
       {/* 검색 및 필터 - 최상단 */}
-      <StaffSearchFilter
-        filter={searchFilter}
-        onFilterChange={handleFilterChange}
-        onReset={handleFilterReset}
-        staffCount={pagination.total}
-        loading={loading}
-        onRefresh={handleRefresh}
-        onAddStaff={handleAddStaff}
-      />
+      <Suspense
+        fallback={
+          <div className="p-4 rounded-lg border bg-white/50 dark:bg-gray-800/50 animate-pulse" aria-busy>
+            <div className="h-6 w-48 bg-gray-200 dark:bg-gray-700 rounded mb-3" />
+            <div className="h-10 w-full bg-gray-100 dark:bg-gray-700 rounded" />
+          </div>
+        }
+      >
+        <StaffSearchFilter
+          filter={searchFilter}
+          onFilterChange={handleFilterChange}
+          onReset={handleFilterReset}
+          staffCount={pagination.total}
+          loading={loading}
+          onRefresh={handleRefresh}
+          onAddStaff={handleAddStaff}
+        />
+      </Suspense>
 
       {/* 직원 통계 대시보드 */}
-      <StaffStats stats={staffStats} loading={statsLoading} />
+      <Suspense
+        fallback={
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {Array.from({ length: 4 }).map((_, idx) => (
+              <div key={idx} className="h-24 rounded-lg border bg-white/50 dark:bg-gray-800/50 animate-pulse" />
+            ))}
+          </div>
+        }
+      >
+        <StaffStats stats={staffStats} loading={statsLoading} />
+      </Suspense>
 
       {/* 직원 목록 테이블 */}
-      <StaffTable
-        staff={staff}
-        loading={loading}
-        sortOption={sortOption}
-        onSortChange={handleSortChange}
-        pagination={pagination}
-        onPageChange={handlePageChange}
-        onEdit={openEditMode}
-        onDelete={handleDeleteStaff}
-        onView={handleViewStaff}
-        selectedStaff={selectedStaff}
-        onSelectionChange={setSelectedStaff}
-        onBulkAction={handleBulkAction}
-      />
+      <Suspense
+        fallback={
+          <div className="rounded-lg border overflow-hidden">
+            <div className="h-10 bg-gray-100 dark:bg-gray-800 animate-pulse" />
+            {Array.from({ length: 8 }).map((_, idx) => (
+              <div key={idx} className="h-12 border-t bg-white/50 dark:bg-gray-900/50 animate-pulse" />
+            ))}
+          </div>
+        }
+      >
+        <StaffTable
+          staff={staff}
+          loading={loading}
+          sortOption={sortOption}
+          onSortChange={handleSortChange}
+          pagination={pagination}
+          onPageChange={handlePageChange}
+          onEdit={openEditMode}
+          onDelete={handleDeleteStaff}
+          onView={handleViewStaff}
+          selectedStaff={selectedStaff}
+          onSelectionChange={setSelectedStaff}
+          onBulkAction={handleBulkAction}
+        />
+      </Suspense>
 
       {/* 직원 등록/수정 폼 모달 */}
-      <StaffForm
-        isOpen={isFormOpen}
-        onClose={closeForm}
-        onSubmit={handleSubmit}
-        staff={editingStaff}
-        isLoading={formLoading}
-      />
+      <Suspense fallback={null}>
+        <StaffForm
+          isOpen={isFormOpen}
+          onClose={closeForm}
+          onSubmit={handleSubmit}
+          staff={editingStaff}
+          isLoading={formLoading}
+        />
+      </Suspense>
 
       {/* 직원 상세 정보 모달 */}
-      <StaffDetailModal
-        isOpen={isDetailModalOpen}
-        onClose={closeDetailModal}
-        staff={viewingStaff}
-        onEdit={openEditMode}
-      />
+      <Suspense fallback={null}>
+        <StaffDetailModal
+          isOpen={isDetailModalOpen}
+          onClose={closeDetailModal}
+          staff={viewingStaff}
+          onEdit={openEditMode}
+        />
+      </Suspense>
     </div>
   );
 };

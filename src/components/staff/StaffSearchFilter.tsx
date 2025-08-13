@@ -30,7 +30,8 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
   onAddStaff,
 }) => {
   const [isAdvancedOpen, setIsAdvancedOpen] = useState(false);
-  const [searchDebounce, setSearchDebounce] = useState<NodeJS.Timeout | null>(null);
+  const MIN_SEARCH_LENGTH = 1;
+  const [searchInput, setSearchInput] = useState<string>(filter.search || '');
   const [roles, setRoles] = useState<StaffRole[]>([]);
 
   // 역할 목록 조회
@@ -96,17 +97,30 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
     },
   ];
 
-  // 검색어 디바운스 처리
+  // 외부에서 필터가 변경되면 입력값 동기화
+  useEffect(() => {
+    setSearchInput(filter.search || '');
+  }, [filter.search]);
+
+  // 자동검색 제거: 입력값만 업데이트
   const handleSearchChange = (value: string) => {
-    if (searchDebounce) {
-      clearTimeout(searchDebounce);
-    }
+    setSearchInput(value);
+  };
 
-    const timeout = setTimeout(() => {
+  // Enter 검색 / ESC 클리어
+  const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      const value = e.currentTarget.value.trim();
+      if (value.length === 0 || value.length < MIN_SEARCH_LENGTH) {
+        onFilterChange({ ...filter, search: undefined });
+        return;
+      }
       onFilterChange({ ...filter, search: value });
-    }, 300);
-
-    setSearchDebounce(timeout);
+    }
+    if (e.key === 'Escape') {
+      setSearchInput('');
+      onFilterChange({ ...filter, search: undefined });
+    }
   };
 
   // 필터 업데이트 핸들러
@@ -139,14 +153,7 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
 
   const activeFilterCount = getActiveFilterCount();
 
-  // 컴포넌트 언마운트 시 디바운스 정리
-  useEffect(() => {
-    return () => {
-      if (searchDebounce) {
-        clearTimeout(searchDebounce);
-      }
-    };
-  }, [searchDebounce]);
+  // 자동검색 제거됨: 디바운스 정리 불필요
 
   return (
     <div className="bg-white dark:bg-dark-800 rounded-lg shadow-sm border border-gray-200 dark:border-dark-600 sticky top-4 z-20">
@@ -162,7 +169,9 @@ const StaffSearchFilterComponent: React.FC<StaffSearchFilterProps> = ({
               <input
                 type="text"
                 placeholder="이름, 연락처, 직원번호 검색..."
+                value={searchInput}
                 onChange={e => handleSearchChange(e.target.value)}
+                onKeyDown={handleSearchKeyDown}
                 className="block w-full pl-10 pr-3 py-2 text-sm border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-700 dark:text-dark-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 disabled={loading}
               />

@@ -1,11 +1,6 @@
 import { Plus } from '@/utils/lucide-shim';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { Suspense, useCallback, useEffect, useState } from 'react';
 import { useToastHelpers } from '../components/common/Toast';
-import MemberDetailModal from '../components/member/MemberDetailModal';
-import MemberForm from '../components/member/MemberForm';
-import MemberSearchFilter from '../components/member/MemberSearchFilter';
-import MemberStats from '../components/member/MemberStats';
-import MemberTable from '../components/member/MemberTable';
 import {
     BulkAction,
     CreateMemberInput,
@@ -17,6 +12,22 @@ import {
     UpdateMemberInput,
 } from '../types/member';
 import { mockData, safeElectronCall } from '../utils/environmentUtils';
+// 코드 스플리팅: 초기 엔트리 최소화를 위해 지연 로딩
+const MemberDetailModal = React.lazy(
+  () => import(/* webpackChunkName: "member-detail-modal" */ '../components/member/MemberDetailModal')
+);
+const MemberForm = React.lazy(
+  () => import(/* webpackChunkName: "member-form" */ '../components/member/MemberForm')
+);
+const MemberSearchFilter = React.lazy(
+  () => import(/* webpackChunkName: "member-search-filter" */ '../components/member/MemberSearchFilter')
+);
+const MemberStats = React.lazy(
+  () => import(/* webpackChunkName: "member-stats" */ '../components/member/MemberStats')
+);
+const MemberTable = React.lazy(
+  () => import(/* webpackChunkName: "member-table" */ '../components/member/MemberTable')
+);
 
 const Members: React.FC = () => {
   // 상태 관리
@@ -479,15 +490,24 @@ const Members: React.FC = () => {
       )}
 
       {/* 검색 및 필터 - 최상단 */}
-      <MemberSearchFilter
-        filter={searchFilter}
-        onFilterChange={handleFilterChange}
-        onReset={handleFilterReset}
-        memberCount={pagination.total}
-        loading={loading}
-        onRefresh={handleRefresh}
-        onAddMember={handleAddMember}
-      />
+      <Suspense
+        fallback={
+          <div className="p-4 rounded-lg border bg-white/50 dark:bg-gray-800/50 animate-pulse" aria-busy>
+            <div className="h-6 w-48 bg-gray-200 dark:bg-gray-700 rounded mb-3" />
+            <div className="h-10 w-full bg-gray-100 dark:bg-gray-700 rounded" />
+          </div>
+        }
+      >
+        <MemberSearchFilter
+          filter={searchFilter}
+          onFilterChange={handleFilterChange}
+          onReset={handleFilterReset}
+          memberCount={pagination.total}
+          loading={loading}
+          onRefresh={handleRefresh}
+          onAddMember={handleAddMember}
+        />
+      </Suspense>
 
       {/* 개발 환경에서만 디버그 버튼 표시 */}
       {process.env.NODE_ENV === 'development' && (
@@ -509,41 +529,66 @@ const Members: React.FC = () => {
       )}
 
       {/* 회원 통계 대시보드 */}
-      <MemberStats stats={memberStats} loading={statsLoading} />
+      <Suspense
+        fallback={
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {Array.from({ length: 4 }).map((_, idx) => (
+              <div key={idx} className="h-24 rounded-lg border bg-white/50 dark:bg-gray-800/50 animate-pulse" />
+            ))}
+          </div>
+        }
+      >
+        <MemberStats stats={memberStats} loading={statsLoading} />
+      </Suspense>
 
       {/* 회원 목록 테이블 */}
-      <MemberTable
-        members={members}
-        loading={loading}
-        sortOption={sortOption}
-        onSortChange={handleSortChange}
-        pagination={pagination}
-        onPageChange={handlePageChange}
-        onLimitChange={handleLimitChange}
-        onEdit={openEditMode}
-        onDelete={handleDeleteMember}
-        onView={handleViewMember}
-        selectedMembers={selectedMembers}
-        onSelectionChange={setSelectedMembers}
-        onBulkAction={handleBulkAction}
-      />
+      <Suspense
+        fallback={
+          <div className="rounded-lg border overflow-hidden">
+            <div className="h-10 bg-gray-100 dark:bg-gray-800 animate-pulse" />
+            {Array.from({ length: 8 }).map((_, idx) => (
+              <div key={idx} className="h-12 border-t bg-white/50 dark:bg-gray-900/50 animate-pulse" />
+            ))}
+          </div>
+        }
+      >
+        <MemberTable
+          members={members}
+          loading={loading}
+          sortOption={sortOption}
+          onSortChange={handleSortChange}
+          pagination={pagination}
+          onPageChange={handlePageChange}
+          onLimitChange={handleLimitChange}
+          onEdit={openEditMode}
+          onDelete={handleDeleteMember}
+          onView={handleViewMember}
+          selectedMembers={selectedMembers}
+          onSelectionChange={setSelectedMembers}
+          onBulkAction={handleBulkAction}
+        />
+      </Suspense>
 
       {/* 회원 등록/수정 폼 모달 */}
-      <MemberForm
-        isOpen={isFormOpen}
-        onClose={closeForm}
-        onSubmit={handleSubmit}
-        member={editingMember}
-        isLoading={formLoading}
-      />
+      <Suspense fallback={null}>
+        <MemberForm
+          isOpen={isFormOpen}
+          onClose={closeForm}
+          onSubmit={handleSubmit}
+          member={editingMember}
+          isLoading={formLoading}
+        />
+      </Suspense>
 
       {/* 회원 상세 정보 모달 */}
-      <MemberDetailModal
-        isOpen={isDetailModalOpen}
-        onClose={closeDetailModal}
-        member={viewingMember}
-        onEdit={openEditMode}
-      />
+      <Suspense fallback={null}>
+        <MemberDetailModal
+          isOpen={isDetailModalOpen}
+          onClose={closeDetailModal}
+          member={viewingMember}
+          onEdit={openEditMode}
+        />
+      </Suspense>
     </div>
   );
 };

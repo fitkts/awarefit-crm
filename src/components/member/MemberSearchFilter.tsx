@@ -22,7 +22,8 @@ const MemberSearchFilterComponent: React.FC<MemberSearchFilterProps> = ({
   onAddMember,
 }) => {
   const [isAdvancedOpen, setIsAdvancedOpen] = useState(false);
-  const [searchDebounce, setSearchDebounce] = useState<NodeJS.Timeout | null>(null);
+  const MIN_SEARCH_LENGTH = 1;
+  const [searchInput, setSearchInput] = useState<string>(filter.search || '');
   const [staffList, setStaffList] = useState<Array<{ id: number; name: string; position: string }>>(
     []
   );
@@ -96,17 +97,30 @@ const MemberSearchFilterComponent: React.FC<MemberSearchFilterProps> = ({
     },
   ];
 
-  // 검색어 디바운스 처리
+  // 외부에서 필터가 변경되면 입력값 동기화
+  useEffect(() => {
+    setSearchInput(filter.search || '');
+  }, [filter.search]);
+
+  // 자동검색 제거: 입력값만 업데이트
   const handleSearchChange = (value: string) => {
-    if (searchDebounce) {
-      clearTimeout(searchDebounce);
-    }
+    setSearchInput(value);
+  };
 
-    const timeout = setTimeout(() => {
+  // Enter 검색 / ESC 클리어
+  const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      const value = e.currentTarget.value.trim();
+      if (value.length === 0 || value.length < MIN_SEARCH_LENGTH) {
+        onFilterChange({ ...filter, search: undefined });
+        return;
+      }
       onFilterChange({ ...filter, search: value });
-    }, 300);
-
-    setSearchDebounce(timeout);
+    }
+    if (e.key === 'Escape') {
+      setSearchInput('');
+      onFilterChange({ ...filter, search: undefined });
+    }
   };
 
   // 필터 업데이트 핸들러
@@ -162,16 +176,10 @@ const MemberSearchFilterComponent: React.FC<MemberSearchFilterProps> = ({
     loadStaff();
   }, []);
 
-  useEffect(() => {
-    return () => {
-      if (searchDebounce) {
-        clearTimeout(searchDebounce);
-      }
-    };
-  }, [searchDebounce]);
+  // 자동검색 제거됨: 디바운스 정리 불필요
 
   return (
-    <div className="bg-white dark:bg-dark-800 rounded-lg shadow-sm border border-gray-200 dark:border-dark-600">
+    <div className="bg-white dark:bg-dark-800 rounded-lg shadow-sm border border-gray-200 dark:border-dark-600 sticky top-0 z-30">
       {/* 기본 검색 바 */}
       <div className="p-4 border-b border-gray-200 dark:border-dark-600">
         <div className="flex flex-col lg:flex-row lg:items-center gap-3">
@@ -181,8 +189,9 @@ const MemberSearchFilterComponent: React.FC<MemberSearchFilterProps> = ({
             <input
               type="text"
               placeholder="회원 이름, 전화번호, 이메일 검색"
-              defaultValue={filter.search || ''}
+              value={searchInput}
               onChange={e => handleSearchChange(e.target.value)}
+              onKeyDown={handleSearchKeyDown}
               className="w-full pl-9 pr-3 py-2 text-sm border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-700 dark:text-dark-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
               disabled={loading}
             />

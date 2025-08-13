@@ -61,13 +61,17 @@ const menuItems: MenuItem[] = [
     icon: Calendar,
     status: 'coming-soon',
   },
-  {
-    id: 'component-demo',
-    label: '컴포넌트 데모',
-    icon: Code,
-    status: 'active',
-    badge: 'New',
-  },
+  ...(process.env.NODE_ENV !== 'production'
+    ? [
+        {
+          id: 'component-demo',
+          label: '컴포넌트 데모',
+          icon: Code,
+          status: 'active',
+          badge: 'New',
+        } as MenuItem,
+      ]
+    : []),
   {
     id: 'settings',
     label: '시스템 설정',

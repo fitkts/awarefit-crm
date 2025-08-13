@@ -1,14 +1,14 @@
-import React from 'react';
-import {
-  Users,
-  CreditCard,
-  UserCog,
-  BarChart3,
-  TrendingUp,
-  TrendingDown,
-  DollarSign,
-  Clock,
-} from '@/utils/lucide-shim';
+import React, { Suspense } from 'react';
+// 대시보드 내부 섹션 지연 로딩
+const StatsCards = React.lazy(
+  () => import(/* webpackChunkName: "dashboard-stats-cards" */ '../components/dashboard/StatsCards')
+);
+const QuickActions = React.lazy(
+  () => import(/* webpackChunkName: "dashboard-quick-actions" */ '../components/dashboard/QuickActions')
+);
+const RecentActivities = React.lazy(
+  () => import(/* webpackChunkName: "dashboard-recent-activities" */ '../components/dashboard/RecentActivities')
+);
 
 const Dashboard: React.FC = () => {
   // 임시 통계 데이터 (나중에 실제 데이터베이스에서 가져올 예정)
@@ -18,7 +18,7 @@ const Dashboard: React.FC = () => {
       value: '247',
       change: '+12',
       changeType: 'increase',
-      icon: Users,
+      iconKey: 'users',
       color: 'blue',
     },
     {
@@ -26,7 +26,7 @@ const Dashboard: React.FC = () => {
       value: '₩8,420,000',
       change: '+23%',
       changeType: 'increase',
-      icon: DollarSign,
+      iconKey: 'dollar-sign',
       color: 'green',
     },
     {
@@ -34,7 +34,7 @@ const Dashboard: React.FC = () => {
       value: '189',
       change: '-3',
       changeType: 'decrease',
-      icon: TrendingUp,
+      iconKey: 'trending-up',
       color: 'purple',
     },
     {
@@ -42,7 +42,7 @@ const Dashboard: React.FC = () => {
       value: '42',
       change: '+8',
       changeType: 'increase',
-      icon: Clock,
+      iconKey: 'clock',
       color: 'orange',
     },
   ];
@@ -56,10 +56,10 @@ const Dashboard: React.FC = () => {
   ];
 
   const quickActions = [
-    { id: 'add-member', label: '회원 등록', icon: Users, color: 'blue' },
-    { id: 'process-payment', label: '결제 처리', icon: CreditCard, color: 'green' },
-    { id: 'view-statistics', label: '통계 보기', icon: BarChart3, color: 'purple' },
-    { id: 'manage-staff', label: '직원 관리', icon: UserCog, color: 'orange' },
+    { id: 'add-member', label: '회원 등록', iconKey: 'users', color: 'blue' },
+    { id: 'process-payment', label: '결제 처리', iconKey: 'credit-card', color: 'green' },
+    { id: 'view-statistics', label: '통계 보기', iconKey: 'bar-chart-3', color: 'purple' },
+    { id: 'manage-staff', label: '직원 관리', iconKey: 'user-cog', color: 'orange' },
   ];
 
   return (
@@ -73,125 +73,34 @@ const Dashboard: React.FC = () => {
       </div>
 
       {/* 주요 통계 카드들 */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {stats.map(stat => {
-          const IconComponent = stat.icon;
-          return (
-            <div
-              key={stat.title}
-              className="bg-white rounded-xl p-6 shadow-sm border border-gray-200"
-            >
-              <div className="flex items-center justify-between mb-4">
-                <div
-                  className={`w-12 h-12 rounded-lg flex items-center justify-center ${
-                    stat.color === 'blue'
-                      ? 'bg-blue-100'
-                      : stat.color === 'green'
-                        ? 'bg-green-100'
-                        : stat.color === 'purple'
-                          ? 'bg-purple-100'
-                          : 'bg-orange-100'
-                  }`}
-                >
-                  <IconComponent
-                    className={`w-6 h-6 ${
-                      stat.color === 'blue'
-                        ? 'text-blue-600'
-                        : stat.color === 'green'
-                          ? 'text-green-600'
-                          : stat.color === 'purple'
-                            ? 'text-purple-600'
-                            : 'text-orange-600'
-                    }`}
-                  />
-                </div>
-
-                <div
-                  className={`flex items-center space-x-1 text-sm ${
-                    stat.changeType === 'increase' ? 'text-green-600' : 'text-red-600'
-                  }`}
-                >
-                  {stat.changeType === 'increase' ? (
-                    <TrendingUp className="w-4 h-4" />
-                  ) : (
-                    <TrendingDown className="w-4 h-4" />
-                  )}
-                  <span>{stat.change}</span>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-1">{stat.value}</h3>
-                <p className="text-sm text-gray-600">{stat.title}</p>
-              </div>
-            </div>
-          );
-        })}
-      </div>
+      <Suspense
+        fallback={
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {Array.from({ length: 4 }).map((_, idx) => (
+              <div key={idx} className="h-24 rounded-xl border bg-white/50 dark:bg-gray-800/50 animate-pulse" />
+            ))}
+          </div>
+        }
+      >
+        <StatsCards items={stats as any} />
+      </Suspense>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* 빠른 액션 */}
-        <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">빠른 액션</h3>
-          <div className="space-y-3">
-            {quickActions.map(action => {
-              const IconComponent = action.icon;
-              return (
-                <button
-                  key={action.id}
-                  className="w-full flex items-center space-x-3 p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors text-left"
-                >
-                  <div
-                    className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-                      action.color === 'blue'
-                        ? 'bg-blue-100'
-                        : action.color === 'green'
-                          ? 'bg-green-100'
-                          : action.color === 'purple'
-                            ? 'bg-purple-100'
-                            : 'bg-orange-100'
-                    }`}
-                  >
-                    <IconComponent
-                      className={`w-5 h-5 ${
-                        action.color === 'blue'
-                          ? 'text-blue-600'
-                          : action.color === 'green'
-                            ? 'text-green-600'
-                            : action.color === 'purple'
-                              ? 'text-purple-600'
-                              : 'text-orange-600'
-                      }`}
-                    />
-                  </div>
-                  <span className="font-medium text-gray-900">{action.label}</span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
+        <Suspense
+          fallback={
+            <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 animate-pulse h-48" />
+          }
+        >
+          <QuickActions items={quickActions as any} />
+        </Suspense>
 
         {/* 최근 활동 */}
-        <div className="lg:col-span-2 bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">최근 활동</h3>
-          <div className="space-y-4">
-            {recentActivities.map(activity => (
-              <div key={activity.id} className="flex items-center justify-between py-2">
-                <div className="flex-1">
-                  <p className="text-sm font-medium text-gray-900">{activity.action}</p>
-                  <p className="text-sm text-gray-600">{activity.member}</p>
-                </div>
-                <div className="text-sm text-gray-500">{activity.time}</div>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-4 pt-4 border-t border-gray-200">
-            <button className="text-sm text-blue-600 hover:text-blue-700 font-medium">
-              모든 활동 보기 →
-            </button>
-          </div>
-        </div>
+        <Suspense
+          fallback={<div className="lg:col-span-2 h-64 rounded-xl border bg-white/50 animate-pulse" />}
+        >
+          <RecentActivities items={recentActivities} />
+        </Suspense>
       </div>
 
       {/* 시스템 상태 */}

@@ -1,4 +1,4 @@
-import React, { Suspense, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { ToastProvider } from '../components/common/Toast';
 import Layout from '../components/layout/Layout';
 import { ThemeProvider } from '../contexts/ThemeContext';
@@ -8,10 +8,30 @@ const Dashboard = React.lazy(() => import('../pages/Dashboard'));
 const Members = React.lazy(() => import('../pages/Members'));
 const Payment = React.lazy(() => import('../pages/Payment'));
 const Staff = React.lazy(() => import('../pages/Staff'));
-const ComponentDemo = React.lazy(() => import('../pages/ComponentDemo'));
+const ComponentDemo = process.env.NODE_ENV !== 'production'
+  ? React.lazy(() => import('../pages/ComponentDemo'))
+  : (null as unknown as React.FC);
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<string>('dashboard');
+  // 초기 진입 성능 최적화: 최초 페인트 후에 비활성 페이지 프리로드
+  useEffect(() => {
+    // 비차단 프리로드: 낮은 우선순위로 다음 페이지들 로드
+    const preload = () => {
+      import('../pages/Members');
+      import('../pages/Payment');
+      import('../pages/Staff');
+      // 개발 환경에서만 데모 프리로드
+      if (process.env.NODE_ENV !== 'production') {
+        import('../pages/ComponentDemo');
+      }
+    };
+    if ('requestIdleCallback' in window) {
+      (window as any).requestIdleCallback(preload, { timeout: 2000 });
+    } else {
+      setTimeout(preload, 1500);
+    }
+  }, []);
 
   const handlePageChange = (page: string) => {
     setCurrentPage(page);
@@ -53,7 +73,7 @@ const App: React.FC = () => {
           </div>
         );
       case 'component-demo':
-        return <ComponentDemo />;
+        return process.env.NODE_ENV !== 'production' ? <ComponentDemo /> : <Dashboard />;
       default:
         return <Dashboard />;
     }
