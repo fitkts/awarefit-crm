@@ -1,10 +1,12 @@
 {
-  "timestamp": "2025-08-07T12:11:50.449Z",
+  "timestamp": "2025-08-11T10:44:16.212Z",
   "overall": {
     "status": "healthy",
-    "score": 100,
+    "score": 97.5,
     "critical_issues": [],
-    "warnings": [],
+    "warnings": [
+      "코드 포맷팅이 일관되지 않습니다."
+    ],
     "recommendations": [
       "📊 정기적으로 헬스체크를 실행하여 시스템 상태를 모니터링하세요.",
       "🔄 자동화 스크립트를 활용하여 개발 효율성을 높이세요."
@@ -30,8 +32,8 @@
       "status": "healthy"
     },
     "code_quality": {
-      "score": 100,
-      "passed": 5,
+      "score": 80,
+      "passed": 4,
       "total": 5,
       "status": "healthy"
     },
@@ -60,7 +62,7 @@
       "status": "healthy"
     }
   },
-  "execution_time": 100253,
+  "execution_time": 36962,
   "version": "1.0.0",
   "project": "Awarefit CRM"
 }
