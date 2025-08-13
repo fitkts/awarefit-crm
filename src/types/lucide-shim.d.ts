@@ -83,4 +83,3 @@ declare module '@/utils/lucide-shim' {
   export const UserCheck: LucideIcon;
   export const UserX: LucideIcon;
 }
-

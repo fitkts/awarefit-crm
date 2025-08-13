@@ -1,4 +1,12 @@
-import { Bookmark, ChevronDown, Filter, Plus, RefreshCw, RotateCcw, Search } from '@/utils/lucide-shim';
+import {
+  Bookmark,
+  ChevronDown,
+  Filter,
+  Plus,
+  RefreshCw,
+  RotateCcw,
+  Search,
+} from '@/utils/lucide-shim';
 import React, { useEffect, useState } from 'react';
 import { StaffRole, StaffSearchFilter } from '../../types/staff';
 

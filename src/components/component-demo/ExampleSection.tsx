@@ -78,7 +78,11 @@ const ExampleSection: React.FC = () => {
             <Button
               variant="primary"
               onClick={() => {
-                addToast({ type: 'success', title: '폼 제출 완료', message: '문의가 성공적으로 접수되었습니다.' });
+                addToast({
+                  type: 'success',
+                  title: '폼 제출 완료',
+                  message: '문의가 성공적으로 접수되었습니다.',
+                });
               }}
             >
               제출하기
@@ -87,7 +91,11 @@ const ExampleSection: React.FC = () => {
               variant="outline"
               onClick={() => {
                 setFormData({ name: '', email: '', phone: '', category: '', message: '' });
-                addToast({ type: 'info', title: '폼 초기화', message: '모든 필드가 초기화되었습니다.' });
+                addToast({
+                  type: 'info',
+                  title: '폼 초기화',
+                  message: '모든 필드가 초기화되었습니다.',
+                });
               }}
             >
               초기화
@@ -113,7 +121,10 @@ const ExampleSection: React.FC = () => {
             <h4 className="font-semibold text-gray-900 mb-2">사용 중인 컴포넌트</h4>
             <div className="flex flex-wrap gap-2">
               {['Input', 'Select', 'Textarea', 'Button', 'Card'].map(comp => (
-                <span key={comp} className="px-2 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded">
+                <span
+                  key={comp}
+                  className="px-2 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded"
+                >
                   {comp}
                 </span>
               ))}
@@ -150,5 +161,3 @@ const ExampleSection: React.FC = () => {
 };
 
 export default ExampleSection;
-
-

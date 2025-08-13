@@ -2,7 +2,18 @@
 import React from 'react';
 
 // 🎯 자주 사용되는 핵심 아이콘만 미리 로드 (shim 경유로 번들 축소)
-import { Calendar, Copy, Edit, Eye, Mail, Phone, Save, Settings, Star, User } from '@/utils/lucide-shim';
+import {
+  Calendar,
+  Copy,
+  Edit,
+  Eye,
+  Mail,
+  Phone,
+  Save,
+  Settings,
+  Star,
+  User,
+} from '@/utils/lucide-shim';
 
 interface OptimizedIconProps {
   name: string;

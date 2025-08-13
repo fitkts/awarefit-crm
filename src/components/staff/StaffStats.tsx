@@ -1,12 +1,12 @@
 import {
-    Briefcase,
-    Building,
-    CreditCard,
-    Shield,
-    TrendingUp,
-    UserCheck,
-    UserPlus,
-    Users,
+  Briefcase,
+  Building,
+  CreditCard,
+  Shield,
+  TrendingUp,
+  UserCheck,
+  UserPlus,
+  Users,
 } from '@/utils/lucide-shim';
 import React from 'react';
 import { StaffStats } from '../../types/staff';

@@ -4,10 +4,14 @@ const StatsCards = React.lazy(
   () => import(/* webpackChunkName: "dashboard-stats-cards" */ '../components/dashboard/StatsCards')
 );
 const QuickActions = React.lazy(
-  () => import(/* webpackChunkName: "dashboard-quick-actions" */ '../components/dashboard/QuickActions')
+  () =>
+    import(/* webpackChunkName: "dashboard-quick-actions" */ '../components/dashboard/QuickActions')
 );
 const RecentActivities = React.lazy(
-  () => import(/* webpackChunkName: "dashboard-recent-activities" */ '../components/dashboard/RecentActivities')
+  () =>
+    import(
+      /* webpackChunkName: "dashboard-recent-activities" */ '../components/dashboard/RecentActivities'
+    )
 );
 
 const Dashboard: React.FC = () => {
@@ -77,7 +81,10 @@ const Dashboard: React.FC = () => {
         fallback={
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {Array.from({ length: 4 }).map((_, idx) => (
-              <div key={idx} className="h-24 rounded-xl border bg-white/50 dark:bg-gray-800/50 animate-pulse" />
+              <div
+                key={idx}
+                className="h-24 rounded-xl border bg-white/50 dark:bg-gray-800/50 animate-pulse"
+              />
             ))}
           </div>
         }
@@ -97,7 +104,9 @@ const Dashboard: React.FC = () => {
 
         {/* 최근 활동 */}
         <Suspense
-          fallback={<div className="lg:col-span-2 h-64 rounded-xl border bg-white/50 animate-pulse" />}
+          fallback={
+            <div className="lg:col-span-2 h-64 rounded-xl border bg-white/50 animate-pulse" />
+          }
         >
           <RecentActivities items={recentActivities} />
         </Suspense>

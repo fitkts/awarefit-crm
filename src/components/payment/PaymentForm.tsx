@@ -1,11 +1,11 @@
 import { Calculator, CreditCard, Package, User, X } from '@/utils/lucide-shim';
 import React, { useCallback, useEffect, useState } from 'react';
 import {
-    CreatePaymentInput,
-    Payment,
-    PaymentMethod,
-    PaymentType,
-    UpdatePaymentInput,
+  CreatePaymentInput,
+  Payment,
+  PaymentMethod,
+  PaymentType,
+  UpdatePaymentInput,
 } from '../../types/payment';
 
 interface PaymentFormProps {

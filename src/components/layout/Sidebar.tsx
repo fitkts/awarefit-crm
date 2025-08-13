@@ -1,12 +1,12 @@
 import {
-    BarChart3,
-    Calendar,
-    Code,
-    CreditCard,
-    Home,
-    Settings,
-    UserCog,
-    Users,
+  BarChart3,
+  Calendar,
+  Code,
+  CreditCard,
+  Home,
+  Settings,
+  UserCog,
+  Users,
 } from '@/utils/lucide-shim';
 import React from 'react';
 

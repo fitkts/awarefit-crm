@@ -1,6 +1,6 @@
 /**
  * 🔧 better-sqlite3 자동 복구 서비스
- * 
+ *
  * NODE_MODULE_VERSION 호환성 문제를 자동으로 감지하고 해결합니다.
  */
 
@@ -47,7 +47,6 @@ export class BetterSqlite3Service {
       console.log('✅ [BetterSqlite3] 호환성 검사 통과');
       this.isFixed = true;
       return true;
-
     } catch (error) {
       console.error('❌ [BetterSqlite3] 자동 복구 실패:', error);
       // 최후 수단: 강제 수동 복구
@@ -92,25 +91,23 @@ export class BetterSqlite3Service {
     }
   }
 
-
-
   /**
    * Electron 전용 재빌드 수행
    */
   private async rebuildForElectron(): Promise<void> {
     console.log('⚡ [BetterSqlite3] Electron 재빌드 수행 중...');
     try {
-      execSync('npx electron-rebuild -f -m better-sqlite3', { 
+      execSync('npx electron-rebuild -f -m better-sqlite3', {
         stdio: 'pipe',
-        cwd: process.cwd()
+        cwd: process.cwd(),
       });
       console.log('✅ [BetterSqlite3] Electron 재빌드 완료');
     } catch (_error) {
       // Electron rebuild 실패 시 전체 재빌드 시도
       console.log('🔄 [BetterSqlite3] 전체 Electron 재빌드 시도...');
-      execSync('npx electron-rebuild', { 
+      execSync('npx electron-rebuild', {
         stdio: 'pipe',
-        cwd: process.cwd()
+        cwd: process.cwd(),
       });
       console.log('✅ [BetterSqlite3] 전체 Electron 재빌드 완료');
     }
@@ -121,19 +118,18 @@ export class BetterSqlite3Service {
    */
   async fullRecovery(): Promise<void> {
     console.log('🔄 [BetterSqlite3] 완전 복구 시작 (캐시 클리어 포함)...');
-    
+
     try {
       // 1. 모듈 캐시에서 better-sqlite3 제거
       this.clearModuleCache();
-      
+
       // 2. 재빌드 수행
       await this.rebuildForElectron();
-      
+
       // 3. 다시 캐시 클리어 (재빌드 후에도)
       this.clearModuleCache();
-      
+
       console.log('✅ [BetterSqlite3] 완전 복구 완료');
-      
     } catch (_error) {
       console.error('❌ [BetterSqlite3] 완전 복구 실패:', _error);
       throw _error;
@@ -145,23 +141,23 @@ export class BetterSqlite3Service {
    */
   private clearModuleCache(): void {
     console.log('🧹 [BetterSqlite3] 모듈 캐시 클리어...');
-    
+
     try {
       // better-sqlite3 관련 모든 캐시된 모듈 찾기 및 제거
       const moduleKeys = Object.keys(require.cache);
-      const betterSqliteKeys = moduleKeys.filter(key => 
-        key.includes('better-sqlite3') || 
-        key.includes('better_sqlite3') ||
-        key.includes('bindings')
+      const betterSqliteKeys = moduleKeys.filter(
+        key =>
+          key.includes('better-sqlite3') ||
+          key.includes('better_sqlite3') ||
+          key.includes('bindings')
       );
-      
+
       betterSqliteKeys.forEach(key => {
         console.log(`   🗑️ 캐시 제거: ${path.basename(key)}`);
         delete require.cache[key];
       });
-      
+
       console.log(`   ✅ ${betterSqliteKeys.length}개 캐시 항목 제거 완료`);
-      
     } catch (_error) {
       console.log('   ⚠️ 캐시 클리어 부분적 실패 (계속 진행)');
     }
@@ -175,7 +171,7 @@ export class BetterSqlite3Service {
     try {
       // 1. 캐시 완전 클리어
       this.clearModuleCache();
-      
+
       // 2. 모듈 완전 제거
       const modulePath = path.join(process.cwd(), 'node_modules', 'better-sqlite3');
       if (fs.existsSync(modulePath)) {
@@ -185,16 +181,16 @@ export class BetterSqlite3Service {
 
       // 3. 재설치
       console.log('   📦 모듈 재설치...');
-      execSync('npm install better-sqlite3 --no-save', { 
+      execSync('npm install better-sqlite3 --no-save', {
         stdio: 'pipe',
-        cwd: process.cwd()
+        cwd: process.cwd(),
       });
 
       // 4. Electron 재빌드
       console.log('   ⚡ Electron 재빌드...');
-      execSync('npx electron-rebuild', { 
+      execSync('npx electron-rebuild', {
         stdio: 'pipe',
-        cwd: process.cwd()
+        cwd: process.cwd(),
       });
 
       // 5. 마지막 캐시 클리어
@@ -203,7 +199,6 @@ export class BetterSqlite3Service {
       console.log('✅ [BetterSqlite3] 수동 강제 수정 완료');
       this.isFixed = true;
       return true;
-
     } catch (_error) {
       console.error('❌ [BetterSqlite3] 수동 강제 수정 실패:', _error);
       return false;

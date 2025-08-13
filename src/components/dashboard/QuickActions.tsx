@@ -22,7 +22,7 @@ const colorClasses: Record<ActionColor, { bg: string; text: string }> = {
 };
 
 const iconMap = {
-  'users': Users,
+  users: Users,
   'credit-card': CreditCard,
   'bar-chart-3': BarChart3,
   'user-cog': UserCog,
@@ -41,7 +41,9 @@ const QuickActions: React.FC<QuickActionsProps> = ({ items }) => {
               key={action.id}
               className="w-full flex items-center space-x-3 p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors text-left"
             >
-              <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${palette.bg}`}>
+              <div
+                className={`w-10 h-10 rounded-lg flex items-center justify-center ${palette.bg}`}
+              >
                 <IconComponent className={`w-5 h-5 ${palette.text}`} />
               </div>
               <span className="font-medium text-gray-900">{action.label}</span>
@@ -54,5 +56,3 @@ const QuickActions: React.FC<QuickActionsProps> = ({ items }) => {
 };
 
 export default QuickActions;
-
-

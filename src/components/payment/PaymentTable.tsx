@@ -1,15 +1,15 @@
 import {
-    ArrowUpDown,
-    Calendar,
-    CheckCircle,
-    Clock,
-    CreditCard,
-    DollarSign,
-    Edit,
-    Eye,
-    RefreshCw,
-    User,
-    X,
+  ArrowUpDown,
+  Calendar,
+  CheckCircle,
+  Clock,
+  CreditCard,
+  DollarSign,
+  Edit,
+  Eye,
+  RefreshCw,
+  User,
+  X,
 } from '@/utils/lucide-shim';
 import React from 'react';
 import { PaymentDetail, PaymentSortOption } from '../../types/payment';

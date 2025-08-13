@@ -75,7 +75,9 @@ class MockIntersectionObserver implements IntersectionObserver {
   disconnect(): void {}
   observe(_target: Element): void {}
   unobserve(_target: Element): void {}
-  takeRecords(): IntersectionObserverEntry[] { return []; }
+  takeRecords(): IntersectionObserverEntry[] {
+    return [];
+  }
 }
 // jsdom 환경에서 전역에 주입
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

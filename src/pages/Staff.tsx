@@ -1,14 +1,14 @@
 import React, { Suspense, useCallback, useEffect, useState } from 'react';
 import { useToastHelpers } from '../components/common/Toast';
 import {
-    CreateStaffInput,
-    Staff,
-    StaffBulkAction,
-    StaffPaginationInfo,
-    StaffSearchFilter as StaffSearchFilterType,
-    StaffSortOption,
-    StaffStats as StaffStatsType,
-    UpdateStaffInput,
+  CreateStaffInput,
+  Staff,
+  StaffBulkAction,
+  StaffPaginationInfo,
+  StaffSearchFilter as StaffSearchFilterType,
+  StaffSortOption,
+  StaffStats as StaffStatsType,
+  UpdateStaffInput,
 } from '../types/staff';
 import { mockData, safeElectronCall } from '../utils/environmentUtils';
 // 코드 스플리팅: 초기 엔트리 최소화를 위해 지연 로딩
@@ -19,7 +19,8 @@ const StaffForm = React.lazy(
   () => import(/* webpackChunkName: "staff-form" */ '../components/staff/StaffForm')
 );
 const StaffSearchFilter = React.lazy(
-  () => import(/* webpackChunkName: "staff-search-filter" */ '../components/staff/StaffSearchFilter')
+  () =>
+    import(/* webpackChunkName: "staff-search-filter" */ '../components/staff/StaffSearchFilter')
 );
 const StaffStats = React.lazy(
   () => import(/* webpackChunkName: "staff-stats" */ '../components/staff/StaffStats')
@@ -377,7 +378,10 @@ const StaffPage: React.FC = () => {
       {/* 검색 및 필터 - 최상단 */}
       <Suspense
         fallback={
-          <div className="p-4 rounded-lg border bg-white/50 dark:bg-gray-800/50 animate-pulse" aria-busy>
+          <div
+            className="p-4 rounded-lg border bg-white/50 dark:bg-gray-800/50 animate-pulse"
+            aria-busy
+          >
             <div className="h-6 w-48 bg-gray-200 dark:bg-gray-700 rounded mb-3" />
             <div className="h-10 w-full bg-gray-100 dark:bg-gray-700 rounded" />
           </div>
@@ -399,7 +403,10 @@ const StaffPage: React.FC = () => {
         fallback={
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {Array.from({ length: 4 }).map((_, idx) => (
-              <div key={idx} className="h-24 rounded-lg border bg-white/50 dark:bg-gray-800/50 animate-pulse" />
+              <div
+                key={idx}
+                className="h-24 rounded-lg border bg-white/50 dark:bg-gray-800/50 animate-pulse"
+              />
             ))}
           </div>
         }
@@ -413,7 +420,10 @@ const StaffPage: React.FC = () => {
           <div className="rounded-lg border overflow-hidden">
             <div className="h-10 bg-gray-100 dark:bg-gray-800 animate-pulse" />
             {Array.from({ length: 8 }).map((_, idx) => (
-              <div key={idx} className="h-12 border-t bg-white/50 dark:bg-gray-900/50 animate-pulse" />
+              <div
+                key={idx}
+                className="h-12 border-t bg-white/50 dark:bg-gray-900/50 animate-pulse"
+              />
             ))}
           </div>
         }

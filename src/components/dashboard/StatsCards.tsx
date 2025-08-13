@@ -25,11 +25,11 @@ const colorClasses: Record<StatColor, { bg: string; text: string }> = {
 };
 
 const iconMap = {
-  'users': Users,
+  users: Users,
   'dollar-sign': DollarSign,
   'trending-up': TrendingUp,
   'trending-down': TrendingDown,
-  'clock': Clock,
+  clock: Clock,
 } as const;
 
 const StatsCards: React.FC<StatsCardsProps> = ({ items }) => {
@@ -39,9 +39,14 @@ const StatsCards: React.FC<StatsCardsProps> = ({ items }) => {
         const IconComponent = iconMap[item.iconKey];
         const palette = colorClasses[item.color];
         return (
-          <div key={item.title} className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+          <div
+            key={item.title}
+            className="bg-white rounded-xl p-6 shadow-sm border border-gray-200"
+          >
             <div className="flex items-center justify-between mb-4">
-              <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${palette.bg}`}>
+              <div
+                className={`w-12 h-12 rounded-lg flex items-center justify-center ${palette.bg}`}
+              >
                 <IconComponent className={`w-6 h-6 ${palette.text}`} />
               </div>
               <div
@@ -69,5 +74,3 @@ const StatsCards: React.FC<StatsCardsProps> = ({ items }) => {
 };
 
 export default StatsCards;
-
-

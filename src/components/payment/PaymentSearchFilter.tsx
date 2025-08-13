@@ -204,7 +204,8 @@ const PaymentSearchFilter: React.FC<PaymentSearchFilterProps> = ({
   };
 
   // 기간 계산 유틸
-  const toDateStr = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  const toDateStr = (d: Date) =>
+    `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
   const setDayRange = (nextOffset: number) => {
     const base = new Date();
     const target = new Date(base);
@@ -244,7 +245,7 @@ const PaymentSearchFilter: React.FC<PaymentSearchFilterProps> = ({
     });
   };
 
-  // 
+  //
 
   return (
     <div
@@ -260,19 +261,19 @@ const PaymentSearchFilter: React.FC<PaymentSearchFilterProps> = ({
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <Search className="h-4 w-4 text-gray-400" />
               </div>
-          <input
-            type="text"
+              <input
+                type="text"
                 placeholder="회원명, 전화번호, 결제번호 검색..."
                 value={searchInput}
                 onChange={e => handleSearchChange(e.target.value)}
                 onKeyDown={handleSearchKeyDown}
                 className="block w-full pl-10 pr-3 py-2 text-sm border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-700 dark:text-dark-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 disabled={loading}
-          />
-        </div>
+              />
+            </div>
 
-        {/* 고급 필터 토글 */}
-        <button
+            {/* 고급 필터 토글 */}
+            <button
               onClick={() => setIsAdvancedOpen(!isAdvancedOpen)}
               className={`flex items-center gap-2 px-3 py-2 text-sm border rounded-lg transition-colors ${
                 isAdvancedOpen || getActiveFilterCount() > 0
@@ -283,25 +284,27 @@ const PaymentSearchFilter: React.FC<PaymentSearchFilterProps> = ({
             >
               <Filter className="w-4 h-4" />
               <span>고급 필터</span>
-          {getActiveFilterCount() > 0 && (
+              {getActiveFilterCount() > 0 && (
                 <span className="bg-blue-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-              {getActiveFilterCount()}
-            </span>
-          )}
-              <ChevronDown className={`w-4 h-4 transition-transform ${isAdvancedOpen ? 'rotate-180' : ''}`} />
-        </button>
+                  {getActiveFilterCount()}
+                </span>
+              )}
+              <ChevronDown
+                className={`w-4 h-4 transition-transform ${isAdvancedOpen ? 'rotate-180' : ''}`}
+              />
+            </button>
 
-        {/* 초기화 버튼 */}
-        {getActiveFilterCount() > 0 && (
-          <button
-            onClick={onReset}
+            {/* 초기화 버튼 */}
+            {getActiveFilterCount() > 0 && (
+              <button
+                onClick={onReset}
                 className="flex items-center gap-1 px-2 py-2 text-sm text-gray-600 dark:text-dark-400 hover:text-gray-900 dark:hover:text-dark-100 transition-colors"
                 disabled={loading}
                 title="필터 초기화"
-          >
+              >
                 <RotateCcw className="w-4 h-4" />
-          </button>
-        )}
+              </button>
+            )}
           </div>
 
           <div className="flex items-center space-x-3">
@@ -339,7 +342,11 @@ const PaymentSearchFilter: React.FC<PaymentSearchFilterProps> = ({
               </span>
             ) : (
               <span>
-                총 <span className="font-semibold text-gray-900 dark:text-dark-100">{resultCount.toLocaleString()}건</span>의 결제
+                총{' '}
+                <span className="font-semibold text-gray-900 dark:text-dark-100">
+                  {resultCount.toLocaleString()}건
+                </span>
+                의 결제
               </span>
             )}
           </div>
@@ -358,7 +365,9 @@ const PaymentSearchFilter: React.FC<PaymentSearchFilterProps> = ({
               </button>
               <button
                 onClick={() => applyPreset(filterPresets.find(p => p.id === 'today')!)}
-                className={'px-2 py-0.5 text-[11px] bg-gray-100 dark:bg-dark-600 text-gray-700 dark:text-dark-200 hover:bg-gray-200 dark:hover:bg-dark-500 transition-colors'}
+                className={
+                  'px-2 py-0.5 text-[11px] bg-gray-100 dark:bg-dark-600 text-gray-700 dark:text-dark-200 hover:bg-gray-200 dark:hover:bg-dark-500 transition-colors'
+                }
                 disabled={loading}
               >
                 오늘
@@ -385,7 +394,9 @@ const PaymentSearchFilter: React.FC<PaymentSearchFilterProps> = ({
               </button>
               <button
                 onClick={() => applyPreset(filterPresets.find(p => p.id === 'this_week')!)}
-                className={'px-2 py-0.5 text-[11px] bg-gray-100 dark:bg-dark-600 text-gray-700 dark:text-dark-200 hover:bg-gray-200 dark:hover:bg-dark-500 transition-colors'}
+                className={
+                  'px-2 py-0.5 text-[11px] bg-gray-100 dark:bg-dark-600 text-gray-700 dark:text-dark-200 hover:bg-gray-200 dark:hover:bg-dark-500 transition-colors'
+                }
                 disabled={loading}
               >
                 이번 주
@@ -412,7 +423,9 @@ const PaymentSearchFilter: React.FC<PaymentSearchFilterProps> = ({
               </button>
               <button
                 onClick={() => applyPreset(filterPresets.find(p => p.id === 'this_month')!)}
-                className={'px-2 py-0.5 text-[11px] bg-gray-100 dark:bg-dark-600 text-gray-700 dark:text-dark-200 hover:bg-gray-200 dark:hover:bg-dark-500 transition-colors'}
+                className={
+                  'px-2 py-0.5 text-[11px] bg-gray-100 dark:bg-dark-600 text-gray-700 dark:text-dark-200 hover:bg-gray-200 dark:hover:bg-dark-500 transition-colors'
+                }
                 disabled={loading}
               >
                 이번 달
@@ -435,7 +448,9 @@ const PaymentSearchFilter: React.FC<PaymentSearchFilterProps> = ({
                   <button
                     key={preset.id}
                     onClick={() => applyPreset(preset)}
-                    className={"flex items-center gap-1 px-2 py-0.5 text-[11px] rounded-full bg-gray-100 dark:bg-dark-600 text-gray-700 dark:text-dark-200 hover:bg-gray-200 dark:hover:bg-dark-500 transition-colors"}
+                    className={
+                      'flex items-center gap-1 px-2 py-0.5 text-[11px] rounded-full bg-gray-100 dark:bg-dark-600 text-gray-700 dark:text-dark-200 hover:bg-gray-200 dark:hover:bg-dark-500 transition-colors'
+                    }
                     disabled={loading}
                   >
                     <Bookmark className="w-3 h-3" />
@@ -451,154 +466,156 @@ const PaymentSearchFilter: React.FC<PaymentSearchFilterProps> = ({
       {isAdvancedOpen && (
         <div className="p-4 border-b border-gray-200 dark:border-dark-600 bg-gray-50 dark:bg-dark-700">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {/* 날짜 범위 */}
-          <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">
-              <Calendar className="w-4 h-4 inline mr-1" />
-              시작일
-            </label>
-            <input
-              type="date"
-              value={filter.payment_date_from || ''}
-              onChange={e => handleFilterChange('payment_date_from', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-700 text-gray-900 dark:text-dark-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
+            {/* 날짜 범위 */}
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">
+                <Calendar className="w-4 h-4 inline mr-1" />
+                시작일
+              </label>
+              <input
+                type="date"
+                value={filter.payment_date_from || ''}
+                onChange={e => handleFilterChange('payment_date_from', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-700 text-gray-900 dark:text-dark-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
 
-          <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">
-              <Calendar className="w-4 h-4 inline mr-1" />
-              종료일
-            </label>
-            <input
-              type="date"
-              value={filter.payment_date_to || ''}
-              onChange={e => handleFilterChange('payment_date_to', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-700 text-gray-900 dark:text-dark-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">
+                <Calendar className="w-4 h-4 inline mr-1" />
+                종료일
+              </label>
+              <input
+                type="date"
+                value={filter.payment_date_to || ''}
+                onChange={e => handleFilterChange('payment_date_to', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-700 text-gray-900 dark:text-dark-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
 
-          {/* 결제 유형 */}
-          <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">
-              <Package className="w-4 h-4 inline mr-1" />
-              결제 유형
-            </label>
-            <select
-              value={filter.payment_type ?? ''}
-              onChange={e =>
-                handleFilterChange('payment_type', e.target.value ? e.target.value : undefined)
-              }
-              className="w-full px-3 py-2 border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-700 text-gray-900 dark:text-dark-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="">전체</option>
-              <option value="membership">회원권</option>
-              <option value="pt">PT</option>
-              <option value="other">기타</option>
-            </select>
-          </div>
+            {/* 결제 유형 */}
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">
+                <Package className="w-4 h-4 inline mr-1" />
+                결제 유형
+              </label>
+              <select
+                value={filter.payment_type ?? ''}
+                onChange={e =>
+                  handleFilterChange('payment_type', e.target.value ? e.target.value : undefined)
+                }
+                className="w-full px-3 py-2 border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-700 text-gray-900 dark:text-dark-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="">전체</option>
+                <option value="membership">회원권</option>
+                <option value="pt">PT</option>
+                <option value="other">기타</option>
+              </select>
+            </div>
 
-          {/* 결제 방식 */}
-          <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">
-              <CreditCard className="w-4 h-4 inline mr-1" />
-              결제 방식
-            </label>
-            <select
-              value={filter.payment_method ?? ''}
-              onChange={e =>
-                handleFilterChange('payment_method', e.target.value ? e.target.value : undefined)
-              }
-              className="w-full px-3 py-2 border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-700 text-gray-900 dark:text-dark-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="">전체</option>
-              <option value="현금">현금</option>
-              <option value="카드">카드</option>
-              <option value="계좌이체">계좌이체</option>
-              <option value="기타">기타</option>
-            </select>
-          </div>
+            {/* 결제 방식 */}
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">
+                <CreditCard className="w-4 h-4 inline mr-1" />
+                결제 방식
+              </label>
+              <select
+                value={filter.payment_method ?? ''}
+                onChange={e =>
+                  handleFilterChange('payment_method', e.target.value ? e.target.value : undefined)
+                }
+                className="w-full px-3 py-2 border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-700 text-gray-900 dark:text-dark-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="">전체</option>
+                <option value="현금">현금</option>
+                <option value="카드">카드</option>
+                <option value="계좌이체">계좌이체</option>
+                <option value="기타">기타</option>
+              </select>
+            </div>
 
-          {/* 담당 직원 */}
-          <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">
-              <User className="w-4 h-4 inline mr-1" />
-              담당 직원
-            </label>
-            <select
-              value={filter.staff_id || ''}
-              onChange={e =>
-                handleFilterChange(
-                  'staff_id',
-                  e.target.value ? parseInt(e.target.value) : undefined
-                )
-              }
-              className="w-full px-3 py-2 border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-700 text-gray-900 dark:text-dark-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="">전체 직원</option>
-              {staffList.map(staff => (
-                <option key={staff.id} value={staff.id}>
-                  {staff.name} ({staff.position})
-                </option>
-              ))}
-            </select>
-          </div>
+            {/* 담당 직원 */}
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">
+                <User className="w-4 h-4 inline mr-1" />
+                담당 직원
+              </label>
+              <select
+                value={filter.staff_id || ''}
+                onChange={e =>
+                  handleFilterChange(
+                    'staff_id',
+                    e.target.value ? parseInt(e.target.value) : undefined
+                  )
+                }
+                className="w-full px-3 py-2 border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-700 text-gray-900 dark:text-dark-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="">전체 직원</option>
+                {staffList.map(staff => (
+                  <option key={staff.id} value={staff.id}>
+                    {staff.name} ({staff.position})
+                  </option>
+                ))}
+              </select>
+            </div>
 
-          {/* 결제 상태 */}
-          <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">
-              상태
-            </label>
-            <select
-              value={filter.status ?? ''}
-              onChange={e => handleFilterChange('status', e.target.value ? e.target.value : undefined)}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-700 text-gray-900 dark:text-dark-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="">전체</option>
-              <option value="completed">완료</option>
-              <option value="refunded">환불</option>
-              <option value="cancelled">취소</option>
-              <option value="pending">대기</option>
-            </select>
-          </div>
+            {/* 결제 상태 */}
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">
+                상태
+              </label>
+              <select
+                value={filter.status ?? ''}
+                onChange={e =>
+                  handleFilterChange('status', e.target.value ? e.target.value : undefined)
+                }
+                className="w-full px-3 py-2 border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-700 text-gray-900 dark:text-dark-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="">전체</option>
+                <option value="completed">완료</option>
+                <option value="refunded">환불</option>
+                <option value="cancelled">취소</option>
+                <option value="pending">대기</option>
+              </select>
+            </div>
 
-          {/* 금액 범위 */}
-          <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">
-              최소 금액
-            </label>
-            <input
-              type="number"
-              placeholder="0"
-              value={filter.amount_min || ''}
-              onChange={e =>
-                handleFilterChange(
-                  'amount_min',
-                  e.target.value ? parseInt(e.target.value) : undefined
-                )
-              }
-              className="w-full px-3 py-2 border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-700 text-gray-900 dark:text-dark-100 placeholder-gray-400 dark:placeholder-dark-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
+            {/* 금액 범위 */}
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">
+                최소 금액
+              </label>
+              <input
+                type="number"
+                placeholder="0"
+                value={filter.amount_min || ''}
+                onChange={e =>
+                  handleFilterChange(
+                    'amount_min',
+                    e.target.value ? parseInt(e.target.value) : undefined
+                  )
+                }
+                className="w-full px-3 py-2 border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-700 text-gray-900 dark:text-dark-100 placeholder-gray-400 dark:placeholder-dark-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
 
-          <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">
-              최대 금액
-            </label>
-            <input
-              type="number"
-              placeholder="∞"
-              value={filter.amount_max || ''}
-              onChange={e =>
-                handleFilterChange(
-                  'amount_max',
-                  e.target.value ? parseInt(e.target.value) : undefined
-                )
-              }
-              className="w-full px-3 py-2 border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-700 text-gray-900 dark:text-dark-100 placeholder-gray-400 dark:placeholder-dark-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-          {/* grid wrapper end */}
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-dark-300">
+                최대 금액
+              </label>
+              <input
+                type="number"
+                placeholder="∞"
+                value={filter.amount_max || ''}
+                onChange={e =>
+                  handleFilterChange(
+                    'amount_max',
+                    e.target.value ? parseInt(e.target.value) : undefined
+                  )
+                }
+                className="w-full px-3 py-2 border border-gray-300 dark:border-dark-600 bg-white dark:bg-dark-700 text-gray-900 dark:text-dark-100 placeholder-gray-400 dark:placeholder-dark-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            {/* grid wrapper end */}
           </div>
         </div>
       )}

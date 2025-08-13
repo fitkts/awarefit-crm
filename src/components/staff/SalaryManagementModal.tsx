@@ -1,12 +1,12 @@
 import {
-    Calculator,
-    CreditCard,
-    History,
-    Save,
-    TrendingDown,
-    TrendingUp,
-    User,
-    X,
+  Calculator,
+  CreditCard,
+  History,
+  Save,
+  TrendingDown,
+  TrendingUp,
+  User,
+  X,
 } from '@/utils/lucide-shim';
 import React, { useEffect, useState } from 'react';
 import { SalaryAdjustmentInput, Staff, StaffSalaryHistory } from '../../types/staff';

@@ -23,5 +23,3 @@ describe('IconOptimizer', () => {
     expect(screen.getByTestId('icon-calendar')).toBeInTheDocument();
   });
 });
-
-

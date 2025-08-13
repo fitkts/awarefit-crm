@@ -1,12 +1,12 @@
 import {
-    CreditCard,
-    DollarSign,
-    FileText,
-    History,
-    Package,
-    RefreshCw,
-    User,
-    X,
+  CreditCard,
+  DollarSign,
+  FileText,
+  History,
+  Package,
+  RefreshCw,
+  User,
+  X,
 } from '@/utils/lucide-shim';
 import React, { useEffect, useState } from 'react';
 import { PaymentDetail } from '../../types/payment';

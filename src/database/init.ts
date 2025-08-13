@@ -18,7 +18,7 @@ export const initializeDatabase = async (): Promise<Database.Database> => {
   for (let attempt = 1; attempt <= 3; attempt++) {
     try {
       console.log(`🚀 데이터베이스 초기화 시도 ${attempt}/3...`);
-      
+
       // 🔧 better-sqlite3 호환성 자동 보장
       if (attempt === 1) {
         const isCompatible = await ensureBetterSqlite3Compatibility();
@@ -45,47 +45,46 @@ export const initializeDatabase = async (): Promise<Database.Database> => {
       // 🚀 필수 테이블만 먼저 생성 (기본 작동에 필요한 것들)
       createEssentialTables(db);
 
-    // 🚀 기본 데이터는 더 나중에 백그라운드에서 삽입
-    setImmediate(() => {
-      try {
-        // 나머지 테이블 생성
-        if (db) {
-          createOptionalTables(db);
+      // 🚀 기본 데이터는 더 나중에 백그라운드에서 삽입
+      setImmediate(() => {
+        try {
+          // 나머지 테이블 생성
+          if (db) {
+            createOptionalTables(db);
 
-          // 기본 데이터 삽입
-          insertDefaultData(db);
+            // 기본 데이터 삽입
+            insertDefaultData(db);
+          }
+
+          console.log('✅ 보조 테이블 및 기본 데이터 삽입 완료');
+        } catch (error) {
+          console.error('보조 초기화 실패:', error);
         }
+      });
 
-        console.log('✅ 보조 테이블 및 기본 데이터 삽입 완료');
-      } catch (error) {
-        console.error('보조 초기화 실패:', error);
-      }
-    });
-
-    // 🚀 마이그레이션은 더욱 뒤로 지연
-    setTimeout(() => {
-      try {
-        console.log('🔄 백그라운드에서 마이그레이션 시작...');
-        if (db) {
-          const migrationRunner = new MigrationRunner(db);
-          migrationRunner.runMigrations();
-          console.log('✅ 마이그레이션 완료');
+      // 🚀 마이그레이션은 더욱 뒤로 지연
+      setTimeout(() => {
+        try {
+          console.log('🔄 백그라운드에서 마이그레이션 시작...');
+          if (db) {
+            const migrationRunner = new MigrationRunner(db);
+            migrationRunner.runMigrations();
+            console.log('✅ 마이그레이션 완료');
+          }
+        } catch (migrationError) {
+          console.error('마이그레이션 실행 중 오류 발생:', migrationError);
+          console.log('마이그레이션 실패했지만 앱은 계속 실행됩니다.');
         }
-      } catch (migrationError) {
-        console.error('마이그레이션 실행 중 오류 발생:', migrationError);
-        console.log('마이그레이션 실패했지만 앱은 계속 실행됩니다.');
-      }
-    }, 500);
+      }, 500);
 
       console.log(`✅ 데이터베이스 초기화 완료 (시도 ${attempt}/3 성공)`);
       return db;
-      
     } catch (error) {
       console.error(`❌ 데이터베이스 초기화 시도 ${attempt}/3 실패:`, error);
-      
+
       if (attempt < 3) {
         console.log(`🔄 ${attempt + 1}번째 시도를 위해 추가 복구 수행...`);
-        
+
         // 각 시도마다 더 강력한 복구 방법 사용
         if (attempt === 1) {
           // 2번째 시도: 강제 복구
@@ -104,18 +103,18 @@ export const initializeDatabase = async (): Promise<Database.Database> => {
             console.log('⚠️ 완전 재설치 실패, 마지막 시도 계속...');
           }
         }
-        
+
         // 잠시 대기 후 재시도
         await new Promise(resolve => setTimeout(resolve, 1000));
         continue;
       }
-      
+
       // 모든 시도 실패
       console.error('💥 모든 복구 시도 실패. 데이터베이스 없이 실행됩니다.');
       throw error;
     }
   }
-  
+
   // 이 지점에 도달하면 안 됨 (TypeScript 타입 체커를 위한 fallback)
   throw new Error('데이터베이스 초기화 중 예상치 못한 오류가 발생했습니다.');
 };
@@ -123,7 +122,9 @@ export const initializeDatabase = async (): Promise<Database.Database> => {
 // 데이터베이스 인스턴스 반환 (동기적)
 export const getDatabase = (): Database.Database => {
   if (!db) {
-    throw new Error('데이터베이스가 아직 초기화되지 않았습니다. initializeDatabase()를 먼저 호출하세요.');
+    throw new Error(
+      '데이터베이스가 아직 초기화되지 않았습니다. initializeDatabase()를 먼저 호출하세요.'
+    );
   }
   return db;
 };

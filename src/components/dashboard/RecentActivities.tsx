@@ -27,12 +27,12 @@ const RecentActivities: React.FC<RecentActivitiesProps> = ({ items }) => {
         ))}
       </div>
       <div className="mt-4 pt-4 border-t border-gray-200">
-        <button className="text-sm text-blue-600 hover:text-blue-700 font-medium">모든 활동 보기 →</button>
+        <button className="text-sm text-blue-600 hover:text-blue-700 font-medium">
+          모든 활동 보기 →
+        </button>
       </div>
     </div>
   );
 };
 
 export default RecentActivities;
-
-

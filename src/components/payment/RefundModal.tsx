@@ -1,12 +1,12 @@
 import {
-    AlertTriangle,
-    Calculator,
-    CreditCard,
-    DollarSign,
-    FileText,
-    Lock,
-    RefreshCw,
-    X,
+  AlertTriangle,
+  Calculator,
+  CreditCard,
+  DollarSign,
+  FileText,
+  Lock,
+  RefreshCw,
+  X,
 } from '@/utils/lucide-shim';
 import React, { useEffect, useState } from 'react';
 import { PaymentDetail, RefundEligibility } from '../../types/payment';

@@ -4,22 +4,32 @@ import ThemeToggle from '../components/ui/ThemeToggle';
 
 // 섹션 지연 로딩 (코드 스플리팅)
 const ButtonSection = React.lazy(
-  () => import(/* webpackChunkName: "demo-button-section" */ '../components/component-demo/ButtonSection')
+  () =>
+    import(
+      /* webpackChunkName: "demo-button-section" */ '../components/component-demo/ButtonSection'
+    )
 );
 const CardSection = React.lazy(
-  () => import(/* webpackChunkName: "demo-card-section" */ '../components/component-demo/CardSection')
+  () =>
+    import(/* webpackChunkName: "demo-card-section" */ '../components/component-demo/CardSection')
 );
 const ModalSection = React.lazy(
-  () => import(/* webpackChunkName: "demo-modal-section" */ '../components/component-demo/ModalSection')
+  () =>
+    import(/* webpackChunkName: "demo-modal-section" */ '../components/component-demo/ModalSection')
 );
 const InputSection = React.lazy(
-  () => import(/* webpackChunkName: "demo-input-section" */ '../components/component-demo/InputSection')
+  () =>
+    import(/* webpackChunkName: "demo-input-section" */ '../components/component-demo/InputSection')
 );
 const ToastSection = React.lazy(
-  () => import(/* webpackChunkName: "demo-toast-section" */ '../components/component-demo/ToastSection')
+  () =>
+    import(/* webpackChunkName: "demo-toast-section" */ '../components/component-demo/ToastSection')
 );
 const ExampleSection = React.lazy(
-  () => import(/* webpackChunkName: "demo-example-section" */ '../components/component-demo/ExampleSection')
+  () =>
+    import(
+      /* webpackChunkName: "demo-example-section" */ '../components/component-demo/ExampleSection'
+    )
 );
 
 const ComponentDemo: React.FC = () => {
@@ -41,7 +51,9 @@ const ComponentDemo: React.FC = () => {
           </div>
           <div className="flex-1">
             <h1 className="text-3xl font-bold">컴포넌트 데모</h1>
-            <p className="text-purple-100 mt-2">재사용 가능한 UI 컴포넌트들을 직접 테스트하고 코드를 확인해보세요</p>
+            <p className="text-purple-100 mt-2">
+              재사용 가능한 UI 컴포넌트들을 직접 테스트하고 코드를 확인해보세요
+            </p>
           </div>
           <div className="flex items-start">
             <ThemeToggle size="lg" />
@@ -70,35 +82,35 @@ const ComponentDemo: React.FC = () => {
         <Suspense fallback={<div className="h-72 rounded-xl border bg-white/50 animate-pulse" />}>
           <ButtonSection />
         </Suspense>
-          </div>
+      </div>
 
       {/* Card 섹션 */}
       <div id="cards">
         <Suspense fallback={<div className="h-72 rounded-xl border bg-white/50 animate-pulse" />}>
           <CardSection />
         </Suspense>
-            </div>
+      </div>
 
       {/* Modal 섹션 */}
       <div id="modals">
         <Suspense fallback={<div className="h-72 rounded-xl border bg-white/50 animate-pulse" />}>
           <ModalSection />
         </Suspense>
-            </div>
+      </div>
 
       {/* Input 섹션 */}
       <div id="inputs">
         <Suspense fallback={<div className="h-72 rounded-xl border bg-white/50 animate-pulse" />}>
           <InputSection />
         </Suspense>
-            </div>
+      </div>
 
       {/* Toast 섹션 */}
       <div id="toasts">
         <Suspense fallback={<div className="h-48 rounded-xl border bg-white/50 animate-pulse" />}>
           <ToastSection />
         </Suspense>
-          </div>
+      </div>
 
       {/* 예제 섹션 */}
       <Suspense fallback={<div className="h-72 rounded-xl border bg-white/50 animate-pulse" />}>

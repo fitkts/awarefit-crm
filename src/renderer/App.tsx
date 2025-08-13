@@ -8,9 +8,10 @@ const Dashboard = React.lazy(() => import('../pages/Dashboard'));
 const Members = React.lazy(() => import('../pages/Members'));
 const Payment = React.lazy(() => import('../pages/Payment'));
 const Staff = React.lazy(() => import('../pages/Staff'));
-const ComponentDemo = process.env.NODE_ENV !== 'production'
-  ? React.lazy(() => import('../pages/ComponentDemo'))
-  : (null as unknown as React.FC);
+const ComponentDemo =
+  process.env.NODE_ENV !== 'production'
+    ? React.lazy(() => import('../pages/ComponentDemo'))
+    : (null as unknown as React.FC);
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<string>('dashboard');

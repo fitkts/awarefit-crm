@@ -2,25 +2,27 @@ import { Plus } from '@/utils/lucide-shim';
 import React, { Suspense, useCallback, useEffect, useState } from 'react';
 import { useToastHelpers } from '../components/common/Toast';
 import {
-    BulkAction,
-    CreateMemberInput,
-    Member,
-    MemberSearchFilter as MemberSearchFilterType,
-    MemberStats as MemberStatsType,
-    PaginationInfo,
-    SortOption,
-    UpdateMemberInput,
+  BulkAction,
+  CreateMemberInput,
+  Member,
+  MemberSearchFilter as MemberSearchFilterType,
+  MemberStats as MemberStatsType,
+  PaginationInfo,
+  SortOption,
+  UpdateMemberInput,
 } from '../types/member';
 import { mockData, safeElectronCall } from '../utils/environmentUtils';
 // 코드 스플리팅: 초기 엔트리 최소화를 위해 지연 로딩
 const MemberDetailModal = React.lazy(
-  () => import(/* webpackChunkName: "member-detail-modal" */ '../components/member/MemberDetailModal')
+  () =>
+    import(/* webpackChunkName: "member-detail-modal" */ '../components/member/MemberDetailModal')
 );
 const MemberForm = React.lazy(
   () => import(/* webpackChunkName: "member-form" */ '../components/member/MemberForm')
 );
 const MemberSearchFilter = React.lazy(
-  () => import(/* webpackChunkName: "member-search-filter" */ '../components/member/MemberSearchFilter')
+  () =>
+    import(/* webpackChunkName: "member-search-filter" */ '../components/member/MemberSearchFilter')
 );
 const MemberStats = React.lazy(
   () => import(/* webpackChunkName: "member-stats" */ '../components/member/MemberStats')
@@ -492,7 +494,10 @@ const Members: React.FC = () => {
       {/* 검색 및 필터 - 최상단 */}
       <Suspense
         fallback={
-          <div className="p-4 rounded-lg border bg-white/50 dark:bg-gray-800/50 animate-pulse" aria-busy>
+          <div
+            className="p-4 rounded-lg border bg-white/50 dark:bg-gray-800/50 animate-pulse"
+            aria-busy
+          >
             <div className="h-6 w-48 bg-gray-200 dark:bg-gray-700 rounded mb-3" />
             <div className="h-10 w-full bg-gray-100 dark:bg-gray-700 rounded" />
           </div>
@@ -533,7 +538,10 @@ const Members: React.FC = () => {
         fallback={
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {Array.from({ length: 4 }).map((_, idx) => (
-              <div key={idx} className="h-24 rounded-lg border bg-white/50 dark:bg-gray-800/50 animate-pulse" />
+              <div
+                key={idx}
+                className="h-24 rounded-lg border bg-white/50 dark:bg-gray-800/50 animate-pulse"
+              />
             ))}
           </div>
         }
@@ -547,7 +555,10 @@ const Members: React.FC = () => {
           <div className="rounded-lg border overflow-hidden">
             <div className="h-10 bg-gray-100 dark:bg-gray-800 animate-pulse" />
             {Array.from({ length: 8 }).map((_, idx) => (
-              <div key={idx} className="h-12 border-t bg-white/50 dark:bg-gray-900/50 animate-pulse" />
+              <div
+                key={idx}
+                className="h-12 border-t bg-white/50 dark:bg-gray-900/50 animate-pulse"
+              />
             ))}
           </div>
         }

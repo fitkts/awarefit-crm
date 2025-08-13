@@ -1,10 +1,10 @@
 import {
-    AlertCircle,
-    Calendar,
-    CreditCard,
-    FileText,
-    TrendingUp,
-    Users,
+  AlertCircle,
+  Calendar,
+  CreditCard,
+  FileText,
+  TrendingUp,
+  Users,
 } from '@/utils/lucide-shim';
 import React from 'react';
 
@@ -86,18 +86,28 @@ const StatCard: React.FC<{
   compact?: boolean;
 }> = ({ title, value, subtitle, icon, iconBgColor, change, compact = false }) => (
   <div
-    className={
-      `bg-white dark:bg-dark-800 ${compact ? 'p-2' : 'p-6'} rounded-lg border border-gray-200 dark:border-dark-600`
-    }
+    className={`bg-white dark:bg-dark-800 ${compact ? 'p-2' : 'p-6'} rounded-lg border border-gray-200 dark:border-dark-600`}
   >
     <div className="flex items-center">
       <div className={`${compact ? 'p-1' : 'p-3'} rounded-lg ${iconBgColor}`}>{icon}</div>
       <div className={`${compact ? 'ml-2' : 'ml-4'} flex-1`}>
-        <p className={`${compact ? 'text-[11px]' : 'text-sm'} font-medium text-gray-600 dark:text-dark-300`}>{title}</p>
-        <p className={`${compact ? 'text-lg' : 'text-2xl'} font-bold text-gray-900 dark:text-dark-100`}>{value}</p>
+        <p
+          className={`${compact ? 'text-[11px]' : 'text-sm'} font-medium text-gray-600 dark:text-dark-300`}
+        >
+          {title}
+        </p>
+        <p
+          className={`${compact ? 'text-lg' : 'text-2xl'} font-bold text-gray-900 dark:text-dark-100`}
+        >
+          {value}
+        </p>
         {subtitle && (
           <div className={`${compact ? 'mt-0.5' : 'mt-1'} flex items-center`}>
-            <p className={`${compact ? 'text-[11px]' : 'text-xs'} text-gray-500 dark:text-dark-400`}>{subtitle}</p>
+            <p
+              className={`${compact ? 'text-[11px]' : 'text-xs'} text-gray-500 dark:text-dark-400`}
+            >
+              {subtitle}
+            </p>
             <ChangeIndicator change={change} />
           </div>
         )}
@@ -109,17 +119,25 @@ const StatCard: React.FC<{
 const PaymentStats: React.FC<PaymentStatsProps> = ({ data, loading = false, compact = false }) => {
   if (loading) {
     return (
-      <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 ${compact ? 'gap-2' : 'gap-6'}`}>
+      <div
+        className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 ${compact ? 'gap-2' : 'gap-6'}`}
+      >
         {[...Array(4)].map((_, index) => (
           <div
             key={index}
             className={`bg-white dark:bg-dark-800 ${compact ? 'p-3' : 'p-6'} rounded-lg border border-gray-200 dark:border-dark-600 animate-pulse`}
           >
             <div className="flex items-center">
-              <div className={`${compact ? 'p-1 w-8 h-8' : 'p-3 w-12 h-12'} rounded-lg bg-gray-200 dark:bg-dark-600`}></div>
+              <div
+                className={`${compact ? 'p-1 w-8 h-8' : 'p-3 w-12 h-12'} rounded-lg bg-gray-200 dark:bg-dark-600`}
+              ></div>
               <div className={`${compact ? 'ml-2' : 'ml-4'} flex-1`}>
-                <div className={`${compact ? 'h-3' : 'h-4'} bg-gray-200 dark:bg-dark-600 rounded mb-2 w-3/4`}></div>
-                <div className={`${compact ? 'h-4' : 'h-6'} bg-gray-200 dark:bg-dark-600 rounded w-1/2`}></div>
+                <div
+                  className={`${compact ? 'h-3' : 'h-4'} bg-gray-200 dark:bg-dark-600 rounded mb-2 w-3/4`}
+                ></div>
+                <div
+                  className={`${compact ? 'h-4' : 'h-6'} bg-gray-200 dark:bg-dark-600 rounded w-1/2`}
+                ></div>
               </div>
             </div>
           </div>
@@ -130,9 +148,10 @@ const PaymentStats: React.FC<PaymentStatsProps> = ({ data, loading = false, comp
 
   return (
     <div className={compact ? 'space-y-2' : 'space-y-6'}>
-
       {/* 주요 통계 카드들 */}
-      <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 ${compact ? 'gap-2' : 'gap-6'}`}>
+      <div
+        className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 ${compact ? 'gap-2' : 'gap-6'}`}
+      >
         {/* 오늘 매출 */}
         <StatCard
           title="오늘 매출"
