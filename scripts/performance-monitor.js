@@ -525,7 +525,12 @@ class PerformanceMonitor {
       // 웹팩 번들 분석기 실행
       try {
         console.log('  🔍 상세 번들 분석 실행 중...');
-        execSync('npm run analyze', { stdio: 'ignore' });
+        // 비대화형(static) 모드로 실행하여 블로킹 방지
+        execSync(process.platform === 'win32'
+          ? 'npm run analyze'
+          : 'npm run analyze',
+          { stdio: 'ignore', env: { ...process.env, ANALYZE_MODE: 'static', ANALYZE_OPEN: 'false' } }
+        );
         bundleStats.analysis.detailed = true;
         console.log('  ✅ 번들 분석 완료 (webpack-bundle-analyzer 결과 확인)');
       } catch (error) {

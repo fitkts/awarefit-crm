@@ -11,7 +11,7 @@ module.exports = {
   
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].js',
+    filename: isDevelopment ? '[name].js' : '[name].[contenthash].js',
     clean: false,
     publicPath: isDevelopment ? '/' : './'
   },
@@ -131,7 +131,7 @@ module.exports = {
   },
   
   // 🚀 더 빠른 소스맵 (개발 환경)
-  devtool: isDevelopment ? 'eval-cheap-module-source-map' : 'source-map',
+  devtool: isDevelopment ? 'eval-cheap-module-source-map' : false,
   
   optimization: {
     splitChunks: {
@@ -189,14 +189,16 @@ module.exports = {
           reuseExistingChunk: true
         },
         
-        // 🚀 ComponentDemo 페이지 별도 분리 (지연 로딩)
-        componentDemo: {
-          test: /[\\/]src[\\/]pages[\\/]ComponentDemo\.tsx$/,
-          name: 'component-demo',
-          chunks: 'all',
-          priority: 12,
-          enforce: true
-        },
+        // 🚀 ComponentDemo 페이지 별도 분리 (개발 환경에서만 활성)
+        ...(isDevelopment ? {
+          componentDemo: {
+            test: /[\\/]src[\\/]pages[\\/]ComponentDemo\.tsx$/,
+            name: 'component-demo',
+            chunks: 'all',
+            priority: 12,
+            enforce: true
+          }
+        } : {}),
         
         // 🚀 페이지별 분리
         pages: {
@@ -240,10 +242,13 @@ module.exports = {
     ...(isDevelopment ? {} : {
       minimize: true,
       concatenateModules: true,
-      // Tree shaking 강화
       providedExports: true,
       usedExports: true,
-      sideEffects: false
+      sideEffects: false,
+      splitChunks: {
+        chunks: 'all',
+        minRemainingSize: 0
+      }
     })
   }
 }; 
