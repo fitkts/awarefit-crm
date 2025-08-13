@@ -17,7 +17,7 @@ test.describe('결제 수정 버그 재현 테스트', () => {
 
   test('결제 수정 시 새 결제가 생성되는 버그 재현', async ({ page }) => {
     // 1. 새 결제 하나 생성 (테스트 데이터 준비)
-    await page.click('text=새 결제 등록');
+    await page.click('[data-testid="payment-add-button"]');
     await page.waitForSelector('[data-testid="payment-form"]');
 
     // 회원 선택
